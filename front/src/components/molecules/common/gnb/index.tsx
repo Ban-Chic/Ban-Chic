@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 function GNB() {
-  return <HeaderContainer>헤더</HeaderContainer>;
+  return <SHeaderContainer>헤더</SHeaderContainer>;
 }
 
-const HeaderContainer = styled.nav`
+export const SHeaderContainer = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;

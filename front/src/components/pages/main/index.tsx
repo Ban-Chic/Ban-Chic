@@ -1,7 +1,9 @@
 function MainPage() {
   return (
     <>
-      <main>메인페이지</main>
+      <main>
+        <div>메인</div>
+      </main>
     </>
   );
 }
