@@ -1,10 +1,9 @@
 import ReactDOM from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./styles/GlobalStyles";
 import Router from "./router/Router";
 import theme from "./styles/Theme";
-import Layouts from "./layouts";
 
 async function enableMocking() {
   if (!import.meta.env.DEV) {
@@ -20,10 +19,10 @@ async function enableMocking() {
 enableMocking().then(() => {
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={theme}>
-      <Layouts>
+      <BrowserRouter>
         <GlobalStyles />
-        <RouterProvider router={Router} />
-      </Layouts>
+        <Router />
+      </BrowserRouter>
     </ThemeProvider>
   );
 });

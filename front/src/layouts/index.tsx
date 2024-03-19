@@ -4,16 +4,19 @@ import GNB, { SHeaderContainer } from "../components/molecules/common/gnb";
 import Footer, {
   SFooterContainer,
 } from "../components/molecules/common/footer";
+import { Outlet } from "react-router";
 
-interface Props {
-  children: ReactNode;
-}
+// interface Props {
+//   children: ReactNode;
+// }
 
-function Layouts({ children }: Props) {
+function Layouts() {
   return (
     <SLayout>
       <GNB />
-      {children}
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </SLayout>
   );
