@@ -10,13 +10,13 @@ spring:
     active: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/banchic?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/perfume?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
     username: ${LOCAL_MYSQL_USERNAME}
     password: ${LOCAL_MYSQL_PASSWORD}
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
       format_sql: true
       use_sql_comments: true
       highlight_sql: true
