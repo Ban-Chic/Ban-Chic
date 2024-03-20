@@ -8,7 +8,7 @@ export const SHeaderContainer = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: blue;
   height: 44px;
 `;
 

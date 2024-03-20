@@ -1,4 +1,4 @@
-import { http } from "msw";
+import { http, HttpResponse } from "msw";
 
 export const handlers = [
   http.get("/posts", () => {
@@ -9,5 +9,14 @@ export const handlers = [
   }),
   http.delete("/posts/:id", ({ params }) => {
     console.log(`Captured a "DELETE /posts/${params.id}" request`);
+  }),
+  http.get("/api/users", () => {
+    return HttpResponse.json([
+      {
+        id: 1,
+        nickName: "Ham",
+        profileImg: "/fake-img.png",
+      },
+    ]);
   }),
 ];
