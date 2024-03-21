@@ -3,6 +3,7 @@ package com.ssafy.banchic.domain.entity;
 import com.ssafy.banchic.domain.entity.perfume.Gender;
 import com.ssafy.banchic.domain.entity.perfume.Longevity;
 import com.ssafy.banchic.domain.entity.perfume.Price;
+import com.ssafy.banchic.domain.entity.perfume.Season;
 import com.ssafy.banchic.domain.entity.perfume.Sillage;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,11 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import java.util.List;
 import lombok.Getter;
 
 @Entity
@@ -26,15 +23,19 @@ public class Perfume {
     @Column(name = "perfume_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
+    @Column(name = "perfume_name")
+    private String perfumeName;
+    private String perfumeImg;
+    private String brandName;
+    private String brandImg;
+    private String notes;
+    private int year;
+    private int bestRate;
+    private float rate;
 
-    @ManyToMany
-    @JoinTable(name = "perfume_note",
-        joinColumns = @JoinColumn(name = "perfume_id"),
-        inverseJoinColumns = @JoinColumn(name = "note_id"))
-    private List<Note> notes;
+    @OneToOne
+    @JoinColumn(name = "accord_id")
+    private Accord accord;
 
     @OneToOne
     @JoinColumn(name = "sillage_id")
@@ -52,9 +53,8 @@ public class Perfume {
     @JoinColumn(name = "gender_id")
     private Gender gender;
 
-    @Column(name = "perfume_name")
-    private String name;
-    private int year;
-    private String imgUrl;
+    @OneToOne
+    @JoinColumn(name = "season_id")
+    private Season season;
 
 }

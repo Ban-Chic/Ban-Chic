@@ -3,6 +3,7 @@ server:
     encoding:
       force: true
       charset: UTF-8
+    context-path: /api
   port: 8081
 
 spring:
