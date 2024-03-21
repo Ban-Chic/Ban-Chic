@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SeasonRes {
 
-    private int spring;
-    private int summer;
-    private int fall;
-    private int winter;
-    private int day;
-    private int night;
+    private float spring;
+    private float summer;
+    private float fall;
+    private float winter;
+    private float day;
+    private float night;
 
     public static SeasonRes from(Season season) {
         return SeasonRes.builder()

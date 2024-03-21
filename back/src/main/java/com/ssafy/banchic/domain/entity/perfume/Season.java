@@ -16,11 +16,11 @@ public class Season {
     @Column(name = "season_id")
     private Long id;
 
-    private int spring;
-    private int summer;
-    private int fall;
-    private int winter;
-    private int day;
-    private int night;
+    private float spring;
+    private float summer;
+    private float fall;
+    private float winter;
+    private float day;
+    private float night;
 
 }

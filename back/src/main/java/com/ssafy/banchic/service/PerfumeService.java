@@ -16,7 +16,7 @@ public class PerfumeService {
 
     public PerfumeRes getPerfume(Long perfumeId) {
         Perfume perfume = perfumeRepository.findById(perfumeId)
-            .orElseThrow(() -> new CustomException(ErrorCode.NON_FOUND_ID));
+            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
 
         return PerfumeRes.from(perfume);
     }

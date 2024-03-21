@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 public class CommonResponse {
 
     @Builder.Default
-    private Date dateTime = new Date();
+    private Date timeStamp = new Date();
     @Builder.Default
     private HttpStatus status = HttpStatus.OK;
     private String message;
