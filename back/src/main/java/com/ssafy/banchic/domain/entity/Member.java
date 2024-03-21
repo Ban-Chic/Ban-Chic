@@ -1,11 +1,7 @@
 package com.ssafy.banchic.domain.entity;
 
 import com.ssafy.banchic.domain.type.OAuthProvider;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +19,20 @@ public class Member extends BaseEntity {
     @Column(name = "member_id")
     private Long id;
 
+    private String email;
     private String nickname;
+    @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
+    private String refreshToken;
 
+    @Builder
+    public Member(String email, String nickname, OAuthProvider oAuthProvider) {
+        this.email = email;
+        this.nickname = nickname;
+        this.oAuthProvider = oAuthProvider;
+
+    }
+    public void changeRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }
