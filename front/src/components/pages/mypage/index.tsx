@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import theme from "../../../styles/Theme";
+import { STitle, SBody1, SBody2, SSubTitle } from "../../../styles/Font";
+import List from "../../molecules/list";
+import CircleItem from "../../atoms/item/circleItem";
 
 function MyPage() {
   const [nickNamedata, setNickNamedata] = useState<string>("");
@@ -34,14 +38,49 @@ function MyPage() {
   );
 }
 
-const SFlexCenter = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-`;
+=======
+    <SMypageContainer>
+      <SMyPageGrid>
+        <SBlock>
+          <SSubTitle>내 추구미4</SSubTitle>
+        </SBlock>
+        <SBlock>
+          <SFlexCenter>
+            <SSubTitle>내 정보2</SSubTitle>
+            <SProfile imageUrl={Img} />
+            {nickNamedata && <STitle>{nickNamedata}</STitle>}
+          </SFlexCenter>
+        </SBlock>
+        <SBlock>
+          <SSubTitle>내가 쓴 리뷰들3</SSubTitle>
+        </SBlock>
+        <SBlock>
+          <SSubTitle>좋아요 한 향수1</SSubTitle>
+          <List>
+            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
+          </List>
+        </SBlock>
+        <SBlock>
+          <SSubTitle>내가 본 향수5</SSubTitle>
+          <List>
+            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
+          </List>
+        </SBlock>
+        <SBlock>
+          <SSubTitle>내 검색기록6</SSubTitle>
+        </SBlock>
+        <SBlock>
+          닉네임 변경 / 로그아웃7
+          <div>dd</div>
+        </SBlock>
+      </SMyPageGrid>
+    </SMypageContainer>
+  );
+}
 
 const SProfile = styled.div<{ imageUrl: string }>`
   width: 200px;
@@ -52,34 +91,60 @@ const SProfile = styled.div<{ imageUrl: string }>`
   background-repeat: no-repeat;
 `;
 
-const SMyPageGrid = styled.main`
+const SFlexCenter = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const SMypageContainer = styled.main`
+  background-image: url("./ddddd.jpg");
+`;
+
+const SMyPageGrid = styled.section`
+  max-width: 1200px;
+
+  margin: 0 auto;
   display: grid;
   padding: 10px;
   gap: 15px;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, minmax(calc((100vh - 44px - 60px) / 4), auto));
+  grid-template-columns: 1fr;
+
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(
+      4,
+      minmax(calc((100vh - 44px - 60px) / 4), auto)
+    );
+  }
 `;
 
 const SBlock = styled.div`
-  background-color: #e2e2e2;
+  background-color: ${theme.color.sectionColor};
   width: 100%;
   border-radius: 10px;
-  color: #191919;
   padding: 10px;
+  transition: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  ${theme.styleBase.glassmorphism}
+  @media only screen and (min-width: 768px) {
+    &:nth-child(1),
+    &:nth-child(3) {
+      grid-row: 1 / span 2;
+    }
 
-  &:nth-child(1),
-  &:nth-child(3) {
-    grid-row: 1 / span 2;
-  }
+    &:nth-child(2) {
+      grid-row: 2 / span 2;
+    }
 
-  &:nth-child(2) {
-    grid-row: 2 / span 2;
-  }
-
-  &:nth-child(4),
-  &:nth-child(6) {
-    grid-row: 3 / span 2;
+    &:nth-child(4),
+    &:nth-child(6) {
+      grid-row: 3 / span 2;
+    }
   }
 `;
 
+>>>>>>> Stashed changes
 export default MyPage;
