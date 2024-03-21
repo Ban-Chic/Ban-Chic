@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCode {
 
-    NON_FOUND_ID(HttpStatus.BAD_REQUEST, "해당 아이디를 찾을 수 없습니다.");
+    NOT_FOUND_ID(HttpStatus.BAD_REQUEST, "해당 아이디를 찾을 수 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String detail;
