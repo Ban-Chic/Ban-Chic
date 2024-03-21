@@ -18,27 +18,6 @@ function MyPage() {
       });
   }, []);
   return (
-    <>
-      <SMyPageGrid>
-        <SBlock>좋아요 한 향수</SBlock>
-        <SBlock>
-          <SFlexCenter>
-            <div>내정보</div>
-            <SProfile imageUrl={Img} />
-            {nickNamedata && <div>{nickNamedata}</div>}
-          </SFlexCenter>
-        </SBlock>
-        <SBlock>내가 본 향수</SBlock>
-        <SBlock>서베이</SBlock>
-        <SBlock>내가 쓴 리뷰들</SBlock>
-        <SBlock>내 검색기록</SBlock>
-        <SBlock>닉네임 변경 / 로그아웃</SBlock>
-      </SMyPageGrid>
-    </>
-  );
-}
-
-=======
     <SMypageContainer>
       <SMyPageGrid>
         <SBlock>
@@ -146,5 +125,4 @@ const SBlock = styled.div`
   }
 `;
 
->>>>>>> Stashed changes
 export default MyPage;
