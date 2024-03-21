@@ -3,7 +3,27 @@ server:
     encoding:
       force: true
       charset: UTF-8
+    context-path: /api
   port: 8081
+
+jwt:
+  secret-key: ${JWT_KEYVALUE}
+
+oauth:
+  kakao:
+    client-id: ${KAKAO_CLIENTID}
+    url:
+      auth: https://kauth.kakao.com
+      api: https://kapi.kakao.com
+      redirect: http://localhost:8080/users/logout/kakao
+      logout: https://kapi.kakao.com/v1/user/logout
+  naver:
+    secret: ${NAVER_SECRET}
+    client-id: ${NAVER_CLIENTID}
+    url:
+      auth: https://nid.naver.com
+      api: https://openapi.naver.com
+# 둔딕이
 
 spring:
   profiles:
