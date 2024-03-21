@@ -1,15 +1,55 @@
 import styled from "styled-components";
+import theme from "../../../../styles/Theme";
+import { Link } from "react-router-dom";
 
 function GNB() {
-  return <SHeaderContainer>헤더</SHeaderContainer>;
+  return (
+    <SHeaderContainer>
+      <SLink to="/">Ban:Chic</SLink>
+      <SImgContainer src="/logo_triangle_banchic.png" alt="logo" />
+      <SLink to="/perfumeId">PerfumeDetail</SLink>
+      <SLink to="/mypage">MyPage</SLink>
+      <SSpanContainer>
+        <MenuIcon>menu</MenuIcon>
+      </SSpanContainer>
+    </SHeaderContainer>
+  );
 }
 
 export const SHeaderContainer = styled.nav`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  padding-left: 5rem;
+  padding-right: 5rem;
   align-items: center;
-  background-color: red;
-  height: 44px;
+  background-color: transparent;
+  color: #f2f2f2;
+`;
+
+const SImgContainer = styled.img`
+  padding: 10px;
+  width: 110px;
+`;
+
+const SLink = styled(Link)`
+  ${theme.font.KumarOneRegular};
+  font-size: 30px;
+`;
+
+const SSpanContainer = styled.span`
+  width: 154.59px;
+  display: flex;
+  justify-content: center;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 200,
+    "opsz" 24;
+`;
+
+const MenuIcon = styled.span`
+  font-family: "Material Icons";
+  font-size: 50px;
 `;
 
 export default GNB;
