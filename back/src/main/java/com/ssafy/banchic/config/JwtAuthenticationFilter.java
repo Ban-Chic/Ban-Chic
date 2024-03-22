@@ -19,6 +19,9 @@ public class JwtAuthenticationFilter implements Filter {
     private final static List<String> whiteList = new ArrayList<>();
 
     static {
+        whiteList.add("/api/swagger-ui");
+        whiteList.add("/api/swagger-ui/index.html");
+        whiteList.add("/api/swagger-ui.html");
         whiteList.add("/api/auth/login/naver");
         whiteList.add("/api/auth/login/kakao");
     }
