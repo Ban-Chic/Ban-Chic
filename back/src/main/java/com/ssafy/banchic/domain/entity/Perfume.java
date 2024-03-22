@@ -28,14 +28,11 @@ public class Perfume {
     private String perfumeImg;
     private String brandName;
     private String brandImg;
+    private String accords;
     private String notes;
     private int year;
     private int bestRate;
     private float rate;
-
-    @OneToOne
-    @JoinColumn(name = "accord_id")
-    private Accord accord;
 
     @OneToOne
     @JoinColumn(name = "sillage_id")

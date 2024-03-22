@@ -19,11 +19,10 @@ public class PerfumeRes {
     private String brandName;
     private String brandImg;
     private String notes;
+    private String accords;
     private int year;
     private int bestRate;
     private float rate;
-
-    private AccordRes accord;
     private SillageRes sillage;
     private LongevityRes longevity;
     private PriceRes price;
@@ -33,20 +32,20 @@ public class PerfumeRes {
     public static PerfumeRes from(Perfume perfume) {
         return PerfumeRes.builder()
             .id(perfume.getId())
-            .accord(AccordRes.from(perfume.getAccord()))
+            .perfumeName(perfume.getPerfumeName())
+            .perfumeImg(perfume.getPerfumeImg())
+            .brandName(perfume.getBrandName())
+            .brandImg(perfume.getBrandImg())
+            .notes(perfume.getNotes().replaceAll(" Notes", "Notes"))
+            .year(perfume.getYear())
+            .bestRate(perfume.getBestRate())
+            .rate(perfume.getRate())
+            .accords(perfume.getAccords().replaceAll("%", ""))
             .sillage(SillageRes.from(perfume.getSillage()))
             .longevity(LongevityRes.from(perfume.getLongevity()))
             .price(PriceRes.from(perfume.getPrice()))
             .gender(GenderRes.from(perfume.getGender()))
             .season(SeasonRes.from(perfume.getSeason()))
-            .perfumeName(perfume.getPerfumeName())
-            .perfumeImg(perfume.getPerfumeImg())
-            .brandName(perfume.getBrandName())
-            .brandImg(perfume.getBrandImg())
-            .notes(perfume.getNotes())
-            .year(perfume.getYear())
-            .bestRate(perfume.getBestRate())
-            .rate(perfume.getRate())
             .build();
     }
 
