@@ -44,3 +44,12 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace
