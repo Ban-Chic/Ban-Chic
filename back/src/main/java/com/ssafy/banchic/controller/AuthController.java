@@ -21,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/auth")
 public class AuthController {
     private final OAuthLoginService oAuthLoginService;
     private final OAuthLogoutService oAuthLogoutService;
@@ -66,12 +66,16 @@ public class AuthController {
      */
 
     @PostMapping("/logout/naver")
-    public ResponseEntity<RevokeTokenResponseDto> logoutNaver(@RequestBody NaverLogoutParams params) {
-        return ResponseEntity.ok(oAuthLogoutService.logout(params));
+    public ResponseEntity<CommonResponse> logoutNaver(@RequestBody NaverLogoutParams params) {
+//        return ResponseEntity.ok(oAuthLogoutService.logout(params));
+        return new ResponseEntity<>(CommonResponse.builder()
+                .message("네이버 로그아웃 성공")
+                .data(oAuthLogoutService.logout(params))
+                .build(), HttpStatus.OK);
     }
 
     @GetMapping("/logout/kakao")
-    public ResponseEntity<String> logoutKakao(@RequestHeader("Authorization") String accessToken) {
+    public ResponseEntity<CommonResponse> logoutKakao(@RequestHeader("Authorization") String accessToken) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("client_id", kakaoClientId);
         params.add("logout_redirect_uri", kakaoLogoutRedirectUrl);
@@ -89,14 +93,18 @@ public class AuthController {
 
         if (response.getStatusCode() == HttpStatus.FOUND) {
             // 로그아웃이 성공적으로 수행되었을 경우
-            return new ResponseEntity<>("logout success", HttpStatus.OK);
+            return new ResponseEntity<>(CommonResponse.builder()
+                    .message("카카오 로그아웃 성공")
+                    .build(), HttpStatus.OK);
         } else {
             // 로그아웃이 실패한 경우
-            return new ResponseEntity<>("fail logout", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(CommonResponse.builder()
+                    .message("카카오 로그아웃 실패")
+                    .build(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/login/checkNickname/{email}/{provider}")
+
 
     @PostMapping("/extend/token")
     public ResponseEntity<AuthTokens> extendToken(@RequestHeader("Authorization") String accessToken,
