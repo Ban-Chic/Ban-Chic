@@ -3,7 +3,7 @@ spring:
     active: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/perfume?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    url: ${PROD_MYSQL_URL}/perfume?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
     username: ${PROD_MYSQL_USERNAME}
     password: ${PROD_MYSQL_PASSWORD}
   jpa:
