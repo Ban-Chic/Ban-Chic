@@ -202,7 +202,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,macos,windows
-/gradle/
 /build/resources/main/application.yml
 /.gradle/buildOutputCleanup/buildOutputCleanup.lock
 /.gradle/buildOutputCleanup/cache.properties
