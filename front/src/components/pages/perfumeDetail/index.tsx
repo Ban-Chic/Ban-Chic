@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import theme from "../../../styles/Theme";
 import ReviewInDetail from "../../molecules/review/reviewInDetail";
 import { SHeaderContainer } from "../../molecules/common/gnb";
+import PieChartContainer from "../../molecules/charts/pieChart";
+import RadarChartContainer from "../../molecules/charts/radarChart";
 
 interface Props {
   perfumeImg: string;
@@ -46,8 +48,9 @@ function PerfumeDetailPage() {
           )}
         </SBlock>
         <SBlock>
-          
-           </SBlock>
+          <RadarChartContainer/>
+          {/* <PieChartContainer/> */}
+        </SBlock>
         <SBlock></SBlock>
         <SBlock>
           최근 리뷰
@@ -57,7 +60,6 @@ function PerfumeDetailPage() {
           {data && <SSpan>{data[0].perfumeName}</SSpan>}
           <SSpan>향수 한글 이름</SSpan>
         </SBlock>
-
       </SContainer>
     </>
   );

@@ -21,7 +21,7 @@ function ReviewInDetail(Props: Props) {
             <div>아이디2</div>
             <div>별점 </div>
           </SIdAndRating>
-          <SImgContainer src={"public/img_perfume_sample.png"} alt="logo" />
+          <SImgContainer src={"img_perfume_sample.png"} alt="logo" />
           <SReviewText>앞 리뷰 때문에 샀어요!! 돈낭비 오짐!</SReviewText>
         </SListItemContainer>
       </SContainer>

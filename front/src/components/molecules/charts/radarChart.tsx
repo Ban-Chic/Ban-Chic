@@ -1,58 +1,96 @@
-import React, { PureComponent } from 'react';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import styled from "styled-components";
+import React, { PureComponent } from "react";
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  Legend,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 const data = [
   {
-    subject: 'Math',
-    A: 120,
-    B: 110,
-    fullMark: 150,
+    subject: "Day",
+    A: 100,
+    fullMark: 100,
   },
   {
-    subject: 'Chinese',
-    A: 98,
-    B: 130,
-    fullMark: 150,
+    subject: "Summer",
+    A: 71.1538,
+    fullMark: 100,
   },
   {
-    subject: 'English',
-    A: 86,
-    B: 130,
-    fullMark: 150,
+    subject: "Winter",
+    A: 34.6154,
+    fullMark: 100,
   },
   {
-    subject: 'Geography',
-    A: 99,
-    B: 100,
-    fullMark: 150,
+    subject: "Night",
+    A: 19.2308,
+    fullMark: 100,
   },
   {
-    subject: 'Physics',
-    A: 85,
-    B: 90,
-    fullMark: 150,
+    subject: "Fall",
+    A: 46.1538,
+    fullMark: 100,
   },
   {
-    subject: 'History',
-    A: 65,
-    B: 85,
-    fullMark: 150,
+    subject: "Spring",
+    A: 90.3846,
+    fullMark: 100,
   },
 ];
 
-export default class Example extends PureComponent {
-  static demoUrl = 'https://codesandbox.io/s/simple-radar-chart-rjoc6';
-
-  render() {
-    return (
-      <ResponsiveContainer width="100%" height="100%">
-        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="subject" />
-          <PolarRadiusAxis />
-          <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-        </RadarChart>
-      </ResponsiveContainer>
-    );
-  }
+function RadarChartContainer() {
+  return (
+    <>
+      <SContainer>
+        <h1>RadarChart</h1>
+        <SDiv>
+          <RadarChart
+            width={310}
+            height={270}
+            cx="50%"
+            cy="50%"
+            outerRadius="80%"
+            data={data}
+            margin={{top: 15, bottom:0}}
+          >
+            <PolarGrid />
+            <PolarAngleAxis dataKey="subject" />
+            <PolarRadiusAxis angle={30} domain={[0, 100]} />
+            <Radar
+              name="향수 A"
+              dataKey="A"
+              stroke="#e2113f"
+              fill="#e2113f"
+              fillOpacity={0.6}
+              legendType="diamond"
+              isAnimationActive={true}
+              animationBegin={1}
+              animationEasing="ease-in-out"
+            />
+            <Legend />
+            <Tooltip/>
+          </RadarChart>
+        </SDiv>
+      </SContainer>
+    </>
+  );
 }
+
+const SContainer = styled.div`
+  padding: 10px;
+`;
+
+const SDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+export default RadarChartContainer;
