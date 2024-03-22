@@ -7,6 +7,7 @@ import Layouts from "../layouts";
 import MainPage from "../components/pages/main";
 import ErrorPage from "../components/pages/error";
 import MyPage from "../components/pages/mypage";
+import LoginPage from "../components/pages/login";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route element={<Layouts />} errorElement={<ErrorPage />}>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
       </Route>
     </Routes>
   );
