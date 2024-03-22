@@ -21,6 +21,7 @@ public class JwtAuthenticationFilter implements Filter {
     static {
         whiteList.add("/api/auth/login/naver");
         whiteList.add("/api/auth/login/kakao");
+        whiteList.add("/api/perfumes");
     }
 
     @Override
