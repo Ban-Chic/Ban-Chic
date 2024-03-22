@@ -1,4 +1,4 @@
-import { http } from "msw";
+import { http, HttpResponse } from "msw";
 
 export const handlers = [
   http.get("/posts", () => {
@@ -29,7 +29,7 @@ export const handlers = [
         brandName: "Zara",
         brandImg: "https://fimgs.net/mdimg/dizajneri/m.642.jpg",
         profileImg: "/fake-img.png",
-        RadioNodeListting: 3.77,
+        RadioNodeListing: 3.77,
         bestRate: 5,
         vote: 408,
         accords: {

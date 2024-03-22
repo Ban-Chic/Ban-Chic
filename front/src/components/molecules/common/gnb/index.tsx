@@ -24,11 +24,13 @@ export const SHeaderContainer = styled.nav`
   align-items: center;
   background-color: transparent;
   color: #f2f2f2;
+  white-space: nowrap;
+  height: 50px;
 `;
 
 const SImgContainer = styled.img`
   padding: 10px;
-  width: 110px;
+  width: 50px;
 `;
 
 const SLink = styled(Link)`
