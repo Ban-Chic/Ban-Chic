@@ -23,7 +23,6 @@ oauth:
     url:
       auth: https://nid.naver.com
       api: https://openapi.naver.com
-# 둔딕이
 
 spring:
   profiles:
@@ -44,3 +43,12 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace

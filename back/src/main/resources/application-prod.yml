@@ -1,6 +1,7 @@
 spring:
-  profiles:
-    active: prod
+  config:
+    activate:
+      on-profile: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${PROD_MYSQL_URL}/perfume?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
