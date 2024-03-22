@@ -33,6 +33,7 @@ public class PerfumeRes {
     public static PerfumeRes from(Perfume perfume) {
         return PerfumeRes.builder()
             .id(perfume.getId())
+            .accord(AccordRes.from(perfume.getAccord()))
             .sillage(SillageRes.from(perfume.getSillage()))
             .longevity(LongevityRes.from(perfume.getLongevity()))
             .price(PriceRes.from(perfume.getPrice()))

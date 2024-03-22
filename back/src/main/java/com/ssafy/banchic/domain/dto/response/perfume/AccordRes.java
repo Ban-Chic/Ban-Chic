@@ -1,6 +1,6 @@
 package com.ssafy.banchic.domain.dto.response.perfume;
 
-import com.ssafy.banchic.domain.entity.perfume.Sillage;
+import com.ssafy.banchic.domain.entity.Accord;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,19 +13,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AccordRes {
 
-    private int veryWeak;
-    private int weak;
-    private int moderate;
-    private int longLasting;
-    private int eternal;
+    private float citrus;
+    private float floral;
+    private float freshSpicy;
+    private float powdery;
+    private float sweet;
+    private float aromatic;
 
-    public static AccordRes from(Sillage sillage) {
+    public static AccordRes from(Accord accord) {
         return AccordRes.builder()
-            .veryWeak(sillage.getVeryWeak())
-            .weak(sillage.getWeak())
-            .moderate(sillage.getModerate())
-            .longLasting(sillage.getLongLasting())
-            .eternal(sillage.getLongLasting())
+            .citrus(accord.getCitrus())
+            .floral(accord.getFloral())
+            .freshSpicy(accord.getFreshSpicy())
+            .powdery(accord.getPowdery())
+            .sweet(accord.getSweet())
             .build();
     }
 
