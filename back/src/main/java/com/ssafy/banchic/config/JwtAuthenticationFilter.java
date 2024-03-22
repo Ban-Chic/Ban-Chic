@@ -21,7 +21,7 @@ public class JwtAuthenticationFilter implements Filter {
     static {
         whiteList.add("/api/auth/login/naver");
         whiteList.add("/api/auth/login/kakao");
-        whiteList.add("/api/perfumes");
+        whiteList.add("/api/perfumes/*");
     }
 
     @Override
@@ -60,12 +60,22 @@ public class JwtAuthenticationFilter implements Filter {
         }
         return null;
     }
+
     private boolean checkWhiteList(String requestURI) {
         for (String white : whiteList) {
-            if(requestURI.startsWith(white)) {
+            if (requestURI.startsWith(white) || pathMatches(requestURI, white)) {
                 return true;
             }
         }
         return false;
     }
+
+    private boolean pathMatches(String requestURI, String pattern) {
+        if (pattern.endsWith("/*")) {
+            String patternPrefix = pattern.substring(0, pattern.length() - 2);
+            return requestURI.startsWith(patternPrefix);
+        }
+        return false;
+    }
+
 }
