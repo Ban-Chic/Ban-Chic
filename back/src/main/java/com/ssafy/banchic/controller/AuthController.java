@@ -50,7 +50,7 @@ public class AuthController {
                 .build(), HttpStatus.OK);
     }
 
-    @PostMapping("/login/naver")
+    @GetMapping("/login/naver")
     public ResponseEntity<CommonResponse> loginNaver(
         @RequestParam("code") String code, HttpServletResponse response) {
         return new ResponseEntity<>(CommonResponse.builder()
