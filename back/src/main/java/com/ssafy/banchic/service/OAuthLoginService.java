@@ -8,6 +8,7 @@ import com.ssafy.banchic.oauthApi.response.RequestOAuthInfoService;
 import com.ssafy.banchic.repository.MemberRepository;
 import com.ssafy.banchic.tokens.AuthTokens;
 import com.ssafy.banchic.tokens.AuthTokensGenerator;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -46,8 +47,8 @@ public class OAuthLoginService {
 //        // JWT 토큰으로 엑세스 토큰, 리프래쉬 토큰이 만들어져서 리턴된다
 //    }
 
-    public LoginResult login(OAuthLoginParams params) {
-        OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(params);
+    public LoginResult login(String code, OAuthLoginParams params, HttpServletResponse response) {
+        OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(params, code);
         OAuthProvider oAuthProvider = oAuthInfoResponse.getOAuthProvider();
         String email = oAuthInfoResponse.getEmail();
         Long memberId = findOrCreateMember(oAuthInfoResponse);
@@ -56,7 +57,10 @@ public class OAuthLoginService {
         String nickname = member.get().getNickname();
         AuthTokens authTokens = authTokensGenerator.generate(memberId);
 
-        return new LoginResult(memberId, oAuthProvider, nickname, email, authTokens);
+        response.addHeader("Authorization", "Bearer " + authTokens.getAccessToken());
+        response.addHeader("RefreshToken", authTokens.getRefreshToken());
+
+        return new LoginResult(memberId, oAuthProvider, nickname, email);
     }
 
     public AuthTokens generateNewToken(String accessToken, String refreshToken) {
@@ -127,7 +131,6 @@ public class OAuthLoginService {
         private final OAuthProvider oAuthProvider;
         private final String nickname;
         private final String email;
-        private final AuthTokens authTokens;
     }
 
     @Data
