@@ -57,10 +57,10 @@ public class SecurityConfig {
             .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests((authorizeRequests) ->
                 authorizeRequests
-                    .requestMatchers("/api/auth/login/**").permitAll()
-                    .requestMatchers("/api/auth/test/**").permitAll()
-                    .requestMatchers("/api/perfume/**").permitAll()
-                    .anyRequest().permitAll()
+                    .requestMatchers( "/","/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                    .requestMatchers("/auth/login/**").permitAll()
+                    .requestMatchers("/auth/test/**").permitAll()
+                    .requestMatchers("/perfume/**").permitAll()
             )
             .exceptionHandling(authenticationManager -> authenticationManager
                 .authenticationEntryPoint(new AuthenticationEntryPointException())

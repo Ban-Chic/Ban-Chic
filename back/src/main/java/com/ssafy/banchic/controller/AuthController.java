@@ -7,6 +7,7 @@ import com.ssafy.banchic.oauthApi.params.OauthTokenParams;
 import com.ssafy.banchic.service.OAuthLoginService;
 import com.ssafy.banchic.service.OAuthLogoutService;
 import com.ssafy.banchic.tokens.AuthTokens;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-
+@Tag(name = "ArticleComment API", description = "댓글 관련 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
