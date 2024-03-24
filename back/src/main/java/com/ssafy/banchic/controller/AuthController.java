@@ -1,7 +1,6 @@
 package com.ssafy.banchic.controller;
 
 import com.ssafy.banchic.common.CommonResponse;
-import com.ssafy.banchic.oauthApi.client.RevokeTokenResponseDto;
 import com.ssafy.banchic.oauthApi.params.KakaoLoginParams;
 import com.ssafy.banchic.oauthApi.params.NaverLoginParams;
 import com.ssafy.banchic.oauthApi.params.NaverLogoutParams;
@@ -104,11 +103,10 @@ public class AuthController {
         }
     }
 
-
-
     @PostMapping("/extend/token")
     public ResponseEntity<AuthTokens> extendToken(@RequestHeader("Authorization") String accessToken,
                                                   @RequestBody OauthTokenParams params) {
         return ResponseEntity.ok(oAuthLoginService.generateNewToken(accessToken, params.getRefreshToken()));
     }
+
 }
