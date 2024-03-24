@@ -2,20 +2,18 @@ package com.ssafy.banchic.service;
 
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.type.OAuthProvider;
-import com.ssafy.banchic.oauthApi.params.OAuthLoginParams;
 import com.ssafy.banchic.oauthApi.response.OAuthInfoResponse;
 import com.ssafy.banchic.oauthApi.response.RequestOAuthInfoService;
 import com.ssafy.banchic.repository.MemberRepository;
 import com.ssafy.banchic.tokens.AuthTokens;
 import com.ssafy.banchic.tokens.AuthTokensGenerator;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -47,9 +45,8 @@ public class OAuthLoginService {
 //        // JWT 토큰으로 엑세스 토큰, 리프래쉬 토큰이 만들어져서 리턴된다
 //    }
 
-    public LoginResult login(String code, OAuthLoginParams params, HttpServletResponse response) {
-        OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(params, code);
-        OAuthProvider oAuthProvider = oAuthInfoResponse.getOAuthProvider();
+    public LoginResult login(String code, OAuthProvider oAuthProvider, HttpServletResponse response) {
+        OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(oAuthProvider, code);
         String email = oAuthInfoResponse.getEmail();
         Long memberId = findOrCreateMember(oAuthInfoResponse);
         Optional<Member> member = memberRepository.findById(memberId);

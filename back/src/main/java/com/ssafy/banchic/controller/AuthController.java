@@ -1,8 +1,7 @@
 package com.ssafy.banchic.controller;
 
 import com.ssafy.banchic.common.CommonResponse;
-import com.ssafy.banchic.oauthApi.params.KakaoLoginParams;
-import com.ssafy.banchic.oauthApi.params.NaverLoginParams;
+import com.ssafy.banchic.domain.type.OAuthProvider;
 import com.ssafy.banchic.oauthApi.params.NaverLogoutParams;
 import com.ssafy.banchic.oauthApi.params.OauthTokenParams;
 import com.ssafy.banchic.service.OAuthLoginService;
@@ -15,7 +14,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -34,28 +39,24 @@ public class AuthController {
     @Value("${oauth.kakao.url.redirect}")
     private String kakaoLogoutRedirectUrl;
 
-    /**
-     * 로그인 할 때, params를 통해서 소셜 로그인을 진행하고, 닉네임 유무를 체크
-     * @param params
-     * @return
-     */
-    @PostMapping("/login/kakao")
+
+    @GetMapping("/login/kakao")
     public ResponseEntity<CommonResponse> loginKakao(
-        @RequestParam("code") String code, KakaoLoginParams params, HttpServletResponse response) {
+        @RequestParam("code") String code, HttpServletResponse response) {
         return new ResponseEntity<>(CommonResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message("카카오 로그인 성공")
-                .data(oAuthLoginService.login(code, params, response))
+                .data(oAuthLoginService.login(code, OAuthProvider.KAKAO, response))
                 .build(), HttpStatus.OK);
     }
 
     @PostMapping("/login/naver")
     public ResponseEntity<CommonResponse> loginNaver(
-        @RequestParam("code") String code, NaverLoginParams params, HttpServletResponse response) {
+        @RequestParam("code") String code, HttpServletResponse response) {
         return new ResponseEntity<>(CommonResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message("네이버 로그인 성공")
-                .data(oAuthLoginService.login(code, params, response))
+                .data(oAuthLoginService.login(code, OAuthProvider.NAVER, response))
                 .build(), HttpStatus.OK);
     }
 

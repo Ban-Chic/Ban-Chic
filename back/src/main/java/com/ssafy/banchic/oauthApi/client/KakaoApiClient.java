@@ -1,7 +1,6 @@
 package com.ssafy.banchic.oauthApi.client;
 
 import com.ssafy.banchic.domain.type.OAuthProvider;
-import com.ssafy.banchic.oauthApi.params.OAuthLoginParams;
 import com.ssafy.banchic.oauthApi.params.OAuthLogoutParams;
 import com.ssafy.banchic.oauthApi.response.KakaoInfoResponse;
 import com.ssafy.banchic.oauthApi.response.OAuthInfoResponse;
@@ -40,7 +39,7 @@ public class KakaoApiClient implements OAuthApiClient {
     }
 
     @Override
-    public String requestAccessToken(OAuthLoginParams params, String code) {
+    public String requestAccessToken(String code) {
         String url = authUrl + "/oauth/token";
 
         HttpHeaders httpHeaders = new HttpHeaders();
