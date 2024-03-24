@@ -31,15 +31,14 @@ public class Member extends BaseEntity {
         this.email = email;
         this.nickname = nickname;
         this.oAuthProvider = oAuthProvider;
-
     }
 
-    // 연관관계 메서드
-    public void changeRefreshToken(String refreshToken) {
+    public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
 
-    public void changeNickname(String nickname) {
+    public void updateNickname(String nickname) {
         this.nickname = nickname;
     }
+
 }

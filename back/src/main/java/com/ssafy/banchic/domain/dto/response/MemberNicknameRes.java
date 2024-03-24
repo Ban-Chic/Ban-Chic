@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class MemberNicknameResponse {
+public class MemberNicknameRes {
     private String nickname;
 }

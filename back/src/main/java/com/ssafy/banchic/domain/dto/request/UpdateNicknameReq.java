@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class UpdateNicknameRequest {
+public class UpdateNicknameReq {
     private String nickname;
 }
