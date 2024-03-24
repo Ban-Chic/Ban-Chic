@@ -23,6 +23,7 @@ public class Member extends BaseEntity {
     private String nickname;
     @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
+    private String image;
     private String refreshToken;
 
     @Builder
@@ -30,9 +31,14 @@ public class Member extends BaseEntity {
         this.email = email;
         this.nickname = nickname;
         this.oAuthProvider = oAuthProvider;
-
     }
-    public void changeRefreshToken(String refreshToken) {
+
+    public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
 }

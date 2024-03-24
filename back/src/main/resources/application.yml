@@ -15,7 +15,7 @@ oauth:
     url:
       auth: https://kauth.kakao.com
       api: https://kapi.kakao.com
-      redirect: http://localhost:8080/users/logout/kakao
+      redirect: http://localhost:8081/users/logout/kakao
       logout: https://kapi.kakao.com/v1/user/logout
   naver:
     secret: ${NAVER_SECRET}
