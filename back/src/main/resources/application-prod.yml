@@ -7,17 +7,6 @@ spring:
     url: ${PROD_MYSQL_URL}/perfume?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
     username: ${PROD_MYSQL_USERNAME}
     password: ${PROD_MYSQL_PASSWORD}
-  jpa:
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: update
-      format_sql: true
-      use_sql_comments: true
-      highlight_sql: true
-    database: mysql
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 
 logging:
   level:
