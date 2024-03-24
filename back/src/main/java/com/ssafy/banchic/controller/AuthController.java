@@ -1,6 +1,6 @@
 package com.ssafy.banchic.controller;
 
-import com.ssafy.banchic.common.CommonResponse;
+import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.domain.type.OAuthProvider;
 import com.ssafy.banchic.oauthApi.params.NaverLogoutParams;
 import com.ssafy.banchic.oauthApi.params.OauthTokenParams;
@@ -44,7 +44,7 @@ public class AuthController {
     public ResponseEntity<CommonResponse> loginKakao(
         @RequestParam("code") String code, HttpServletResponse response) {
         return new ResponseEntity<>(CommonResponse.builder()
-                .status(HttpStatus.OK.value())
+                .status(HttpStatus.OK)
                 .message("카카오 로그인 성공")
                 .data(oAuthLoginService.login(code, OAuthProvider.KAKAO, response))
                 .build(), HttpStatus.OK);
@@ -54,7 +54,7 @@ public class AuthController {
     public ResponseEntity<CommonResponse> loginNaver(
         @RequestParam("code") String code, HttpServletResponse response) {
         return new ResponseEntity<>(CommonResponse.builder()
-                .status(HttpStatus.OK.value())
+                .status(HttpStatus.OK)
                 .message("네이버 로그인 성공")
                 .data(oAuthLoginService.login(code, OAuthProvider.NAVER, response))
                 .build(), HttpStatus.OK);
