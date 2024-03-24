@@ -1,91 +1,69 @@
 package com.ssafy.banchic.service;
 
+import com.ssafy.banchic.domain.dto.TokenDto;
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.type.OAuthProvider;
 import com.ssafy.banchic.oauthApi.response.OAuthInfoResponse;
 import com.ssafy.banchic.oauthApi.response.RequestOAuthInfoService;
 import com.ssafy.banchic.repository.MemberRepository;
+import com.ssafy.banchic.util.TokenProvider;
 import com.ssafy.banchic.tokens.AuthTokens;
-import com.ssafy.banchic.tokens.AuthTokensGenerator;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class OAuthLoginService {
-    private final MemberRepository memberRepository;
-    private final AuthTokensGenerator authTokensGenerator;
-    private final RequestOAuthInfoService requestOAuthInfoService;
 
-//    public AuthTokens login(OAuthLoginParams params) {
-//        OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(params);
-//        // param 값을 통한, access, refresh, grantType, 유효시간을 반환한다.
-//        Long memberId = findOrCreateMember(oAuthInfoResponse);
-//        AuthTokens generateToken = authTokensGenerator.generate(memberId);
-//        Optional<Member> member = memberRepository.findById(memberId);
-//        log.info("find member : {}", member.get().getId());
-//        if(member.isPresent()) {
-//            log.info("generateToken : {}", generateToken.getRefreshToken());
-//            member.get().changeRefreshToken(generateToken.getRefreshToken());
-//            memberRepository.save(member.get());
-//            memberRepository.flush();
-//            log.info("member provider : {}", member.get().getOAuthProvider());
-//            log.info("member name : {}", member.get().getEmail());
-//            log.info("member refresh : {}", member.get().getRefreshToken());
-//        } else {
-//            log.debug("Not found Member : {}", memberId);
-//        }
-//        return generateToken;
-//        // JWT 토큰으로 엑세스 토큰, 리프래쉬 토큰이 만들어져서 리턴된다
-//    }
+    private final MemberRepository memberRepository;
+    private final TokenProvider tokenProvider;
+    private final RequestOAuthInfoService requestOAuthInfoService;
 
     public LoginResult login(String code, OAuthProvider oAuthProvider, HttpServletResponse response) {
         OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(oAuthProvider, code);
         String email = oAuthInfoResponse.getEmail();
-        Long memberId = findOrCreateMember(oAuthInfoResponse);
-        Optional<Member> member = memberRepository.findById(memberId);
+        Member member = findOrCreateMember(oAuthInfoResponse);
 
-        String nickname = member.get().getNickname();
-        AuthTokens authTokens = authTokensGenerator.generate(memberId);
+        String nickname = member.getNickname();
+        TokenDto tokenDto = tokenProvider.generateTokenDto(member);
 
-        response.addHeader("Authorization", "Bearer " + authTokens.getAccessToken());
-        response.addHeader("RefreshToken", authTokens.getRefreshToken());
+        response.addHeader("Authorization", "Bearer " + tokenDto.getAccessToken());
+        response.addHeader("RefreshToken", tokenDto.getRefreshToken());
 
-        return new LoginResult(memberId, oAuthProvider, nickname, email);
+        return new LoginResult(member.getId(), oAuthProvider, nickname, email);
     }
 
     public AuthTokens generateNewToken(String accessToken, String refreshToken) {
-        return authTokensGenerator.renewAccessToken(accessToken, refreshToken);
+        return tokenProvider.renewAccessToken(accessToken, refreshToken);
     }
 
 
-    private Long findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
+    private Member findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
         return memberRepository.findByEmail(oAuthInfoResponse.getEmail())
-                .map(Member::getId)
                 .orElseGet(() -> newMember(oAuthInfoResponse));
     }
 
-    private Long newMember(OAuthInfoResponse oAuthInfoResponse) {
+    private Member newMember(OAuthInfoResponse oAuthInfoResponse) {
         Member member = Member.builder()
                 .email(oAuthInfoResponse.getEmail())
                 .nickname(oAuthInfoResponse.getNickname())
                 .oAuthProvider(oAuthInfoResponse.getOAuthProvider())
                 .build();
 
-        return memberRepository.save(member).getId();
+        return memberRepository.save(member);
     }
 
     /**
      * email, oauthProvider 를 통해서, 접근한 유저가 닉네임이 있는 유저인지, 아닌지 조회
      * 조회한 후에, 여기서 NicknameResponse에 null이 들어가는 지 , 닉네임이 들어가는 지 체크하고
      * 있으면 로그인, 없으면 최초 등록
-     *
      */
     private NicknameResponse findMemberNickname(String email, String provider) {
         String nickname = null;
@@ -109,16 +87,7 @@ public class OAuthLoginService {
      */
     private boolean existNickName(String nickname) {
         boolean existNickname = memberRepository.findByNickname(nickname);
-        if(existNickname)
-            return false;
-        else
-            return true;
-    }
-
-    private Member findMember(OAuthInfoResponse oAuthInfoResponse) {
-        Optional<Member> findMember = memberRepository.findByEmail(oAuthInfoResponse.getEmail());
-
-        return findMember.orElse(null);
+        return !existNickname;
     }
 
     @Data
@@ -136,10 +105,4 @@ public class OAuthLoginService {
         private final String nickname;
     }
 
-    @Data
-    @AllArgsConstructor
-    public static class NicknameRequest {
-        private final String email;
-        private final String provider;
-    }
 }

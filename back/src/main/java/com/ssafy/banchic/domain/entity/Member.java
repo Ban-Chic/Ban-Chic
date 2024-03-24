@@ -24,18 +24,6 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
     private String image;
-    private String refreshToken;
-
-    @Builder
-    public Member(String email, String nickname, OAuthProvider oAuthProvider) {
-        this.email = email;
-        this.nickname = nickname;
-        this.oAuthProvider = oAuthProvider;
-    }
-
-    public void updateRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
 
     public void updateNickname(String nickname) {
         this.nickname = nickname;
