@@ -40,13 +40,14 @@ public class KakaoApiClient implements OAuthApiClient {
     }
 
     @Override
-    public String requestAccessToken(OAuthLoginParams params) {
+    public String requestAccessToken(OAuthLoginParams params, String code) {
         String url = authUrl + "/oauth/token";
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        MultiValueMap<String, String> body = params.makeBody();
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("code", code);
         body.add("grant_type", GRANT_TYPE);
         body.add("client_id", clientId);
 

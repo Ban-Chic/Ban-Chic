@@ -8,6 +8,7 @@ import com.ssafy.banchic.oauthApi.params.OauthTokenParams;
 import com.ssafy.banchic.service.OAuthLoginService;
 import com.ssafy.banchic.service.OAuthLogoutService;
 import com.ssafy.banchic.tokens.AuthTokens;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -39,20 +40,22 @@ public class AuthController {
      * @return
      */
     @PostMapping("/login/kakao")
-    public ResponseEntity<CommonResponse> loginKakao(@RequestBody KakaoLoginParams params) {
+    public ResponseEntity<CommonResponse> loginKakao(
+        @RequestParam("code") String code, KakaoLoginParams params, HttpServletResponse response) {
         return new ResponseEntity<>(CommonResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message("카카오 로그인 성공")
-                .data(oAuthLoginService.login(params))
+                .data(oAuthLoginService.login(code, params, response))
                 .build(), HttpStatus.OK);
     }
 
     @PostMapping("/login/naver")
-    public ResponseEntity<CommonResponse> loginNaver(@RequestBody NaverLoginParams params) {
+    public ResponseEntity<CommonResponse> loginNaver(
+        @RequestParam("code") String code, NaverLoginParams params, HttpServletResponse response) {
         return new ResponseEntity<>(CommonResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message("네이버 로그인 성공")
-                .data(oAuthLoginService.login(params))
+                .data(oAuthLoginService.login(code, params, response))
                 .build(), HttpStatus.OK);
     }
 
