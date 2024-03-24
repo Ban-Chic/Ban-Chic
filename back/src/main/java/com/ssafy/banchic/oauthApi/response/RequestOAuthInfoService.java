@@ -3,15 +3,13 @@ package com.ssafy.banchic.oauthApi.response;
 import com.ssafy.banchic.domain.type.OAuthProvider;
 import com.ssafy.banchic.oauthApi.client.OAuthApiClient;
 import com.ssafy.banchic.oauthApi.client.RevokeTokenResponseDto;
-import com.ssafy.banchic.oauthApi.params.OAuthLoginParams;
 import com.ssafy.banchic.oauthApi.params.OAuthLogoutParams;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
@@ -24,9 +22,9 @@ public class RequestOAuthInfoService {
         );
     }
 
-    public OAuthInfoResponse request(OAuthLoginParams params) {
-        OAuthApiClient client = clients.get(params.oAuthProvider());
-        String accessToken = client.requestAccessToken(params);
+    public OAuthInfoResponse request(OAuthProvider oAuthProvider, String code) {
+        OAuthApiClient client = clients.get(oAuthProvider);
+        String accessToken = client.requestAccessToken(code);
         OAuthInfoResponse res = client.requestOauthInfo(accessToken);
         log.info("Object : " + res.getEmail());
         log.info("name : "+ res.getNickname());

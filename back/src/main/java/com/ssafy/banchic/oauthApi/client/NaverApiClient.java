@@ -1,7 +1,6 @@
 package com.ssafy.banchic.oauthApi.client;
 
 import com.ssafy.banchic.domain.type.OAuthProvider;
-import com.ssafy.banchic.oauthApi.params.OAuthLoginParams;
 import com.ssafy.banchic.oauthApi.params.OAuthLogoutParams;
 import com.ssafy.banchic.oauthApi.response.NaverInfoResponse;
 import com.ssafy.banchic.oauthApi.response.OAuthInfoResponse;
@@ -43,13 +42,14 @@ public class NaverApiClient implements OAuthApiClient{
     }
 
     @Override
-    public String requestAccessToken(OAuthLoginParams params) {
+    public String requestAccessToken(String code) {
         String url = authUrl + "/oauth2.0/token";
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        MultiValueMap<String, String> body = params.makeBody();
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("code", code);
         body.add("grant_type", GRANT_TYPE);
         body.add("client_id", clientId);
         body.add("client_secret", clientSecret);

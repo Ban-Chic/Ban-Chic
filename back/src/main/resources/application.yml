@@ -23,7 +23,6 @@ oauth:
     url:
       auth: https://nid.naver.com
       api: https://openapi.naver.com
-# 둔딕이
 
 spring:
   profiles:
@@ -44,3 +43,25 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+cloud:
+  aws:
+    s3:
+      bucket: ${S3_BUCKET_NAME}
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace

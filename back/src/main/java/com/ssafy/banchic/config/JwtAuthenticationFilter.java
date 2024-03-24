@@ -19,7 +19,10 @@ public class JwtAuthenticationFilter implements Filter {
     private final static List<String> whiteList = new ArrayList<>();
 
     static {
-        whiteList.add("/api/auth/login/*");
+        whiteList.add("/api/auth/login/naver");
+        whiteList.add("/api/auth/login/kakao");
+        whiteList.add("/api/auth/test/*");
+        whiteList.add("/api/perfumes/*");
     }
 
     @Override
@@ -58,6 +61,7 @@ public class JwtAuthenticationFilter implements Filter {
         }
         return null;
     }
+
     private boolean checkWhiteList(String requestURI) {
         for (String white : whiteList) {
             if (requestURI.startsWith(white) || pathMatches(requestURI, white)) {
