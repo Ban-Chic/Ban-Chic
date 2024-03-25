@@ -97,4 +97,5 @@ export const updateNickname = (nickName: string) =>
 export const updateProfileImage = () => API.patch("/members/image");
 
 /** 회원 탈퇴 */
-export const deleteMember = () => API.delete("/members");
+export const deleteMember = () =>
+  API.delete(`/members/${localStorage.getItem("uid")}`);

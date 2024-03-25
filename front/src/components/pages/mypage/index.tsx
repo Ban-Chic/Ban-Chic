@@ -7,12 +7,16 @@ import CircleItem from "../../atoms/item/circleItem";
 import { getMember } from "../../../api/Api";
 import ButtonComponent from "../../atoms/auth/Button";
 import useLogout from "../../../hooks/auth/useLogout";
+import useNickNameChange from "../../../hooks/auth/useNickNameChaner";
+import useDeleteId from "../../../hooks/auth/useDeleteId";
 
 function MyPage() {
   const [nickNamedata, setNickNamedata] = useState<string>("");
   const [profileImg, setProfileImg] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const Logout = useLogout();
+  const NicknameChange = useNickNameChange();
+  const DeleteId = useDeleteId();
 
   useEffect(() => {
     getMember(Number(localStorage.getItem("uid"))).then((res) => {
@@ -60,7 +64,11 @@ function MyPage() {
           <SSubTitle>내 검색기록</SSubTitle>
         </SBlock>
         <SBlock>
+          <ButtonComponent onClick={() => NicknameChange(nickNamedata)}>
+            닉네임 수정
+          </ButtonComponent>
           <ButtonComponent onClick={() => Logout()}>로그아웃</ButtonComponent>
+          <ButtonComponent onClick={() => DeleteId()}>회원탈퇴</ButtonComponent>
         </SBlock>
       </SMyPageGrid>
     </SMypageContainer>
@@ -109,10 +117,14 @@ const SMyPageGrid = styled.section`
 const SBlock = styled.div`
   background-color: ${theme.color.sectionColor};
   width: 100%;
+  height: 100%;
   border-radius: 10px;
   padding: 10px;
   transition: cubic-bezier(0.55, 0.055, 0.675, 0.19);
   ${theme.styleBase.glassmorphism}
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   @media only screen and (min-width: 768px) {
     &:nth-child(1),
     &:nth-child(3) {
