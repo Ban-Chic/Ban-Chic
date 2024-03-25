@@ -61,32 +61,13 @@ public class Perfume {
     @JoinColumn(name = "season_id")
     private Season season;
 
-//    @Builder
-//    public Perfume(String perfumeName, String perfumeImg, String brandName, String brandImg, String accords, String notes, int year, int bestRate, float rate, Integer perfumeCount, Integer likeCount, Sillage sillage, Longevity longevity, Price price, Gender gender, Season season) {
-//        this.perfumeName = perfumeName;
-//        this.perfumeImg = perfumeImg;
-//        this.brandName = brandName;
-//        this.brandImg = brandImg;
-//        this.accords = accords;
-//        this.notes = notes;
-//        this.year = year;
-//        this.bestRate = bestRate;
-//        this.rate = rate;
-//        this.perfumeCount = perfumeCount;
-//        this.likeCount = likeCount;
-//        this.sillage = sillage;
-//        this.longevity = longevity;
-//        this.price = price;
-//        this.gender = gender;
-//        this.season = season;
-//    }
-
     // 메서드 정리
     public void increaseLike() {
         this.likeCount++;
     }
 
     public void decreaseLike() {
-        this.likeCount--;
+        if(this.likeCount > 0)
+            this.likeCount--;
     }
 }

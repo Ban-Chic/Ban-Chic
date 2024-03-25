@@ -24,11 +24,4 @@ public class Longevity {
     private int strong;
     private int enormous;
 
-    @Builder
-    public Longevity(int intimate, int moderate, int strong, int enormous) {
-        this.intimate = intimate;
-        this.moderate = moderate;
-        this.strong = strong;
-        this.enormous = enormous;
-    }
 }

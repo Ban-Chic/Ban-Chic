@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class LikesController {
+public class HeartController {
 
     private final LikesService likesService;
     private final MemberService memberService;
     private final PerfumeService perfumeService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    @PostMapping("/likes/{perfumeId}")
-    public ResponseEntity<CommonResponse> likePost(@RequestHeader("Authorization") String authorization,
+    @PostMapping("/heart/{perfumeId}")
+    public ResponseEntity<CommonResponse> update(@RequestHeader("Authorization") String authorization,
                                                    @PathVariable("perfumeId") Long perfumeId) throws Exception {
 
         /**

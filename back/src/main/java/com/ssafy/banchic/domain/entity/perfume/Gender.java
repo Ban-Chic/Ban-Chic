@@ -25,12 +25,4 @@ public class Gender {
     private int moreMale;
     private int male;
 
-    @Builder
-    public Gender(int female, int moreFemale, int unisex, int moreMale, int male) {
-        this.female = female;
-        this.moreFemale = moreFemale;
-        this.unisex = unisex;
-        this.moreMale = moreMale;
-        this.male = male;
-    }
 }

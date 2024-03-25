@@ -26,13 +26,4 @@ public class Sillage {
     private int longLasting;
     private int eternal;
 
-    @Builder
-    public Sillage(int veryWeak, int weak, int moderate, int longLasting, int eternal) {
-        this.veryWeak = veryWeak;
-        this.weak = weak;
-        this.moderate = moderate;
-        this.longLasting = longLasting;
-        this.eternal = eternal;
-    }
-
 }

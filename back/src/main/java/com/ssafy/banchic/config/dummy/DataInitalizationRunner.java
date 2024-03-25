@@ -5,9 +5,11 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class DataInitalizationRunner implements ApplicationRunner {
+
     private final DummyDataService dummyDataService;
+
     public DataInitalizationRunner(DummyDataService dummyDataService) {
         this.dummyDataService = dummyDataService;
     }

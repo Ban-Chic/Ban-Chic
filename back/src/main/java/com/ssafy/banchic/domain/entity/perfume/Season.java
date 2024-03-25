@@ -26,13 +26,4 @@ public class Season {
     private float day;
     private float night;
 
-    @Builder
-    public Season(float spring, float summer, float fall, float winter, float day, float night) {
-        this.spring = spring;
-        this.summer = summer;
-        this.fall = fall;
-        this.winter = winter;
-        this.day = day;
-        this.night = night;
-    }
 }

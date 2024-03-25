@@ -25,12 +25,4 @@ public class Price {
     private int goodValue;
     private int greatValue;
 
-    @Builder
-    public Price(int wayOverpriced, int overpriced, int ok, int goodValue, int greatValue) {
-        this.wayOverpriced = wayOverpriced;
-        this.overpriced = overpriced;
-        this.ok = ok;
-        this.goodValue = goodValue;
-        this.greatValue = greatValue;
-    }
 }

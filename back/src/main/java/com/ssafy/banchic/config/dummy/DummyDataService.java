@@ -43,14 +43,12 @@ public class DummyDataService {
                 .build();
         memberRepository.save(member2);
 
-        Sillage sillage1 = Sillage.builder()
-                .veryWeak(1)
+        Sillage sillage1 = Sillage.builder().veryWeak(1)
                 .weak(2)
                 .moderate(3)
                 .longLasting(4)
                 .eternal(5)
                 .build();
-
         sillageRepository.save(sillage1);
 
         Season season = Season.builder()
