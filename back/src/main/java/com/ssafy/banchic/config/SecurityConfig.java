@@ -61,6 +61,7 @@ public class SecurityConfig {
                     .requestMatchers("/auth/login/**").permitAll()
                     .requestMatchers("/auth/test/**").permitAll()
                     .requestMatchers("/perfume/**").permitAll()
+                    .anyRequest().permitAll()
             )
             .exceptionHandling(authenticationManager -> authenticationManager
                 .authenticationEntryPoint(new AuthenticationEntryPointException())
