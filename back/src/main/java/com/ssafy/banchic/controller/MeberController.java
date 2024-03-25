@@ -1,7 +1,7 @@
 package com.ssafy.banchic.controller;
 
-import com.ssafy.banchic.common.CommonResponse;
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
+import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
 import com.ssafy.banchic.service.MemberService;
 import lombok.AllArgsConstructor;

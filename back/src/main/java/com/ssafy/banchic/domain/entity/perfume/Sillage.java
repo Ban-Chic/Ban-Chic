@@ -1,14 +1,18 @@
 package com.ssafy.banchic.domain.entity.perfume;
 
+import com.ssafy.banchic.domain.entity.Accord;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Sillage {
 
     @Id
@@ -21,5 +25,14 @@ public class Sillage {
     private int moderate;
     private int longLasting;
     private int eternal;
+
+    @Builder
+    public Sillage(int veryWeak, int weak, int moderate, int longLasting, int eternal) {
+        this.veryWeak = veryWeak;
+        this.weak = weak;
+        this.moderate = moderate;
+        this.longLasting = longLasting;
+        this.eternal = eternal;
+    }
 
 }

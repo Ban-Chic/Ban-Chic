@@ -5,10 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Gender {
 
     @Id
@@ -22,4 +25,12 @@ public class Gender {
     private int moreMale;
     private int male;
 
+    @Builder
+    public Gender(int female, int moreFemale, int unisex, int moreMale, int male) {
+        this.female = female;
+        this.moreFemale = moreFemale;
+        this.unisex = unisex;
+        this.moreMale = moreMale;
+        this.male = male;
+    }
 }

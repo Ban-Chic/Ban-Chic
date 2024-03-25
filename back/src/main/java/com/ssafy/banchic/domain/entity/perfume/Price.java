@@ -5,10 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Price {
 
     @Id
@@ -22,4 +25,12 @@ public class Price {
     private int goodValue;
     private int greatValue;
 
+    @Builder
+    public Price(int wayOverpriced, int overpriced, int ok, int goodValue, int greatValue) {
+        this.wayOverpriced = wayOverpriced;
+        this.overpriced = overpriced;
+        this.ok = ok;
+        this.goodValue = goodValue;
+        this.greatValue = greatValue;
+    }
 }

@@ -5,10 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Season {
 
     @Id
@@ -23,4 +26,13 @@ public class Season {
     private float day;
     private float night;
 
+    @Builder
+    public Season(float spring, float summer, float fall, float winter, float day, float night) {
+        this.spring = spring;
+        this.summer = summer;
+        this.fall = fall;
+        this.winter = winter;
+        this.day = day;
+        this.night = night;
+    }
 }

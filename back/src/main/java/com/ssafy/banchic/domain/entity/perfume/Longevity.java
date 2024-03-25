@@ -5,10 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Longevity {
 
     @Id
@@ -21,4 +24,11 @@ public class Longevity {
     private int strong;
     private int enormous;
 
+    @Builder
+    public Longevity(int intimate, int moderate, int strong, int enormous) {
+        this.intimate = intimate;
+        this.moderate = moderate;
+        this.strong = strong;
+        this.enormous = enormous;
+    }
 }
