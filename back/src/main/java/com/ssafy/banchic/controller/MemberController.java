@@ -4,6 +4,7 @@ import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
 import com.ssafy.banchic.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/members")
-public class MeberController {
+public class MemberController {
 
     private final MemberService memberService;
 
     @GetMapping("/{memberId}/info")
-    public ResponseEntity<CommonResponse> getMemberInfo(@PathVariable("memberId") Long memberId) {
-        MemberInfoRes memberInfoResDto = memberService.memberInfo(memberId);
+    public ResponseEntity<CommonResponse> getMemberInfo(
+        @PathVariable("memberId") Long memberId, HttpServletRequest httpServletRequest) {
+        MemberInfoRes memberInfoResDto = memberService.getMemberInfo(memberId, httpServletRequest);
         return new ResponseEntity<>(CommonResponse.builder()
                 .message("유저 정보 조회 성공")
                 .data(memberInfoResDto)
