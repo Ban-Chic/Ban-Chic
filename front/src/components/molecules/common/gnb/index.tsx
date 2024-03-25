@@ -23,7 +23,7 @@ function GNB() {
       <SButton onClick={toggleSide}>
         MENU
       </SButton>
-      <Sidebar isOpen={isOpen} setIsOpen={isOpen} />
+      {/* <Sidebar isOpen={isOpen} setIsOpen={isOpen} /> */}
       {/* <SSpanContainer>
         <MenuIcon>menu</MenuIcon>
       </SSpanContainer> */}

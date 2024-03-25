@@ -140,7 +140,7 @@ const SBlock = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  background-color: yellow;
+  background-color: black;
   &:nth-child(1) {
     grid-column: 1 / span 2;
     grid-row: 1 / span 3;
