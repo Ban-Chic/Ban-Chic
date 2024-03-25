@@ -31,7 +31,7 @@ const SLayout = styled.div`
   }
 
   &:nth-child(1) > :nth-child(2) {
-    min-height: calc(100vh - (244px));
+    min-height: calc(100vh - (250px));
   }
 `;
 
