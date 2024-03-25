@@ -17,7 +17,7 @@ async function enableMocking() {
 }
 
 enableMocking().then(() => {
-  ReactDOM.createRoot(document.getElementById("root")!).render(
+  ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <GlobalStyles />
