@@ -23,9 +23,11 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         String key = "Authorization";
+        String refreshKey = "RefreshToken";
 
         SecurityRequirement securityRequirement = new SecurityRequirement()
-            .addList(key);
+            .addList(key)
+            .addList(refreshKey);
 
         SecurityScheme accessTokenSecurityScheme = new SecurityScheme()
             .type(SecurityScheme.Type.HTTP)
@@ -34,8 +36,14 @@ public class SwaggerConfig {
             .in(SecurityScheme.In.HEADER)
             .name(HttpHeaders.AUTHORIZATION);
 
+        SecurityScheme refreshTokenSecurityScheme = new SecurityScheme()
+            .type(SecurityScheme.Type.APIKEY)
+            .in(SecurityScheme.In.HEADER)
+            .name("RefreshToken");
+
         Components components = new Components()
-            .addSecuritySchemes(key, accessTokenSecurityScheme);
+            .addSecuritySchemes(key, accessTokenSecurityScheme)
+            .addSecuritySchemes(refreshKey, refreshTokenSecurityScheme);
 
         return new OpenAPI()
             .addSecurityItem(securityRequirement)
