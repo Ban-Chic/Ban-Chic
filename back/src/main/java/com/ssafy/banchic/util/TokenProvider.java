@@ -1,9 +1,12 @@
 package com.ssafy.banchic.util;
 
+import com.ssafy.banchic.domain.UserDetailsImpl;
 import com.ssafy.banchic.domain.dto.TokenDto;
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.entity.RefreshToken;
 import com.ssafy.banchic.domain.type.MemberType;
+import com.ssafy.banchic.exception.CustomException;
+import com.ssafy.banchic.exception.ErrorCode;
 import com.ssafy.banchic.repository.RefreshTokenRepository;
 import com.ssafy.banchic.tokens.AuthTokens;
 import io.jsonwebtoken.Claims;
@@ -14,11 +17,16 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -105,7 +113,7 @@ public class TokenProvider {
         }
     }
 
-    public String generate(String subject, Date expiredAt) {
+    private String generate(String subject, Date expiredAt) {
         return Jwts.builder()
             .setSubject(subject)
             .setExpiration(expiredAt)
@@ -117,7 +125,7 @@ public class TokenProvider {
         return Long.valueOf(extractSubject(accessToken));
     }
 
-    public String extractSubject(String accessToken) {
+    private String extractSubject(String accessToken) {
         Claims claims = parseClaims(accessToken);
         return claims.getSubject();
     }
@@ -132,6 +140,44 @@ public class TokenProvider {
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
+    }
+
+    @Transactional
+    public Member getMemberFromAccessToken(HttpServletRequest request) {
+        if (null == request.getHeader("RefreshToken") || null == request.getHeader("Authorization")) {
+            throw new CustomException(ErrorCode.BLANK_TOKEN_HEADER);
+        }
+
+        return validateMember(request);
+    }
+
+    @Transactional
+    public Member validateMember(HttpServletRequest request) {
+        String tokenFromHeader = request.getHeader("RefreshToken");
+//        String tokenFromHeader = request.getHeader("Authorization");
+        if (!validateToken(tokenFromHeader)) {
+            throw new CustomException(ErrorCode.INVALID_TOKEN);
+        }
+
+        Member member = getMemberFromAuthentication();
+        isPresentRefreshToken(member);
+
+        return member;
+    }
+
+    public Member getMemberFromAuthentication() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null
+            || AnonymousAuthenticationToken.class.isAssignableFrom(authentication.getClass())) {
+            throw new CustomException(ErrorCode.NOT_FOUND_AUTHENTICATION);
+        }
+        return ((UserDetailsImpl) authentication.getPrincipal()).getMember();
+    }
+
+    @Transactional(readOnly = true)
+    public RefreshToken isPresentRefreshToken(Member member) {
+        return refreshTokenRepository.findByMember(member)
+            .orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_REFRESH_TOKEN));
     }
 
 }
