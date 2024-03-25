@@ -36,7 +36,7 @@ public class Review extends BaseEntity {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "perfume_id")
     private Perfume perfume;
 
     public void updateImgUrl(String imgUrl) {

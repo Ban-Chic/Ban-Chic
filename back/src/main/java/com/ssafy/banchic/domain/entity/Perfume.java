@@ -57,7 +57,7 @@ public class Perfume {
     @JoinColumn(name = "season_id")
     private Season season;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "perfume", cascade = CascadeType.REMOVE)
     private List<Review> reviews;
 
 }
