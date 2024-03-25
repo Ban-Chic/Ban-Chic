@@ -7,7 +7,7 @@ server:
   port: 8081
 
 jwt:
-  secret-key: ${JWT_KEYVALUE}
+  secret: ${JWT_KEYVALUE}
 
 oauth:
   kakao:
