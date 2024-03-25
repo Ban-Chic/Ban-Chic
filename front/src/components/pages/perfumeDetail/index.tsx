@@ -5,18 +5,33 @@ import ReviewInDetail from "../../molecules/review/reviewInDetail";
 import { SHeaderContainer } from "../../molecules/common/gnb";
 import PieChartContainer from "../../molecules/charts/pieChart";
 import RadarChartContainer from "../../molecules/charts/radarChart";
+import SpriceImageUrl from "../../../utils/ImgUrl";
+import BarChartContainer from "../../molecules/charts/barChart";
+import GPTSample from "../../molecules/gptApi/gptSample";
 
 interface Props {
-  perfumeImg: string;
-  perfumeName: string;
-  RadioNodeListing: number;
-  bestRate: number;
-  vote: number;
-  notes: object;
+  // data: string;
+  // perfumeImg: string;
+  // perfumeName: string;
+  // RadioNodeListing: number;
+  // bestRate: number;
+  // vote: number;
+  // notes: object;
+  // season: object;
+  data: {
+    perfumeImg: string;
+    perfumeName: string;
+    RadioNodeListing: number;
+    bestRate: number;
+    vote: number;
+    notes: object;
+    season: object;
+  } | null;
 }
 
-function PerfumeDetailPage() {
-  const [data, setData] = useState<Props>();
+function PerfumeDetail() {
+  const [data, setData] = useState<Props["data"]>(null);
+  // const [data, setData] = useState<Props>();
   useEffect(() => {
     fetch("/chart")
       .then((res) => res.json())
@@ -25,116 +40,189 @@ function PerfumeDetailPage() {
         setData(response);
       });
   }, []);
+
   return (
     <>
-      <SContainer>
+      <SDetailContainer>
         <SBlock>
-          {data && <SImgContainer src={data[0].perfumeImg} alt="logo" />}
+          {data && <SImg src={data[0].perfumeImg} alt="Perfume Img" />}
         </SBlock>
         <SBlock>
-          {data && (
-            <SContent>
-              평점 : {data[0].RadioNodeListing} / {data[0].bestRate}
-            </SContent>
-          )}
-          {data && (
-            <SContent>Top Notes : {data[0].notes["Top Notes"]}</SContent>
-          )}
-          {data && (
-            <SContent>Middle Notes : {data[0].notes["Middle Notes"]}</SContent>
-          )}
-          {data && (
-            <SContent>Base Notes : {data[0].notes["Base Notes"]}</SContent>
-          )}
+          {data && <GPTSample perfumeName={data[0].perfumeName} notes={data[0].notes}/>}
         </SBlock>
         <SBlock>
-          <RadarChartContainer/>
-          {/* <PieChartContainer/> */}
-        </SBlock>
-        <SBlock></SBlock>
-        <SBlock>
-          최근 리뷰
-          {data && <ReviewInDetail perfumeImg={data[0].perfumeImg} />}
+          {data && <RadarChartContainer season={data[0].season} />}
         </SBlock>
         <SBlock>
-          {data && <SSpan>{data[0].perfumeName}</SSpan>}
-          <SSpan>향수 한글 이름</SSpan>
+          <SNote>
+            <SNoteCate>Top Notes</SNoteCate>
+            <SNoteGroup>
+              <SEachNote>
+                {data && (
+                  <SNoteImg
+                    src={SpriceImageUrl[
+                      `${data[0].notes["Top Notes"]}`
+                    ].replace("/m.", "/o.")}
+                    alt="Perfume Img"
+                  />
+                )}
+                {data && <SNoteName>{data[0].notes["Top Notes"]}</SNoteName>}
+              </SEachNote>
+              <SEachNote>
+                {data && (
+                  <SNoteImg
+                    src={SpriceImageUrl[
+                      `${data[0].notes["Top Notes"]}`
+                    ].replace("/m.", "/o.")}
+                    alt="Perfume Img"
+                  />
+                )}
+                {data && <SNoteName>{data[0].notes["Top Notes"]}</SNoteName>}
+              </SEachNote>
+            </SNoteGroup>
+          </SNote>
+          <SNote>
+            <SNoteCate>Middle Notes</SNoteCate>
+            <SNoteGroup>
+              <SEachNote>
+                {data && (
+                  <SNoteImg
+                    src={SpriceImageUrl[
+                      `${data[0].notes["Middle Notes"]}`
+                    ].replace("/m.", "/o.")}
+                    alt="Perfume Img"
+                  />
+                )}
+                {data && <SNoteName>{data[0].notes["Middle Notes"]}</SNoteName>}
+              </SEachNote>
+            </SNoteGroup>
+          </SNote>
+          <SNote>
+            <SNoteCate>Base Notes</SNoteCate>
+            <SNoteGroup>
+              <SEachNote>
+                {data && (
+                  <SNoteImg
+                    src={SpriceImageUrl[
+                      `${data[0].notes["Base Notes"]}`
+                    ].replace("/m.", "/o.")}
+                    alt="Perfume Img"
+                  />
+                )}
+                {data && <SNoteName>{data[0].notes["Base Notes"]}</SNoteName>}
+              </SEachNote>
+            </SNoteGroup>
+          </SNote>
         </SBlock>
-      </SContainer>
+        <SBlock>
+        {data && <ReviewInDetail perfumeImg={data[0].perfumeImg}/>}
+        </SBlock>
+        <SBlock>
+          {data && <SPerfumeName> {data[0].perfumeName}</SPerfumeName>}
+        </SBlock>
+      </SDetailContainer>
     </>
   );
 }
 
-export const SContainer = styled.div`
+const SDetailContainer = styled.div`
   display: grid;
-  /* justify-content: space-between; */
-  /* grid-template-columns: repeat(6, 1fr); */
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, 1fr);
   padding: 3rem;
-  background-color: white;
-  gap: 10px;
+  gap: 15px;
   height: calc(100vh - 50px);
   max-width: 1200px;
   margin: 0 auto;
-  border-radius: 15px;
 `;
 
 const SBlock = styled.div`
+  display: flex;
   width: 100%;
   height: 100%;
-  /* background-color: blue; */
+  background-color: yellow;
   &:nth-child(1) {
     grid-column: 1 / span 2;
     grid-row: 1 / span 3;
     &:hover {
-      background-color: red;
+      background-color: yellowgreen;
     }
-    display: flex;
   }
   &:nth-child(2) {
     grid-column: 3 / span 2;
-    grid-row: 1 / span 2;
-    /* background-color: green; */
-  }
-  &:nth-child(3) {
-    /* background-color: yellowgreen; */
-    grid-column: 5 / span 2;
-    grid-row: 1 / span 2;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
   }
   &:nth-child(4) {
     grid-column: 3 / span 2;
-    grid-row: 3 / span 2;
-    /* background-color: red; */
+    grid-row: 2 / span 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    &:hover {
+      background-color: red;
+    }
+  }
+  &:nth-child(3) {
+    grid-column: 5 / span 2;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    &:hover {
+      background-color: yellowgreen;
+    }
   }
   &:nth-child(5) {
     grid-column: 5 / span 2;
     grid-row: 3 / span 2;
-    /* background-color: gray; */
+    &:hover {
+      background-color: yellowgreen;
+    }
   }
   &:nth-child(6) {
     grid-column: 1 / span 2;
-    /* background-color: gray; */
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    gap: 15px;
+    &:hover {
+      background-color: yellowgreen;
+    }
   }
 `;
 
-const SImgContainer = styled.img`
-  padding: 10px;
+const SImg = styled.img`
   margin: 0 auto;
 `;
 
-const SSpan = styled.span`
-  ${theme.font.KumarOneRegular};
-  color: black;
-  font-size: 1.5rem;
-  height: 30px;
-  text-align: center;
+const SNote = styled.div`
 `;
 
-const SContent = styled.div``;
+const SNoteCate = styled.div`
+  font-size: 30px;
+  padding: 10px;
+`;
 
-export default PerfumeDetailPage;
+const SNoteGroup = styled.div`
+  display: flex;
+  gap: 10px;
+  padding-left: 15px;
+`;
+
+const SEachNote = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SNoteName = styled.div`
+  margin: 0 auto;
+`;
+
+const SNoteImg = styled.img`
+  width: 60px;
+`;
+
+const SPerfumeName = styled.div`
+  font-size: 30px;
+`;
+
+export default PerfumeDetail;

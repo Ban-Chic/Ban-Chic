@@ -4,16 +4,16 @@ function MainPage() {
   return (
     <>
       <main>
-        <SSpanContainer>
+        <SDivContainer>
           메인
-        </SSpanContainer>
+        </SDivContainer>
       </main>
     </>
   );
 }
 
-const SSpanContainer = styled.span`
-  
+const SDivContainer = styled.div`
+  height: 1200px;
   color: white;
 `;
 

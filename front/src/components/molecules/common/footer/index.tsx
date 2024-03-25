@@ -1,14 +1,24 @@
 import styled from "styled-components";
 
 function Footer() {
+  const goToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <>
       <SFooterContainer>
-        <SUlContainer>
+        <SDiv>
+          <SInner>TEAM Blo9</SInner>
+          <SInner>Copyright © BANCHIC. ALL RIGHTS RESERVED</SInner>
+          <SInner onClick={goToTop}>
+            <SButton>BACK TO TOP</SButton>
+          </SInner>
+        </SDiv>
+        {/* <SUlContainer>
           <li>HOME</li>
           <li>FACEBOOK</li>
           <li>INSTAGRAM</li>
-        </SUlContainer>
+        </SUlContainer> */}
       </SFooterContainer>
       <SImg src="/footerLogo.svg" alt="" />
     </>
@@ -31,6 +41,13 @@ export const SFooterContainer = styled.nav`
   color: #f2f2f2;
 `;
 
+const SDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const SInner = styled.div``;
+
 const SUlContainer = styled.nav`
   list-style-type: disc;
   margin-block-start: 1em;
@@ -41,9 +58,12 @@ const SUlContainer = styled.nav`
 `;
 
 const SImg = styled.img`
-  padding: 4rem;
+  /* padding: 5rem; */
+  height: 300px;
   width: 100%;
 `;
 
+const SButton = styled.button`
+`;
 
 export default Footer;

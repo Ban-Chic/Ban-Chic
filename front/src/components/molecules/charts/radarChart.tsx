@@ -11,53 +11,64 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  {
-    subject: "Day",
-    A: 100,
-    fullMark: 100,
-  },
-  {
-    subject: "Summer",
-    A: 71.1538,
-    fullMark: 100,
-  },
-  {
-    subject: "Winter",
-    A: 34.6154,
-    fullMark: 100,
-  },
-  {
-    subject: "Night",
-    A: 19.2308,
-    fullMark: 100,
-  },
-  {
-    subject: "Fall",
-    A: 46.1538,
-    fullMark: 100,
-  },
-  {
-    subject: "Spring",
-    A: 90.3846,
-    fullMark: 100,
-  },
-];
+interface Props {
+  season: string;
+  day: string;
+  night: string;
+  spring: string;
+  summer: string;
+  fall: string;
+  winter: string;
+}
 
-function RadarChartContainer() {
+function RadarChartContainer(Props: Props) {
+  const data = [
+    {
+      subject: "Day",
+      // A: 100,
+      A: parseFloat(Props.season.day),
+      fullMark: 100,
+    },
+    {
+      subject: "Summer",
+      A: parseFloat(Props.season.summer),
+      fullMark: 100,
+    },
+    {
+      subject: "Winter",
+      A: parseFloat(Props.season.winter),
+      fullMark: 100,
+    },
+    {
+      subject: "Night",
+      A: parseFloat(Props.season.night),
+      fullMark: 100,
+    },
+    {
+      subject: "Fall",
+      A: parseFloat(Props.season.fall),
+      fullMark: 100,
+    },
+    {
+      subject: "Spring",
+      A: parseFloat(Props.season.spring),
+      fullMark: 100,
+    },
+  ];
+
   return (
     <>
       <SContainer>
         <h1>RadarChart</h1>
         <SDiv>
           <RadarChart
-            width={310}
+            width={300}
             height={270}
             cx="50%"
             cy="50%"
             outerRadius="80%"
             data={data}
-            margin={{top: 15, bottom:0}}
+            margin={{ top: 15, bottom: 0 }}
           >
             <PolarGrid />
             <PolarAngleAxis dataKey="subject" />
@@ -74,7 +85,7 @@ function RadarChartContainer() {
               animationEasing="ease-in-out"
             />
             <Legend />
-            <Tooltip/>
+            <Tooltip />
           </RadarChart>
         </SDiv>
       </SContainer>
