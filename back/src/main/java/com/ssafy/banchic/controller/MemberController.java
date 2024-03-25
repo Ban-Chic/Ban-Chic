@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/members")
-public class MeberController {
+public class MemberController {
 
     private final MemberService memberService;
 
@@ -33,11 +33,12 @@ public class MeberController {
                     .message("유저 삭제 완료")
                     .data(deleteMember)
                     .build(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(CommonResponse.builder()
+                    .message("유저 삭제 실패")
+                    .data(deleteMember)
+                    .build(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(CommonResponse.builder()
-                .message("유저 삭제 실패")
-                .data(deleteMember)
-                .build(), HttpStatus.OK);
     }
 
     @PutMapping("/{memberId}/nickname")

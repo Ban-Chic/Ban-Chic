@@ -4,7 +4,7 @@ import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.service.LikesService;
 import com.ssafy.banchic.service.MemberService;
 import com.ssafy.banchic.service.PerfumeService;
-import com.ssafy.banchic.util.JwtTokenProvider;
+import com.ssafy.banchic.util.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class HeartController {
     private final LikesService likesService;
     private final MemberService memberService;
     private final PerfumeService perfumeService;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final TokenProvider tokenProvider;
 
     @PostMapping("/heart/{perfumeId}")
     public ResponseEntity<CommonResponse> update(@RequestHeader("Authorization") String authorization,
@@ -37,8 +37,8 @@ public class HeartController {
         String accessToken = authorization.substring(7);
         log.info("accessToken : {}", accessToken);
         try {
-            if (jwtTokenProvider.validToken(accessToken)) {
-                Long memberId = jwtTokenProvider.getMemberIdFromToken(accessToken);
+            if (tokenProvider.validateToken(accessToken)) {
+                Long memberId = tokenProvider.extractMemberId(accessToken);
                 likesService.addLike(perfumeId, memberId);
                 return ResponseEntity.ok(CommonResponse.builder()
                         .message("좋아요가 정상적으로 작동중입니다.")
