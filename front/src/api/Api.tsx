@@ -89,7 +89,9 @@ export const getMember = (userId: number) => API.get(`/members/${userId}/info`);
 
 /** 닉네임 수정 */
 export const updateNickname = (nickName: string) =>
-  API.patch("members/nickname", nickName);
+  API.patch(`members/${localStorage.getItem("uid")}/nickname`, {
+    nickname: nickName,
+  });
 
 /** 프로필 이미지 수정 */
 export const updateProfileImage = () => API.patch("/members/image");

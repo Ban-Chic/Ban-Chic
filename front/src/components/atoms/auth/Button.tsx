@@ -8,11 +8,7 @@ interface IButtonProps {
 }
 
 function ButtonComponent({ children, onClick }: IButtonProps) {
-  return (
-    <>
-      <SButton onClick={onClick}>{children}</SButton>
-    </>
-  );
+  return <SButton onClick={onClick}>{children}</SButton>;
 }
 
 const SButton = styled.button`
