@@ -2,6 +2,7 @@ package com.ssafy.banchic.domain.entity;
 
 import com.ssafy.banchic.domain.type.OAuthProvider;
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,9 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
     private String image;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Review> reviews;
 
     public void updateNickname(String nickname) {
         this.nickname = nickname;
