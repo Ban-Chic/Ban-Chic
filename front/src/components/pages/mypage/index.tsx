@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
-import { STitle, SBody1, SBody2, SSubTitle } from "../../../styles/Font";
+import { STitle, SSubTitle } from "../../../styles/Font";
 import List from "../../molecules/list";
 import CircleItem from "../../atoms/item/circleItem";
 
