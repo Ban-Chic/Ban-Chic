@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import theme from "../../../styles/Theme";
-import { SBody1, SSubTitle, STitle } from "../../../styles/Font";
+import { SSubTitle } from "../../../styles/Font";
 import PursuitBeauty from "../../../utils/PursuitBeauty";
 
 function SurveyPage() {
