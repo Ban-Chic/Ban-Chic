@@ -1,40 +1,47 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
-import { STitle, SSubTitle } from "../../../styles/Font";
+import { STitle, SSubTitle, SBody1 } from "../../../styles/Font";
 import List from "../../molecules/list";
 import CircleItem from "../../atoms/item/circleItem";
+import { getMember } from "../../../api/Api";
+import ButtonComponent from "../../atoms/auth/Button";
+import useLogout from "../../../hooks/auth/useLogout";
 
 function MyPage() {
   const [nickNamedata, setNickNamedata] = useState<string>("");
-  const [Img, setImg] = useState<string>("");
+  const [profileImg, setProfileImg] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const Logout = useLogout();
+
   useEffect(() => {
-    fetch("/api/users")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setNickNamedata(data[0].nickName);
-        setImg(data[0].profileImg);
-      });
+    getMember(Number(localStorage.getItem("uid"))).then((res) => {
+      console.log(res);
+      setNickNamedata(res.data.data.nickname);
+      setProfileImg(res.data.data.image);
+      setEmail(res.data.data.email);
+    });
   }, []);
+
   return (
     <SMypageContainer>
       <SMyPageGrid>
         <SBlock>
-          <SSubTitle>내 추구미4</SSubTitle>
+          <SSubTitle>내 추구미</SSubTitle>
         </SBlock>
         <SBlock>
           <SFlexCenter>
-            <SSubTitle>내 정보2</SSubTitle>
-            <SProfile imageUrl={Img} />
+            <SSubTitle>내 정보</SSubTitle>
+            <SProfile imageUrl={profileImg} />
             {nickNamedata && <STitle>{nickNamedata}</STitle>}
+            {email && <SBody1>{email}</SBody1>}
           </SFlexCenter>
         </SBlock>
         <SBlock>
-          <SSubTitle>내가 쓴 리뷰들3</SSubTitle>
+          <SSubTitle>내가 쓴 리뷰들</SSubTitle>
         </SBlock>
         <SBlock>
-          <SSubTitle>좋아요 한 향수1</SSubTitle>
+          <SSubTitle>좋아요 한 향수</SSubTitle>
           <List>
             <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
             <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
@@ -42,7 +49,7 @@ function MyPage() {
           </List>
         </SBlock>
         <SBlock>
-          <SSubTitle>내가 본 향수5</SSubTitle>
+          <SSubTitle>내가 본 향수</SSubTitle>
           <List>
             <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
             <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
@@ -50,17 +57,15 @@ function MyPage() {
           </List>
         </SBlock>
         <SBlock>
-          <SSubTitle>내 검색기록6</SSubTitle>
+          <SSubTitle>내 검색기록</SSubTitle>
         </SBlock>
         <SBlock>
-          닉네임 변경 / 로그아웃7
-          <div>dd</div>
+          <ButtonComponent onClick={() => Logout()}>로그아웃</ButtonComponent>
         </SBlock>
       </SMyPageGrid>
     </SMypageContainer>
   );
 }
-
 const SProfile = styled.div<{ imageUrl: string }>`
   width: 200px;
   height: 200px;

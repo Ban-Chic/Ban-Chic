@@ -22,12 +22,6 @@ API.interceptors.response.use(
   async (error) => {
     if (error.response) {
       const { config } = error;
-      if (error.response.status === 400) {
-        return {
-          code: "400",
-          message: "400",
-        };
-      }
       // 토큰 만료시
       if (error.response.data.statusCode === 401) {
         const originRequest = config;
@@ -60,18 +54,6 @@ API.interceptors.response.use(
           window.location.href = "/login";
         }
         window.location.href = "/login";
-      }
-      if (error.response.status === 403) {
-        return {
-          code: "403",
-          message: "403",
-        };
-      }
-      if (error.response.status === 404) {
-        return {
-          code: "404",
-          message: "404",
-        };
       }
     }
     return Promise.reject(error);

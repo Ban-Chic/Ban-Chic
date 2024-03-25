@@ -71,10 +71,10 @@ export const postKakaoLogin = (code: string | null) => {
 };
 
 /** 네이버 로그아웃 */
-export const postNaverLogout = () => API.post("/auth/logout/naver");
+export const getNaverLogout = () => API.get("/auth/logout/naver");
 
 /** 카카오 로그아웃 */
-export const postKakaoLogout = () => API.post("/auth/logout/Kakao");
+export const getKakaoLogout = () => API.get("/auth/logout/kakao");
 
 // 멤버
 

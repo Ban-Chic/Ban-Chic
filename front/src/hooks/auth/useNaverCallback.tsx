@@ -18,11 +18,11 @@ function useNaverCallback() {
         localStorage.setItem("oauthProvider", response.data.data.oauthProvider);
 
         // 메인 페이지로 이동
-        // navigate("/");
+        navigate("/");
       })
       .catch((error: any) => {
         // 에러발생 시 login 페이지로 전환
-        // navigate("/login");
+        navigate("/login");
         console.log(error);
       });
   }, []);
