@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { STitle } from "../../../styles/Font";
 import theme from "../../../styles/Theme";
+import NaverLogin from "../../atoms/auth/NaverLoginButton";
+import KakaoLogin from "../../atoms/auth/KakaoLoginButton";
 
 function LoginPage() {
   return (
@@ -10,12 +11,8 @@ function LoginPage() {
       <SLoginSection>
         <SLoginTitle>Login</SLoginTitle>
         <SFlexTap>
-          <Link to="/">
-            <SImg src="/naverLogin.png" alt="" />
-          </Link>
-          <Link to="/">
-            <SImg src="/kakaoLogin.png" alt="" />
-          </Link>
+          <NaverLogin />
+          <KakaoLogin />
         </SFlexTap>
       </SLoginSection>
     </SLoginContainer>
@@ -36,16 +33,13 @@ const SLoginTitle = styled(STitle)`
   ${theme.font.Title}
 `;
 
-const SImg = styled.img`
-  width: 200px;
-`;
-
 const SFlexTap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  width: 10em;
 `;
 
 const SLoginContainer = styled.div`

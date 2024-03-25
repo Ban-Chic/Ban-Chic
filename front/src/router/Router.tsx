@@ -10,6 +10,8 @@ import MyPage from "../components/pages/mypage";
 import LoginPage from "../components/pages/login";
 import RecommendPage from "../components/pages/recommend";
 import SurveyPage from "../components/pages/survey";
+import NaverCallback from "../components/pages/login/NaverCallback";
+import KakaoCallback from "../components/pages/login/KakaoCallback";
 
 function Router() {
   return (
@@ -21,6 +23,8 @@ function Router() {
         <Route path="/recommend" element={<RecommendPage />}></Route>
         <Route path="/survey" element={<SurveyPage />}></Route>
       </Route>
+      <Route path="/naver/callback" element={<NaverCallback />}></Route>
+      <Route path="/kakao/callback" element={<KakaoCallback />}></Route>
     </Routes>
   );
 }
