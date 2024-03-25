@@ -55,10 +55,11 @@ public class MemberController {
     @PutMapping("/{memberId}/image")
     public ResponseEntity<CommonResponse> updateProfileImage (
         @PathVariable("memberId") Long memberId,
-        @RequestPart(value = "file", required = false) MultipartFile file) {
+        @RequestPart(value = "file", required = false) MultipartFile file,
+        HttpServletRequest httpServletRequest) {
         return new ResponseEntity<>(CommonResponse.builder()
             .message("프로필 이미지 수정 완료")
-            .data(memberService.updateImage(memberId, file))
+            .data(memberService.updateImage(memberId, file, httpServletRequest))
             .build(), HttpStatus.OK);
     }
 

@@ -58,24 +58,30 @@ public class MemberService {
                 .build();
     }
 
+
+    public String updateImage(Long memberId, MultipartFile file, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
+
+        if (!memberFromAccessToken.getId().equals(memberId)) {
+            throw new CustomException(ErrorCode.NO_AUTHORITY);
+        }
+
+        if (!(memberFromAccessToken.getImage() == null || memberFromAccessToken.getImage().isEmpty())) {
+            fileUploadService.delete(memberFromAccessToken.getImage());
+        }
+
+        String imgUrl = fileUploadService.save("member/", file);
+        memberFromAccessToken.updateImage(imgUrl);
+
+        memberRepository.save(memberFromAccessToken);
+
+        return imgUrl;
+    }
+
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
         return memberRepository.findById(memberFromAccessToken.getId())
             .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
-    }
-
-    public String updateImage(Long memberId, MultipartFile file) {
-        Member member = memberRepository.findById(memberId)
-            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
-
-        if (member.getImage().isEmpty()) {
-            fileUploadService.delete(member.getImage());
-        }
-
-        String imgUrl = fileUploadService.save("/member", file);
-        member.updateImage(imgUrl);
-
-        return imgUrl;
     }
 
 }
