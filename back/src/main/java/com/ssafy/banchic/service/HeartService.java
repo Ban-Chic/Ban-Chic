@@ -27,7 +27,7 @@ public class HeartService {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
         Perfume findPerfume = perfumeRepository.findById(perfumeId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NO_PERFUME));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
 
         if (!heartRepository.existsByMemberAndPerfume(memberFromAccessToken, findPerfume)) {
             // 값이 없으면 좋아요를 추가합니다.
