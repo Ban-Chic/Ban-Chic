@@ -30,18 +30,10 @@ public class MemberController {
 
     @DeleteMapping("/{memberId}")
     public ResponseEntity<CommonResponse> delete(@PathVariable("memberId") Long memberId, HttpServletRequest httpServletRequest) {
-        boolean deleteMember = memberService.memberDelete(memberId, httpServletRequest);
-        if(deleteMember) {
-            return new ResponseEntity<>(CommonResponse.builder()
+        memberService.delete(memberId, httpServletRequest);
+        return new ResponseEntity<>(CommonResponse.builder()
                     .message("유저 삭제 완료")
-                    .data(deleteMember)
                     .build(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(CommonResponse.builder()
-                    .message("유저 삭제 실패")
-                    .data(deleteMember)
-                    .build(), HttpStatus.OK);
-        }
     }
 
     @PutMapping("/{memberId}/nickname")

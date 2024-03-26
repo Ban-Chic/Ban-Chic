@@ -34,35 +34,28 @@ public class MemberService {
         return MemberInfoRes.from(memberFromAccessToken);
     }
 
-    public boolean memberDelete(Long memberId, HttpServletRequest httpServletRequest) {
+    public void delete(Long memberId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
         if (!memberFromAccessToken.getId().equals(memberId)) {
             throw new CustomException(ErrorCode.NO_AUTHORITY);
-        } else {
-            memberRepository.findById(memberId);
-            return true;
         }
+
+        memberRepository.deleteById(memberId);
     }
 
-    public MemberNicknameRes updateNickname(Long memberId, UpdateNicknameReq request, HttpServletRequest httpServletRequest) {
+    public MemberNicknameRes updateNickname(Long memberId, UpdateNicknameReq updateNicknameReq, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
-        if(!memberFromAccessToken.getId().equals(memberId)) {
+        if (!memberFromAccessToken.getId().equals(memberId)) {
             throw new CustomException(ErrorCode.NOT_FOUND_ID);
-        } else  {
-            Member findMember = memberRepository.findById(memberId)
-                    .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
-            String newNickname = "";
-            newNickname = request.getNickname();
-            findMember.updateNickname(newNickname);
-            Member updateMember = memberRepository.save(findMember);
-
-            return MemberNicknameRes.from(updateMember);
         }
 
-    }
+        memberFromAccessToken.updateNickname(updateNicknameReq.getNickname());
+        Member updateMember = memberRepository.save(memberFromAccessToken);
 
+        return MemberNicknameRes.from(updateMember);
+    }
 
     public String updateImage(Long memberId, MultipartFile file, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
