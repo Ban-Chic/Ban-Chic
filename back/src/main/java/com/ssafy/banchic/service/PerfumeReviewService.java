@@ -47,12 +47,32 @@ public class PerfumeReviewService {
         Review review = Review.builder()
             .rate(reviewReq.getRate())
             .content(reviewReq.getContent())
-            .imgUrl(fileUploadService.save("review/", file))
+            .imgUrl(file.isEmpty() ? null : fileUploadService.save("review/", file))
             .perfume(perfume)
             .member(member)
             .build();
 
         return perfumeReviewRepository.save(review).getId();
+    }
+
+    public ReviewRes update(
+        Long perfumeId, Long reviewId, ReviewReq reviewReq, HttpServletRequest httpServletRequest) {
+        Review review = perfumeReviewRepository.findById(reviewId)
+            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
+        Member member = getMemberFromAccessToken(httpServletRequest);
+
+        if (!review.getPerfume().getId().equals(perfumeId)) {
+            throw new CustomException(ErrorCode.INVALID_RESOURCE);
+        }
+
+        if (!review.getMember().getId().equals(member.getId())) {
+            throw new CustomException(ErrorCode.NO_AUTHORITY);
+        }
+
+        review.update(reviewReq);
+        perfumeReviewRepository.save(review);
+
+        return ReviewRes.from(review);
     }
 
     public Member getMemberFromAccessToken(HttpServletRequest request) {
