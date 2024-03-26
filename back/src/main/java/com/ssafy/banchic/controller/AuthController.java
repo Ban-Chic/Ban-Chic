@@ -40,7 +40,6 @@ public class AuthController {
     @Value("${oauth.kakao.url.redirect}")
     private String kakaoLogoutRedirectUrl;
 
-
     @GetMapping("/login/kakao")
     public ResponseEntity<CommonResponse> loginKakao(
         @RequestParam("code") String code, HttpServletResponse response) {

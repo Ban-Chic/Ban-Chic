@@ -6,8 +6,9 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UpdateNicknameReq {
+public class ReviewReq {
 
-    private String nickname;
+    private int rate;
+    private String content;
 
 }
