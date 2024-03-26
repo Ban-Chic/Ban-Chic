@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,6 @@ public class PerfumeController {
 
     private final PerfumeService perfumeService;
     private final PerfumeReviewService perfumeReviewService;
-
 
     @GetMapping("/{perfumeId}")
     public ResponseEntity<CommonResponse> getPerfume(@PathVariable Long perfumeId) {
@@ -54,7 +54,7 @@ public class PerfumeController {
         @RequestPart(value = "file", required = false) MultipartFile file,
         HttpServletRequest httpServletRequest) {
         return ResponseEntity.ok(CommonResponse.builder()
-            .message("리뷰 작성")
+            .message("리뷰 작성 완료")
             .data(perfumeReviewService.create(perfumeId, reviewReq, file, httpServletRequest))
             .build());
     }
@@ -66,8 +66,19 @@ public class PerfumeController {
         @RequestBody ReviewReq reviewReq,
         HttpServletRequest httpServletRequest) {
         return ResponseEntity.ok(CommonResponse.builder()
-            .message("리뷰 수정")
+            .message("리뷰 수정 완료")
             .data(perfumeReviewService.update(perfumeId, reviewId, reviewReq, httpServletRequest))
+            .build());
+    }
+
+    @DeleteMapping(value = "/{perfumeId}/reviews/{reviewId}")
+    public ResponseEntity<CommonResponse> deleteReview(
+        @PathVariable Long perfumeId,
+        @PathVariable Long reviewId,
+        HttpServletRequest httpServletRequest) {
+        perfumeReviewService.delete(perfumeId, reviewId, httpServletRequest);
+        return ResponseEntity.ok(CommonResponse.builder()
+            .message("리뷰 삭제 완료")
             .build());
     }
 
