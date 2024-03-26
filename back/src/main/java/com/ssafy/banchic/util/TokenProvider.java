@@ -82,6 +82,10 @@ public class TokenProvider {
     }
 
     public boolean validateToken(String token) {
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
@@ -144,7 +148,7 @@ public class TokenProvider {
 
     @Transactional
     public Member getMemberFromAccessToken(HttpServletRequest request) {
-        if (null == request.getHeader("RefreshToken") || null == request.getHeader("Authorization")) {
+        if (null == request.getHeader("Authorization")) {
             throw new CustomException(ErrorCode.BLANK_TOKEN_HEADER);
         }
 
@@ -153,8 +157,8 @@ public class TokenProvider {
 
     @Transactional
     public Member validateMember(HttpServletRequest request) {
-        String tokenFromHeader = request.getHeader("RefreshToken");
-//        String tokenFromHeader = request.getHeader("Authorization");
+//        String tokenFromHeader = request.getHeader("RefreshToken");
+        String tokenFromHeader = request.getHeader("Authorization");
         if (!validateToken(tokenFromHeader)) {
             throw new CustomException(ErrorCode.INVALID_TOKEN);
         }
