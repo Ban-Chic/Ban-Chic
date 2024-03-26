@@ -1,7 +1,7 @@
 package com.ssafy.banchic.controller;
 
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
-import com.ssafy.banchic.service.LikesService;
+import com.ssafy.banchic.service.HeartService;
 import com.ssafy.banchic.service.MemberService;
 import com.ssafy.banchic.service.PerfumeService;
 import com.ssafy.banchic.util.TokenProvider;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class HeartController {
 
-    private final LikesService likesService;
+    private final HeartService likesService;
     private final MemberService memberService;
     private final PerfumeService perfumeService;
     private final TokenProvider tokenProvider;

@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Builder
@@ -24,6 +27,12 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
     private String image;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private RefreshToken refreshToken;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Heart> heart = new ArrayList<>();
 
     public void updateNickname(String nickname) {
         this.nickname = nickname;

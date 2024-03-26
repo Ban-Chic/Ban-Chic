@@ -36,10 +36,10 @@ public class Perfume {
 
     // 향수 조회수
     @Builder.Default
-    private Integer perfumeCount = 0;
+    private int perfumeCount = 0;
     // 향수 좋아요수
     @Builder.Default
-    private Integer likeCount = 0;
+    private int likeCount = 0;
 
     @OneToOne
     @JoinColumn(name = "sillage_id")

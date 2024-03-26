@@ -22,6 +22,9 @@ public class Heart extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "perfume_id")
     private Perfume perfume;
-
-
+    @Builder
+    public Heart(Member member, Perfume perfume) {
+        this.member = member;
+        this.perfume = perfume;
+    }
 }
