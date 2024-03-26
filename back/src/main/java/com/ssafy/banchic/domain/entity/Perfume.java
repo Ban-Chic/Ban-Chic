@@ -5,10 +5,8 @@ import com.ssafy.banchic.domain.entity.perfume.Longevity;
 import com.ssafy.banchic.domain.entity.perfume.Price;
 import com.ssafy.banchic.domain.entity.perfume.Season;
 import com.ssafy.banchic.domain.entity.perfume.Sillage;
-import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,7 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import java.util.List;
 import lombok.Getter;
 
 @Entity
@@ -50,7 +47,7 @@ public class Perfume {
     private int perfumeCount = 0;
     // 향수 좋아요수
     @Builder.Default
-    private int likeCount = 0;
+    private int heartCount = 0;
 
     @OneToOne
     @JoinColumn(name = "sillage_id")
@@ -77,11 +74,11 @@ public class Perfume {
 
     // 메서드 정리
     public void increaseLike() {
-        this.likeCount++;
+        this.heartCount++;
     }
 
     public void decreaseLike() {
-        if(this.likeCount > 0)
-            this.likeCount--;
+        if(this.heartCount > 0)
+            this.heartCount--;
     }
 }

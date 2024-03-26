@@ -13,7 +13,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -35,27 +34,33 @@ public class MemberService {
         return MemberInfoRes.from(memberFromAccessToken);
     }
 
-    public boolean memberDelete(Long memberId) {
-        Optional<Member> findMember = memberRepository.findById(memberId);
-        if(findMember.isPresent()) {
-            memberRepository.deleteById(memberId);
+    public boolean memberDelete(Long memberId, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
+
+        if (!memberFromAccessToken.getId().equals(memberId)) {
+            throw new CustomException(ErrorCode.NO_AUTHORITY);
+        } else {
+            memberRepository.findById(memberId);
             return true;
         }
-        return false;
     }
 
-    public MemberNicknameRes updateNickname(Long memberId, UpdateNicknameReq request) {
-        Optional<Member> findMember = memberRepository.findById(memberId);
-        String newNickname = "";
-        if(findMember.isPresent()) {
+    public MemberNicknameRes updateNickname(Long memberId, UpdateNicknameReq request, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
+
+        if(!memberFromAccessToken.getId().equals(memberId)) {
+            throw new CustomException(ErrorCode.NOT_FOUND_ID);
+        } else  {
+            Member findMember = memberRepository.findById(memberId)
+                    .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
+            String newNickname = "";
             newNickname = request.getNickname();
-            findMember.get().updateNickname(newNickname);
-            memberRepository.save(findMember.get());
+            findMember.updateNickname(newNickname);
+            Member updateMember = memberRepository.save(findMember);
+
+            return MemberNicknameRes.from(updateMember);
         }
 
-        return MemberNicknameRes.builder()
-                .nickname(newNickname)
-                .build();
     }
 
 
@@ -81,7 +86,7 @@ public class MemberService {
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
         return memberRepository.findById(memberFromAccessToken.getId())
-            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
     }
 
 }
