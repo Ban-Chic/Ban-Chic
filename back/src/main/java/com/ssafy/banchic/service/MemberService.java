@@ -13,7 +13,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -35,29 +34,28 @@ public class MemberService {
         return MemberInfoRes.from(memberFromAccessToken);
     }
 
-    public boolean memberDelete(Long memberId) {
-        Optional<Member> findMember = memberRepository.findById(memberId);
-        if(findMember.isPresent()) {
-            memberRepository.deleteById(memberId);
-            return true;
-        }
-        return false;
-    }
+    public void delete(Long memberId, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
-    public MemberNicknameRes updateNickname(Long memberId, UpdateNicknameReq request) {
-        Optional<Member> findMember = memberRepository.findById(memberId);
-        String newNickname = "";
-        if(findMember.isPresent()) {
-            newNickname = request.getNickname();
-            findMember.get().updateNickname(newNickname);
-            memberRepository.save(findMember.get());
+        if (!memberFromAccessToken.getId().equals(memberId)) {
+            throw new CustomException(ErrorCode.NO_AUTHORITY);
         }
 
-        return MemberNicknameRes.builder()
-                .nickname(newNickname)
-                .build();
+        memberRepository.deleteById(memberId);
     }
 
+    public MemberNicknameRes updateNickname(Long memberId, UpdateNicknameReq updateNicknameReq, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
+
+        if (!memberFromAccessToken.getId().equals(memberId)) {
+            throw new CustomException(ErrorCode.NOT_FOUND_ID);
+        }
+
+        memberFromAccessToken.updateNickname(updateNicknameReq.getNickname());
+        Member updateMember = memberRepository.save(memberFromAccessToken);
+
+        return MemberNicknameRes.from(updateMember);
+    }
 
     public String updateImage(Long memberId, MultipartFile file, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
@@ -81,7 +79,7 @@ public class MemberService {
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
         return memberRepository.findById(memberFromAccessToken.getId())
-            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
     }
 
 }

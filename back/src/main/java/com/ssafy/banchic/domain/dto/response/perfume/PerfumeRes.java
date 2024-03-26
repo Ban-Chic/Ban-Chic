@@ -28,25 +28,27 @@ public class PerfumeRes {
     private PriceRes price;
     private GenderRes gender;
     private SeasonRes season;
+    private int hearts;
 
     public static PerfumeRes from(Perfume perfume) {
         return PerfumeRes.builder()
-            .id(perfume.getId())
-            .perfumeName(perfume.getPerfumeName())
-            .perfumeImg(perfume.getPerfumeImg())
-            .brandName(perfume.getBrandName())
-            .brandImg(perfume.getBrandImg())
-            .notes(perfume.getNotes().replaceAll(" Notes", "Notes"))
-            .year(perfume.getYear())
-            .bestRate(perfume.getBestRate())
-            .rate(perfume.getRate())
-            .accords(perfume.getAccords().replaceAll("%", ""))
-            .sillage(SillageRes.from(perfume.getSillage()))
-            .longevity(LongevityRes.from(perfume.getLongevity()))
-            .price(PriceRes.from(perfume.getPrice()))
-            .gender(GenderRes.from(perfume.getGender()))
-            .season(SeasonRes.from(perfume.getSeason()))
-            .build();
+                .id(perfume.getId())
+                .perfumeName(perfume.getPerfumeName())
+                .perfumeImg(perfume.getPerfumeImg())
+                .brandName(perfume.getBrandName())
+                .brandImg(perfume.getBrandImg())
+                .notes(perfume.getNotes().replaceAll(" Notes", "Notes"))
+                .year(perfume.getYear())
+                .bestRate(perfume.getBestRate())
+                .rate(perfume.getRate())
+                .accords(perfume.getAccords().replaceAll("%", ""))
+                .sillage(SillageRes.from(perfume.getSillage()))
+                .longevity(LongevityRes.from(perfume.getLongevity()))
+                .price(PriceRes.from(perfume.getPrice()))
+                .gender(GenderRes.from(perfume.getGender()))
+                .season(SeasonRes.from(perfume.getSeason()))
+                .hearts(perfume.getHeartCnt())
+                .build();
     }
 
 }
