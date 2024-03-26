@@ -47,7 +47,7 @@ public class PerfumeRes {
                 .price(PriceRes.from(perfume.getPrice()))
                 .gender(GenderRes.from(perfume.getGender()))
                 .season(SeasonRes.from(perfume.getSeason()))
-                .hearts(perfume.getHeartCount())
+                .hearts(perfume.getHeartCnt())
                 .build();
     }
 

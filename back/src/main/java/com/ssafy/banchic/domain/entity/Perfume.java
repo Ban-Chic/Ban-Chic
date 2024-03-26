@@ -44,10 +44,10 @@ public class Perfume {
 
     // 향수 조회수
     @Builder.Default
-    private int perfumeCount = 0;
+    private int perfumeCnt = 0;
     // 향수 좋아요수
     @Builder.Default
-    private int heartCount = 0;
+    private int heartCnt = 0;
 
     @OneToOne
     @JoinColumn(name = "sillage_id")
@@ -73,12 +73,12 @@ public class Perfume {
     private List<Review> reviews;
 
     // 메서드 정리
-    public void increaseLike() {
-        this.heartCount++;
+    public void increaseHeart() {
+        this.heartCnt++;
     }
 
-    public void decreaseLike() {
-        if(this.heartCount > 0)
-            this.heartCount--;
+    public void decreaseHeartCnt() {
+        if(this.heartCnt > 0)
+            this.heartCnt--;
     }
 }

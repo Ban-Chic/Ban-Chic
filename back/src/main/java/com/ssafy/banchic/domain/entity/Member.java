@@ -34,7 +34,7 @@ public class Member extends BaseEntity {
     private RefreshToken refreshToken;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Heart> heart = new ArrayList<>();
+    private List<Heart> hearts;
 
     public void updateNickname(String nickname) {
         this.nickname = nickname;

@@ -31,11 +31,11 @@ public class HeartService {
 
         if (!heartRepository.existsByMemberAndPerfume(memberFromAccessToken, findPerfume)) {
             // 값이 없으면 좋아요를 추가합니다.
-            findPerfume.increaseLike();
+            findPerfume.increaseHeart();
             heartRepository.save(new Heart(memberFromAccessToken, findPerfume));
             // 외래키로 member와 perfume을 묶어서 객체로 저장한다.
         } else {
-            findPerfume.decreaseLike();
+            findPerfume.decreaseHeartCnt();
             heartRepository.deleteByMemberAndPerfume(memberFromAccessToken, findPerfume);
         }
     }
