@@ -3,11 +3,10 @@ package com.ssafy.banchic.controller;
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.domain.type.OAuthProvider;
 import com.ssafy.banchic.oauthApi.params.NaverLogoutParams;
-import com.ssafy.banchic.oauthApi.params.OauthTokenParams;
 import com.ssafy.banchic.service.OAuthLoginService;
 import com.ssafy.banchic.service.OAuthLogoutService;
-import com.ssafy.banchic.tokens.AuthTokens;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -107,10 +106,13 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/extend/token")
-    public ResponseEntity<AuthTokens> extendToken(@RequestHeader("Authorization") String accessToken,
-                                                  @RequestBody OauthTokenParams params) {
-        return ResponseEntity.ok(oAuthLoginService.generateNewToken(accessToken, params.getRefreshToken()));
+    @PostMapping("/renew")
+    public ResponseEntity<CommonResponse> renewToken(
+        HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        oAuthLoginService.generateNewToken(httpServletRequest, httpServletResponse);
+        return new ResponseEntity<>(CommonResponse.builder()
+            .message("액세스 토큰 갱신 완료")
+            .build(), HttpStatus.OK);
     }
 
 }

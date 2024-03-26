@@ -8,7 +8,6 @@ import com.ssafy.banchic.domain.type.MemberType;
 import com.ssafy.banchic.exception.CustomException;
 import com.ssafy.banchic.exception.ErrorCode;
 import com.ssafy.banchic.repository.RefreshTokenRepository;
-import com.ssafy.banchic.tokens.AuthTokens;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -101,20 +100,13 @@ public class TokenProvider {
         return false;
     }
 
-    public AuthTokens renewAccessToken(String accessToken, String refreshToken) {
-        try {
-            // 리프레시 토큰을 사용하여 새로운 액세스 토큰 생성
-            long now = (new Date()).getTime();
-            Date accessTokenExpiredAt = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
-            // 기존 리프레시 토큰을 그대로 사용하거나, 새로 생성해야 한다면 그 로직을 추가할 수 있습니다.
-            // 여기에서는 기존 리프레시 토큰을 그대로 사용하도록 가정합니다.
-            String subject = extractMemberId(accessToken).toString();
-            String newAccessToken = generate(subject, accessTokenExpiredAt);
-
-            return AuthTokens.of(newAccessToken, refreshToken, "Bearer", ACCESS_TOKEN_EXPIRE_TIME / 1000L);
-        } catch (Exception e) {
-            throw new RuntimeException("Error renewing access token", e);
-        }
+    public String renewAccessToken(String accessToken, String refreshToken) {
+        //TODO : accessToken 만료 여부 체크
+        //TODO : refreshToken 유효성 체크
+        long now = (new Date()).getTime();
+        Date accessTokenExpiredAt = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+        Claims claims = parseClaims(accessToken);
+        return generate(claims.getSubject(), accessTokenExpiredAt);
     }
 
     private String generate(String subject, Date expiredAt) {
@@ -135,6 +127,10 @@ public class TokenProvider {
     }
 
     private Claims parseClaims(String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
         try {
             return Jwts.parserBuilder()
                 .setSigningKey(key)
@@ -157,7 +153,6 @@ public class TokenProvider {
 
     @Transactional
     public Member validateMember(HttpServletRequest request) {
-//        String tokenFromHeader = request.getHeader("RefreshToken");
         String tokenFromHeader = request.getHeader("Authorization");
         if (!validateToken(tokenFromHeader)) {
             throw new CustomException(ErrorCode.INVALID_TOKEN);

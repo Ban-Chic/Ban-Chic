@@ -7,7 +7,7 @@ import com.ssafy.banchic.oauthApi.response.OAuthInfoResponse;
 import com.ssafy.banchic.oauthApi.response.RequestOAuthInfoService;
 import com.ssafy.banchic.repository.MemberRepository;
 import com.ssafy.banchic.util.TokenProvider;
-import com.ssafy.banchic.tokens.AuthTokens;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,10 +40,13 @@ public class OAuthLoginService {
         return new LoginResult(member.getId(), oAuthProvider, nickname, email);
     }
 
-    public AuthTokens generateNewToken(String accessToken, String refreshToken) {
-        return tokenProvider.renewAccessToken(accessToken, refreshToken);
+    public void generateNewToken(HttpServletRequest request, HttpServletResponse response) {
+        String authorization = request.getHeader("Authorization");
+        String refreshToken = request.getHeader("RefreshToken");
+        String newToken = tokenProvider.renewAccessToken(authorization, refreshToken);
+        response.addHeader("Authorization", "Bearer " + newToken);
+        response.addHeader("RefreshToken", refreshToken);
     }
-
 
     private Member findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
         return memberRepository.findByEmail(oAuthInfoResponse.getEmail())
@@ -78,7 +81,6 @@ public class OAuthLoginService {
 
         return new NicknameResponse(nickname);
     }
-
 
     /**
      * nickname 전체 조회를 통해서, 사용중인 닉네임이면 false, 사용중인 닉네임이 아니면 true
