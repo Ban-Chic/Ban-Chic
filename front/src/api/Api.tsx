@@ -21,9 +21,9 @@ export const baseAPI = () => API.get("/");
 // 향수
 
 /** 향수 상세 조회 */
-export const perfumeDetail = (
+export const getPerfumeDetail = (
   perfumeId: string
-): Promise<AxiosResponse<PerfumeData>> => API.get(`${perfumeId}`);
+): Promise<AxiosResponse<PerfumeData>> => API.get(`/perfumes/${perfumeId}`);
 
 export const getRecommend = () => API.get("/recommend/top");
 
@@ -40,7 +40,7 @@ export const deleteLike = (perfumeId: number) =>
 
 /** 향수 리뷰 목록 조회 */
 export const getPerfumeReviews = (perfumeId: number) =>
-  API.delete(`/perfumes/${perfumeId}/reviews`);
+  API.get(`/perfumes/${perfumeId}/reviews`);
 
 // 리뷰
 

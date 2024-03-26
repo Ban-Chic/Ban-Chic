@@ -298,11 +298,9 @@ const SDiv3Li = styled.li`
   text-transform: uppercase;
   display: block;
   &:nth-child(1) {
-    -webkit-transition: all .7s cubic-bezier(0.3, 0, 0.2, 1) 0s;
     transition: all .7s cubic-bezier(0.3, 0, 0.2, 1) 0s
   }
   &:nth-child(2) {
-    -webkit-transition: all .7s cubic-bezier(0.3, 0, 0.2, 1) 0s;
     transition: all .7s cubic-bezier(0.3, 0, 0.2, 1) 0s
   }
 `;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import theme from "../../../../styles/Theme";
 import { Link } from "react-router-dom";
-import Sidebar from "../../sidebar/sidebar";
 import React, {useState} from "react";
+import Example from "../../sidebarFramer/example";
 
 
 
@@ -18,16 +18,9 @@ function GNB() {
       <SLink to="/mainSample">
         <SImgContainer src="/logo_triangle_banchic.png" alt="logo" />
       </SLink>
-      <SLink to="/perfumeId">PerfumeDetail</SLink>
+      <SLink to="/perfumes/1">PerfumeDetail</SLink>
       <SLink to="/mypage">MyPage</SLink>
-      <SButton onClick={toggleSide}>
-        MENU
-      </SButton>
-      {/* <Sidebar isOpen={isOpen} setIsOpen={isOpen} /> */}
-      {/* <SSpanContainer>
-        <MenuIcon>menu</MenuIcon>
-      </SSpanContainer> */}
-      {/* <Sidebar /> */}
+      <Example/>
     </SHeaderContainer>
   );
 }

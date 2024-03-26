@@ -22,7 +22,7 @@ function Router() {
       <Route element={<Layouts />} errorElement={<ErrorPage />}>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/perfumeId" element={<PerfumeDetailPage />}></Route>
+        <Route path="/perfumes/:perfumeId" element={<PerfumeDetailPage />}></Route>
         <Route path="/mainSample" element={<MainSample />}></Route>
         <Route path="/gptSample" element={<GPTSample />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
