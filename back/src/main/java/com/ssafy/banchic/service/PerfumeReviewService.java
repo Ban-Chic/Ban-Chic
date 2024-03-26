@@ -38,7 +38,7 @@ public class PerfumeReviewService {
         return reviews.map(ReviewRes::from);
     }
 
-    public Long create(Long perfumeId, ReviewReq reviewReq, MultipartFile file,HttpServletRequest httpServletRequest) {
+    public ReviewRes create(Long perfumeId, ReviewReq reviewReq, MultipartFile file,HttpServletRequest httpServletRequest) {
         Perfume perfume = perfumeRepository.findById(perfumeId)
             .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
 
@@ -52,7 +52,7 @@ public class PerfumeReviewService {
             .member(member)
             .build();
 
-        return perfumeReviewRepository.save(review).getId();
+        return ReviewRes.from(perfumeReviewRepository.save(review));
     }
 
     public ReviewRes update(
@@ -73,6 +73,23 @@ public class PerfumeReviewService {
         perfumeReviewRepository.save(review);
 
         return ReviewRes.from(review);
+    }
+
+    public void delete(
+        Long perfumeId, Long reviewId, HttpServletRequest httpServletRequest) {
+        Review review = perfumeReviewRepository.findById(reviewId)
+            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
+        Member member = getMemberFromAccessToken(httpServletRequest);
+
+        if (!review.getPerfume().getId().equals(perfumeId)) {
+            throw new CustomException(ErrorCode.INVALID_RESOURCE);
+        }
+
+        if (!review.getMember().getId().equals(member.getId())) {
+            throw new CustomException(ErrorCode.NO_AUTHORITY);
+        }
+
+        perfumeReviewRepository.delete(review);
     }
 
     public Member getMemberFromAccessToken(HttpServletRequest request) {
