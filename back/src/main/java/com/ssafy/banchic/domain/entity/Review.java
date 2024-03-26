@@ -1,5 +1,6 @@
 package com.ssafy.banchic.domain.entity;
 
+import com.ssafy.banchic.domain.dto.request.ReviewReq;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -39,8 +40,9 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "perfume_id")
     private Perfume perfume;
 
-    public void updateImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void update(ReviewReq reviewReq) {
+        this.rate = reviewReq.getRate();
+        this.content = reviewReq.getContent();
     }
 
 }
