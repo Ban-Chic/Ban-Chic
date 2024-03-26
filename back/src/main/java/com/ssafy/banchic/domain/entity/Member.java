@@ -3,6 +3,7 @@ package com.ssafy.banchic.domain.entity;
 import com.ssafy.banchic.domain.type.OAuthProvider;
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,6 +29,12 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Review> reviews;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private RefreshToken refreshToken;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Heart> hearts;
 
     public void updateNickname(String nickname) {
         this.nickname = nickname;

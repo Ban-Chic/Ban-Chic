@@ -5,6 +5,9 @@ import com.ssafy.banchic.domain.entity.perfume.Longevity;
 import com.ssafy.banchic.domain.entity.perfume.Price;
 import com.ssafy.banchic.domain.entity.perfume.Season;
 import com.ssafy.banchic.domain.entity.perfume.Sillage;
+import lombok.*;
+
+import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,11 +17,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import java.util.List;
 import lombok.Getter;
 
 @Entity
+@Builder
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Perfume {
 
     @Id
@@ -36,6 +41,13 @@ public class Perfume {
     private int year;
     private int bestRate;
     private float rate;
+
+    // 향수 조회수
+    @Builder.Default
+    private int perfumeCnt = 0;
+    // 향수 좋아요수
+    @Builder.Default
+    private int heartCnt = 0;
 
     @OneToOne
     @JoinColumn(name = "sillage_id")
@@ -60,4 +72,13 @@ public class Perfume {
     @OneToMany(mappedBy = "perfume", cascade = CascadeType.REMOVE)
     private List<Review> reviews;
 
+    // 메서드 정리
+    public void increaseHeart() {
+        this.heartCnt++;
+    }
+
+    public void decreaseHeartCnt() {
+        if(this.heartCnt > 0)
+            this.heartCnt--;
+    }
 }
