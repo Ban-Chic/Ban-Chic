@@ -19,7 +19,7 @@ public class ExceptionController {
         (final CustomException e) {
         log.warn("api Exception : {}", e.getErrorCode());
         return ResponseEntity.status(e.getErrorCode().getHttpStatus())
-            .body(new ExceptionResponse(e.getMessage(), e.getErrorCode()));
+            .body(new ExceptionResponse(e.getMessage(), e.getErrorCode(), e.getErrorCode().getHttpStatus().value()));
     }
 
     @Getter
@@ -28,6 +28,7 @@ public class ExceptionController {
     public static class ExceptionResponse {
         private String message;
         private ErrorCode errorCode;
+        private int value;
     }
 
 }
