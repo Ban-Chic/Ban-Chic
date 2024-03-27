@@ -59,14 +59,14 @@ export const deletePerfumeReview = (perfumeId: number, reviewId: number) =>
 // 소셜로그인
 
 /** 네이버 소셜 로그인 */
-export const postNaverLogin = (code: string | null, state: string | null) => {
+export const getNaverLogin = (code: string | null, state: string | null) => {
   return API.get("/auth/login/naver", {
     params: { code: code, state: state },
   });
 };
 
 /** 카카오 소셜 로그인 */
-export const postKakaoLogin = (code: string | null) => {
+export const getKakaoLogin = (code: string | null) => {
   return API.get(`/auth/login/kakao`, { params: { code: code } });
 };
 

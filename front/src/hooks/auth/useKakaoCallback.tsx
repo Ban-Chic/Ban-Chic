@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { postKakaoLogin } from "../../api/Api";
+import { getKakaoLogin } from "../../api/Api";
 
 function useKakaoCallback() {
   const navigate = useNavigate();
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get("code");
-    postKakaoLogin(code)
+    getKakaoLogin(code)
       .then((response) => {
         // spring에서 발급된 jwt 반환 localStorage 저장
         localStorage.setItem("accessToken", response.headers["authorization"]);
