@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { STitle, SSubTitle, SBody1 } from "../../../styles/Font";
+
 import List from "../../molecules/list";
 import CircleItem from "../../atoms/item/circleItem";
-import { getMember } from "../../../api/Api";
+import { getMember, updateProfileImage } from "../../../api/Api";
 import ButtonComponent from "../../atoms/auth/Button";
 import useLogout from "../../../hooks/auth/useLogout";
 import useNickNameChange from "../../../hooks/auth/useNickNameChange";
@@ -20,15 +21,26 @@ function MyPage() {
   const Logout = useLogout();
   const { nick, changeNickName } = useNickNameChange();
   const DeleteId = useDeleteId();
+  const [files, setFiles] = useState<FileList | null>();
 
   useEffect(() => {
     getMember(Number(localStorage.getItem("uid"))).then((res) => {
-      console.log(res);
+      console.log(res.data.data);
       setNickNamedata(res.data.data.nickname);
-      setProfileImg(res.data.data.image);
       setEmail(res.data.data.email);
+      res.data.data.image
+        ? setProfileImg(res.data.data.image)
+        : setProfileImg("/defalutUser.png");
     });
-  }, []);
+  }, [nick]);
+
+  const subsub = () => {
+    if (files) {
+      updateProfileImage(files[0]).then((res) => {
+        console.log(res);
+      });
+    }
+  };
 
   return (
     <SMypageContainer>
@@ -39,7 +51,19 @@ function MyPage() {
         <SBlock>
           <SFlexCenter>
             <SSubTitle>내 정보</SSubTitle>
-            <SProfile imageUrl={profileImg} />
+            <SProfile $imageurl={profileImg} />
+            <input
+              type="file"
+              id="profileImg"
+              accept="iamge/*"
+              onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
+                console.log(event.target.files);
+                setFiles(event?.target?.files);
+              }}
+            />
+            <button type="submit" onClick={subsub}>
+              제출
+            </button>
             {nickNamedata && <STitle>{nickNamedata}</STitle>}
             {email && <SBody1>{email}</SBody1>}
           </SFlexCenter>

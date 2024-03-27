@@ -5,11 +5,23 @@ const API = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
 });
 
+export const ImgAPI = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+});
+
 API.interceptors.request.use((config) => ({
   ...config,
   headers: {
     Authorization: `${localStorage.getItem("accessToken")}`,
     "Content-Type": "application/json",
+  },
+}));
+
+ImgAPI.interceptors.request.use((config) => ({
+  ...config,
+  headers: {
+    Authorization: `${localStorage.getItem("accessToken")}`,
+    "Content-Type": "multipart/form-data",
   },
 }));
 

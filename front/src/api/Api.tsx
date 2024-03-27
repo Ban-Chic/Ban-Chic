@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import API from "./Config";
+import API, { ImgAPI } from "./Config";
 
 interface PerfumeData {
   id: number;
@@ -77,8 +77,10 @@ export const getNaverLogout = () => API.get("/auth/logout/naver");
 export const getKakaoLogout = () => API.get("/auth/logout/kakao");
 
 /** 토큰 연장 */
-export const postExtendToken = (refreshToken: string) =>
-  API.post("/auth/extend/token", { refreshToken: refreshToken });
+export const postExtendToken = () =>
+  API.post("/auth/extend/token", {
+    refreshToken: localStorage.getItem("refreshToken"),
+  });
 
 /** 토큰 연장 */
 
@@ -95,12 +97,16 @@ export const getMember = (userId: number) => API.get(`/members/${userId}/info`);
 
 /** 닉네임 수정 */
 export const updateNickname = (nickName: string) =>
-  API.patch(`members/${localStorage.getItem("uid")}/nickname`, {
+  API.put(`members/${localStorage.getItem("uid")}/nickname`, {
     nickname: nickName,
   });
 
 /** 프로필 이미지 수정 */
-export const updateProfileImage = () => API.patch("/members/image");
+export const updateProfileImage = (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  return ImgAPI.put(`/members/${localStorage.getItem("uid")}/image`, formData);
+};
 
 /** 회원 탈퇴 */
 export const deleteMember = () =>
