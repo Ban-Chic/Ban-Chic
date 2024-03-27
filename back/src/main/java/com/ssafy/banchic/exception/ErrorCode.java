@@ -17,7 +17,7 @@ public enum ErrorCode {
     INVALID_RESOURCE(HttpStatus.NOT_FOUND, "유효하지 않은 리소스입니다."),
     RENEW_TOKEN_FAIL(HttpStatus.BAD_REQUEST, "토큰 갱신에 실패하였습니다."),
     NOT_EXPIRED(HttpStatus.BAD_REQUEST, "만료되지 않은 토큰입니다."),
-    EXPIRED_TOKEN(HttpStatus.BAD_REQUEST, "만료된 토큰입니다."),
+    EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "만료된 토큰입니다."),
 
     FILE_UPLOAD_FAIL(HttpStatus.BAD_REQUEST, "파일 업로드에 실패했습니다."),
     FILE_DELETE_FAIL(HttpStatus.BAD_REQUEST, "파일 삭제에 실패했습니다."),
