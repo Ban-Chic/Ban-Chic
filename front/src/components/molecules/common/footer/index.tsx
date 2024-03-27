@@ -2,23 +2,21 @@ import styled from "styled-components";
 
 function Footer() {
   const goToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    console.log("제발위로")
+    
   };
+
   return (
     <>
       <SFooterContainer>
         <SDiv>
           <SInner>TEAM Blo9</SInner>
           <SInner>Copyright © BANCHIC. ALL RIGHTS RESERVED</SInner>
-          <SInner onClick={goToTop}>
-            <SButton>BACK TO TOP</SButton>
+          <SInner>
+            <SButton onClick={goToTop}>BACK TO TOP</SButton>
           </SInner>
         </SDiv>
-        {/* <SUlContainer>
-          <li>HOME</li>
-          <li>FACEBOOK</li>
-          <li>INSTAGRAM</li>
-        </SUlContainer> */}
       </SFooterContainer>
       <SImg src="/footerLogo.svg" alt="" />
     </>
@@ -35,6 +33,7 @@ export const SFooterContainer = styled.nav`
   right: 0;
   padding-right: 5rem;
   padding-left: 5rem;
+  margin-top: 50px;
   align-items: center;
   background-color: transparent;
   /* height: 100%; */

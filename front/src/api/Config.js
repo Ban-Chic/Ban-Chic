@@ -67,12 +67,6 @@ API.interceptors.response.use(
           message: "403",
         };
       }
-      if (error.response.status === 404) {
-        return {
-          code: "404",
-          message: "404",
-        };
-      }
     }
     return Promise.reject(error);
   }
