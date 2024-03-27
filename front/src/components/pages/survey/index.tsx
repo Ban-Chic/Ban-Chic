@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import theme from "../../../styles/Theme";
 import { SSubTitle } from "../../../styles/Font";
 import PursuitBeauty from "../../../utils/PursuitBeauty";
+import { motion } from "framer-motion";
 
 function SurveyPage() {
   return (
@@ -12,9 +13,15 @@ function SurveyPage() {
           <SSubTitle>선택해주세요</SSubTitle>
         </SSurveyContainer>
         <SSubTitle>나의 추구미</SSubTitle>
-        <SPursuitBeautyContainer>
+        <SPursuitBeautyContainer
+          variants={FContainer}
+          initial="hidden"
+          animate="visible"
+        >
           {PursuitBeauty.map((item) => (
-            <SPursuitBlock to="">{item}</SPursuitBlock>
+            <SPursuitBlock to="" variants={FVariantitem}>
+              {item}
+            </SPursuitBlock>
           ))}
         </SPursuitBeautyContainer>
       </SContainer>
@@ -22,7 +29,7 @@ function SurveyPage() {
   );
 }
 
-const SPursuitBlock = styled(Link)`
+const SPursuitBlock = styled(motion(Link))`
   background-color: blue;
   display: flex;
   justify-content: center;
@@ -35,7 +42,7 @@ const SPursuitBlock = styled(Link)`
   }
 `;
 
-const SPursuitBeautyContainer = styled.section`
+const SPursuitBeautyContainer = styled(motion.section)`
   width: 700px;
   height: 500px;
   display: grid;
@@ -43,6 +50,7 @@ const SPursuitBeautyContainer = styled.section`
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 2.5em);
   grid-auto-flow: row;
+
   &:nth-child(1) {
     grid-row: 1 / span 5;
   }
@@ -61,12 +69,31 @@ const SSurveyContainer = styled.figure`
 
 const SContainer = styled.article`
   width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 1em;
   gap: 2em;
 `;
+
+const FContainer = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.1,
+      staggerChildren: 0.04,
+    },
+  },
+};
+
+const FVariantitem = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 export default SurveyPage;

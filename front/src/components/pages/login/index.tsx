@@ -4,12 +4,24 @@ import { STitle } from "../../../styles/Font";
 import theme from "../../../styles/Theme";
 import NaverLogin from "../../atoms/auth/NaverLoginButton";
 import KakaoLogin from "../../atoms/auth/KakaoLoginButton";
+import { motion } from "framer-motion";
 
 function LoginPage() {
   return (
     <SLoginContainer>
-      <SLoginSection>
-        <SLoginTitle>Login</SLoginTitle>
+      <SLoginSection
+        initial={{ rotate: 180, scale: 0 }}
+        animate={{ rotate: 0, scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 70,
+          damping: 10,
+        }}
+      >
+        <div>
+          <SLoginTitle>Ban:Chic</SLoginTitle>
+          <SLoginTitle>Login</SLoginTitle>
+        </div>
         <SFlexTap>
           <NaverLogin />
           <KakaoLogin />
@@ -19,14 +31,14 @@ function LoginPage() {
   );
 }
 
-const SLoginSection = styled.div`
+const SLoginSection = styled(motion.div)`
   width: 32rem;
-  background-color: blue;
   display: flex;
-  flex-direction: column;
+  gap: 2em;
   justify-content: space-between;
-  align-items: center;
   padding: 60px 30px;
+  ${theme.styleBase.glassmorphism}
+  border-radius: 5px;
 `;
 
 const SLoginTitle = styled(STitle)`
