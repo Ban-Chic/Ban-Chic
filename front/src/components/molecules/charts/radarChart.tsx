@@ -76,8 +76,8 @@ function RadarChartContainer(Props: Props) {
             <Radar
               name="향수 A"
               dataKey="A"
-              stroke="#e2113f"
-              fill="#e2113f"
+              stroke="white"
+              fill="white"
               fillOpacity={0.6}
               legendType="diamond"
               isAnimationActive={true}

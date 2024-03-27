@@ -27,6 +27,11 @@ const font = {
         font-weight: 400;
         font-style: normal;
       `,
+  KumarOneOutline: `
+        font-family: "Kumar One Outline", system-ui;
+        font-weight: 400;
+        font-style: normal;
+      `,
 };
 
 export const SBody2 = styled.h1`

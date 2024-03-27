@@ -14,7 +14,7 @@ export const handlers = [
     return HttpResponse.json([
       {
         id: 1,
-        nickName: "Ham",
+        nickName: "HojinHam",
         profileImg: "/fake-img.png",
       },
     ]);

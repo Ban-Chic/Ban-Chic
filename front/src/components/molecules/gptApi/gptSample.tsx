@@ -64,11 +64,11 @@ function GPTSample(Props: Props) {
 }
 
 const SContainer = styled.div`
-  background-color: white;
+  background-color: gray;
 `;
 
 const SButton = styled.button`
-  background-color: yellowgreen;
+  background-color: gray;
 `;
 
 export default GPTSample;
