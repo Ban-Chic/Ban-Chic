@@ -85,13 +85,18 @@ function MyPage() {
     </SMypageContainer>
   );
 }
-const SProfile = styled.div<{ imageUrl: string }>`
+const SProfile = styled.div<{ $imageurl: string }>`
   width: 200px;
   height: 200px;
   border-radius: 100px;
-  background-color: red;
-  background-image: url(${(props) => props.imageUrl});
+  background-color: var(--color-white);
+  background-image: url(${(props) => props.$imageurl});
   background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(0.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 `;
 
 const SFlexCenter = styled.div`
@@ -103,16 +108,14 @@ const SFlexCenter = styled.div`
   gap: 20px;
 `;
 
-const SMypageContainer = styled.main`
-  background-image: url("./ddddd.jpg");
-`;
+const SMypageContainer = styled.main``;
 
 const SMyPageGrid = styled.section`
   max-width: 1200px;
 
   margin: 0 auto;
   display: grid;
-  padding: 10px;
+  padding: 1em;
   gap: 15px;
   grid-template-columns: 1fr;
 
