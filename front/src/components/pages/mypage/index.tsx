@@ -47,17 +47,17 @@ function MyPage() {
         <SBlock>
           <SSubTitle>좋아요 한 향수</SSubTitle>
           <List>
-            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
-            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
-            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
           </List>
         </SBlock>
         <SBlock>
           <SSubTitle>내가 본 향수</SSubTitle>
           <List>
-            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
-            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
-            <CircleItem url="/" imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
+            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
           </List>
         </SBlock>
         <SBlock>
