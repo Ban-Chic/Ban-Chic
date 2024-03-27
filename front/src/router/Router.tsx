@@ -15,6 +15,7 @@ import SurveyPage from "../components/pages/survey";
 import NaverCallback from "../components/pages/login/NaverCallback";
 import KakaoCallback from "../components/pages/login/KakaoCallback";
 import LoginPage from "../components/pages/login";
+import MapPage from "../components/pages/map";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/recommend" element={<RecommendPage />}></Route>
         <Route path="/survey" element={<SurveyPage />}></Route>
+        <Route path="/map" element={<MapPage />}></Route>
       </Route>
       <Route path="/naver/callback" element={<NaverCallback />}></Route>
       <Route path="/kakao/callback" element={<KakaoCallback />}></Route>
