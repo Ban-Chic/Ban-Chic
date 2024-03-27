@@ -17,6 +17,9 @@ public class FileUploadService {
     private final AmazonS3ResourceStorage amazonS3ResourceStorage;
 
     public String save(String path, MultipartFile multipartFile) {
+        if (multipartFile.isEmpty()) {
+            throw new CustomException(ErrorCode.EMPTY_FILE);
+        }
         verfyExenstion(multipartFile);
         return amazonS3ResourceStorage.store(path, multipartFile);
     }
