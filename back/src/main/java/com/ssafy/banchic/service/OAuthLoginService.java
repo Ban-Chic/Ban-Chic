@@ -2,12 +2,16 @@ package com.ssafy.banchic.service;
 
 import com.ssafy.banchic.domain.dto.TokenDto;
 import com.ssafy.banchic.domain.entity.Member;
+import com.ssafy.banchic.domain.entity.RefreshToken;
 import com.ssafy.banchic.domain.type.OAuthProvider;
+import com.ssafy.banchic.exception.CustomException;
+import com.ssafy.banchic.exception.ErrorCode;
 import com.ssafy.banchic.oauthApi.response.OAuthInfoResponse;
 import com.ssafy.banchic.oauthApi.response.RequestOAuthInfoService;
 import com.ssafy.banchic.repository.MemberRepository;
+import com.ssafy.banchic.repository.RefreshTokenRepository;
 import com.ssafy.banchic.util.TokenProvider;
-import com.ssafy.banchic.tokens.AuthTokens;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,9 +26,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class OAuthLoginService {
 
-    private final MemberRepository memberRepository;
-    private final TokenProvider tokenProvider;
     private final RequestOAuthInfoService requestOAuthInfoService;
+    private final MemberRepository memberRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final TokenProvider tokenProvider;
 
     public LoginResult login(String code, OAuthProvider oAuthProvider, HttpServletResponse response) {
         OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(oAuthProvider, code);
@@ -34,16 +39,26 @@ public class OAuthLoginService {
         String nickname = member.getNickname();
         TokenDto tokenDto = tokenProvider.generateTokenDto(member);
 
-        response.addHeader("Authorization", "Bearer " + tokenDto.getAccessToken());
-        response.addHeader("RefreshToken", tokenDto.getRefreshToken());
+        setTokenAtHeader(response, tokenDto.getAccessToken(), tokenDto.getRefreshToken());
 
         return new LoginResult(member.getId(), oAuthProvider, nickname, email);
     }
 
-    public AuthTokens generateNewToken(String accessToken, String refreshToken) {
-        return tokenProvider.renewAccessToken(accessToken, refreshToken);
+    public void renewAccessToken(HttpServletRequest request, HttpServletResponse response) {
+        String refreshToken = request.getHeader("RefreshToken");
+
+        RefreshToken tokenObject = refreshTokenRepository.findByKeyValue(refreshToken)
+            .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
+
+        String accessToken = tokenProvider.generateAccessToken(tokenObject.getMember());
+
+        setTokenAtHeader(response, accessToken, refreshToken);
     }
 
+    private void setTokenAtHeader(HttpServletResponse response, String accessToken, String refreshToken) {
+        response.addHeader("Authorization", "Bearer " + accessToken);
+        response.addHeader("RefreshToken", refreshToken);
+    }
 
     private Member findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
         return memberRepository.findByEmail(oAuthInfoResponse.getEmail())
@@ -78,7 +93,6 @@ public class OAuthLoginService {
 
         return new NicknameResponse(nickname);
     }
-
 
     /**
      * nickname 전체 조회를 통해서, 사용중인 닉네임이면 false, 사용중인 닉네임이 아니면 true
