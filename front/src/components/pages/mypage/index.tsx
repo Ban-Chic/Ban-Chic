@@ -7,15 +7,18 @@ import CircleItem from "../../atoms/item/circleItem";
 import { getMember } from "../../../api/Api";
 import ButtonComponent from "../../atoms/auth/Button";
 import useLogout from "../../../hooks/auth/useLogout";
-import useNickNameChange from "../../../hooks/auth/useNickNameChaner";
+import useNickNameChange from "../../../hooks/auth/useNickNameChange";
 import useDeleteId from "../../../hooks/auth/useDeleteId";
+import useOpenModal from "../../../hooks/modal/useOpenModal";
+import Modal from "../../atoms/modal/Modal";
 
 function MyPage() {
   const [nickNamedata, setNickNamedata] = useState<string>("");
   const [profileImg, setProfileImg] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const { isOpenModal, clickModal, closeModal } = useOpenModal();
   const Logout = useLogout();
-  const NicknameChange = useNickNameChange();
+  const { nick, changeNickName } = useNickNameChange();
   const DeleteId = useDeleteId();
 
   useEffect(() => {
@@ -64,12 +67,20 @@ function MyPage() {
           <SSubTitle>내 검색기록</SSubTitle>
         </SBlock>
         <SBlock>
-          <ButtonComponent onClick={() => NicknameChange(nickNamedata)}>
+          <ButtonComponent onClick={() => clickModal()}>
             닉네임 수정
           </ButtonComponent>
           <ButtonComponent onClick={() => Logout()}>로그아웃</ButtonComponent>
           <ButtonComponent onClick={() => DeleteId()}>회원탈퇴</ButtonComponent>
         </SBlock>
+        {isOpenModal && (
+          <Modal
+            closeModal={closeModal}
+            actionModal={changeNickName}
+            title="닉네임 수정하기"
+            alert={nickNamedata}
+          />
+        )}
       </SMyPageGrid>
     </SMypageContainer>
   );

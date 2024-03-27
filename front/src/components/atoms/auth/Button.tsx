@@ -4,7 +4,8 @@ import theme from "../../../styles/Theme";
 
 interface IButtonProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
+  on?: void;
 }
 
 function ButtonComponent({ children, onClick }: IButtonProps) {
