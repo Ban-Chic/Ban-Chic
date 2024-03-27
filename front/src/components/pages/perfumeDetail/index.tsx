@@ -5,16 +5,18 @@ import ReviewInDetail from "../../molecules/review/reviewInDetail";
 import { SHeaderContainer } from "../../molecules/common/gnb";
 import SpriceImageUrl from "../../../utils/ImgUrl";
 import GPTSample from "../../molecules/gptApi/gptSample";
-import { getPerfumeDetail } from "../../../api/Api";
+import { getPerfumeDetail, getPerfumeReviews, postLike } from "../../../api/Api";
 import { useParams } from "react-router-dom";
 
 import RadarChartContainer from "../../molecules/charts/radarChart";
 import BarChartContainer from "../../molecules/charts/barChart";
 import PieChartContainer from "../../molecules/charts/pieChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
+import { Link } from "react-router-dom";
 
 interface Props {
   data: {
+    id: number;
     perfumeImg: string;
     perfumeName: string;
     RadioNodeListing: number;
@@ -40,13 +42,24 @@ function PerfumeDetail() {
       setData(data.data);
       // setNotes(JSON.parse(data.data.notes));
     });
+    getPerfumeReviews(perfumeId).then((response)=>{
+      console.log(response);
+    })
   }, []);
+
+  const onClickHandler = () => {
+    postLike(Number(perfumeId)).then((response) => {
+      console.log(response);
+      });
+    }
+
 
   return (
     <>
       <SDetailContainer>
         <SBlock>
           {data && <SImg src={data.data.perfumeImg} alt="Perfume Img" />}
+          <SLikeButton onClick={onClickHandler}>좋아요버튼임</SLikeButton>
         </SBlock>
         <SBlock>
           {data && (
@@ -81,9 +94,7 @@ function PerfumeDetail() {
             )}
           </SNote>
         </SBlock>
-        <SBlock>
-          {data && <ReviewInDetail perfumeImg={data.data.perfumeImg} />}
-        </SBlock>
+        <SBlock>{data && <ReviewInDetail perfumeId={perfumeId} />}</SBlock>
         <SBlock>
           {data && <SPerfumeName> {data.data.perfumeName}</SPerfumeName>}
         </SBlock>
@@ -189,6 +200,13 @@ const SNoteImg = styled.img`
 
 const SPerfumeName = styled.div`
   font-size: 30px;
+`;
+
+const SLikeButton = styled.button`
+  position: absolute;
+  z-index: 3;
+  background-color: red;
+  margin-left: 250px;
 `;
 
 export default PerfumeDetail;

@@ -32,11 +32,8 @@ export const getPerfumeList = () => API.get("/perfumes");
 
 /** 향수 좋아요 */
 export const postLike = (perfumeId: number) =>
-  API.post(`/perfumes/${perfumeId}/likes`);
+  API.post(`/heart/${perfumeId}`);
 
-/** 향수 좋아요 삭제 */
-export const deleteLike = (perfumeId: number) =>
-  API.delete(`/perfumes/${perfumeId}/likes`);
 
 /** 향수 리뷰 목록 조회 */
 export const getPerfumeReviews = (perfumeId: number) =>

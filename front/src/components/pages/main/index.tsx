@@ -49,62 +49,6 @@ function MainPage() {
           </SBottomSection>
         </SDiv2Container>
         <SDiv3Container>
-          <div>
-            <SDiv3Wrapper>
-              <SDiv3Ul>
-                <SDiv3Li>
-                  <SDiv3Mask>
-                    <h2>natural</h2>
-                    <h2>crunch</h2>
-                    <h2>madies</h2>
-                  </SDiv3Mask>
-                </SDiv3Li>
-                <SDiv3Li>
-                  <SDiv3Mask>
-                    <h2>natural</h2>
-                    <h2>crunch</h2>
-                    <h2>madies</h2>
-                  </SDiv3Mask>
-                </SDiv3Li>
-                <SDiv3Li>
-                  <SDiv3Mask>
-                    <h2>natural</h2>
-                    <h2>crunch</h2>
-                    <h2>madies</h2>
-                  </SDiv3Mask>
-                </SDiv3Li>
-                <SDiv3Li>
-                  <SDiv3Mask>
-                    <h2>natural</h2>
-                    <h2>crunch</h2>
-                    <h2>madies</h2>
-                  </SDiv3Mask>
-                </SDiv3Li>
-                <SDiv3Li>
-                  <SDiv3Mask>
-                    <h2>natural</h2>
-                    <h2>crunch</h2>
-                    <h2>madies</h2>
-                  </SDiv3Mask>
-                </SDiv3Li>
-              </SDiv3Ul>
-              {/* <div>
-                <div>
-                  <div>
-                    <div>
-                      <img src="" alt="Mangos over paper" />
-                    </div>
-                    <div>
-                      <img src="" alt="Madies snacks out of the bag" />
-                    </div>
-                    <div>
-                      <img src="" alt="Packaging with mangos" />
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-            </SDiv3Wrapper>
-          </div>
         </SDiv3Container>
         <SDiv4Container></SDiv4Container>
       </main>
@@ -283,35 +227,5 @@ const SMiddleSquare = styled.img`
   z-index: 3;
 `;
 
-const SDiv3Wrapper = styled.div`
-  position: relative;
-`;
-
-const SDiv3Ul = styled.ul`
-  width: 100%;
-`;
-
-const SDiv3Li = styled.li`
-  position: relative;
-  text-align: center;
-  color: white;
-  text-transform: uppercase;
-  display: block;
-  &:nth-child(1) {
-    transition: all .7s cubic-bezier(0.3, 0, 0.2, 1) 0s
-  }
-  &:nth-child(2) {
-    transition: all .7s cubic-bezier(0.3, 0, 0.2, 1) 0s
-  }
-`;
-
-const SDiv3Mask = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* overflow: hidden */
-`;
 
 export default MainPage;
