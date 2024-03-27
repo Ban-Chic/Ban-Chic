@@ -109,7 +109,7 @@ public class AuthController {
     @PostMapping("/renew")
     public ResponseEntity<CommonResponse> renewToken(
         HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        oAuthLoginService.generateNewToken(httpServletRequest, httpServletResponse);
+        oAuthLoginService.renewAccessToken(httpServletRequest, httpServletResponse);
         return new ResponseEntity<>(CommonResponse.builder()
             .message("액세스 토큰 갱신 완료")
             .build(), HttpStatus.OK);

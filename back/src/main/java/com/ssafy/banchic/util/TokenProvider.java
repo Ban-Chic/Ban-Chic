@@ -33,7 +33,7 @@ public class TokenProvider {
 
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_PREFIX = "Bearer ";
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24;  // 24 시간
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 15;
     private static final long REFRESH_TOKEN_EXPRIRE_TIME = 1000 * 60 * 60 * 24 * 7;  // 7일
 
     private final Key key;
@@ -47,21 +47,13 @@ public class TokenProvider {
     }
 
     public TokenDto generateTokenDto(Member member) {
-        long now = (new Date().getTime());
-
         // AccessToken 생성
-        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
-        String accessToken = Jwts.builder()
-            .setSubject(member.getId().toString())  // memberId
-            .claim(AUTHORITIES_KEY, MemberType.ROLE_MEMBER.toString())
-            .setExpiration(accessTokenExpiresIn)
-            .signWith(key, SignatureAlgorithm.HS256)
-            .compact();
+        String accessToken = generateAccessToken(member);
 
         // RefreshToken 생성
         // (AccessToken의 재발급 목적으로 만들어진 토큰이므로 만료기한 외 별다른 정보를 담지 않는다)
         String refreshToken = Jwts.builder()
-            .setExpiration(new Date(now + REFRESH_TOKEN_EXPRIRE_TIME))
+            .setExpiration(new Date(new Date().getTime() + REFRESH_TOKEN_EXPRIRE_TIME))
             .signWith(key, SignatureAlgorithm.HS256)
             .compact();
 
@@ -80,6 +72,18 @@ public class TokenProvider {
             .build();
     }
 
+    public String generateAccessToken(Member member) {
+        long now = (new Date().getTime());
+        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+        return Jwts.builder()
+            .setSubject(member.getId().toString())  // memberId
+            .claim(AUTHORITIES_KEY, MemberType.ROLE_MEMBER.toString())
+            .setExpiration(accessTokenExpiresIn)
+            .signWith(key, SignatureAlgorithm.HS256)
+            .compact();
+    }
+
+
     public boolean validateToken(String token) {
         if (token.startsWith("Bearer ")) {
             token = token.substring(7);
@@ -92,6 +96,7 @@ public class TokenProvider {
             log.info("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.");
         } catch (ExpiredJwtException e) {
             log.info("Expired JWT token, 만료된 JWT token 입니다.");
+            throw new CustomException(ErrorCode.EXPIRED_TOKEN);
         } catch (UnsupportedJwtException e) {
             log.info("Unsupported JWT token, 지원되지 않는 JWT 토큰 입니다.");
         } catch (IllegalArgumentException e) {
@@ -100,46 +105,16 @@ public class TokenProvider {
         return false;
     }
 
-    public String renewAccessToken(String accessToken, String refreshToken) {
-        //TODO : accessToken 만료 여부 체크
-        //TODO : refreshToken 유효성 체크
-        long now = (new Date()).getTime();
-        Date accessTokenExpiredAt = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
-        Claims claims = parseClaims(accessToken);
-        return generate(claims.getSubject(), accessTokenExpiredAt);
-    }
-
-    private String generate(String subject, Date expiredAt) {
-        return Jwts.builder()
-            .setSubject(subject)
-            .setExpiration(expiredAt)
-            .signWith(key, SignatureAlgorithm.HS512)
-            .compact();
-    }
-
-    public Long extractMemberId(String accessToken) {
-        return Long.valueOf(extractSubject(accessToken));
-    }
-
-    private String extractSubject(String accessToken) {
-        Claims claims = parseClaims(accessToken);
-        return claims.getSubject();
-    }
-
     private Claims parseClaims(String accessToken) {
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
         }
 
-        try {
-            return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(accessToken)
-                .getBody();
-        } catch (ExpiredJwtException e) {
-            return e.getClaims();
-        }
+        return Jwts.parserBuilder()
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(accessToken)
+            .getBody();
     }
 
     @Transactional
@@ -174,8 +149,8 @@ public class TokenProvider {
     }
 
     @Transactional(readOnly = true)
-    public RefreshToken isPresentRefreshToken(Member member) {
-        return refreshTokenRepository.findByMember(member)
+    public void isPresentRefreshToken(Member member) {
+        refreshTokenRepository.findByMember(member)
             .orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_REFRESH_TOKEN));
     }
 
