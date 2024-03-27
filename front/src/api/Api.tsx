@@ -76,6 +76,12 @@ export const getNaverLogout = () => API.get("/auth/logout/naver");
 /** 카카오 로그아웃 */
 export const getKakaoLogout = () => API.get("/auth/logout/kakao");
 
+/** 토큰 연장 */
+export const postExtendToken = (refreshToken: string) =>
+  API.post("/auth/extend/token", { refreshToken: refreshToken });
+
+/** 토큰 연장 */
+
 // 멤버
 
 /** 좋아요 한 향수 목록 조회 */
