@@ -1,6 +1,8 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import GlobalStyles from "./styles/GlobalStyles";
 import Router from "./router/Router";
@@ -19,13 +21,18 @@ async function enableMocking() {
   });
 }
 
+const queryClient = new QueryClient();
+
 enableMocking().then(() => {
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <GlobalStyles />
-        <Router />
-      </BrowserRouter>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <GlobalStyles />
+          <Router />
+          <ReactQueryDevtools initialIsOpen={true} />
+        </BrowserRouter>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 });
