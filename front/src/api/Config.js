@@ -1,29 +1,29 @@
 import axios from "axios";
-import { postExtendToken } from "./Api";
 
-const API = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-});
+export function createCustomAxios(baseURL, contentType) {
+  const instance = axios.create({
+    baseURL,
+  });
 
-export const ImgAPI = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-});
+  instance.interceptors.request.use((config) => ({
+    ...config,
+    headers: {
+      Authorization: localStorage.getItem("accessToken"),
+      "Content-Type": contentType,
+    },
+  }));
 
-API.interceptors.request.use((config) => ({
-  ...config,
-  headers: {
-    Authorization: `${localStorage.getItem("accessToken")}`,
-    "Content-Type": "application/json",
-  },
-}));
+  return instance;
+}
 
-ImgAPI.interceptors.request.use((config) => ({
-  ...config,
-  headers: {
-    Authorization: `${localStorage.getItem("accessToken")}`,
-    "Content-Type": "multipart/form-data",
-  },
-}));
+export const API = createCustomAxios(
+  import.meta.env.VITE_BASE_URL,
+  "application/json"
+);
+export const ImgAPI = createCustomAxios(
+  import.meta.env.VITE_BASE_URL,
+  "multipart/form-data"
+);
 
 // 응답 인터셉터 처리
 API.interceptors.response.use(
@@ -34,10 +34,16 @@ API.interceptors.response.use(
     if (error.response) {
       const { config } = error;
       // 토큰 만료시
-      if (error.response.data.statusCode === 401) {
+      if (error.response.status === 401) {
         const originRequest = config;
         // 리프레시 토큰 api
-        const response = await postExtendToken();
+        const response = await axios
+          .create({
+            baseURL: import.meta.env.VITE_BASE_URL,
+          })
+          .post("/auth/renew", {
+            refreshToken: localStorage.getItem("refreshToken"),
+          });
 
         // 리프레시 토큰 요청이 성공할 때
         if (response.status === 200) {
