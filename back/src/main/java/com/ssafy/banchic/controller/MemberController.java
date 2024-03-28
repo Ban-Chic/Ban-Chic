@@ -33,7 +33,7 @@ public class MemberController {
 
     @Operation(
             summary = "본인이 좋아요한 향수 목록 조회",
-            description = "맴버가 좋아요한 향수 목록에 대한 조회"
+            description = "멤버가 좋아요한 향수 목록에 대한 조회"
     )
     @ApiResponse(
             responseCode = "200",
@@ -43,7 +43,7 @@ public class MemberController {
     public ResponseEntity<CommonResponse> getMemberHeart(@PathVariable("memberId") Long memberId,
                                                          HttpServletRequest httpServletRequest) {
         return ResponseEntity.ok(CommonResponse.builder()
-                .message("맴버가 좋아요한 향수 목록 조회")
+                .message("멤버가 좋아요한 향수 목록 조회")
                 .data(memberService.getMemberHeart(memberId, httpServletRequest))
                 .build());
     }
@@ -60,7 +60,7 @@ public class MemberController {
     public ResponseEntity<CommonResponse> getMemberReview(@PathVariable("memberId") Long memberId,
                                                           HttpServletRequest httpServletRequest) {
         return ResponseEntity.ok(CommonResponse.builder()
-                .message("맴버가 작성한 리뷰 목록 조회")
+                .message("멤버가 작성한 리뷰 목록 조회")
                 .data(memberService.getMemberReview(memberId, httpServletRequest))
                 .build());
     }
@@ -84,7 +84,7 @@ public class MemberController {
     }
 
     @Operation(
-            summary = "맴버 삭제",
+            summary = "버 삭제",
             description = "본인 정보를 삭제합니다."
     )
     @ApiResponse(
@@ -101,7 +101,7 @@ public class MemberController {
 
     @Operation(
             summary = "닉네임 변경",
-            description = "맴버의 닉네임을 변경합니다."
+            description = "멤버의 닉네임을 변경합니다."
     )
     @ApiResponse(
             responseCode = "200",
@@ -136,6 +136,14 @@ public class MemberController {
                 .build(), HttpStatus.OK);
     }
 
+    @Operation(
+        summary = "서베이 제출(향수 추천)",
+        description = "서베이를 기반으로 향수를 추천합니다."
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "추천 목록 조회에 성공했습니다."
+    )
     @PostMapping("/survey")
     public ResponseEntity<CommonResponse> survey (
         @RequestBody PersuitReq persuitReq, HttpServletRequest httpServletRequest) {
@@ -145,6 +153,14 @@ public class MemberController {
             .build(), HttpStatus.OK);
     }
 
+    @Operation(
+        summary = "추천받은 향수 목록 조회",
+        description = "서베이로 추천받은 향수의 목록을 조회합니다."
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "추천받은 향수 목록 조회에 성공했습니다."
+    )
     @GetMapping("/recommend")
     public ResponseEntity<CommonResponse> getRecommendList (HttpServletRequest httpServletRequest) {
         return new ResponseEntity<>(CommonResponse.builder()

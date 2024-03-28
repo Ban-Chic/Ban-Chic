@@ -49,7 +49,7 @@ public class HeartController {
 
     @Operation(
             summary = "좋아요 조회",
-            description = "현재 맴버가 좋아요를 눌렀는 지 체크"
+            description = "현재 멤버가 좋아요를 눌렀는 지 체크"
     )
     @ApiResponse(
             responseCode = "200",
