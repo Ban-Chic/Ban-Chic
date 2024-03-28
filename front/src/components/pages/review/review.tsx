@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getPerfumeReviews } from "../../../api/Api";
+import { deletePerfumeReview, getPerfumeReviews } from "../../../api/Api";
 import { useParams } from "react-router-dom";
 import useIntersectionObserver from "./hook";
 
@@ -60,34 +60,59 @@ function ReviewPage() {
     }
   };
 
-  const {setTarget} =useIntersectionObserver({
-    root:null,
+  const { setTarget } = useIntersectionObserver({
+    root: null,
     rootMargin: "0px",
     threshold: 0.5,
     onIntersect,
   });
 
   return (
-    <SReivewContainer>
-      {/* <SEachReview> */}
-      {data &&
-        data.map((item, index: number) => (
-          <SReviewCard key={index}>
-            <SReviewImg src={item.imgUrl} alt="" />
-            <div>
-              <p>{item.content}</p>
-            </div>
-            <SWriterInfo>
-              <SProfileImg src={item.member.imgUrl} alt="" />
-              <p>{item.member.nickname}</p>
-            </SWriterInfo>
-          </SReviewCard>
-        ))}
-      <div ref={setTarget}>{isLoaded && <div>Loading...</div>}</div>
-
-      {/* </SEachReview> */}
-    </SReivewContainer>
+    <>
+      <SReivewContainer>
+        {data &&
+          data.map((item, index: number) => (
+            <SReviewCard key={index}>
+              <SReviewImg src={item.imgUrl} alt="" />
+              <div>
+                <p>{item.content}</p>
+              </div>
+              <SWriterInfo>
+                <SProfileImg src={item.member.imgUrl} alt="" />
+                <p>{item.member.nickname}</p>
+              </SWriterInfo>
+              <button
+                onClick={() => deletePerfumeReview(Number(perfumeId), item.id)}
+              >
+                삭제 버튼
+              </button>
+            </SReviewCard>
+          ))}
+      </SReivewContainer>
+    </>
   );
+
+  // return (
+  //   <SReivewContainer>
+  //     {data &&
+  //       data.map((item, index: number) => (
+  //         <SReviewCard key={index}>
+  //           <SReviewImg src={item.imgUrl} alt="" />
+  //           <div>
+  //             <p>{item.content}</p>
+  //           </div>
+  //           <SWriterInfo>
+  //             <SProfileImg src={item.member.imgUrl} alt="" />
+  //             <p>{item.member.nickname}</p>
+  //           </SWriterInfo>
+  //           <button onClick={deletePerfumeReview(perfumeId: perfumeId, reviewId: item.id)}>삭제 버튼</button>
+  //         </SReviewCard>
+  //       ))}
+
+  //     <div ref={setTarget}>{isLoaded && <div>Loading...</div>}</div>
+
+  //   </SReivewContainer>
+  // );
 }
 
 const SReivewContainer = styled.div`
@@ -127,7 +152,7 @@ const SEachReview = styled.div`
 
 const SReviewCard = styled.div`
   border-radius: 15px;
-  background-color: pink;
+  background-color: blue;
   padding: 10px;
   width: 260px;
   display: flex;

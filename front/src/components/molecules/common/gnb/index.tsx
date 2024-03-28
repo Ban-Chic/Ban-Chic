@@ -3,6 +3,7 @@ import theme from "../../../../styles/Theme";
 import { Link } from "react-router-dom";
 import React, {useState} from "react";
 import Example from "../../sidebarFramer/example";
+import SidebarReal from "../../sidebarReal/sidebarReal";
 
 
 
@@ -21,7 +22,8 @@ function GNB() {
       <SLink to="/perfumes/1">PerfumeDetail</SLink>
       <SLink to="/mypage">MyPage</SLink>
       {/* <SLink to="/perfumes/1/reviews">리뷰더보기</SLink> */}
-      <Example/>
+      {/* <Example/> */}
+      <SidebarReal width={500}></SidebarReal>
     </SHeaderContainer>
   );
 }

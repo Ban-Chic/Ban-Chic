@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import theme from "../../../styles/Theme";
 import ReviewInDetail from "../../molecules/review/reviewInDetail";
 import { SHeaderContainer } from "../../molecules/common/gnb";
@@ -19,6 +19,8 @@ import PieChartContainer from "../../molecules/charts/pieChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
 import { Link } from "react-router-dom";
 import ReviewPage from "../review/review";
+import ReviewRegist from "../../molecules/review/reviewRegist";
+import CRUDTest from "../crudTest";
 
 interface Props {
   data: {
@@ -41,6 +43,11 @@ function PerfumeDetail() {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<Props["data"]>(null);
   // const [notes, setNotes] = useState<Props["data"]>(null);
+
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const onClickToggleModal = useCallback(() => {
+    setOpenModal(!isOpenModal);
+  }, [isOpenModal]);
 
   useEffect(() => {
     getPerfumeDetail(perfumeId).then((data) => {
@@ -117,6 +124,10 @@ function PerfumeDetail() {
           {data && <SPerfumeName> {data.data.perfumeName}</SPerfumeName>}
         </SBlock>
       </SDetailContainer>
+      <div>
+        <Link to="/perfumes/review/crud">CRUD Test</Link> | 
+        <Link to="/perfumes/1/reviews"> Review Zone</Link> |
+      </div>
     </>
   );
 }
@@ -226,6 +237,22 @@ const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
   /* transform: translate(0%, 0%); */
   background-color: darkgreen;
   color: black;
+`;
+
+const DialogButton = styled.button`
+  width: 160px;
+  height: 48px;
+  background-color: blueviolet;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 400;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
 `;
 
 export default PerfumeDetail;
