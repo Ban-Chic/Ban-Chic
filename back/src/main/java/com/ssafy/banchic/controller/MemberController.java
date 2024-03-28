@@ -98,4 +98,12 @@ public class MemberController {
             .build(), HttpStatus.OK);
     }
 
+    @GetMapping("/recommend")
+    public ResponseEntity<CommonResponse> getRecommendList (HttpServletRequest httpServletRequest) {
+        return new ResponseEntity<>(CommonResponse.builder()
+            .message("추천받은 향수 목록 조회 완료")
+            .data(memberService.getRecommList(httpServletRequest))
+            .build(), HttpStatus.OK);
+    }
+
 }

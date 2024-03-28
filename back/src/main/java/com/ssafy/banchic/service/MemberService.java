@@ -9,6 +9,7 @@ import com.ssafy.banchic.domain.dto.response.PerfumeOverviewRes;
 import com.ssafy.banchic.domain.dto.response.ReviewRes;
 import com.ssafy.banchic.domain.entity.Heart;
 import com.ssafy.banchic.domain.entity.Member;
+import com.ssafy.banchic.domain.entity.Perfume;
 import com.ssafy.banchic.domain.entity.Persuit;
 import com.ssafy.banchic.domain.entity.Recommend;
 import com.ssafy.banchic.domain.entity.Review;
@@ -16,13 +17,16 @@ import com.ssafy.banchic.exception.CustomException;
 import com.ssafy.banchic.exception.ErrorCode;
 import com.ssafy.banchic.repository.HeartRepository;
 import com.ssafy.banchic.repository.MemberRepository;
+import com.ssafy.banchic.repository.PerfumeRepository;
 import com.ssafy.banchic.repository.PersuitRepository;
 import com.ssafy.banchic.repository.RecommendRepository;
 import com.ssafy.banchic.repository.PerfumeReviewRepository;
 import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpEntity;
@@ -38,13 +42,16 @@ import org.springframework.web.multipart.MultipartFile;
 @Transactional
 public class MemberService {
 
+    private final FileUploadService fileUploadService;
+
     private final MemberRepository memberRepository;
+    private final PerfumeRepository perfumeRepository;
     private final PersuitRepository persuitRepository;
     private final RecommendRepository recommendRepository;
-    private final HeartRepository heartRepository;
-    private final FileUploadService fileUploadService;
-    private final RestTemplate restTemplate;
     private final PerfumeReviewRepository perfumeReviewRepository;
+    private final HeartRepository heartRepository;
+
+    private final RestTemplate restTemplate;
     private final TokenProvider tokenProvider;
 
     public List<ReviewRes> getMemberReview(Long memberId, HttpServletRequest httpServletRequest) {
@@ -138,20 +145,20 @@ public class MemberService {
 
         StringBuilder sb = new StringBuilder();
         String requestBody = sb.append("{")
-            .append("\"clear\": " ).append(req.getClear() == true ? 1 : 0).append(", ")
-            .append("\"romantic\": " ).append(req.getRomantic() == true ? 1 : 0).append(", ")
-            .append("\"pretty\": " ).append(req.getPretty() == true ? 1 : 0).append(", ")
-            .append("\"coolcasual\": " ).append(req.getCoolcasual() == true ? 1 : 0).append(", ")
-            .append("\"casual\": " ).append(req.getCasual() == true ? 1 : 0).append(", ")
-            .append("\"natural\": " ).append(req.getNatural() == true ? 1 : 0).append(", ")
-            .append("\"elegant\": " ).append(req.getElegant() == true ? 1 : 0).append(", ")
-            .append("\"dynamic\": " ).append(req.getDynamic() == true ? 1 : 0).append(", ")
-            .append("\"wild\": " ).append(req.getWild() == true ? 1 : 0).append(", ")
-            .append("\"gorgeous\": " ).append(req.getGorgeous() == true ? 1 : 0).append(", ")
-            .append("\"chic\": " ).append(req.getChic() == true ? 1 : 0).append(", ")
-            .append("\"modern\": " ).append(req.getModern() == true ? 1 : 0).append(", ")
-            .append("\"classic\": " ).append(req.getClassic() == true ? 1 : 0).append(", ")
-            .append("\"dandy\": " ).append(req.getDandy() == true ? 1 : 0)
+            .append("\"clear\": " ).append(req.getClear() ? 1 : 0).append(", ")
+            .append("\"romantic\": " ).append(req.getRomantic() ? 1 : 0).append(", ")
+            .append("\"pretty\": " ).append(req.getPretty() ? 1 : 0).append(", ")
+            .append("\"coolcasual\": " ).append(req.getCoolcasual() ? 1 : 0).append(", ")
+            .append("\"casual\": " ).append(req.getCasual() ? 1 : 0).append(", ")
+            .append("\"natural\": " ).append(req.getNatural() ? 1 : 0).append(", ")
+            .append("\"elegant\": " ).append(req.getElegant() ? 1 : 0).append(", ")
+            .append("\"dynamic\": " ).append(req.getDynamic() ? 1 : 0).append(", ")
+            .append("\"wild\": " ).append(req.getWild() ? 1 : 0).append(", ")
+            .append("\"gorgeous\": " ).append(req.getGorgeous() ? 1 : 0).append(", ")
+            .append("\"chic\": " ).append(req.getChic() ? 1 : 0).append(", ")
+            .append("\"modern\": " ).append(req.getModern() ? 1 : 0).append(", ")
+            .append("\"classic\": " ).append(req.getClassic() ? 1 : 0).append(", ")
+            .append("\"dandy\": " ).append(req.getDandy() ? 1 : 0)
             .append("}").toString();
 
         Persuit persuit = Persuit.from(req, member);
@@ -165,6 +172,7 @@ public class MemberService {
         Recommendation recommResponse = restTemplate.postForObject(url, requestEntity, Recommendation.class);
 
         Recommend recommend = new Recommend();
+        recommend.setMember(member);
         recommend.setOne(recommResponse.getRecommendIndex().get(0));
         recommend.setTwo(recommResponse.getRecommendIndex().get(1));
         recommend.setThree(recommResponse.getRecommendIndex().get(2));
@@ -176,6 +184,10 @@ public class MemberService {
         recommend.setNine(recommResponse.getRecommendIndex().get(8));
         recommend.setTen(recommResponse.getRecommendIndex().get(9));
 
+        if (recommendRepository.existsByMember(member)) {
+            recommendRepository.deleteByMember(member);
+            recommendRepository.flush();
+        }
         recommendRepository.save(recommend);
         return RecommRes.from(recommend);
     }
@@ -188,6 +200,33 @@ public class MemberService {
             return recommend_index;
         }
     }
+
+    public List<PerfumeOverviewRes> getRecommList(HttpServletRequest request) {
+        Member member = getMemberFromAccessToken(request);
+
+        Recommend recommend = recommendRepository.findByMember(member)
+            .orElseThrow(() -> new CustomException(ErrorCode.RECOMM_NOT_EXIST));
+
+        List<PerfumeOverviewRes> recommList = new ArrayList<>();
+        recommList.add(findById(recommend.getOne()));
+        recommList.add(findById(recommend.getTwo()));
+        recommList.add(findById(recommend.getThree()));
+        recommList.add(findById(recommend.getFour()));
+        recommList.add(findById(recommend.getFive()));
+        recommList.add(findById(recommend.getSix()));
+        recommList.add(findById(recommend.getSeven()));
+        recommList.add(findById(recommend.getEight()));
+        recommList.add(findById(recommend.getNine()));
+        recommList.add(findById(recommend.getTen()));
+
+        return recommList;
+    }
+
+    private PerfumeOverviewRes findById(int id) {
+        Optional<Perfume> perfume = perfumeRepository.findById(id);
+        return perfume.isPresent() ? PerfumeOverviewRes.from(perfume.get()) : null;
+    }
+
 
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);

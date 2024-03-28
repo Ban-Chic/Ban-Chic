@@ -2,14 +2,15 @@ package com.ssafy.banchic.controller;
 
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.service.HeartService;
-import com.ssafy.banchic.service.MemberService;
-import com.ssafy.banchic.service.PerfumeService;
-import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
@@ -21,7 +22,7 @@ public class HeartController {
 
     @PostMapping("/{perfumeId}/hearts")
     public ResponseEntity<CommonResponse> update(HttpServletRequest httpServletRequest,
-                                                 @PathVariable("perfumeId") Long perfumeId) {
+                                                 @PathVariable("perfumeId") Integer perfumeId) {
 
         /**
          * 1. jwt token의 값의 유효시간이 남아있는지 체크합니다.
@@ -35,7 +36,7 @@ public class HeartController {
     }
 
     @GetMapping("/{perfumeId}/hearts")
-    public ResponseEntity<CommonResponse> getPerfumeHeart(@PathVariable("perfumeId") Long perfumeId, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<CommonResponse> getPerfumeHeart(@PathVariable("perfumeId") Integer perfumeId, HttpServletRequest httpServletRequest) {
 
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("향수 좋아요 조회")

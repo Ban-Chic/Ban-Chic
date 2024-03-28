@@ -38,6 +38,9 @@ public class Member extends BaseEntity {
     @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
     private Persuit persuit;
 
+    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private Recommend recommend;
+
     public void updateNickname(String nickname) {
         this.nickname = nickname;
     }
