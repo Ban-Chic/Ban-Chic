@@ -1,5 +1,6 @@
 package com.ssafy.banchic.controller;
 
+import com.ssafy.banchic.domain.dto.request.PersuitReq;
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
@@ -54,6 +55,15 @@ public class MemberController {
         return new ResponseEntity<>(CommonResponse.builder()
             .message("프로필 이미지 수정 완료")
             .data(memberService.updateImage(memberId, file, httpServletRequest))
+            .build(), HttpStatus.OK);
+    }
+
+    @PostMapping("/survey")
+    public ResponseEntity<CommonResponse> survey (
+        @RequestBody PersuitReq persuitReq, HttpServletRequest httpServletRequest) {
+        return new ResponseEntity<>(CommonResponse.builder()
+            .message("설문 제출 완료")
+            .data(memberService.survey(persuitReq, httpServletRequest))
             .build(), HttpStatus.OK);
     }
 
