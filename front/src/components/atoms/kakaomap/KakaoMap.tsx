@@ -11,7 +11,7 @@ declare global {
 // 구현할 기능
 // 1. 닫기 가능한 커스텀 오버레이 제작
 // 2. 키워드로 장소 검색 -> 목록 표출
-// 3. 현재 위치로 이동
+// 3. 현재 위치로 이동 (V)
 
 function KakaoMap(): React.ReactElement {
   useEffect(() => {

@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 const SImg = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   background-color: white;
-  border-radius: 15px;
-  padding: 5px;
+  border-radius: 50px;
+  padding: 10px;
 
   position: absolute;
-  right: 10px;
-  bottom: 10px;
+  right: 15px;
+  bottom: 25px;
   z-index: 2;
   cursor: pointer;
 
