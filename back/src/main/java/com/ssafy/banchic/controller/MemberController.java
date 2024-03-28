@@ -84,7 +84,7 @@ public class MemberController {
     }
 
     @Operation(
-            summary = "버 삭제",
+            summary = "멤버 삭제",
             description = "본인 정보를 삭제합니다."
     )
     @ApiResponse(
