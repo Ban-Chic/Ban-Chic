@@ -22,7 +22,9 @@ public enum ErrorCode {
     FILE_UPLOAD_FAIL(HttpStatus.BAD_REQUEST, "파일 업로드에 실패했습니다."),
     FILE_DELETE_FAIL(HttpStatus.BAD_REQUEST, "파일 삭제에 실패했습니다."),
     EMPTY_FILE(HttpStatus.BAD_REQUEST, "파일이 없습니다."),
-    NOT_VALID_EXTENSION(HttpStatus.BAD_REQUEST, "유효하지 않은 확장자입니다.");
+    NOT_VALID_EXTENSION(HttpStatus.BAD_REQUEST, "유효하지 않은 확장자입니다."),
+
+    RECOMM_FAIL(HttpStatus.BAD_REQUEST, "추천에 실패하였습니다.");
 
     private final HttpStatus httpStatus;
     private final String detail;

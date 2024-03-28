@@ -1,10 +1,9 @@
 package com.ssafy.banchic.controller;
 
+import com.ssafy.banchic.domain.dto.request.PersuitReq;
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
-import com.ssafy.banchic.domain.dto.response.PerfumeOverviewRes;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
-import com.ssafy.banchic.domain.dto.response.ReviewRes;
 import com.ssafy.banchic.service.HeartService;
 import com.ssafy.banchic.service.MemberService;
 import com.ssafy.banchic.service.PerfumeReviewService;
@@ -12,10 +11,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -82,6 +87,15 @@ public class MemberController {
                 .message("프로필 이미지 수정 완료")
                 .data(memberService.updateImage(memberId, file, httpServletRequest))
                 .build(), HttpStatus.OK);
+    }
+
+    @PostMapping("/survey")
+    public ResponseEntity<CommonResponse> survey (
+        @RequestBody PersuitReq persuitReq, HttpServletRequest httpServletRequest) {
+        return new ResponseEntity<>(CommonResponse.builder()
+            .message("설문 제출 완료")
+            .data(memberService.survey(persuitReq, httpServletRequest))
+            .build(), HttpStatus.OK);
     }
 
 }

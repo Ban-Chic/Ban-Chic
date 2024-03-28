@@ -69,7 +69,6 @@ public class AuthController {
 
     @PostMapping("/logout/naver")
     public ResponseEntity<CommonResponse> logoutNaver(@RequestBody NaverLogoutParams params) {
-//        return ResponseEntity.ok(oAuthLogoutService.logout(params));
         return new ResponseEntity<>(CommonResponse.builder()
                 .message("네이버 로그아웃 성공")
                 .data(oAuthLogoutService.logout(params))
