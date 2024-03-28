@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class HeartService {
@@ -38,6 +40,16 @@ public class HeartService {
             findPerfume.decreaseHeartCnt();
             heartRepository.deleteByMemberAndPerfume(memberFromAccessToken, findPerfume);
         }
+
+    }
+
+    public boolean checkHeart(Long perfumeId, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
+
+        Perfume perfume = perfumeRepository.findById(perfumeId)
+                .orElseThrow(()->new CustomException(ErrorCode.NOT_FOUND_ID));
+
+        return heartRepository.existsByMemberAndPerfume(memberFromAccessToken, perfume);
     }
 
     public Member getMemberFromAccessToken(HttpServletRequest request) {

@@ -3,6 +3,7 @@ package com.ssafy.banchic.controller;
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
+import com.ssafy.banchic.service.HeartService;
 import com.ssafy.banchic.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/members")
 public class MemberController {
 
+    private final HeartService heartService;
     private final MemberService memberService;
+
+    @GetMapping("/{memberId}/hearts")
+    public ResponseEntity<CommonResponse> getMemberHeart(@PathVariable("memberId") Long memberId,
+                                                         HttpServletRequest httpServletRequest) {
+        return null;
+    }
 
     @GetMapping("/{memberId}/info")
     public ResponseEntity<CommonResponse> getMemberInfo(
@@ -35,6 +43,7 @@ public class MemberController {
                     .message("유저 삭제 완료")
                     .build(), HttpStatus.OK);
     }
+
 
     @PutMapping("/{memberId}/nickname")
     public ResponseEntity<CommonResponse> updateNickname(

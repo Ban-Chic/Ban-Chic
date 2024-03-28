@@ -6,6 +6,7 @@ import com.ssafy.banchic.domain.dto.response.MemberNicknameRes;
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.exception.CustomException;
 import com.ssafy.banchic.exception.ErrorCode;
+import com.ssafy.banchic.repository.HeartRepository;
 import com.ssafy.banchic.repository.MemberRepository;
 import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;

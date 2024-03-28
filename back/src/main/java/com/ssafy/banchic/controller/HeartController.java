@@ -9,18 +9,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
+@RequestMapping("/perfumes")
 @RequiredArgsConstructor
 public class HeartController {
 
     private final HeartService heartService;
 
-    @PostMapping("/heart/{perfumeId}")
+    @PostMapping("/{perfumeId}/hearts")
     public ResponseEntity<CommonResponse> update(HttpServletRequest httpServletRequest,
                                                  @PathVariable("perfumeId") Long perfumeId) {
 
@@ -36,4 +35,15 @@ public class HeartController {
                 .build());
 
     }
+
+    @GetMapping("/{perfumeId}/hearts")
+    public ResponseEntity<CommonResponse> getPerfumeHeart(@PathVariable("perfumeId") Long perfumeId, HttpServletRequest httpServletRequest) {
+
+        return ResponseEntity.ok(CommonResponse.builder()
+                .message("향수 좋아요 조회")
+                .data(heartService.checkHeart(perfumeId, httpServletRequest))
+                .build());
+
+    }
+
 }
