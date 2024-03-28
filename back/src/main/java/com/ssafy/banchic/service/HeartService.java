@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class HeartService {
+
     private final MemberRepository memberRepository;
     private final PerfumeRepository perfumeRepository;
     private final HeartRepository heartRepository;
@@ -40,7 +41,6 @@ public class HeartService {
             heartRepository.deleteByMemberAndPerfume(memberFromAccessToken, findPerfume);
             return false;
         }
-
     }
 
     public boolean checkHeart(Integer perfumeId, HttpServletRequest httpServletRequest) {

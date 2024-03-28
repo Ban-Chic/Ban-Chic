@@ -2,6 +2,9 @@ package com.ssafy.banchic.controller;
 
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
 import com.ssafy.banchic.service.HeartService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Heart", description = "좋아요 관련 API")
 @RestController
 @Slf4j
 @RequestMapping("/perfumes")
@@ -20,6 +24,14 @@ public class HeartController {
 
     private final HeartService heartService;
 
+    @Operation(
+            summary = "좋아요 누르기",
+            description = "좋아요를 누르면 +1, 해제하면 -1"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "좋아요가 성공적으로 작동되었습니다."
+    )
     @PostMapping("/{perfumeId}/hearts")
     public ResponseEntity<CommonResponse> update(HttpServletRequest httpServletRequest,
                                                  @PathVariable("perfumeId") Integer perfumeId) {
@@ -35,6 +47,14 @@ public class HeartController {
                 .build());
     }
 
+    @Operation(
+            summary = "좋아요 조회",
+            description = "현재 맴버가 좋아요를 눌렀는 지 체크"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "좋아요를 눌렀는 지에 대한 확인되었습니다."
+    )
     @GetMapping("/{perfumeId}/hearts")
     public ResponseEntity<CommonResponse> getPerfumeHeart(@PathVariable("perfumeId") Integer perfumeId, HttpServletRequest httpServletRequest) {
 

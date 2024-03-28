@@ -37,11 +37,12 @@ public class OAuthLoginService {
         Member member = findOrCreateMember(oAuthInfoResponse);
 
         String nickname = member.getNickname();
+        String gender = member.getGender();
         TokenDto tokenDto = tokenProvider.generateTokenDto(member);
 
         setTokenAtHeader(response, tokenDto.getAccessToken(), tokenDto.getRefreshToken());
 
-        return new LoginResult(member.getId(), oAuthProvider, nickname, email);
+        return new LoginResult(member.getId(), oAuthProvider, nickname, email, gender);
     }
 
     public void renewAccessToken(HttpServletRequest request, HttpServletResponse response) {
@@ -111,6 +112,7 @@ public class OAuthLoginService {
         private final OAuthProvider oAuthProvider;
         private final String nickname;
         private final String email;
+        private final String gender;
     }
 
     @Data
