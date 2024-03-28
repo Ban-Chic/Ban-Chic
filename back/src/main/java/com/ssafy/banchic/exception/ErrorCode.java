@@ -24,7 +24,8 @@ public enum ErrorCode {
     EMPTY_FILE(HttpStatus.BAD_REQUEST, "파일이 없습니다."),
     NOT_VALID_EXTENSION(HttpStatus.BAD_REQUEST, "유효하지 않은 확장자입니다."),
 
-    RECOMM_FAIL(HttpStatus.BAD_REQUEST, "추천에 실패하였습니다.");
+    RECOMM_FAIL(HttpStatus.BAD_REQUEST, "추천에 실패하였습니다."),
+    RECOMM_NOT_EXIST(HttpStatus.BAD_REQUEST, "추천 목록이 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String detail;

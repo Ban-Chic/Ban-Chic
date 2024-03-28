@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PerfumeRes {
 
-    private Long id;
+    private Integer id;
     private String perfumeName;
     private String perfumeImg;
     private String brandName;
