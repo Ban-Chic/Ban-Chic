@@ -2,18 +2,19 @@ import { useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { STitle, SSubTitle, SBody1 } from "../../../styles/Font";
-import {
-  getMember,
-  updateNickname,
-  updateProfileImage,
-} from "../../../api/Api";
+import { updateProfileImage } from "../../../api/Api";
 import ButtonComponent from "../../atoms/auth/Button";
 import useLogout from "../../../hooks/auth/useLogout";
 import useDeleteId from "../../../hooks/auth/useDeleteId";
 import useOpenModal from "../../../hooks/modal/useOpenModal";
 import Modal from "../../atoms/modal/Modal";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import CircleItemList from "../../molecules/list/circleItemList";
+import useGetUser, {
+  useUpdateNickname,
+  useUpdateProfileImage,
+} from "../../../hooks/info/useGetUser";
+import ProfileCard from "../../molecules/mypage/profileCard";
+import LoadingSpinner from "../../../utils/LoadingSpinner";
 
 function MyPage() {
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
@@ -21,41 +22,33 @@ function MyPage() {
   const DeleteId = useDeleteId();
   const [files, setFiles] = useState<FileList | null>();
 
-  const queryClient = useQueryClient();
-
   // 내 정보 불러오는 탠스택쿼리
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["mypage"],
-    queryFn: () => getMember(Number(localStorage.getItem("uid"))),
-  });
+  const { data, isLoading, isError, error } = useGetUser();
 
   // 닉네임 뮤테이션
-  const useUpdateNickname = useMutation({
-    mutationFn: updateNickname,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["mypage"] });
-    },
-    mutationKey: ["nickname"],
-  });
+  const nickNameMutation = useUpdateNickname();
 
   // 닉네임 업데이트
   const updateNicknameFunction = (nickname: string) => {
-    useUpdateNickname.mutate(nickname);
+    nickNameMutation.mutate(nickname);
   };
 
-  // 이미지 제출
-  const subsub = () => {
+  // 프로필 이미지 뮤테이션
+  const profileImageMutation = useUpdateProfileImage();
+
+  // 프로필 이미지 버튼 핸들러
+  const updateProfileImage = () => {
     if (files) {
-      updateProfileImage(files[0]).then((res) => {
-        console.log(res);
-      });
+      profileImageMutation.mutate(files[0]);
+    } else {
+      window.alert("프로필 이미지를 업로드해주세요.");
     }
+    console.log(typeof data);
   };
 
   // 로딩 화면
-  if (isLoading) return <>Loading</>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <>{error.message}</>;
-
   return (
     <SMypageContainer>
       <SMyPageGrid>
@@ -63,24 +56,13 @@ function MyPage() {
           <SSubTitle>내 추구미</SSubTitle>
         </SBlock>
         <SBlock>
-          <SFlexCenter>
-            <SSubTitle>내 정보</SSubTitle>
-            <SProfile $imageurl={data.data?.image} />
-            <input
-              type="file"
-              id="profileImg"
-              accept="iamge/*"
-              onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-                console.log(event.target.files);
-                setFiles(event?.target?.files);
-              }}
-            />
-            <button type="submit" onClick={subsub}>
-              제출
-            </button>
-            {data.data.nickname && <STitle>{data.data?.nickname}</STitle>}
-            {data.data.email && <SBody1>{data.data?.email}</SBody1>}
-          </SFlexCenter>
+          <ProfileCard
+            data={data}
+            onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFiles(event?.target?.files);
+            }}
+            updateProfileImage={updateProfileImage}
+          />
         </SBlock>
         <SBlock>
           <SSubTitle>내가 쓴 리뷰들</SSubTitle>
@@ -96,7 +78,9 @@ function MyPage() {
           </CircleItemList>
         </SBlock>
         <SBlock>
-          <SSubTitle>내 검색기록</SSubTitle>
+          <CircleItemList data={[{ perfumeId: 1, imageUrl: "/tomford.jpg" }]}>
+            <SSubTitle>내가 추천받은 향수들</SSubTitle>
+          </CircleItemList>
         </SBlock>
         <SBlock>
           <ButtonComponent onClick={() => clickModal()}>
@@ -117,29 +101,6 @@ function MyPage() {
     </SMypageContainer>
   );
 }
-
-const SProfile = styled.div<{ $imageurl: string }>`
-  width: 200px;
-  height: 200px;
-  border-radius: 100px;
-  background-color: var(--color-white);
-  background-image: url(${(props) => props.$imageurl});
-  background-repeat: no-repeat;
-  background-position: center;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(0.5px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-`;
-
-const SFlexCenter = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-`;
 
 const SMypageContainer = styled.main``;
 
