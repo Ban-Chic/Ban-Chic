@@ -73,30 +73,25 @@ export const getNaverLogout = () => API.get("/auth/logout/naver");
 /** 카카오 로그아웃 */
 export const getKakaoLogout = () => API.get("/auth/logout/kakao");
 
-/** 토큰 연장 */
-export const postExtendToken = () =>
-  API.post("/auth/extend/token", {
-    refreshToken: localStorage.getItem("refreshToken"),
-  });
-
-/** 토큰 연장 */
-
 // 멤버
 
 /** 좋아요 한 향수 목록 조회 */
-export const getLikes = () => API.get("/members/likes");
+export const getLikes = (userId: number) => API.get(`/members/${userId}/likes`);
 
 /** 작성한 리뷰 목록 조회 */
-export const getReviews = () => API.get("/members/reviews");
+export const getReviews = (userId: number) =>
+  API.get(`/members/${userId}/reviews`);
 
 /** 멤버 정보 조회 */
-export const getMember = (userId: number) => API.get(`/members/${userId}/info`);
+export const getMember = (userId: number) =>
+  API.get(`/members/${userId}/info`).then((res) => res.data);
 
 /** 닉네임 수정 */
-export const updateNickname = (nickName: string) =>
-  API.put(`members/${localStorage.getItem("uid")}/nickname`, {
+export const updateNickname = (nickName: string) => {
+  return API.put(`members/${localStorage.getItem("uid")}/nickname`, {
     nickname: nickName,
   });
+};
 
 /** 프로필 이미지 수정 */
 export const updateProfileImage = (file: File) => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SSubTitle, STitle } from "../../../styles/Font";
 import PerfumeListItem from "../../atoms/item/perfumeListItem";
-import List from "../../molecules/list";
+import List from "../../atoms/list";
 import styled from "styled-components";
 
 interface PerfumeData {
