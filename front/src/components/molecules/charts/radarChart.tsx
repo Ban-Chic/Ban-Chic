@@ -69,15 +69,16 @@ function RadarChartContainer(Props: Props) {
             outerRadius="80%"
             data={data}
             margin={{ top: 15, bottom: 0 }}
-          >
-            <PolarGrid />
+            >
+            <PolarGrid gridType="circle"/>
             <PolarAngleAxis dataKey="subject" />
             <PolarRadiusAxis angle={30} domain={[0, 100]} />
             <Radar
-              name="향수 A"
+            
+              name="Seasonality"
               dataKey="A"
               stroke="white"
-              fill="white"
+              fill="yellow"
               fillOpacity={0.6}
               legendType="diamond"
               isAnimationActive={true}
@@ -95,7 +96,7 @@ function RadarChartContainer(Props: Props) {
 
 const SContainer = styled.div`
   padding: 10px;
-`;
+  `;
 
 const SDiv = styled.div`
   width: 100%;
