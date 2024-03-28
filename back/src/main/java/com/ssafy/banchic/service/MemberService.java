@@ -3,26 +3,66 @@ package com.ssafy.banchic.service;
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
 import com.ssafy.banchic.domain.dto.response.MemberNicknameRes;
+import com.ssafy.banchic.domain.dto.response.PerfumeOverviewRes;
+import com.ssafy.banchic.domain.dto.response.ReviewRes;
+import com.ssafy.banchic.domain.entity.Heart;
 import com.ssafy.banchic.domain.entity.Member;
+import com.ssafy.banchic.domain.entity.Review;
 import com.ssafy.banchic.exception.CustomException;
 import com.ssafy.banchic.exception.ErrorCode;
+import com.ssafy.banchic.repository.HeartRepository;
 import com.ssafy.banchic.repository.MemberRepository;
+import com.ssafy.banchic.repository.PerfumeReviewRepository;
 import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @AllArgsConstructor
 @Transactional
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final HeartRepository heartRepository;
     private final FileUploadService fileUploadService;
+    private final PerfumeReviewRepository perfumeReviewRepository;
     private final TokenProvider tokenProvider;
+
+    public List<ReviewRes> getMemberReview(Long memberId, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
+
+        if (!memberFromAccessToken.getId().equals(memberId)) {
+            throw new CustomException(ErrorCode.NOT_FOUND_ID);
+        }
+
+        List<Review> findMemberReviews = perfumeReviewRepository.findByMemberId(memberId);
+
+        return findMemberReviews
+                .stream()
+                .map(ReviewRes::from)
+                .toList();
+
+    }
+
+    public List<PerfumeOverviewRes> getMemberHeart(Long memberId, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
+
+        if(!memberFromAccessToken.getId().equals(memberId)) {
+            throw new CustomException(ErrorCode.NOT_FOUND_ID);
+        }
+
+        List<Heart> memberHearts = heartRepository.findByMemberId(memberId);
+
+        return memberHearts.stream()
+                .map(e -> PerfumeOverviewRes.from(e.getPerfume()))
+                .toList();
+    }
 
     public MemberInfoRes getMemberInfo(Long memberId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
