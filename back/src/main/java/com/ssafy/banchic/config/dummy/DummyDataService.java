@@ -2,10 +2,12 @@ package com.ssafy.banchic.config.dummy;
 
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.entity.Perfume;
+import com.ssafy.banchic.domain.entity.Review;
 import com.ssafy.banchic.domain.entity.perfume.*;
 import com.ssafy.banchic.domain.type.OAuthProvider;
 import com.ssafy.banchic.repository.MemberRepository;
 import com.ssafy.banchic.repository.PerfumeRepository;
+import com.ssafy.banchic.repository.PerfumeReviewRepository;
 import com.ssafy.banchic.repository.perfume.*;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class DummyDataService {
     private final GenderRepository genderRepository;
     private final PerfumeRepository perfumeRepository;
     private final MemberRepository memberRepository;
+    private final PerfumeReviewRepository perfumeReviewRepository;
     @Transactional
     public void insertDummyData() {
         Member member = Member.builder()
@@ -42,6 +45,14 @@ public class DummyDataService {
                 .oAuthProvider(OAuthProvider.NAVER)
                 .build();
         memberRepository.save(member2);
+
+        Member realMember = Member.builder()
+                .email("danny100e@gmail.com")
+                .image("test3.jpg")
+                .nickname("현준")
+                .oAuthProvider(OAuthProvider.KAKAO)
+                .build();
+        memberRepository.save(realMember);
 
         Sillage sillage1 = Sillage.builder().veryWeak(1)
                 .weak(2)
@@ -122,6 +133,18 @@ public class DummyDataService {
 //                .gender(gender)
 //                .season(season)
                 .build();
+
         perfumeRepository.save(perfume2);
+
+        Review review = Review.builder()
+                .content("엄둔딕")
+                .imgUrl("test.jpg")
+                .rate(5)
+                .member(realMember)
+                .perfume(perfume)
+                .build();
+
+        perfumeReviewRepository.save(review);
+
     }
 }
