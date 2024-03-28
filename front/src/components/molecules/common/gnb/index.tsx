@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import theme from "../../../../styles/Theme";
 import { Link } from "react-router-dom";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Example from "../../sidebarFramer/example";
 import SidebarReal from "../../sidebarReal/sidebarReal";
-
-
+import { MenuToggle } from "../../../atoms/menuToggle/menuToggle";
 
 function GNB() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleSide = () => {
     setIsOpen(true);
+    console.log(isOpen);
   };
 
   return (
@@ -23,7 +23,11 @@ function GNB() {
       <SLink to="/mypage">MyPage</SLink>
       {/* <SLink to="/perfumes/1/reviews">리뷰더보기</SLink> */}
       {/* <Example/> */}
-      <SidebarReal width={500}></SidebarReal>
+      {/* <SMenuButton role="button" onClick={toggleSide}>삼단바</SMenuButton>
+      <SidebarReal width={1500} isOpen={isOpen} setIsOpen={setIsOpen}>
+      </SidebarReal> */}
+
+      {/* <MenuToggle toggle={() => toggleSide} /> */}
     </SHeaderContainer>
   );
 }
@@ -67,7 +71,30 @@ const MenuIcon = styled.div`
 `;
 
 const SButton = styled.button`
-  
+  position: absolute;
+  left: -100px;
+  top: 10px;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  transition: 0.8s ease;
+  border: 2px solid #202020;
+  border-radius: 40px;
+  overflow: hidden;
+`;
+
+const SImg = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const SSpan = styled.span`
+  color: white;
+`;
+
+const SMenuButton = styled.button`
+  position: relative;
+  z-index: 5;
 `;
 
 export default GNB;

@@ -30,11 +30,11 @@ interface Props {
     RadioNodeListing: number;
     bestRate: number;
     vote: number;
-    notes: string;
+    // notes: string;
     season: object;
-    TopNotes: string[];
-    MiddleNotes: string[];
-    BottomNotes: string[];
+    // TopNotes: string[];
+    // MiddleNotes: string[];
+    // BottomNotes: string[];
   } | null;
 }
 
@@ -86,7 +86,7 @@ function PerfumeDetail() {
           )}
         </SBlock>
         <SBlock>
-          <SNote>
+          {/* <SNote>
             <SNoteCate>Top Notes</SNoteCate>
             {data && (
               <NoteGroup notes={data.data.notes} noteName={"TopNotes"} />
@@ -103,7 +103,7 @@ function PerfumeDetail() {
             {data && (
               <NoteGroup notes={data.data.notes} noteName={"BaseNotes"} />
             )}
-          </SNote>
+          </SNote> */}
         </SBlock>
         <SBlock>
           {/* <Link to="/perfumes/1/reviews">리뷰더보기</Link> */}

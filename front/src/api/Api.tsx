@@ -62,8 +62,11 @@ export const postPerfumeReview = ({
 };
 
 /** 리뷰 수정 */
-export const updatePerfumeReview = (review: IReview) =>
-  API.put(`/perfumes/${review.perfumeId}/reviews/${review.reviewId}`);
+export const updatePerfumeReview = (
+  perfumeId: number,
+  reviewId: number,
+  newReview: object
+) => API.put(`/perfumes/${perfumeId}/reviews/${reviewId}`, newReview);
 
 /** 리뷰 삭제 */
 export const deletePerfumeReview = (perfumeId: number, reviewId: number) =>

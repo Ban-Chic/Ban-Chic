@@ -18,6 +18,7 @@ import LoginPage from "../components/pages/login";
 import MapPage from "../components/pages/map";
 import ReviewPage from "../components/pages/review/review";
 import CRUDTest from "../components/pages/crudTest";
+import ReviewModify from "../components/pages/review/reviewModify";
 function Router() {
   return (
     <Routes>
@@ -33,6 +34,7 @@ function Router() {
         <Route path="/map" element={<MapPage />}></Route>
         <Route path="/perfumes/:perfumeId/reviews" element={<ReviewPage/>}></Route>
         <Route path="/perfumes/review/crud" element={<CRUDTest/>}></Route>
+        <Route path="/perfumes/:perfumeId/reviews/:reviewId" element={<ReviewModify/>}></Route>
       </Route>
       <Route path="/naver/callback" element={<NaverCallback />}></Route>
       <Route path="/kakao/callback" element={<KakaoCallback />}></Route>

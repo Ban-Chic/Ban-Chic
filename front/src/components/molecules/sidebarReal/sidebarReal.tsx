@@ -6,6 +6,10 @@ const SidebarReal = ({ width = 500 }) => {
   const [xPosition, setX] = useState(-width);
   const side = useRef<HTMLDivElement>(null);
 
+  const toggleSide = ()=>{
+    setIsOpen(true)
+  }
+
   // button 클릭 시 토글
   const toggleMenu = () => {
     if (xPosition < 0) {
@@ -46,6 +50,7 @@ const SidebarReal = ({ width = 500 }) => {
           transform: `translatex(${-xPosition}px)`,
         }}
       >
+        <SContent></SContent>
         <SButton onClick={() => toggleMenu()}>
           {isOpen ? (
             <SSpan>X</SSpan>
@@ -53,7 +58,6 @@ const SidebarReal = ({ width = 500 }) => {
             <SImg src="/logo_yellow.png" alt="contact open button" />
           )}
         </SButton>
-        <SContent></SContent>
       </SSidebar>
     </SContainer>
   );
@@ -64,7 +68,7 @@ const SContainer = styled.div`
 `;
 
 const SSidebar = styled.div`
-  background-color: #e3ecf1;
+  background-color: #068c16;
   border-left: 4px solid #202020;
   position: fixed;
   top: 0;
@@ -77,12 +81,12 @@ const SSidebar = styled.div`
 `;
 
 const SButton = styled.button`
-  position: relative;
-  left: -50px;
+  position: absolute;
+  left: -100px;
   top: 10px;
   width: 40px;
   height: 40px;
-  z-index: 99;
+  z-index: 1;
   transition: 0.8s ease;
   border: 2px solid #202020;
   border-radius: 40px;
