@@ -12,6 +12,8 @@ const SImg = styled.img`
   bottom: 10px;
   z-index: 2;
   cursor: pointer;
+
+  box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 `;
 const MapContainer = styled.div`
   height: 100%;
