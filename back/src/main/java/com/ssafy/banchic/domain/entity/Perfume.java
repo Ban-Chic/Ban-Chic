@@ -68,7 +68,7 @@ public class Perfume {
     private Season season;
 
     @OneToOne
-    @JoinColumn(name = "likea")
+    @JoinColumn(name = "likeablity_id")
     private Likeability likeability;
 
     @OneToMany(mappedBy = "perfume", cascade = CascadeType.REMOVE)
