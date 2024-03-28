@@ -127,8 +127,6 @@ public class MemberService {
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
         Recommendation recommResponse = restTemplate.postForObject(url, requestEntity, Recommendation.class);
 
-        System.out.println(">>>>>>>>>>>>>  "+recommResponse.getRecommendIndex());
-
         Recommend recommend = new Recommend();
         recommend.setOne(recommResponse.getRecommendIndex().get(0));
         recommend.setTwo(recommResponse.getRecommendIndex().get(1));
@@ -147,14 +145,10 @@ public class MemberService {
 
     @Getter
     public static class Recommendation {
-        private List<Integer> recommendIndex;
+        private List<Integer> recommend_index;
 
         public List<Integer> getRecommendIndex() {
-            return recommendIndex;
-        }
-
-        public void setRecommendIndex(List<Integer> recommendIndex) {
-            this.recommendIndex = recommendIndex;
+            return recommend_index;
         }
     }
 
