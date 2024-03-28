@@ -7,10 +7,12 @@ import com.ssafy.banchic.domain.dto.response.MemberNicknameRes;
 import com.ssafy.banchic.domain.dto.response.RecommRes;
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.entity.Persuit;
+import com.ssafy.banchic.domain.entity.Recommend;
 import com.ssafy.banchic.exception.CustomException;
 import com.ssafy.banchic.exception.ErrorCode;
 import com.ssafy.banchic.repository.MemberRepository;
 import com.ssafy.banchic.repository.PersuitRepository;
+import com.ssafy.banchic.repository.RecommendRepository;
 import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -32,6 +34,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PersuitRepository persuitRepository;
+    private final RecommendRepository recommendRepository;
     private final FileUploadService fileUploadService;
     private final RestTemplate restTemplate;
     private final TokenProvider tokenProvider;
@@ -98,20 +101,20 @@ public class MemberService {
 
         StringBuilder sb = new StringBuilder();
         String requestBody = sb.append("{")
-            .append("\"clear\": " ).append(req.getClear()).append(", ")
-            .append("\"romantic\": " ).append(req.getRomantic()).append(", ")
-            .append("\"pretty\": " ).append(req.getPretty()).append(", ")
-            .append("\"coolcasual\": " ).append(req.getCoolcasual()).append(", ")
-            .append("\"casual\": " ).append(req.getCasual()).append(", ")
-            .append("\"natural\": " ).append(req.getNatural()).append(", ")
-            .append("\"elegant\": " ).append(req.getElegant()).append(", ")
-            .append("\"dynamic\": " ).append(req.getDynamic()).append(", ")
-            .append("\"wild\": " ).append(req.getWild()).append(", ")
-            .append("\"gorgeous\": " ).append(req.getGorgeous()).append(", ")
-            .append("\"chic\": " ).append(req.getChic()).append(", ")
-            .append("\"modern\": " ).append(req.getModern()).append(", ")
-            .append("\"classic\": " ).append(req.getClassic()).append(", ")
-            .append("\"dandy\": " ).append(req.getDandy())
+            .append("\"clear\": " ).append(req.getClear() == true ? 1 : 0).append(", ")
+            .append("\"romantic\": " ).append(req.getRomantic() == true ? 1 : 0).append(", ")
+            .append("\"pretty\": " ).append(req.getPretty() == true ? 1 : 0).append(", ")
+            .append("\"coolcasual\": " ).append(req.getCoolcasual() == true ? 1 : 0).append(", ")
+            .append("\"casual\": " ).append(req.getCasual() == true ? 1 : 0).append(", ")
+            .append("\"natural\": " ).append(req.getNatural() == true ? 1 : 0).append(", ")
+            .append("\"elegant\": " ).append(req.getElegant() == true ? 1 : 0).append(", ")
+            .append("\"dynamic\": " ).append(req.getDynamic() == true ? 1 : 0).append(", ")
+            .append("\"wild\": " ).append(req.getWild() == true ? 1 : 0).append(", ")
+            .append("\"gorgeous\": " ).append(req.getGorgeous() == true ? 1 : 0).append(", ")
+            .append("\"chic\": " ).append(req.getChic() == true ? 1 : 0).append(", ")
+            .append("\"modern\": " ).append(req.getModern() == true ? 1 : 0).append(", ")
+            .append("\"classic\": " ).append(req.getClassic() == true ? 1 : 0).append(", ")
+            .append("\"dandy\": " ).append(req.getDandy() == true ? 1 : 0)
             .append("}").toString();
 
         Persuit persuit = Persuit.from(req, member);
@@ -122,19 +125,36 @@ public class MemberService {
         persuitRepository.save(persuit);
 
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-        RecommResponseEntity recommResponseEntity = restTemplate.postForObject(url, requestEntity, RecommResponseEntity.class);
+        Recommendation recommResponse = restTemplate.postForObject(url, requestEntity, Recommendation.class);
 
-        System.out.println(recommResponseEntity.getRecommendList());
+        System.out.println(">>>>>>>>>>>>>  "+recommResponse.getRecommendIndex());
 
-        return null;
+        Recommend recommend = new Recommend();
+        recommend.setOne(recommResponse.getRecommendIndex().get(0));
+        recommend.setTwo(recommResponse.getRecommendIndex().get(1));
+        recommend.setThree(recommResponse.getRecommendIndex().get(2));
+        recommend.setFour(recommResponse.getRecommendIndex().get(3));
+        recommend.setFive(recommResponse.getRecommendIndex().get(4));
+        recommend.setSix(recommResponse.getRecommendIndex().get(5));
+        recommend.setSeven(recommResponse.getRecommendIndex().get(6));
+        recommend.setEight(recommResponse.getRecommendIndex().get(7));
+        recommend.setNine(recommResponse.getRecommendIndex().get(8));
+        recommend.setTen(recommResponse.getRecommendIndex().get(9));
+
+        recommendRepository.save(recommend);
+        return RecommRes.from(recommend);
     }
 
     @Getter
-    public static class RecommResponseEntity {
-        private List<Integer> recommendList;
+    public static class Recommendation {
+        private List<Integer> recommendIndex;
 
-        public List<Integer> getRecommendList() {
-            return recommendList;
+        public List<Integer> getRecommendIndex() {
+            return recommendIndex;
+        }
+
+        public void setRecommendIndex(List<Integer> recommendIndex) {
+            this.recommendIndex = recommendIndex;
         }
     }
 
