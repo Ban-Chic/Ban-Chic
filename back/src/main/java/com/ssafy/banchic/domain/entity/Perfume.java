@@ -1,10 +1,6 @@
 package com.ssafy.banchic.domain.entity;
 
-import com.ssafy.banchic.domain.entity.perfume.Gender;
-import com.ssafy.banchic.domain.entity.perfume.Longevity;
-import com.ssafy.banchic.domain.entity.perfume.Price;
-import com.ssafy.banchic.domain.entity.perfume.Season;
-import com.ssafy.banchic.domain.entity.perfume.Sillage;
+import com.ssafy.banchic.domain.entity.perfume.*;
 import lombok.*;
 
 import java.util.List;
@@ -37,9 +33,11 @@ public class Perfume {
     private String brandName;
     private String brandImg;
     private String accords;
+    @Column(length = 5000)
     private String notes;
     private int year;
     private int bestRate;
+    private int vote;
     private float rate;
 
     // 향수 조회수
@@ -68,6 +66,10 @@ public class Perfume {
     @OneToOne
     @JoinColumn(name = "season_id")
     private Season season;
+
+    @OneToOne
+    @JoinColumn(name = "likeability_id")
+    private Likeability likeability;
 
     @OneToMany(mappedBy = "perfume", cascade = CascadeType.REMOVE)
     private List<Review> reviews;

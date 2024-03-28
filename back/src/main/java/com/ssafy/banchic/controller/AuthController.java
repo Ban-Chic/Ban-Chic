@@ -5,6 +5,8 @@ import com.ssafy.banchic.domain.type.OAuthProvider;
 import com.ssafy.banchic.oauthApi.params.NaverLogoutParams;
 import com.ssafy.banchic.service.OAuthLoginService;
 import com.ssafy.banchic.service.OAuthLogoutService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-@Tag(name = "ArticleComment API", description = "댓글 관련 API")
+@Tag(name = "Auth API", description = "인증 관련 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
@@ -39,6 +41,14 @@ public class AuthController {
     @Value("${oauth.kakao.url.redirect}")
     private String kakaoLogoutRedirectUrl;
 
+    @Operation(
+            summary = "카카오 로그인",
+            description = "카카오 로그인을 합니다."
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "카카오 로그인에 성공하였습니다."
+    )
     @GetMapping("/login/kakao")
     public ResponseEntity<CommonResponse> loginKakao(
         @RequestParam("code") String code, HttpServletResponse response) {
@@ -49,6 +59,14 @@ public class AuthController {
                 .build(), HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "네이버 로그인",
+            description = "네이버 로그인을 합니다"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "네이버 로그인에 성공하였습니다."
+    )
     @GetMapping("/login/naver")
     public ResponseEntity<CommonResponse> loginNaver(
         @RequestParam("code") String code, HttpServletResponse response) {
@@ -105,6 +123,14 @@ public class AuthController {
         }
     }
 
+    @Operation(
+            summary = "엑세스 토큰 재발급",
+            description = "리프래쉬 토큰으로 엑세스 토큰을 재발급합니다."
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "엑세스 토큰을 재발급합니다."
+    )
     @PostMapping("/renew")
     public ResponseEntity<CommonResponse> renewToken(
         HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {

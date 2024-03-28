@@ -1,6 +1,5 @@
 package com.ssafy.banchic.domain.entity.perfume;
 
-import com.ssafy.banchic.domain.entity.Accord;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
