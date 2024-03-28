@@ -3,7 +3,6 @@ import styled from "styled-components";
 function Footer() {
   const goToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    console.log("제발위로")
     
   };
 

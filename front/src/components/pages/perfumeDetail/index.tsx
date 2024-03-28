@@ -1,18 +1,24 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import React, { useState, useEffect } from "react";
 import theme from "../../../styles/Theme";
 import ReviewInDetail from "../../molecules/review/reviewInDetail";
 import { SHeaderContainer } from "../../molecules/common/gnb";
 import SpriceImageUrl from "../../../utils/ImgUrl";
 import GPTSample from "../../molecules/gptApi/gptSample";
-import { getPerfumeDetail, getPerfumeReviews, postLike } from "../../../api/Api";
+import {
+  getPerfumeDetail,
+  getPerfumeReviews,
+  postLike,
+} from "../../../api/Api";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import RadarChartContainer from "../../molecules/charts/radarChart";
 import BarChartContainer from "../../molecules/charts/barChart";
 import PieChartContainer from "../../molecules/charts/pieChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
 import { Link } from "react-router-dom";
+import ReviewPage from "../review/review";
 
 interface Props {
   data: {
@@ -32,27 +38,25 @@ interface Props {
 
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
-
+  const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<Props["data"]>(null);
   // const [notes, setNotes] = useState<Props["data"]>(null);
 
   useEffect(() => {
     getPerfumeDetail(perfumeId).then((data) => {
-      console.log(data.data);
       setData(data.data);
       // setNotes(JSON.parse(data.data.notes));
     });
-    getPerfumeReviews(perfumeId).then((response)=>{
+    getPerfumeReviews(perfumeId).then((response) => {
       console.log(response);
-    })
+    });
   }, []);
 
   const onClickHandler = () => {
-    postLike(Number(perfumeId)).then((response) => {
+    postLike(perfumeId).then((response) => {
       console.log(response);
-      });
-    }
-
+    });
+  };
 
   return (
     <>
@@ -62,16 +66,16 @@ function PerfumeDetail() {
           <SLikeButton onClick={onClickHandler}>좋아요버튼임</SLikeButton>
         </SBlock>
         <SBlock>
+          {data && data.data.season && (
+            <RadarChartContainer season={data.data.season} />
+          )}
+        </SBlock>
+        <SBlock>
           {data && (
             <GPTSample
               perfumeName={data.data.perfumeName}
               notes={data.data.notes}
             />
-          )}
-        </SBlock>
-        <SBlock>
-          {data && data.data.season && (
-            <RadarChartContainer season={data.data.season} />
           )}
         </SBlock>
         <SBlock>
@@ -94,7 +98,21 @@ function PerfumeDetail() {
             )}
           </SNote>
         </SBlock>
-        <SBlock>{data && <ReviewInDetail perfumeId={perfumeId} />}</SBlock>
+        <SBlock>
+          {/* <Link to="/perfumes/1/reviews">리뷰더보기</Link> */}
+          <SParent
+            layout
+            isOpenCheck={isOpen}
+            initial={{ borderRadius: 50 }}
+            onClick={() => setIsOpen(!isOpen)}
+            transition={{
+              opacity: { ease: "linear" },
+              layout: { duration: 0.6 },
+            }}
+          >
+            <ReviewPage />
+          </SParent>
+        </SBlock>
         <SBlock>
           {data && <SPerfumeName> {data.data.perfumeName}</SPerfumeName>}
         </SBlock>
@@ -112,6 +130,7 @@ const SDetailContainer = styled.div`
   height: calc(100vh - 50px);
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
 `;
 
 const SBlock = styled.div`
@@ -128,7 +147,7 @@ const SBlock = styled.div`
   }
   &:nth-child(2) {
     grid-column: 3 / span 2;
-    background-color: gray;
+    background-color: black;
     display: flex;
     flex-direction: column;
   }
@@ -144,7 +163,7 @@ const SBlock = styled.div`
   }
   &:nth-child(3) {
     grid-column: 5 / span 2;
-    grid-row: 1 / span 2;
+    /* grid-row: 1 / span 2; */
     display: flex;
     flex-direction: column;
     &:hover {
@@ -153,7 +172,7 @@ const SBlock = styled.div`
   }
   &:nth-child(5) {
     grid-column: 5 / span 2;
-    grid-row: 3 / span 2;
+    grid-row: 2 / span 3;
     &:hover {
       background-color: yellowgreen;
     }
@@ -179,25 +198,6 @@ const SNoteCate = styled.div`
   padding: 10px;
 `;
 
-const SNoteGroup = styled.div`
-  display: flex;
-  gap: 10px;
-  padding-left: 15px;
-`;
-
-const SEachNote = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const SNoteName = styled.div`
-  margin: 0 auto;
-`;
-
-const SNoteImg = styled.img`
-  width: 60px;
-`;
-
 const SPerfumeName = styled.div`
   font-size: 30px;
 `;
@@ -207,6 +207,25 @@ const SLikeButton = styled.button`
   z-index: 3;
   background-color: red;
   margin-left: 250px;
+`;
+
+const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
+  /* width: 1200px;
+  height: 400px; */
+  background: white;
+  width: ${(props) => (props.isOpenCheck ? "45.9%" : "100%")};
+  height: ${(props) => (props.isOpenCheck ? "86.5%" : "100%")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: ${(props) => (props.isOpenCheck ? "fixed" : "static")};
+  z-index: 1;
+  top: ${(props) => (props.isOpenCheck ? "9%" : "0%")};
+  right: ${(props) => (props.isOpenCheck ? "16%" : "0%")};
+  /* inset: ${(props) => (props.isOpenCheck ? "0%" : "0%")}; */
+  /* transform: translate(0%, 0%); */
+  background-color: darkgreen;
+  color: black;
 `;
 
 export default PerfumeDetail;
