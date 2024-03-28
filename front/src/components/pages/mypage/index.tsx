@@ -1,39 +1,53 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { STitle, SSubTitle, SBody1 } from "../../../styles/Font";
-
-import List from "../../molecules/list";
-import CircleItem from "../../atoms/item/circleItem";
-import { getMember, updateProfileImage } from "../../../api/Api";
+import {
+  getMember,
+  updateNickname,
+  updateProfileImage,
+} from "../../../api/Api";
 import ButtonComponent from "../../atoms/auth/Button";
 import useLogout from "../../../hooks/auth/useLogout";
-import useNickNameChange from "../../../hooks/auth/useNickNameChange";
 import useDeleteId from "../../../hooks/auth/useDeleteId";
 import useOpenModal from "../../../hooks/modal/useOpenModal";
 import Modal from "../../atoms/modal/Modal";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import CircleItemList from "../../molecules/list/circleItemList";
 
 function MyPage() {
-  const [nickNamedata, setNickNamedata] = useState<string>("");
-  const [profileImg, setProfileImg] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
   const Logout = useLogout();
-  const { nick, changeNickName } = useNickNameChange();
   const DeleteId = useDeleteId();
   const [files, setFiles] = useState<FileList | null>();
 
-  useEffect(() => {
-    getMember(Number(localStorage.getItem("uid"))).then((res) => {
-      console.log(res.data.data);
-      setNickNamedata(res.data.data.nickname);
-      setEmail(res.data.data.email);
-      res.data.data.image
-        ? setProfileImg(res.data.data.image)
-        : setProfileImg("/defalutUser.png");
-    });
-  }, [nick]);
+  const queryClient = useQueryClient();
 
+  // 내 정보 불러오는 탠스택쿼리
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["mypage"],
+    queryFn: () => getMember(Number(localStorage.getItem("uid"))),
+  });
+
+  // 닉네임 뮤테이션
+  const useUpdateNickname = useMutation({
+    mutationFn: updateNickname,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["mypage"] });
+    },
+    mutationKey: ["nickname"],
+  });
+
+  // 닉네임 업데이트
+  const updateNicknameFunction = (nickname: string) => {
+    useUpdateNickname.mutate(nickname);
+  };
+
+  // 로딩 화면
+  if (isLoading) return <>Loading</>;
+  if (isError) return <>{error.message}</>;
+
+  // 이미지 제출
   const subsub = () => {
     if (files) {
       updateProfileImage(files[0]).then((res) => {
@@ -51,7 +65,7 @@ function MyPage() {
         <SBlock>
           <SFlexCenter>
             <SSubTitle>내 정보</SSubTitle>
-            <SProfile $imageurl={profileImg} />
+            <SProfile $imageurl={data.data.image} />
             <input
               type="file"
               id="profileImg"
@@ -64,28 +78,22 @@ function MyPage() {
             <button type="submit" onClick={subsub}>
               제출
             </button>
-            {nickNamedata && <STitle>{nickNamedata}</STitle>}
-            {email && <SBody1>{email}</SBody1>}
+            {data.data.nickname && <STitle>{data.data.nickname}</STitle>}
+            {data.data.email && <SBody1>{data.data.email}</SBody1>}
           </SFlexCenter>
         </SBlock>
         <SBlock>
           <SSubTitle>내가 쓴 리뷰들</SSubTitle>
         </SBlock>
         <SBlock>
-          <SSubTitle>좋아요 한 향수</SSubTitle>
-          <List>
-            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
-            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
-            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
-          </List>
+          <CircleItemList data={[{ perfumeId: 1, imageUrl: "/tomford.jpg" }]}>
+            <SSubTitle>좋아요 한 향수</SSubTitle>
+          </CircleItemList>
         </SBlock>
         <SBlock>
-          <SSubTitle>내가 본 향수</SSubTitle>
-          <List>
-            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
-            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
-            <CircleItem url="/" $imageUrl="/tomford.jpg"></CircleItem>
-          </List>
+          <CircleItemList data={[{ perfumeId: 1, imageUrl: "/tomford.jpg" }]}>
+            <SSubTitle>내가 본 향수</SSubTitle>
+          </CircleItemList>
         </SBlock>
         <SBlock>
           <SSubTitle>내 검색기록</SSubTitle>
@@ -100,9 +108,9 @@ function MyPage() {
         {isOpenModal && (
           <Modal
             closeModal={closeModal}
-            actionModal={changeNickName}
+            actionModal={updateNicknameFunction}
             title="닉네임 수정하기"
-            alert={nickNamedata}
+            alert={data.data.nickname}
           />
         )}
       </SMyPageGrid>
@@ -163,6 +171,7 @@ const SBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;
+  transition: ease 0.1s all;
   @media only screen and (min-width: 768px) {
     &:nth-child(1),
     &:nth-child(3) {
