@@ -81,7 +81,8 @@ export const getReviews = (userId: number) =>
   API.get(`/members/${userId}/reviews`);
 
 /** 멤버 정보 조회 */
-export const getMember = (userId: number) => API.get(`/members/${userId}/info`);
+export const getMember = (userId: number) =>
+  API.get(`/members/${userId}/info`).then((res) => res.data);
 
 /** 닉네임 수정 */
 export const updateNickname = (nickName: string) => {

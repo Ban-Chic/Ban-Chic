@@ -43,10 +43,6 @@ function MyPage() {
     useUpdateNickname.mutate(nickname);
   };
 
-  // 로딩 화면
-  if (isLoading) return <>Loading</>;
-  if (isError) return <>{error.message}</>;
-
   // 이미지 제출
   const subsub = () => {
     if (files) {
@@ -55,6 +51,10 @@ function MyPage() {
       });
     }
   };
+
+  // 로딩 화면
+  if (isLoading) return <>Loading</>;
+  if (isError) return <>{error.message}</>;
 
   return (
     <SMypageContainer>
@@ -65,7 +65,7 @@ function MyPage() {
         <SBlock>
           <SFlexCenter>
             <SSubTitle>내 정보</SSubTitle>
-            <SProfile $imageurl={data.data.image} />
+            <SProfile $imageurl={data.data?.image} />
             <input
               type="file"
               id="profileImg"
@@ -78,8 +78,8 @@ function MyPage() {
             <button type="submit" onClick={subsub}>
               제출
             </button>
-            {data.data.nickname && <STitle>{data.data.nickname}</STitle>}
-            {data.data.email && <SBody1>{data.data.email}</SBody1>}
+            {data.data.nickname && <STitle>{data.data?.nickname}</STitle>}
+            {data.data.email && <SBody1>{data.data?.email}</SBody1>}
           </SFlexCenter>
         </SBlock>
         <SBlock>
@@ -110,13 +110,14 @@ function MyPage() {
             closeModal={closeModal}
             actionModal={updateNicknameFunction}
             title="닉네임 수정하기"
-            alert={data.data.nickname}
+            alert={data.data?.nickname}
           />
         )}
       </SMyPageGrid>
     </SMypageContainer>
   );
 }
+
 const SProfile = styled.div<{ $imageurl: string }>`
   width: 200px;
   height: 200px;
