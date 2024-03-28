@@ -30,6 +30,11 @@ public class NaverInfoResponse implements OAuthInfoResponse {
     }
 
     @Override
+    public String getGender() {
+        return response.getNickname();
+    }
+
+    @Override
     public OAuthProvider getOAuthProvider() {
         return OAuthProvider.NAVER;
     }

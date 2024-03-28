@@ -25,6 +25,7 @@ public class Member extends BaseEntity {
     private String nickname;
     @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
+    private String gender;
     private String image;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
