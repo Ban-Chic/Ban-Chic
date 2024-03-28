@@ -20,7 +20,6 @@ function MainPage() {
               <SImgOne src="/logo_green.png" alt="perfume_square" />
             </SImgGroup>
           </SFisrtLoad>
-
           <SH1Cascade>
             <SDivKumarWhite>Just Like That</SDivKumarWhite>
           </SH1Cascade>
@@ -48,8 +47,7 @@ function MainPage() {
             </SH2Group>
           </SBottomSection>
         </SDiv2Container>
-        <SDiv3Container>
-        </SDiv3Container>
+        <SDiv3Container></SDiv3Container>
         <SDiv4Container></SDiv4Container>
       </main>
     </>
@@ -226,6 +224,5 @@ const SMiddleSquare = styled.img`
   width: 150px;
   z-index: 3;
 `;
-
 
 export default MainPage;

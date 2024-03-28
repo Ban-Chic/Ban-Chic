@@ -31,10 +31,12 @@ export const getRecommend = () => API.get("/recommend/top");
 export const getPerfumeList = () => API.get("/perfumes");
 
 /** 향수 좋아요 */
-export const postLike = (perfumeId: number) => API.post(`/heart/${perfumeId}`);
+export const postLike = (perfumeId: string) =>
+  API.post(`/heart/${perfumeId}`);
+
 
 /** 향수 리뷰 목록 조회 */
-export const getPerfumeReviews = (perfumeId: number) =>
+export const getPerfumeReviews = (perfumeId: string) =>
   API.get(`/perfumes/${perfumeId}/reviews`);
 
 // 리뷰

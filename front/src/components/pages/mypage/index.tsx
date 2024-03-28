@@ -71,7 +71,6 @@ function MyPage() {
               id="profileImg"
               accept="iamge/*"
               onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-                console.log(event.target.files);
                 setFiles(event?.target?.files);
               }}
             />

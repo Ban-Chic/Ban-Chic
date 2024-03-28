@@ -20,6 +20,7 @@ function GNB() {
       </SLink>
       <SLink to="/perfumes/1">PerfumeDetail</SLink>
       <SLink to="/mypage">MyPage</SLink>
+      {/* <SLink to="/perfumes/1/reviews">리뷰더보기</SLink> */}
       <Example/>
     </SHeaderContainer>
   );
