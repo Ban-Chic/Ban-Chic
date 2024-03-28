@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import NaverMap from "../../atoms/navermap/NaverMap";
+import KakaoMap from "../../atoms/kakaomap/KakaoMap";
 
 function MapPage() {
   return (
     <>
       <SDiv>
-        <NaverMap />
+        <KakaoMap />
       </SDiv>
     </>
   );
