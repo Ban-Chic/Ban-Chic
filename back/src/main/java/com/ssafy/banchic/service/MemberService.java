@@ -4,7 +4,6 @@ import com.ssafy.banchic.domain.dto.request.PersuitReq;
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
 import com.ssafy.banchic.domain.dto.response.MemberNicknameRes;
-import com.ssafy.banchic.domain.dto.response.RecommRes;
 import com.ssafy.banchic.domain.dto.response.PerfumeOverviewRes;
 import com.ssafy.banchic.domain.dto.response.ReviewRes;
 import com.ssafy.banchic.domain.entity.Heart;
@@ -135,7 +134,7 @@ public class MemberService {
         return imgUrl;
     }
 
-    public RecommRes survey(PersuitReq req, HttpServletRequest httpServletRequest) {
+    public List<PerfumeOverviewRes> survey(PersuitReq req, HttpServletRequest httpServletRequest) {
         Member member = getMemberFromAccessToken(httpServletRequest);
 
         String url = "http://j10b109.p.ssafy.io:9876/api/recommend";
@@ -189,7 +188,20 @@ public class MemberService {
             recommendRepository.flush();
         }
         recommendRepository.save(recommend);
-        return RecommRes.from(recommend);
+
+        List<PerfumeOverviewRes> recommList = new ArrayList<>();
+        recommList.add(findById(recommend.getOne()));
+        recommList.add(findById(recommend.getTwo()));
+        recommList.add(findById(recommend.getThree()));
+        recommList.add(findById(recommend.getFour()));
+        recommList.add(findById(recommend.getFive()));
+        recommList.add(findById(recommend.getSix()));
+        recommList.add(findById(recommend.getSeven()));
+        recommList.add(findById(recommend.getEight()));
+        recommList.add(findById(recommend.getNine()));
+        recommList.add(findById(recommend.getTen()));
+
+        return recommList;
     }
 
     @Getter
