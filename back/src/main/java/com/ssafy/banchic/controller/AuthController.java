@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-@Tag(name = "Login API", description = "로그인 관련 API")
+@Tag(name = "Auth API", description = "인증 관련 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")

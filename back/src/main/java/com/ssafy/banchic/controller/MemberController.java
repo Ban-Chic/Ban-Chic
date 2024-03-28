@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Tag(name = "Member", description = "Member 관련 API 입니다.")
+@Tag(name = "Member", description = "Member 관련 API")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/members")

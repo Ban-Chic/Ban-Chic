@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Heart", description = "좋아요 관련 API 입니다.")
+@Tag(name = "Heart", description = "좋아요 관련 API")
 @RestController
 @Slf4j
 @RequestMapping("/perfumes")
