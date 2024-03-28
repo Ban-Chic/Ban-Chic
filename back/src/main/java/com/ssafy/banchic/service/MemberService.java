@@ -1,17 +1,21 @@
 package com.ssafy.banchic.service;
 
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
-import com.ssafy.banchic.domain.dto.response.MemberHeartRes;
+import com.ssafy.banchic.domain.dto.response.PerfumeOverviewRes;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
 import com.ssafy.banchic.domain.dto.response.MemberNicknameRes;
+import com.ssafy.banchic.domain.dto.response.ReviewRes;
+import com.ssafy.banchic.domain.dto.response.perfume.PerfumeRes;
 import com.ssafy.banchic.domain.entity.Heart;
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.entity.Perfume;
+import com.ssafy.banchic.domain.entity.Review;
 import com.ssafy.banchic.exception.CustomException;
 import com.ssafy.banchic.exception.ErrorCode;
 import com.ssafy.banchic.repository.HeartRepository;
 import com.ssafy.banchic.repository.MemberRepository;
 import com.ssafy.banchic.repository.PerfumeRepository;
+import com.ssafy.banchic.repository.PerfumeReviewRepository;
 import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -22,8 +26,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -35,26 +40,37 @@ public class MemberService {
     private final PerfumeRepository perfumeRepository;
     private final HeartRepository heartRepository;
     private final FileUploadService fileUploadService;
+    private final PerfumeReviewRepository perfumeReviewRepository;
     private final TokenProvider tokenProvider;
 
-    public List<MemberHeartRes> getMemberHeart(Long memberId, HttpServletRequest httpServletRequest) {
+    public List<ReviewRes> getMemberReview(Long memberId, HttpServletRequest httpServletRequest) {
+        Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
+
+        if (!memberFromAccessToken.getId().equals(memberId)) {
+            throw new CustomException(ErrorCode.NOT_FOUND_ID);
+        }
+
+        List<Review> findMemberReviews = perfumeReviewRepository.findByMemberId(memberId);
+
+        return findMemberReviews
+                .stream()
+                .map(ReviewRes::from)
+                .toList();
+
+    }
+
+    public List<PerfumeOverviewRes> getMemberHeart(Long memberId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
         if(!memberFromAccessToken.getId().equals(memberId)) {
             throw new CustomException(ErrorCode.NOT_FOUND_ID);
         }
 
-        List<Perfume> heartPerfumes = getPerfumesByMemberId(memberId);
-        List<MemberHeartRes> perfumeResList = new ArrayList<>();
-        for(Perfume p : heartPerfumes) {
-            MemberHeartRes perfume = MemberHeartRes.builder()
-                    .id(p.getId())
-                    .perfumeName(p.getPerfumeName())
-                    .perfumeImg(p.getPerfumeImg())
-                    .build();
-            perfumeResList.add(perfume);
-        }
-        return perfumeResList;
+        List<Heart> memberHearts = heartRepository.findByMemberId(memberId);
+
+        return memberHearts.stream()
+                .map(e -> PerfumeOverviewRes.from(e.getPerfume()))
+                .toList();
     }
 
     public MemberInfoRes getMemberInfo(Long memberId, HttpServletRequest httpServletRequest) {
@@ -117,7 +133,7 @@ public class MemberService {
             log.info("perfume : {}", heart.getPerfume().getId()); // 향수 아이디 뽑고
             Perfume findPerfume = perfumeRepository.findById(heart.getPerfume().getId())
                     .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
-            log.info("perfume name : {}", findPerfume);
+            log.info("perfume name : {}", findPerfume.getPerfumeName());
             perfumes.add(findPerfume);
         }
 

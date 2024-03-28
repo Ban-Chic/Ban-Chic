@@ -28,12 +28,10 @@ public class HeartController {
          * 2. 확인된 토큰에 대해서 디코딩을 통해서 memberId의 값을 꺼내옵니다.
          * 3. 꺼내온 값을 통해서, 맴버 아이디와 향수 아이디를 통해서 좋아요 추가 및 삭제를 진행
          */
-        heartService.addHeart(perfumeId, httpServletRequest);
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("좋아요가 정상적으로 작동중입니다.")
-                .data(true)
+                .data(heartService.addHeart(perfumeId, httpServletRequest))
                 .build());
-
     }
 
     @GetMapping("/{perfumeId}/hearts")

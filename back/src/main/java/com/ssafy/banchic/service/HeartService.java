@@ -25,7 +25,7 @@ public class HeartService {
     private final TokenProvider tokenProvider;
 
     @Transactional
-    public void addHeart(Long perfumeId, HttpServletRequest httpServletRequest) {
+    public boolean addHeart(Long perfumeId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
         Perfume findPerfume = perfumeRepository.findById(perfumeId)
@@ -35,10 +35,12 @@ public class HeartService {
             // 값이 없으면 좋아요를 추가합니다.
             findPerfume.increaseHeart();
             heartRepository.save(new Heart(memberFromAccessToken, findPerfume));
+            return true;
             // 외래키로 member와 perfume을 묶어서 객체로 저장한다.
         } else {
             findPerfume.decreaseHeartCnt();
             heartRepository.deleteByMemberAndPerfume(memberFromAccessToken, findPerfume);
+            return false;
         }
 
     }
