@@ -30,7 +30,7 @@ public class PerfumeController {
     private final PerfumeReviewService perfumeReviewService;
 
     @GetMapping("/{perfumeId}")
-    public ResponseEntity<CommonResponse> getPerfume(@PathVariable Long perfumeId) {
+    public ResponseEntity<CommonResponse> getPerfume(@PathVariable Integer perfumeId) {
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("향수 정보 조회")
                 .data(perfumeService.getPerfume(perfumeId))
@@ -39,7 +39,7 @@ public class PerfumeController {
 
     @GetMapping("/{perfumeId}/reviews")
     public ResponseEntity<CommonResponse> getReviews(
-        @PathVariable Long perfumeId,
+        @PathVariable Integer perfumeId,
         @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 10) Pageable pageable) {
         return ResponseEntity.ok(CommonResponse.builder()
             .message("리뷰 목록 조회")
@@ -49,7 +49,7 @@ public class PerfumeController {
 
     @PostMapping(value = "/{perfumeId}/reviews")
     public ResponseEntity<CommonResponse> createReview(
-        @PathVariable Long perfumeId,
+        @PathVariable Integer perfumeId,
         @RequestPart(value = "form") ReviewReq reviewReq,
         @RequestPart(value = "file", required = false) MultipartFile file,
         HttpServletRequest httpServletRequest) {
@@ -61,7 +61,7 @@ public class PerfumeController {
 
     @PutMapping(value = "/{perfumeId}/reviews/{reviewId}")
     public ResponseEntity<CommonResponse> updateReview(
-        @PathVariable Long perfumeId,
+        @PathVariable Integer perfumeId,
         @PathVariable Long reviewId,
         @RequestBody ReviewReq reviewReq,
         HttpServletRequest httpServletRequest) {
@@ -73,7 +73,7 @@ public class PerfumeController {
 
     @DeleteMapping(value = "/{perfumeId}/reviews/{reviewId}")
     public ResponseEntity<CommonResponse> deleteReview(
-        @PathVariable Long perfumeId,
+        @PathVariable Integer perfumeId,
         @PathVariable Long reviewId,
         HttpServletRequest httpServletRequest) {
         perfumeReviewService.delete(perfumeId, reviewId, httpServletRequest);

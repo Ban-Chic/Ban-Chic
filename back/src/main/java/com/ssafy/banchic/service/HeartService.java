@@ -14,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class HeartService {
@@ -25,7 +23,7 @@ public class HeartService {
     private final TokenProvider tokenProvider;
 
     @Transactional
-    public boolean addHeart(Long perfumeId, HttpServletRequest httpServletRequest) {
+    public boolean addHeart(Integer perfumeId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
         Perfume findPerfume = perfumeRepository.findById(perfumeId)
@@ -45,7 +43,7 @@ public class HeartService {
 
     }
 
-    public boolean checkHeart(Long perfumeId, HttpServletRequest httpServletRequest) {
+    public boolean checkHeart(Integer perfumeId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
         Perfume perfume = perfumeRepository.findById(perfumeId)

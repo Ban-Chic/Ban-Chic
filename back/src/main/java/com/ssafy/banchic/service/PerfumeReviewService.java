@@ -31,14 +31,14 @@ public class PerfumeReviewService {
     private final TokenProvider tokenProvider;
 
     @Transactional(readOnly = true)
-    public Page<ReviewRes> getList(Long perfumeId, Pageable pageable) {
+    public Page<ReviewRes> getList(Integer perfumeId, Pageable pageable) {
         Perfume perfume = perfumeRepository.findById(perfumeId)
             .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
         Page<Review> reviews = perfumeReviewRepository.getReviewsByPerfume(perfume, pageable);
         return reviews.map(ReviewRes::from);
     }
 
-    public ReviewRes create(Long perfumeId, ReviewReq reviewReq, MultipartFile file,HttpServletRequest httpServletRequest) {
+    public ReviewRes create(Integer perfumeId, ReviewReq reviewReq, MultipartFile file,HttpServletRequest httpServletRequest) {
         Perfume perfume = perfumeRepository.findById(perfumeId)
             .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
 
@@ -56,7 +56,7 @@ public class PerfumeReviewService {
     }
 
     public ReviewRes update(
-        Long perfumeId, Long reviewId, ReviewReq reviewReq, HttpServletRequest httpServletRequest) {
+        Integer perfumeId, Long reviewId, ReviewReq reviewReq, HttpServletRequest httpServletRequest) {
         Review review = perfumeReviewRepository.findById(reviewId)
             .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
         Member member = getMemberFromAccessToken(httpServletRequest);
@@ -76,7 +76,7 @@ public class PerfumeReviewService {
     }
 
     public void delete(
-        Long perfumeId, Long reviewId, HttpServletRequest httpServletRequest) {
+        Integer perfumeId, Long reviewId, HttpServletRequest httpServletRequest) {
         Review review = perfumeReviewRepository.findById(reviewId)
             .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
         Member member = getMemberFromAccessToken(httpServletRequest);

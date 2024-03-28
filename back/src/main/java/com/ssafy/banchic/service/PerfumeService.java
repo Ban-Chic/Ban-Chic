@@ -14,7 +14,7 @@ public class PerfumeService {
 
     private final PerfumeRepository perfumeRepository;
 
-    public PerfumeRes getPerfume(Long perfumeId) {
+    public PerfumeRes getPerfume(int perfumeId) {
         Perfume perfume = perfumeRepository.findById(perfumeId)
             .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
 
