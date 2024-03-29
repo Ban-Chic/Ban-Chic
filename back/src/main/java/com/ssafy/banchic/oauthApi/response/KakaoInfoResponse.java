@@ -24,7 +24,7 @@ public class KakaoInfoResponse implements OAuthInfoResponse {
 
     @Override
     public String getGender() {
-        return kakaoAccount.getEmail();
+        return kakaoAccount.gender;
     }
 
     @Override
@@ -37,6 +37,7 @@ public class KakaoInfoResponse implements OAuthInfoResponse {
     static class KakaoAccount {
         private KakaoProfile profile;
         private String email;
+        private String gender;
     }
 
     @Getter

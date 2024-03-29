@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 @Service
 @RequiredArgsConstructor
@@ -27,12 +28,15 @@ public class CsvDataService {
 
     @Transactional
     public void importCsvData(String csvFilePath) {
-        try (CSVReader reader = new CSVReader(new FileReader(csvFilePath))) {
+        try (CSVReader reader = new CSVReader(new FileReader(csvFilePath, Charset.forName("EUC-KR")));) {
             String[] line;
             int idx = 0;
             while ((line = reader.readNext()) != null) {
-                System.out.println(line.length);
+//                System.out.println(line.length);
+                System.out.println(idx);
                 String.join(", ", line);
+//                System.out.println(line[39]);
+
                 if (idx == 0) {
                     idx++;
                     continue;
@@ -44,7 +48,8 @@ public class CsvDataService {
                     }
 
 
-                    // 최대 열 : 39
+                    // 최대 열 : 40
+
                     // price entity -> [34 ~ 38]
                     Price price = Price.builder()
                             .wayOverpriced(Integer.parseInt(line[34]))
@@ -128,6 +133,7 @@ public class CsvDataService {
                             .longevity(longevity)
                             .gender(gender)
                             .price(price)
+                            .koreanName(line[39])
                             .build();
 
                     perfumeRepository.save(perfume);
