@@ -1,4 +1,8 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+// 페이지 URL
+import Page_Url from "./Url";
 
 //레이아웃
 import Layouts from "../layouts";
@@ -11,29 +15,54 @@ import PerfumeDetailPage from "../components/pages/perfumeDetail";
 import MainSample from "../components/pages/mainSample/mainSample";
 import GPTSample from "../components/molecules/gptApi/gptSample";
 import RecommendPage from "../components/pages/recommend";
-import SurveyPage from "../components/pages/survey";
+import SurveySelectPage from "../components/pages/survey";
 import NaverCallback from "../components/pages/login/NaverCallback";
 import KakaoCallback from "../components/pages/login/KakaoCallback";
 import LoginPage from "../components/pages/login";
 import MapPage from "../components/pages/map";
+import SurveyPage from "../components/pages/survey/select";
 
 function Router() {
+  const location = useLocation();
   return (
-    <Routes>
-      <Route element={<Layouts />} errorElement={<ErrorPage />}>
-        <Route path="/" element={<MainPage />}></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/perfumes/:perfumeId" element={<PerfumeDetailPage />}></Route>
-        <Route path="/mainSample" element={<MainSample />}></Route>
-        <Route path="/gptSample" element={<GPTSample />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/recommend" element={<RecommendPage />}></Route>
-        <Route path="/survey" element={<SurveyPage />}></Route>
-        <Route path="/map" element={<MapPage />}></Route>
-      </Route>
-      <Route path="/naver/callback" element={<NaverCallback />}></Route>
-      <Route path="/kakao/callback" element={<KakaoCallback />}></Route>
-    </Routes>
+    <AnimatePresence>
+      <Routes location={location} key={location.pathname}>
+        <Route element={<Layouts />} errorElement={<ErrorPage />}>
+          <Route path={Page_Url.Main} element={<MainPage />}></Route>
+          <Route
+            path={Page_Url.PerfumeDetail + ":perfumeId"}
+            element={<PerfumeDetailPage />}
+          ></Route>
+          <Route path="/mainSample" element={<MainSample />}></Route>
+          <Route path="/gptSample" element={<GPTSample />}></Route>
+          <Route path={Page_Url.Login} element={<LoginPage />}></Route>
+          <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
+          <Route path={Page_Url.Map} element={<MapPage />}></Route>
+        </Route>
+
+        <Route path={Page_Url.My} element={<MyPage />}></Route>
+        <Route
+          path={Page_Url.NaverCallback}
+          element={<NaverCallback />}
+        ></Route>
+        <Route
+          path={Page_Url.KakaoCallback}
+          element={<KakaoCallback />}
+        ></Route>
+        <Route path={Page_Url.Survey} element={<SurveySelectPage />}></Route>
+        <Route element={<Layouts />} errorElement={<ErrorPage />}>
+          <Route
+            path={Page_Url.SurveyImage}
+            element={<SurveySelectPage />}
+          ></Route>
+          <Route path={Page_Url.SurveySelect} element={<SurveyPage />}></Route>
+          <Route
+            path={Page_Url.SurveySwipe}
+            element={<SurveySelectPage />}
+          ></Route>
+        </Route>
+      </Routes>
+    </AnimatePresence>
   );
 }
 
