@@ -39,6 +39,7 @@ public class Perfume {
     private int bestRate;
     private int vote;
     private float rate;
+    private String koreanName;
 
     // 향수 조회수
     @Builder.Default
