@@ -4,8 +4,8 @@ import com.ssafy.banchic.domain.dto.request.PersuitReq;
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
 import com.ssafy.banchic.domain.dto.response.MemberNicknameRes;
+import com.ssafy.banchic.domain.dto.response.MemberReviewRes;
 import com.ssafy.banchic.domain.dto.response.PerfumeOverviewRes;
-import com.ssafy.banchic.domain.dto.response.ReviewRes;
 import com.ssafy.banchic.domain.entity.Heart;
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.entity.Perfume;
@@ -17,9 +17,9 @@ import com.ssafy.banchic.exception.ErrorCode;
 import com.ssafy.banchic.repository.HeartRepository;
 import com.ssafy.banchic.repository.MemberRepository;
 import com.ssafy.banchic.repository.PerfumeRepository;
+import com.ssafy.banchic.repository.PerfumeReviewRepository;
 import com.ssafy.banchic.repository.PersuitRepository;
 import com.ssafy.banchic.repository.RecommendRepository;
-import com.ssafy.banchic.repository.PerfumeReviewRepository;
 import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -32,7 +32,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,7 +52,7 @@ public class MemberService {
     private final RestTemplate restTemplate;
     private final TokenProvider tokenProvider;
 
-    public List<ReviewRes> getMemberReview(Long memberId, HttpServletRequest httpServletRequest) {
+    public List<MemberReviewRes> getMemberReview(Long memberId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
         if (!memberFromAccessToken.getId().equals(memberId)) {
@@ -64,7 +63,7 @@ public class MemberService {
 
         return findMemberReviews
                 .stream()
-                .map(ReviewRes::from)
+                .map(MemberReviewRes::from)
                 .toList();
     }
 

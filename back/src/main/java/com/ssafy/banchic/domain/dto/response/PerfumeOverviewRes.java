@@ -12,7 +12,6 @@ public class PerfumeOverviewRes {
     private String perfumeName;
     private String perfumeImg;
     private String brandName;
-    private int year;
     private String accords;
 
     public static PerfumeOverviewRes from(Perfume perfume) {
@@ -21,7 +20,6 @@ public class PerfumeOverviewRes {
             .perfumeName(perfume.getPerfumeName())
             .perfumeImg(perfume.getPerfumeImg())
             .brandName(perfume.getBrandName())
-            .year(perfume.getYear())
             .accords(perfume.getAccords())
             .build();
     }
