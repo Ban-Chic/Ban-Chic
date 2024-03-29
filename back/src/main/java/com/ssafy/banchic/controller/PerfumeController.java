@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,8 +75,7 @@ public class PerfumeController {
             responseCode = "200",
             description = "향수에 대한 리뷰 작성이 성공하였습니다."
     )
-    @PostMapping(value = "/{perfumeId}/reviews",
-        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.IMAGE_PNG_VALUE})
+    @PostMapping(value = "/{perfumeId}/reviews")
     public ResponseEntity<CommonResponse> createReview(
         @PathVariable Integer perfumeId,
         @RequestPart(value = "form") ReviewReq reviewReq,
