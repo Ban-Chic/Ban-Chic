@@ -169,4 +169,20 @@ public class MemberController {
             .build(), HttpStatus.OK);
     }
 
+    @Operation(
+        summary = "추구미 타입 조회",
+        description = "멤버가 선택한 추구미 타입을 조회합니다."
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "추구미 타입 조회에 성공했습니다."
+    )
+    @GetMapping("/persuit")
+    public ResponseEntity<CommonResponse> getPersuit (HttpServletRequest httpServletRequest) {
+        return new ResponseEntity<>(CommonResponse.builder()
+            .message("추구미 타입 조회 완료")
+            .data(memberService.getPersuit(httpServletRequest))
+            .build(), HttpStatus.OK);
+    }
+
 }
