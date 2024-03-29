@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import theme from "../../../styles/Theme";
 
 interface Props {
   season: string;
@@ -59,7 +60,6 @@ function RadarChartContainer(Props: Props) {
   return (
     <>
       <SContainer>
-        <h1>RadarChart</h1>
         <SDiv>
           <RadarChart
             width={300}
@@ -69,12 +69,11 @@ function RadarChartContainer(Props: Props) {
             outerRadius="80%"
             data={data}
             margin={{ top: 15, bottom: 0 }}
-            >
-            <PolarGrid gridType="circle"/>
+          >
+            <PolarGrid gridType="circle" />
             <PolarAngleAxis dataKey="subject" />
             <PolarRadiusAxis angle={30} domain={[0, 100]} />
             <Radar
-            
               name="Seasonality"
               dataKey="A"
               stroke="white"
@@ -84,6 +83,7 @@ function RadarChartContainer(Props: Props) {
               isAnimationActive={true}
               animationBegin={1}
               animationEasing="ease-in-out"
+              activeDots={true}
             />
             <Legend />
             <Tooltip />
@@ -96,9 +96,10 @@ function RadarChartContainer(Props: Props) {
 
 const SContainer = styled.div`
   padding: 10px;
-  `;
+`;
 
 const SDiv = styled.div`
+  ${theme.font.Body1};
   width: 100%;
   height: 100%;
   display: flex;

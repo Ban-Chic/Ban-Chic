@@ -1,18 +1,31 @@
 import styled from "styled-components";
 import theme from "../../../../styles/Theme";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Example from "../../sidebarFramer/example";
 import SidebarReal from "../../sidebarReal/sidebarReal";
 import { MenuToggle } from "../../../atoms/menuToggle/menuToggle";
 
 function GNB() {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleSide = () => {
-    setIsOpen(true);
+  const [isWidth, setIsWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // button 클릭 시 토글
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
     console.log(isOpen);
   };
-
   return (
     <SHeaderContainer>
       <SLink to="/">Ban:Chic</SLink>
@@ -22,10 +35,20 @@ function GNB() {
       <SLink to="/perfumes/1">PerfumeDetail</SLink>
       <SLink to="/mypage">MyPage</SLink>
       {/* <SLink to="/perfumes/1/reviews">리뷰더보기</SLink> */}
-      {/* <Example/> */}
-      {/* <SMenuButton role="button" onClick={toggleSide}>삼단바</SMenuButton>
-      <SidebarReal width={1500} isOpen={isOpen} setIsOpen={setIsOpen}>
-      </SidebarReal> */}
+      {/* <Example/>/ */}
+      {/* <SMenuButton role="button" onClick={toggleSide}>삼단바</SMenuButton> */}
+      <SidebarReal
+        width={isWidth}
+        isOpenCheck={isOpen}
+        setIsOpen={setIsOpen}
+      ></SidebarReal>
+      <SButton onClick={() => toggleMenu()}>
+        {isOpen ? (
+          <SImg src="/logo_yellow.png" alt="contact open button" />
+        ) : (
+          <SImg src="/logo_orange.png" alt="contact open button" />
+        )}
+      </SButton>
 
       {/* <MenuToggle toggle={() => toggleSide} /> */}
     </SHeaderContainer>
@@ -72,12 +95,12 @@ const MenuIcon = styled.div`
 
 const SButton = styled.button`
   position: absolute;
-  left: -100px;
-  top: 10px;
+  top:1em;
+  right:1em;
   width: 40px;
   height: 40px;
-  z-index: 1;
-  transition: 0.8s ease;
+  z-index: 99;
+  transition: 2s ease;
   border: 2px solid #202020;
   border-radius: 40px;
   overflow: hidden;

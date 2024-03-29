@@ -6,6 +6,8 @@ interface PerfumeData {
   perfumeImg: string;
   perfumeName: string;
   brandName: string;
+  notes: string;
+  data: object;
 }
 
 interface IReview {
@@ -41,25 +43,6 @@ export const getPerfumeReviews = (perfumeId: string) =>
 // 리뷰
 
 /** 리뷰 등록 */
-// export const postPerfumeReview = ({
-//   perfumeId,
-//   file,
-//   rate,
-//   content,
-// }: IReview) => {
-//   const formData = new FormData();
-//   formData.append("file", file);
-//   const data = { rate: rate, content: content };
-//   const uploadData = JSON.stringify(data);
-//   const blobData = new Blob([uploadData], { type: "application/json" });
-//   formData.append("form", blobData);
-
-//   console.log(blobData);
-//   console.log("FormData:", formData.get("form")); // FormData 내용 확인
-
-//   // ImgAPI를 사용하여 요청 보내기
-//   return ImgAPI.post(`/perfumes/${perfumeId}/reviews`, formData);
-// };
 export const postPerfumeReview = (
   perfumeId: string,
   file: File,
@@ -70,10 +53,10 @@ export const postPerfumeReview = (
   formData.append("file", file);
   const data = { rate: rate, content: content };
   const uploadData = JSON.stringify(data);
-  const blobData = new Blob([uploadData], { type: "application/json" });
-  formData.append("form", blobData);
+  // const blobData = new Blob([uploadData], { type: "application/json" });
+  formData.append("form", uploadData);
 
-  console.log(blobData);
+  console.log(uploadData);
   console.log("FormData:", formData.get("file")); // FormData 내용 확인
 
   // ImgAPI를 사용하여 요청 보내기
