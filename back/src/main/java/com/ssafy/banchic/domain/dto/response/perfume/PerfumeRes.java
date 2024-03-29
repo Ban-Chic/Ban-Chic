@@ -29,6 +29,7 @@ public class PerfumeRes {
     private GenderRes gender;
     private SeasonRes season;
     private int hearts;
+    private String koreanName;
 
     public static PerfumeRes from(Perfume perfume) {
         return PerfumeRes.builder()
@@ -48,6 +49,7 @@ public class PerfumeRes {
                 .gender(GenderRes.from(perfume.getGender()))
                 .season(SeasonRes.from(perfume.getSeason()))
                 .hearts(perfume.getHeartCnt())
+                .koreanName(perfume.getKoreanName())
                 .build();
     }
 

@@ -39,6 +39,7 @@ public class Perfume {
     private int bestRate;
     private int vote;
     private float rate;
+    private String koreanName;
 
     // 향수 조회수
     @Builder.Default
@@ -68,7 +69,7 @@ public class Perfume {
     private Season season;
 
     @OneToOne
-    @JoinColumn(name = "likeability_id")
+           @JoinColumn(name = "likeability_id")
     private Likeability likeability;
 
     @OneToMany(mappedBy = "perfume", cascade = CascadeType.REMOVE)
