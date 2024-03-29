@@ -4,7 +4,6 @@ import { SSubTitle } from "../../../styles/Font";
 import PursuitBeauty from "../../../utils/PursuitBeauty";
 import { motion } from "framer-motion";
 import useSurvey from "../../../hooks/survey/useSurvey";
-import API from "../../../api/Config";
 import { StyleRanges, Styles } from "../../../utils/PursuitStyleRanges";
 import { postSurvey } from "../../../api/Api";
 

@@ -30,8 +30,13 @@ export const getRecommend = () => API.get("/recommend/top");
 /** 향수 목록 조회 */
 export const getPerfumeList = () => API.get("/perfumes");
 
-/** 향수 좋아요 */
-export const postLike = (perfumeId: number) => API.post(`/heart/${perfumeId}`);
+/** 향수 좋아요 토글*/
+export const postLike = (perfumeId: string) =>
+  API.post(`/perfumes/${perfumeId}/hearts`).then((res) => res.data);
+
+/** 향수 좋아요 조회 */
+export const getLike = (perfumeId: string) =>
+  API.post(`/perfumes/${perfumeId}/hearts`).then((res) => res.data);
 
 /** 향수 리뷰 목록 조회 */
 export const getPerfumeReviews = (perfumeId: number) =>
@@ -74,11 +79,12 @@ export const getKakaoLogout = () => API.get("/auth/logout/kakao");
 // 멤버
 
 /** 좋아요 한 향수 목록 조회 */
-export const getLikes = (userId: number) => API.get(`/members/${userId}/likes`);
+export const getLikes = (userId: number) =>
+  API.get(`/members/${userId}/hearts`).then((res) => res.data);
 
 /** 작성한 리뷰 목록 조회 */
 export const getReviews = (userId: number) =>
-  API.get(`/members/${userId}/reviews`);
+  API.get(`/members/${userId}/reviews`).then((res) => res.data);
 
 /** 추천받은 향수 목록 조회 */
 export const getRecommendedPerfumeList = () => API.get("/members/recommend");
