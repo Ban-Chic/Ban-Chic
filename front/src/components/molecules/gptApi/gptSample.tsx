@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CallGPT } from "./gpt";
 import styled from "styled-components";
+import theme from "../../../styles/Theme";
 
 // interface PerfumeData{
 //   title: string;
@@ -36,8 +37,6 @@ function GPTSample(Props: Props) {
         perfume Name : ${Props.perfumeName}
         spices of perfume : ${Props.notes}
         `,
-        // perfume Name : L'Homme Lacoste Lacoste Fragrances , 
-        // spices of perfume : {"Top Notes": "Mandarin Orange, Rhubarb, Sweet Orange, Quince", "Middle Notes": "Ginger, Almond, Black Pepper, Jasmine", "Base Notes": "Vanilla, Woody Notes, Cedar, Amber, Musk"}
       });
       setData(JSON.parse(message));
     } catch (error) {
@@ -56,8 +55,8 @@ function GPTSample(Props: Props) {
         <SButton onClick={handleClickAPICall}>GPT가 말해주는 향수 설명</SButton>
         {/* <div>perfume_name: {data?.perfume_name}</div> */}
         {/* <div>promotional_copywriting: {data?.promotional_copywriting}</div> */}
-        <div>description: {data?.description}</div>
-        {/* <div>isLoading : {isLoading ? "loading.." : "fin"}</div> */}
+        <SDescription>description: {data?.description}</SDescription>
+        <div>isLoading : {isLoading ? "loading.." : "fin"}</div>
       </SContainer>
     </>
   );
@@ -65,10 +64,14 @@ function GPTSample(Props: Props) {
 
 const SContainer = styled.div`
   background-color: gray;
+  width: 250px;
 `;
 
 const SButton = styled.button`
   background-color: gray;
 `;
 
+const SDescription = styled.div`
+  ${theme.font.Body1}
+`;
 export default GPTSample;

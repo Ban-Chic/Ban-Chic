@@ -43,14 +43,6 @@ interface IReview {
 
 function CRUDTest() {
   //리뷰 등록
-  const [files, setFiles] = useState<FileList | null>();
-  const Review = {
-    perfumeId: 1,
-    content: "",
-    rate: 1,
-    file: File,
-  };
-
   const [board, setBoard] = useState({
     rate: 0,
     content: "",
@@ -118,7 +110,6 @@ function CRUDTest() {
         />
         <button
           onClick={() => {
-            console.log("이거임");
             console.log(reviewImg.file);
             postPerfumeReview("1", reviewImg.file, board.rate, board.content).catch(
               (error) => {

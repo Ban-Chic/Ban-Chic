@@ -1,4 +1,7 @@
-const SpriceImageUrl = {
+interface SpiceImageUrl {
+  [key: string]: string;
+}
+const SpiceImageUrl:SpiceImageUrl  = {
     Bergamot: `https://fimgs.net/mdimg/sastojci/m.75.jpg?1650660089`,
     Bigarade: `https://fimgs.net/mdimg/sastojci/m.1083.jpg?1613090511`,
     "Bitter Orange": `https://fimgs.net/mdimg/sastojci/m.79.jpg?1440725941`,
@@ -1467,5 +1470,5 @@ const SpriceImageUrl = {
     Yeast: `https://fimgs.net/mdimg/sastojci/m.1081.jpg?1612651288`,
   };
   
-  export default SpriceImageUrl;
+  export default SpiceImageUrl;
   

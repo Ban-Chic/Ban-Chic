@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import theme from "../../../styles/Theme";
 import ReviewInDetail from "../../molecules/review/reviewInDetail";
 import { SHeaderContainer } from "../../molecules/common/gnb";
-import SpriceImageUrl from "../../../utils/ImgUrl";
+import SpiceImageUrl from "../../../utils/ImgUrl";
 import GPTSample from "../../molecules/gptApi/gptSample";
 import {
   getPerfumeDetail,
@@ -30,11 +30,11 @@ interface Props {
     RadioNodeListing: number;
     bestRate: number;
     vote: number;
-    // notes: string;
+    notes: string;
     season: object;
-    // TopNotes: string[];
-    // MiddleNotes: string[];
-    // BottomNotes: string[];
+    TopNotes: string[];
+    MiddleNotes: string[];
+    BottomNotes: string[];
   } | null;
 }
 
@@ -42,7 +42,7 @@ function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<Props["data"]>(null);
-  // const [notes, setNotes] = useState<Props["data"]>(null);
+  const [notes, setNotes] = useState<Props["data"]>(null);
 
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const onClickToggleModal = useCallback(() => {
@@ -52,7 +52,9 @@ function PerfumeDetail() {
   useEffect(() => {
     getPerfumeDetail(perfumeId).then((data) => {
       setData(data.data);
-      // setNotes(JSON.parse(data.data.notes));
+      console.log("데이터입장", data.data);
+      setNotes(JSON.parse(data.data.data.notes));
+      console.log("데이터파싱후", notes);
     });
     getPerfumeReviews(perfumeId).then((response) => {
       console.log(response);
@@ -86,27 +88,32 @@ function PerfumeDetail() {
           )}
         </SBlock>
         <SBlock>
-          {/* <SNote>
-            <SNoteCate>Top Notes</SNoteCate>
-            {data && (
-              <NoteGroup notes={data.data.notes} noteName={"TopNotes"} />
-            )}
-          </SNote>
-          <SNote>
-            <SNoteCate>Middle Notes</SNoteCate>
-            {data && (
-              <NoteGroup notes={data.data.notes} noteName={"MiddleNotes"} />
-            )}
-          </SNote>
-          <SNote>
-            <SNoteCate>Base Notes</SNoteCate>
-            {data && (
-              <NoteGroup notes={data.data.notes} noteName={"BaseNotes"} />
-            )}
-          </SNote> */}
+          {data && notes["TopNotes"] && (
+            <>
+              <SNote>
+                <SNoteCate>Top Notes</SNoteCate>
+                <NoteGroup notes={data.data?.notes} noteName={"TopNotes"} />
+              </SNote>
+            </>
+          )}
+          {data && notes["MiddleNotes"] && (
+            <>
+              <SNote>
+                <SNoteCate>Middle Notes</SNoteCate>
+                <NoteGroup notes={data.data.notes} noteName={"MiddleNotes"} />
+              </SNote>
+            </>
+          )}
+          {data && notes["BaseNotes"] && (
+            <>
+              <SNote>
+                <SNoteCate>Base Notes</SNoteCate>
+                <NoteGroup notes={data.data.notes} noteName={"BaseNotes"} />
+              </SNote>
+            </>
+          )}
         </SBlock>
         <SBlock>
-          {/* <Link to="/perfumes/1/reviews">리뷰더보기</Link> */}
           <SParent
             layout
             isOpenCheck={isOpen}
@@ -122,10 +129,11 @@ function PerfumeDetail() {
         </SBlock>
         <SBlock>
           {data && <SPerfumeName> {data.data.perfumeName}</SPerfumeName>}
+          {data && <SPerfumeName> {data.data.koreanName}</SPerfumeName>}
         </SBlock>
       </SDetailContainer>
       <div>
-        <Link to="/perfumes/review/crud">CRUD Test</Link> | 
+        <Link to="/perfumes/review/crud">CRUD Test</Link> |
         <Link to="/perfumes/1/reviews"> Review Zone</Link> |
       </div>
     </>
@@ -191,6 +199,7 @@ const SBlock = styled.div`
   &:nth-child(6) {
     grid-column: 1 / span 2;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     &:hover {
       background-color: yellowgreen;
@@ -205,12 +214,12 @@ const SImg = styled.img`
 const SNote = styled.div``;
 
 const SNoteCate = styled.div`
-  font-size: 30px;
+  ${theme.font.Title};
   padding: 10px;
 `;
 
 const SPerfumeName = styled.div`
-  font-size: 30px;
+  ${theme.font.Title};
 `;
 
 const SLikeButton = styled.button`
@@ -221,8 +230,6 @@ const SLikeButton = styled.button`
 `;
 
 const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
-  /* width: 1200px;
-  height: 400px; */
   background: white;
   width: ${(props) => (props.isOpenCheck ? "45.9%" : "100%")};
   height: ${(props) => (props.isOpenCheck ? "86.5%" : "100%")};
@@ -233,26 +240,9 @@ const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
   z-index: 1;
   top: ${(props) => (props.isOpenCheck ? "9%" : "0%")};
   right: ${(props) => (props.isOpenCheck ? "16%" : "0%")};
-  /* inset: ${(props) => (props.isOpenCheck ? "0%" : "0%")}; */
-  /* transform: translate(0%, 0%); */
   background-color: darkgreen;
   color: black;
 `;
 
-const DialogButton = styled.button`
-  width: 160px;
-  height: 48px;
-  background-color: blueviolet;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 400;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-1px);
-  }
-`;
 
 export default PerfumeDetail;

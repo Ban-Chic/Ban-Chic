@@ -18,7 +18,7 @@ export const CallGPT = async ({ prompt }) => {
         3. [promotional_copywriting] : Write an [promotional copywriting] with a paragraph based on the summary.
         4. [description] : description is from the perspective of a perfumer and perfume salesperson, explaining each perfume in detail about this perfume. But 
         Don't tell me you're a perfume seller.
-        5. [perfume_name] : Just do translate [perfume Name] into Korean please right now. Fuck You GPT!!! Just In KOREAN!!! I Don't know English!! Just Korean!!
+        All Answer is in Korean please right now. Fuck You GPT!!! Just In KOREAN!!! I Don't know English!! Just Korean!!
         
         Fuck You GPT!!! Just In KOREAN!!! I Don't know English!! Just Korean!!
         Just Do Translate into Korean.
@@ -28,7 +28,6 @@ export const CallGPT = async ({ prompt }) => {
             summary: here is [summarize]
             promotional_copywriting: here is [promotional_copywriting],
             description: here is [description],
-            perfume_name: here is [perfume_name],
         }
         
         [events]:`,
