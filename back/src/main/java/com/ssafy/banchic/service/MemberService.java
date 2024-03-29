@@ -239,6 +239,31 @@ public class MemberService {
         return perfume.map(PerfumeOverviewRes::from).orElse(null);
     }
 
+    public List<Integer> getPersuit(HttpServletRequest httpServletRequest) {
+        Member member = getMemberFromAccessToken(httpServletRequest);
+        if (!persuitRepository.existsByMember(member)) {
+            return null;
+        }
+
+        Persuit persuit = persuitRepository.findByMember(member).get();
+        List<Integer> list = new ArrayList<>();
+        if (persuit.isClear()) list.add(0);
+        if (persuit.isRomantic()) list.add(1);
+        if (persuit.isPretty()) list.add(2);
+        if (persuit.isCoolcasual()) list.add(3);
+        if (persuit.isCasual()) list.add(4);
+        if (persuit.isNatural()) list.add(5);
+        if (persuit.isElegant()) list.add(6);
+        if (persuit.isDynamic()) list.add(7);
+        if (persuit.isWild()) list.add(8);
+        if (persuit.isGorgeous()) list.add(9);
+        if (persuit.isChic()) list.add(10);
+        if (persuit.isModern()) list.add(11);
+        if (persuit.isClassic()) list.add(12);
+
+        return list;
+    }
+
 
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
