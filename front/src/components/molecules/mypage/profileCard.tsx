@@ -17,13 +17,17 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
   return (
     <SFlexCenter>
       <SSubTitle>내 정보</SSubTitle>
-      <SProfile $imageurl={data.data?.image} />
+      <SProfile
+        $imageurl={
+          data.data?.image ? data?.data?.image : "public/defalutUser.png"
+        }
+      />
       <input type="file" id="profileImg" accept="image/*" onInput={onInput} />
       <button type="submit" onClick={updateProfileImage}>
         제출
       </button>
-      {data.data.nickname && <STitle>{data.data?.nickname}</STitle>}
-      {data.data.email && <SBody1>{data.data?.email}</SBody1>}
+      {data.data?.nickname && <STitle>{data?.data?.nickname}</STitle>}
+      {data.data?.email && <SBody1>{data?.data?.email}</SBody1>}
     </SFlexCenter>
   );
 }
@@ -43,6 +47,7 @@ const SProfile = styled.div<{ $imageurl: string }>`
   border-radius: 100px;
   background-color: var(--color-white);
   background-image: url(${(props) => props.$imageurl});
+  /* background-image: url("public/defalutUser.png"); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
