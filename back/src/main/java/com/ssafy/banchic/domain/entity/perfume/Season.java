@@ -1,11 +1,11 @@
 package com.ssafy.banchic.domain.entity.perfume;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.ssafy.banchic.domain.entity.Perfume;
+import com.ssafy.banchic.domain.entity.perfume.season.*;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.NavigableMap;
 
 @Entity
 @Getter
@@ -17,7 +17,7 @@ public class Season {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "season_id")
-    private Long id;
+    private int id;
 
     private float spring;
     private float summer;
@@ -25,5 +25,8 @@ public class Season {
     private float winter;
     private float day;
     private float night;
+
+    @OneToOne(mappedBy = "season")
+    private Perfume perfume;
 
 }

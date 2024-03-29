@@ -1,4 +1,4 @@
-package com.ssafy.banchic.config.dummy;
+package com.ssafy.banchic.config.dummy.service;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
