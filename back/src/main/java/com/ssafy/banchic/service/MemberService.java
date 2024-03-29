@@ -216,8 +216,10 @@ public class MemberService {
     public List<PerfumeOverviewRes> getRecommList(HttpServletRequest request) {
         Member member = getMemberFromAccessToken(request);
 
-        Recommend recommend = recommendRepository.findByMember(member)
-            .orElseThrow(() -> new CustomException(ErrorCode.RECOMM_NOT_EXIST));
+        Optional<Recommend> optionalRecommend = recommendRepository.findByMember(member);
+        if (optionalRecommend.isEmpty()) return null;
+
+        Recommend recommend = optionalRecommend.get();
 
         List<PerfumeOverviewRes> recommList = new ArrayList<>();
         recommList.add(findById(recommend.getOne()));
