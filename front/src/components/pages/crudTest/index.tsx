@@ -4,58 +4,62 @@ import theme from "../../../styles/Theme";
 import { getPerfumeReviews, postPerfumeReview } from "../../../api/Api";
 
 interface Props {
-    data: {
-      content: {
-        id: number;
-        rate: number;
-        content: string;
-        imgUrl: string;
-        member: {
-          email: string;
-          imageUrl: string;
-          nickname: string;
-        };
+  data: {
+    content: {
+      id: number;
+      rate: number;
+      content: string;
+      imgUrl: string;
+      member: {
+        email: string;
+        imageUrl: string;
+        nickname: string;
       };
-      pagealbe: object;
-      totalPages: number;
-      totalElements: number;
-      last: boolean;
-      size: number;
-      number: number;
-      sort: {
-        empty: boolean;
-        sorted: boolean;
-        unsorted: boolean;
-      };
-      numberOfElements: number;
-      first: boolean;
+    };
+    pagealbe: object;
+    totalPages: number;
+    totalElements: number;
+    last: boolean;
+    size: number;
+    number: number;
+    sort: {
       empty: boolean;
-    } | null;
-  }
+      sorted: boolean;
+      unsorted: boolean;
+    };
+    numberOfElements: number;
+    first: boolean;
+    empty: boolean;
+  } | null;
+}
 
 interface IReview {
   perfumeId: number;
   reviewId?: number;
   content: string;
   rate: number;
-  file: string;
+  file: File;
 }
 
 function CRUDTest() {
-    //리뷰 등록
+  //리뷰 등록
   const [files, setFiles] = useState<FileList | null>();
   const Review = {
     perfumeId: 1,
     content: "",
     rate: 1,
-    file: "",
+    file: File,
   };
 
   const [board, setBoard] = useState({
     rate: 0,
     content: "",
-    file: "",
+    // file: new File([], "", { type: "" }),
     pefumeId: 1,
+  });
+
+  const [reviewImg, setReviewImg] = useState({
+    file: File,
   });
   const onChange = (event: any) => {
     const { value, name } = event.target;
@@ -73,59 +77,74 @@ function CRUDTest() {
     console.log(board);
   };
 
+  const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, files } = event.target;
+    if (files) {
+      setReviewImg({
+        ...reviewImg,
+        [name]: files[0],
+      });
+    }
+  };
+
   //리뷰 조회
   const perfumeId = "1";
   const [data, setData] = useState<Props["data"]>(null);
   useEffect(() => {
-    getPerfumeReviews(perfumeId).then((response) => {
-      setData(response.data.data.content);
-    });
+    getPerfumeReviews(perfumeId)
+      .then((response) => {
+        setData(response.data.data.content);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
-  
+
   return (
     <>
-    <div>
-      <div>등록zone</div>
-      <span>content</span>
-      <SInput type="text" name="content" onChange={onChange} />
-      <span>rating</span>
-      <SInput type="number" name="rate" onChange={onChange} />
-      <span>perfumeId</span>
-      <SInput type="number" name="perfumeId" value="1" onChange={onChange} />
-      <input
-        type="file"
-        name="file"
-        accept="image/*"
-        onInput={onChange}
-      />
-      <button
-        onClick={() =>
-          postPerfumeReview({
-            perfumeId: 1,
-            file: board.file,
-            rate: board.rate,
-            content: board.content,
-          })
-        }
-      >
-        등록버튼
-      </button>
+      <div>
+        <div>등록zone</div>
+        <span>content</span>
+        <SInput type="text" name="content" onChange={onChange} />
+        <span>rating</span>
+        <SInput type="number" name="rate" onChange={onChange} />
+        <span>perfumeId</span>
+        <SInput type="number" name="perfumeId" value="1" onChange={onChange} />
+        <input
+          type="file"
+          name="file"
+          accept="image/*"
+          onInput={onChangeFile}
+        />
+        <button
+          onClick={() => {
+            console.log("이거임");
+            console.log(reviewImg.file);
+            postPerfumeReview("1", reviewImg.file, board.rate, board.content).catch(
+              (error) => {
+                console.log(error);
+              }
+            );
+          }}
+        >
+          등록버튼
+        </button>
       </div>
-        <div>조회 zone</div>
+      <div>조회 zone</div>
       <SContainer>
         {data &&
-        data.map((item, index: number) => (
-          <SDiv key={index}>
-            <img src={item.imgUrl} alt="" />
-            <div>
-              <p>{item.content}</p>
-            </div>
-            <div>
-              <img src={item.member.imgUrl} alt="" />
-              <p>{item.member.nickname}</p>
-            </div>
-          </SDiv>
-        ))}
+          data.map((item, index: number) => (
+            <SDiv key={index}>
+              <img src={item.imgUrl} alt="" />
+              <div>
+                <p>{item.content}</p>
+              </div>
+              <div>
+                <img src={item.member.imgUrl} alt="" />
+                <p>{item.member.nickname}</p>
+              </div>
+            </SDiv>
+          ))}
       </SContainer>
     </>
   );
@@ -136,13 +155,13 @@ const SInput = styled.input`
 `;
 
 const SDiv = styled.div`
-  width: 150px;  
+  width: 150px;
 `;
 
 const SContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
-background-color: gray;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: gray;
 `;
 
 export default CRUDTest;
