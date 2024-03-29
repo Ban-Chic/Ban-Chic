@@ -44,10 +44,15 @@ public class PerfumeReviewService {
 
         Member member = getMemberFromAccessToken(httpServletRequest);
 
+        String imgUrl = null;
+        if (file != null && !file.isEmpty()) {
+            imgUrl = fileUploadService.save("review/", file);
+        }
+
         Review review = Review.builder()
             .rate(reviewReq.getRate())
             .content(reviewReq.getContent())
-            .imgUrl(file.isEmpty() ? null : fileUploadService.save("review/", file))
+            .imgUrl(imgUrl)
             .perfume(perfume)
             .member(member)
             .build();
