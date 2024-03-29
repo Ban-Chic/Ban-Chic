@@ -260,6 +260,7 @@ public class MemberService {
         if (persuit.isChic()) list.add(10);
         if (persuit.isModern()) list.add(11);
         if (persuit.isClassic()) list.add(12);
+        if (persuit.isDandy()) list.add(13);
 
         return list;
     }
