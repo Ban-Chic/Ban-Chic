@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import theme from "../../../styles/Theme";
+import FrameSection from "../../atoms/framer/frameSection";
 
 function MainPage() {
   return (
@@ -8,45 +9,60 @@ function MainPage() {
         <SDivContainer>
           <SFisrtLoad>
             <div>
-              <h1>
+              <FrameSection>
                 <SDivKumarWhite>BaBaBA Ed:ge</SDivKumarWhite>
-              </h1>
-              <h1>
+              </FrameSection>
+              <FrameSection>
                 <SDivKumarWhite>Perfume —</SDivKumarWhite>
-              </h1>
+              </FrameSection>
             </div>
-            <SImgGroup>
-              <SImgOne src="/logo_yellow.png" alt="perfume_square" />
-              <SImgOne src="/logo_green.png" alt="perfume_square" />
-            </SImgGroup>
+            <FrameSection>
+              <SImgGroup>
+                <SImgOne src="/logo_yellow.png" alt="perfume_square" />
+                <SImgOne src="/logo_green.png" alt="perfume_square" />
+              </SImgGroup>
+            </FrameSection>
           </SFisrtLoad>
-          <SH1Cascade>
-            <SDivKumarWhite>Just Like That</SDivKumarWhite>
-          </SH1Cascade>
-          <SZIndex1>
-            <SImg src="/img_main.png" alt="perfume" />
-          </SZIndex1>
+          <FrameSection>
+            <SH1Cascade>
+              <SDivKumarWhite>Just Like That</SDivKumarWhite>
+            </SH1Cascade>
+          </FrameSection>
+
+          <FrameSection>
+            <SZIndex1>
+              <SImg src="/img_main.png" alt="perfume" />
+            </SZIndex1>
+          </FrameSection>
         </SDivContainer>
-        <SDiv2Container>
-          <SPContainer>
-            <SSpan>A PERFECT PERFUME WITH NOTHING TO ADD</SSpan>
-          </SPContainer>
-          <SMiddleSection>
-            <SImgFlower src="/main_flower_perfume.jpg" alt="" />
-            <SMiddleSquareGroup>
-              <SMiddleSquare src="/logo_orange.png" alt="" />
-              <SMiddleSquare src="/logo_black.png" alt="" />
-            </SMiddleSquareGroup>
-          </SMiddleSection>
-          <SBottomSection>
-            <SImgHand src="/main_hand_perfume.jpg" alt="" />
-            <SH2Group>
-              <SH2>From our </SH2>
-              <SH2>Orchards to</SH2>
-              <SH2>your Hands</SH2>
-            </SH2Group>
-          </SBottomSection>
-        </SDiv2Container>
+        <FrameSection>
+          <SDiv2Container>
+            <SPContainer>
+              <SSpan>A PERFECT PERFUME WITH NOTHING TO ADD</SSpan>
+            </SPContainer>
+            <SMiddleSection>
+              <SImgFlower src="/main_flower_perfume.jpg" alt="" />
+              <FrameSection>
+                <SMiddleSquareGroup>
+                  <SMiddleSquare src="/logo_orange.png" alt="" />
+                  <SMiddleSquare src="/logo_black.png" alt="" />
+                </SMiddleSquareGroup>
+              </FrameSection>
+            </SMiddleSection>
+            <SBottomSection>
+              <FrameSection>
+                <SImgHand src="/main_hand_perfume.jpg" alt="" />
+              </FrameSection>
+              <FrameSection>
+                <SH2Group>
+                  <SH2>From our </SH2>
+                  <SH2>Orchards to</SH2>
+                  <SH2>your Hands</SH2>
+                </SH2Group>
+              </FrameSection>
+            </SBottomSection>
+          </SDiv2Container>
+        </FrameSection>
         <SDiv3Container></SDiv3Container>
         <SDiv4Container></SDiv4Container>
       </main>

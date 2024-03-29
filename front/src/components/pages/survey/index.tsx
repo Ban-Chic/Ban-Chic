@@ -1,99 +1,63 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import theme from "../../../styles/Theme";
-import { SSubTitle } from "../../../styles/Font";
-import PursuitBeauty from "../../../utils/PursuitBeauty";
-import { motion } from "framer-motion";
 
-function SurveyPage() {
+function SurveySelectPage() {
+  // 상태를 문자열로 관리하여 현재 어떤 텍스트를 보여줄지 결정합니다.
+  const [currentText, setCurrentText] = useState("");
+
+  useEffect(() => {
+    // 초기 상태를 'Ready?'로 설정합니다.
+    setCurrentText("HI");
+
+    // 2초 후에 상태를 'Ready?Ready?Ready?Ready?Ready?'로 변경합니다.
+    const timer1 = setTimeout(() => {
+      setCurrentText("dundigi");
+
+      // 추가적으로 3초 후에 상태를 'START'로 변경합니다.
+      const timer2 = setTimeout(() => {
+        setCurrentText("perfume scam");
+      }, 2000);
+
+      return () => clearTimeout(timer2);
+    }, 1000);
+
+    return () => clearTimeout(timer1);
+  }, []);
+
   return (
-    <>
-      <SContainer>
-        <SSurveyContainer>
-          <SSubTitle>선택해주세요</SSubTitle>
-        </SSurveyContainer>
-        <SSubTitle>나의 추구미</SSubTitle>
-        <SPursuitBeautyContainer
-          variants={FContainer}
-          initial="hidden"
-          animate="visible"
+    <SContainer>
+      <AnimatePresence>
+        <FSTitle
+          key={currentText} // Key를 현재 텍스트로 설정하여 각 상태를 구분합니다.
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, type: "spring", stiffness: 100 }}
         >
-          {PursuitBeauty.map((item) => (
-            <SPursuitBlock to="" variants={FVariantitem}>
-              {item}
-            </SPursuitBlock>
-          ))}
-        </SPursuitBeautyContainer>
-      </SContainer>
-    </>
+          {currentText}
+        </FSTitle>
+      </AnimatePresence>
+    </SContainer>
   );
 }
 
-const SPursuitBlock = styled(motion(Link))`
-  background-color: blue;
+const FSTitle = styled(motion.div)`
+  ${theme.font.KumarOneOutline}
+  font-size: 24px;
+  position: relative;
+`;
+
+const SContainer = styled(motion.section)`
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  border-radius: 1em;
-  ${theme.styleBase.glassmorphism}
-  &:hover {
-    transition: all 0.2s;
-    transform: scale(1.05);
-  }
-`;
-
-const SPursuitBeautyContainer = styled(motion.section)`
-  width: 700px;
-  height: 500px;
-  display: grid;
-  gap: 1em;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 2.5em);
-  grid-auto-flow: row;
-
-  &:nth-child(1) {
-    grid-row: 1 / span 5;
-  }
-`;
-
-const SSurveyContainer = styled.figure`
-  width: 20em;
-  height: 5em;
-  border-radius: 0.5em;
-  ${theme.styleBase.glassmorphism}
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1em;
-`;
-
-const SContainer = styled.article`
-  width: 100%;
-  display: flex;
   align-items: center;
   flex-direction: column;
   padding: 1em;
   gap: 2em;
 `;
 
-const FContainer = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.1,
-      staggerChildren: 0.04,
-    },
-  },
-};
-
-const FVariantitem = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
-
-export default SurveyPage;
+export default SurveySelectPage;

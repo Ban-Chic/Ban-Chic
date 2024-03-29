@@ -32,6 +32,21 @@ const font = {
         font-weight: 400;
         font-style: normal;
       `,
+  PretendardRegular: `
+        font-family: Pretendard;
+        font-style: Regular;
+        font-weight: 400;
+      `,
+  PretendardLight: `
+        font-family: Pretendard;
+        font-style: Light;
+        font-weight: 300;
+      `,
+  PretendardSemiBold: `
+        font-family: Pretendard;
+        font-style: SemiBold;
+        font-weight: 600;
+      `,
 };
 
 export const SBody2 = styled.h1`
