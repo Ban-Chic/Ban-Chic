@@ -77,7 +77,7 @@ public class PerfumeController {
             description = "향수에 대한 리뷰 작성이 성공하였습니다."
     )
     @PostMapping(value = "/{perfumeId}/reviews",
-        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.IMAGE_PNG_VALUE})
     public ResponseEntity<CommonResponse> createReview(
         @PathVariable Integer perfumeId,
         @RequestPart(value = "form") ReviewReq reviewReq,
