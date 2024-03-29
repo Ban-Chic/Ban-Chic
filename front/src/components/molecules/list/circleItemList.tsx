@@ -20,8 +20,9 @@ function CircleItemList({ children, data }: IProps) {
       <SContainer>
         {children}
         <List>
-          {data.map((item) => (
+          {data.map((item, i) => (
             <CircleItem
+              key={i}
               url={"/perfumes/" + item.id}
               $imageUrl={item.perfumeImg}
             ></CircleItem>
