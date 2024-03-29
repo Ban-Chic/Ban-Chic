@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { MapContainer } from "./KakaoMap.styled";
 import LocationBtn from "./LocationBtn";
+import SearchPlaces from "./SearchPlaces";
 
 declare global {
   interface Window {
@@ -8,15 +9,10 @@ declare global {
   }
 }
 
-// 구현할 기능
-// 1. 닫기 가능한 커스텀 오버레이 제작
-// 2. 키워드로 장소 검색 -> 목록 표출
-// 3. 현재 위치로 이동 (V)
-
 function KakaoMap(): React.ReactElement {
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${import.meta.env.VITE_KAKAO_MAP_API_KEY}&autoload=false`;
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${import.meta.env.VITE_KAKAO_MAP_API_KEY}&autoload=false&libraries=services`;
     script.async = true;
     document.head.appendChild(script);
 
@@ -43,6 +39,16 @@ function KakaoMap(): React.ReactElement {
           zoomControl,
           window.kakao.maps.ControlPosition.RIGHT
         );
+
+        // make info window
+        window.kakao.infowindow = new window.kakao.maps.InfoWindow({
+          zIndex: 1,
+        });
+
+        navigator.geolocation.getCurrentPosition((data) => {
+          const position = [data.coords.latitude, data.coords.longitude];
+          window.kakao.obj.setCenter(new window.kakao.maps.LatLng(...position));
+        });
       });
     };
 
@@ -55,6 +61,7 @@ function KakaoMap(): React.ReactElement {
     <>
       <MapContainer id="map" />;
       <LocationBtn />
+      <SearchPlaces />
     </>
   );
 }

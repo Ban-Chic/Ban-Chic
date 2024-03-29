@@ -15,8 +15,39 @@ const SImg = styled.img`
 
   box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 `;
+
 const MapContainer = styled.div`
   height: 100%;
 `;
 
-export { SImg, MapContainer };
+const SWrap = styled.div`
+  position: absolute;
+  top: 53px;
+  left: 3px;
+  z-index: 2;
+
+  color: black;
+  background-color: white;
+
+  overflow-y: scroll;
+  max-height: 500px;
+`;
+
+const SForm = styled.form`
+  border-radius: 5px;
+  padding: 10px;
+
+  box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+
+  display: flex;
+  gap: 10px;
+`;
+
+const SList = styled.ul``;
+
+const SPlace = styled.li`
+  display: flex;
+  gap: 10px;
+`;
+
+export { SImg, MapContainer, SForm, SWrap, SList, SPlace };
