@@ -18,7 +18,7 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
     <SFlexCenter>
       <SSubTitle>내 정보</SSubTitle>
       <SProfile $imageurl={data.data?.image} />
-      <input type="file" id="profileImg" accept="iamge/*" onInput={onInput} />
+      <input type="file" id="profileImg" accept="image/*" onInput={onInput} />
       <button type="submit" onClick={updateProfileImage}>
         제출
       </button>
@@ -45,10 +45,11 @@ const SProfile = styled.div<{ $imageurl: string }>`
   background-image: url(${(props) => props.$imageurl});
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(0.5px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 5px solid #f2f2f2;
 `;
 
 export default ProfileCard;

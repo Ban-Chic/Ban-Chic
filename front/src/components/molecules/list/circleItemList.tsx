@@ -4,8 +4,9 @@ import List from "../../atoms/list";
 import { ReactNode } from "react";
 
 interface IPerfumeData {
-  perfumeId: number;
-  imageUrl: string;
+  id: number;
+  perfumeImg: string;
+  perfumeName: string;
 }
 
 interface IProps {
@@ -21,8 +22,8 @@ function CircleItemList({ children, data }: IProps) {
         <List>
           {data.map((item) => (
             <CircleItem
-              url={"/perfumes/" + item.perfumeId}
-              $imageUrl={item.imageUrl}
+              url={"/perfumes/" + item.id}
+              $imageUrl={item.perfumeImg}
             ></CircleItem>
           ))}
         </List>

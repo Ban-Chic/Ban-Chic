@@ -14,6 +14,7 @@ const SListContainer = styled.div`
   padding: 1em;
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 `;
 
 export default List;

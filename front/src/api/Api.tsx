@@ -80,6 +80,9 @@ export const getLikes = (userId: number) => API.get(`/members/${userId}/likes`);
 export const getReviews = (userId: number) =>
   API.get(`/members/${userId}/reviews`);
 
+/** 추천받은 향수 목록 조회 */
+export const getRecommendedPerfumeList = () => API.get("/members/recommend");
+
 /** 멤버 정보 조회 */
 export const getMember = (userId: number) =>
   API.get(`/members/${userId}/info`).then((res) => res.data);
