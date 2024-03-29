@@ -111,3 +111,6 @@ export const deleteMember = () =>
 
 export const postSurvey = (styles: object) =>
   API.post(`/members/survey`, styles);
+
+export const getPersuit = () =>
+  API.get(`/members/persuit`).then((res) => res.data);
