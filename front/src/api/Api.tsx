@@ -101,3 +101,10 @@ export const updateProfileImage = (file: File) => {
 /** 회원 탈퇴 */
 export const deleteMember = () =>
   API.delete(`/members/${localStorage.getItem("uid")}`);
+
+// 설문
+
+/** 설문 제출 */
+
+export const postSurvey = (styles: object) =>
+  API.post(`/members/survey`, styles);
