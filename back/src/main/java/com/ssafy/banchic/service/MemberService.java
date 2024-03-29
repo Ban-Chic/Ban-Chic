@@ -75,7 +75,7 @@ public class MemberService {
             throw new CustomException(ErrorCode.NOT_FOUND_ID);
         }
 
-        List<Heart> memberHearts = heartRepository.findByMemberId(memberId);
+        List<Heart> memberHearts = heartRepository.findByMemberIdOrderByCreatedAtDesc(memberId);
 
         return memberHearts.stream()
                 .map(e -> PerfumeOverviewRes.from(e.getPerfume()))
@@ -236,7 +236,7 @@ public class MemberService {
 
     private PerfumeOverviewRes findById(int id) {
         Optional<Perfume> perfume = perfumeRepository.findById(id);
-        return perfume.isPresent() ? PerfumeOverviewRes.from(perfume.get()) : null;
+        return perfume.map(PerfumeOverviewRes::from).orElse(null);
     }
 
 

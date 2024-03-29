@@ -13,5 +13,5 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
 
     boolean existsByMemberAndPerfume(Member member, Perfume perfume);
     void deleteByMemberAndPerfume(Member member, Perfume perfume);
-    List<Heart> findByMemberId(Long memberId);
+    List<Heart> findByMemberIdOrderByCreatedAtDesc(Long memberId);
 }
