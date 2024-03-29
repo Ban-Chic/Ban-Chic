@@ -12,8 +12,9 @@ interface IReview {
   perfumeId: number;
   reviewId?: number;
   content: string;
-  memberId: number;
-  rating: number;
+  rate: number;
+  file: string;
+  // imgUrl은 스트링 아니면 file
 }
 
 export const baseAPI = () => API.get("/");
@@ -31,9 +32,7 @@ export const getRecommend = () => API.get("/recommend/top");
 export const getPerfumeList = () => API.get("/perfumes");
 
 /** 향수 좋아요 */
-export const postLike = (perfumeId: string) =>
-  API.post(`/heart/${perfumeId}`);
-
+export const postLike = (perfumeId: string) => API.post(`/heart/${perfumeId}`);
 
 /** 향수 리뷰 목록 조회 */
 export const getPerfumeReviews = (perfumeId: string) =>
@@ -42,12 +41,51 @@ export const getPerfumeReviews = (perfumeId: string) =>
 // 리뷰
 
 /** 리뷰 등록 */
-export const postPerfumeReview = (review: IReview) =>
-  API.post(`/perfumes/${review.perfumeId}/reviews`);
+// export const postPerfumeReview = ({
+//   perfumeId,
+//   file,
+//   rate,
+//   content,
+// }: IReview) => {
+//   const formData = new FormData();
+//   formData.append("file", file);
+//   const data = { rate: rate, content: content };
+//   const uploadData = JSON.stringify(data);
+//   const blobData = new Blob([uploadData], { type: "application/json" });
+//   formData.append("form", blobData);
+
+//   console.log(blobData);
+//   console.log("FormData:", formData.get("form")); // FormData 내용 확인
+
+//   // ImgAPI를 사용하여 요청 보내기
+//   return ImgAPI.post(`/perfumes/${perfumeId}/reviews`, formData);
+// };
+export const postPerfumeReview = (
+  perfumeId: string,
+  file: File,
+  rate: number,
+  content: string
+) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const data = { rate: rate, content: content };
+  const uploadData = JSON.stringify(data);
+  const blobData = new Blob([uploadData], { type: "application/json" });
+  formData.append("form", blobData);
+
+  console.log(blobData);
+  console.log("FormData:", formData.get("file")); // FormData 내용 확인
+
+  // ImgAPI를 사용하여 요청 보내기
+  return ImgAPI.post(`/perfumes/${perfumeId}/reviews`, formData);
+};
 
 /** 리뷰 수정 */
-export const updatePerfumeReview = (review: IReview) =>
-  API.patch(`/perfumes/${review.perfumeId}/reviews/${review.reviewId}`);
+export const updatePerfumeReview = (
+  perfumeId: number,
+  reviewId: number,
+  newReview: object
+) => API.put(`/perfumes/${perfumeId}/reviews/${reviewId}`, newReview);
 
 /** 리뷰 삭제 */
 export const deletePerfumeReview = (perfumeId: number, reviewId: number) =>

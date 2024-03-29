@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getPerfumeReviews } from "../../../api/Api";
-import { useParams } from "react-router-dom";
+import { deletePerfumeReview, getPerfumeReviews } from "../../../api/Api";
+import { useNavigate, useParams } from "react-router-dom";
 import useIntersectionObserver from "./hook";
 
 interface Props {
@@ -34,11 +34,29 @@ interface Props {
   } | null;
 }
 
+interface item{
+  id: number;
+  rate: number;
+  content: string;
+  imgUrl: string;
+  member: {
+    email: string;
+    imageUrl: string;
+    nickname: string;
+  };
+}
+
 function ReviewPage() {
   const { perfumeId } = useParams() as { perfumeId: string };
   const [isLoaded, seetIsLoaded] = useState(false);
   const [itemIndex, setItemIndex] = useState(0);
   const [data, setData] = useState<Props["data"]>(null);
+
+  const navigate = useNavigate();
+
+  const navigateToModify = (perfumeId:number, item:item) =>{
+    navigate(`/perfumes/${perfumeId}/reviews/${item.id}`, {state:{content:item.content, rating:item.rate}});
+  }
 
   const testFetch = (delay = 1000) =>
     new Promise((response) => setTimeout(response, delay));
@@ -60,33 +78,38 @@ function ReviewPage() {
     }
   };
 
-  const {setTarget} =useIntersectionObserver({
-    root:null,
+  const { setTarget } = useIntersectionObserver({
+    root: null,
     rootMargin: "0px",
     threshold: 0.5,
     onIntersect,
   });
 
   return (
-    <SReivewContainer>
-      {/* <SEachReview> */}
-      {data &&
-        data.map((item, index: number) => (
-          <SReviewCard key={index}>
-            <SReviewImg src={item.imgUrl} alt="" />
-            <div>
-              <p>{item.content}</p>
-            </div>
-            <SWriterInfo>
-              <SProfileImg src={item.member.imgUrl} alt="" />
-              <p>{item.member.nickname}</p>
-            </SWriterInfo>
-          </SReviewCard>
-        ))}
-      <div ref={setTarget}>{isLoaded && <div>Loading...</div>}</div>
-
-      {/* </SEachReview> */}
-    </SReivewContainer>
+    <>
+      <SReivewContainer>
+        {data &&
+          data.map((item, index: number) => (
+            <SReviewCard key={index}>
+              <SReviewImg src={item.imgUrl} alt="" />
+              <div>
+                <p>{item.content}</p>
+              </div>
+              <SWriterInfo>
+                <SProfileImg src={item.member.imgUrl} alt="" />
+                <p>{item.member.nickname}</p>
+                <p>{item.rate}</p>
+              </SWriterInfo>
+              <button onClick={()=>navigateToModify(Number(perfumeId), item)}>수정 버튼</button>
+              <button
+                onClick={() => deletePerfumeReview(Number(perfumeId), item.id)}
+              >
+                삭제 버튼
+              </button>
+            </SReviewCard>
+          ))}
+      </SReivewContainer>
+    </>
   );
 }
 
@@ -127,7 +150,7 @@ const SEachReview = styled.div`
 
 const SReviewCard = styled.div`
   border-radius: 15px;
-  background-color: pink;
+  background-color: blue;
   padding: 10px;
   width: 260px;
   display: flex;

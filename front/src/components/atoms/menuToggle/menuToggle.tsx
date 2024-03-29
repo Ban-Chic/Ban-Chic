@@ -6,7 +6,7 @@ const Path = (props) => (
   <motion.path
     fill="transparent"
     strokeWidth="3"
-    stroke="hsl(0, 0%, 18%)"
+    stroke="hsl(30, 90%, 10%)"
     strokeLinecap="round"
     {...props}
   />
@@ -56,11 +56,13 @@ const SButton = styled(motion.button)`
   border: none;
   -webkit-user-select: none;
   cursor: pointer;
-  position: absolute;
+  /* position: absolute; */
   top: 18px;
   left: 27px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   background: transparent;
+  color: black;
+  background-color: white;
 `;
