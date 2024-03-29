@@ -1,68 +1,55 @@
 import styled from "styled-components";
+import theme from "../../../../styles/Theme";
+import useScrollTop from "../../../../hooks/feat/useScrollTop";
 
 function Footer() {
-  const goToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    console.log("제발위로")
-    
-  };
-
+  const GoToTop = useScrollTop();
   return (
-    <>
-      <SFooterContainer>
-        <SDiv>
-          <SInner>TEAM Blo9</SInner>
-          <SInner>Copyright © BANCHIC. ALL RIGHTS RESERVED</SInner>
-          <SInner>
-            <SButton onClick={goToTop}>BACK TO TOP</SButton>
-          </SInner>
-        </SDiv>
-      </SFooterContainer>
+    <SFooterContainer>
+      <SDiv>
+        <SBody2NoWrap>TEAM Blo9</SBody2NoWrap>
+        <SBody2NoWrap>Copyright © BANCHIC. ALL RIGHTS RESERVED</SBody2NoWrap>
+        <SBody2NoWrap as={"button"} onClick={GoToTop}>
+          BACK TO TOP
+        </SBody2NoWrap>
+      </SDiv>
       <SImg src="/footerLogo.svg" alt="" />
-    </>
+    </SFooterContainer>
   );
 }
 
+const SBody2NoWrap = styled.h1`
+  white-space: nowrap;
+  ${theme.font.PretendardRegular}
+  font-size: 12px;
+  transition: all 0.1s ease-in-out;
+`;
+
 export const SFooterContainer = styled.nav`
-  display: block;
-  position: relative;
-  /* justify-content: space-between; */
-  width: 89.8vw;
   margin: auto;
-  left: 0;
-  right: 0;
-  padding-right: 5rem;
-  padding-left: 5rem;
-  margin-top: 50px;
+  padding: 1em;
   align-items: center;
   background-color: transparent;
-  /* height: 100%; */
   color: #f2f2f2;
 `;
 
 const SDiv = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const SInner = styled.div``;
-
-const SUlContainer = styled.nav`
-  list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 720px;
+  text-align: center;
+  transition: all 0.1s ease-in-out;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const SImg = styled.img`
-  /* padding: 5rem; */
-  height: 300px;
   width: 100%;
-`;
-
-const SButton = styled.button`
+  max-width: 720px;
+  margin: 0 auto;
 `;
 
 export default Footer;
