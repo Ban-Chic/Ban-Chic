@@ -22,6 +22,9 @@ public class MoreFemale extends BaseEntity {
     @JoinColumn(name = "perfume_id")
     private Perfume perfume;
 
+    public MoreFemale(Perfume perfume) {
+        this.perfume = perfume;
+    }
     @Builder
     public static MoreFemale createFemale(Perfume perfume) {
         return MoreFemale.builder()

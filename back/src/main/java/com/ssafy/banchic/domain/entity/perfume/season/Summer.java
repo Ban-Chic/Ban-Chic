@@ -22,6 +22,9 @@ public class Summer extends BaseEntity {
     @JoinColumn(name = "perfume_id")
     private Perfume perfume;
 
+    public Summer(Perfume perfume) {
+        this.perfume = perfume;
+    }
     @Builder
     public static Summer from(Perfume perfume) {
         return Summer.builder()

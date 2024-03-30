@@ -22,6 +22,9 @@ public class Fall extends BaseEntity {
     @JoinColumn(name = "perfume_id")
     private Perfume perfume;
 
+    public Fall(Perfume perfume) {
+        this.perfume = perfume;
+    }
     @Builder
     public static Fall from(Perfume perfume) {
         return Fall.builder()

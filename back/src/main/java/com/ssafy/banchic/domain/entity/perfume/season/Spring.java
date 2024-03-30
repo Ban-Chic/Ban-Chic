@@ -23,6 +23,9 @@ public class Spring extends BaseEntity {
     @JoinColumn(name = "perfume_id")
     private Perfume perfume;
 
+    public Spring(Perfume perfume) {
+        this.perfume = perfume;
+    }
     @Builder
     public static Spring from(Perfume perfume) {
         return Spring.builder()

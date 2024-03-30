@@ -75,22 +75,22 @@ public class SeasonDataService {
             if (maxSeasonName != null) {
                 switch (maxSeasonName) {
                     case "Spring":
-                        springRepository.save(new Spring(perfume.getId(), perfume));
+                        springRepository.save(new Spring(perfume));
                         break;
                     case "Summer":
-                        summerRepository.save(new Summer(perfume.getId(), perfume));
+                        summerRepository.save(new Summer(perfume));
                         break;
                     case "Fall":
-                        fallRepository.save(new Fall(perfume.getId(), perfume));
+                        fallRepository.save(new Fall(perfume));
                         break;
                     case "Winter":
-                        winterRepository.save(new Winter(perfume.getId(), perfume));
+                        winterRepository.save(new Winter(perfume));
                         break;
                     case "Day":
-                        dayRepository.save(new Day(perfume.getId(), perfume));
+                        dayRepository.save(new Day(perfume));
                         break;
                     case "Night":
-                        nightRepository.save(new Night(perfume.getId(), perfume));
+                        nightRepository.save(new Night(perfume));
                         break;
                 }
             }

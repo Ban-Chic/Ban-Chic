@@ -22,6 +22,9 @@ public class Unisex extends BaseEntity {
     @JoinColumn(name = "perfume_id")
     private Perfume perfume;
 
+    public Unisex(Perfume perfume) {
+        this.perfume = perfume;
+    }
     @Builder
     public static Unisex createFemale(Perfume perfume) {
         return Unisex.builder()

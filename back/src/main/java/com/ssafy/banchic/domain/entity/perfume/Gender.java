@@ -22,6 +22,4 @@ public class Gender {
     private int moreMale;
     private int male;
 
-    @OneToOne(mappedBy = "gender")
-    private Perfume perfume;
 }

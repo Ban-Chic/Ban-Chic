@@ -26,7 +26,4 @@ public class Season {
     private float day;
     private float night;
 
-    @OneToOne(mappedBy = "season")
-    private Perfume perfume;
-
 }

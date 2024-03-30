@@ -23,6 +23,9 @@ public class Night extends BaseEntity {
     @JoinColumn(name = "perfume_id")
     private Perfume perfume;
 
+    public Night(Perfume perfume) {
+        this.perfume = perfume;
+    }
     @Builder
     public static Night from(Perfume perfume) {
         return Night.builder()
