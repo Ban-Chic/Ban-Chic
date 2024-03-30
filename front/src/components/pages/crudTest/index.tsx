@@ -46,7 +46,7 @@ function CRUDTest() {
   const [board, setBoard] = useState({
     rate: 0,
     content: "",
-    // file: new File([], "", { type: "" }),
+    file: new File([], "", { type: "" }),
     pefumeId: 1,
   });
 
