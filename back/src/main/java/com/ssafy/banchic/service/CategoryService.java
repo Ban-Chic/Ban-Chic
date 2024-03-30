@@ -14,8 +14,10 @@ import com.ssafy.banchic.repository.category.season.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,10 @@ public class CategoryService {
     private final MoreMaleRepository moreMaleRepository;
     private final UnisexRepository unisexRepository;
 
-    public List<SeasonRes> getSeasonList(String seasonName, Pageable pageable) {
+//    private static String[] branList = new String[] {"byredo, le labo, aesop, jo malone, bdk, diptyque, tom ford, dior, creed, lanvin"};
+
+    @Transactional(readOnly = true)
+    public Page<SeasonRes> getSeasonList(String seasonName, Pageable pageable) {
         List<Perfume> findPerfumes = new ArrayList<>();
         if (seasonName.equals("Spring")) {
             Page<Spring> springData = springRepository.findAll(pageable);
@@ -85,16 +90,15 @@ public class CategoryService {
             }
         }
 
-        return findPerfumes.stream()
+        List<SeasonRes> seasonResList = findPerfumes.stream()
                 .map(SeasonRes::from)
                 .toList();
 
-        /**
-         *
-         */
+        return new PageImpl<>(seasonResList, pageable, seasonResList.size());
     }
 
-    public List<GenderRes> getGenderList(String genderName, Pageable pageable) {
+    @Transactional(readOnly = true)
+    public Page<GenderRes> getGenderList(String genderName, Pageable pageable) {
         List<Perfume> findPerfumes = new ArrayList<>();
         if(genderName.equals("Male")) {
             Page<Male> males = maleRepository.findAll(pageable);
@@ -133,8 +137,10 @@ public class CategoryService {
             }
         }
 
-        return findPerfumes.stream()
+        List<GenderRes> genderList = findPerfumes.stream()
                 .map(GenderRes::from)
                 .toList();
+
+        return new PageImpl<>(genderList, pageable, genderList.size());
     }
 }
