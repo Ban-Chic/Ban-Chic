@@ -1,10 +1,7 @@
 package com.ssafy.banchic.domain.entity.perfume;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.ssafy.banchic.domain.entity.Perfume;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -25,4 +22,6 @@ public class Gender {
     private int moreMale;
     private int male;
 
+    @OneToOne(mappedBy = "gender")
+    private Perfume perfume;
 }
