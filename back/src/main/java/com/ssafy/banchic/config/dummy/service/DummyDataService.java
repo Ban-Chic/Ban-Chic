@@ -1,4 +1,4 @@
-package com.ssafy.banchic.config.dummy;
+package com.ssafy.banchic.config.dummy.service;
 
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.entity.Perfume;
