@@ -28,7 +28,8 @@ public class AmazonS3ResourceStorage {
 
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(multipartFile.getSize());
-        metadata.setContentType(multipartFile.getContentType());
+//        metadata.setContentType(multipartFile.getContentType());
+        metadata.setContentType("multipart/form-data");
 
         try {
             amazonS3.putObject(bucket, uuidFilename, multipartFile.getInputStream(), metadata);
