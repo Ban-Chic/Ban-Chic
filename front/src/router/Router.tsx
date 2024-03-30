@@ -41,6 +41,15 @@ function Router() {
           <Route path={Page_Url.Login} element={<LoginPage />}></Route>
           <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
           <Route path={Page_Url.Map} element={<MapPage />}></Route>
+          <Route
+            path="/perfumes/:perfumeId/reviews/:reviewId"
+            element={<ReviewModify />}
+          ></Route>
+          <Route path="/perfumes/review/crud" element={<CRUDTest />}></Route>
+          <Route
+            path="/perfumes/:perfumeId/reviews"
+            element={<ReviewPage />}
+          ></Route>
         </Route>
 
         <Route path={Page_Url.My} element={<MyPage />}></Route>
@@ -66,9 +75,6 @@ function Router() {
         </Route>
       </Routes>
     </AnimatePresence>
-        <Route path="/perfumes/:perfumeId/reviews/:reviewId" element={<ReviewModify/>}></Route>
-        <Route path="/perfumes/review/crud" element={<CRUDTest/>}></Route>
-        <Route path="/perfumes/:perfumeId/reviews" element={<ReviewPage/>}></Route>
   );
 }
 

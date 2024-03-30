@@ -12,7 +12,7 @@ function PersuitCard({ children, data }: Props) {
   return (
     <>
       {children}
-      {data.map((item) => (
+      {data?.map((item) => (
         <SFBlock drag={true} dragControls={controls}>
           {item}
         </SFBlock>
