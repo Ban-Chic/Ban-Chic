@@ -30,8 +30,6 @@ public class AmazonS3ResourceStorage {
         metadata.setContentLength(multipartFile.getSize());
         metadata.setContentType(multipartFile.getContentType());
 
-        log.info("컨텐트 타입!!!>>>> " + multipartFile.getContentType());
-
         try {
             amazonS3.putObject(bucket, uuidFilename, multipartFile.getInputStream(), metadata);
         } catch (IOException e) {
