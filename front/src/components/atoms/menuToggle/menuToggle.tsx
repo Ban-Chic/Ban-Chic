@@ -1,68 +1,45 @@
-import * as React from "react";
-import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const Path = (props) => (
-  <motion.path
-    fill="transparent"
-    strokeWidth="3"
-    stroke="hsl(30, 90%, 10%)"
-    strokeLinecap="round"
-    {...props}
-  />
+const Path = styled.path`
+  fill: transparent;
+  stroke-width: 3;
+  stroke: white;
+  stroke-linecap: round;
+  transition: all 0.3s ease;
+`;
+
+interface Props {
+  isOpen: boolean;
+  toggle: () => void;
+}
+
+const MenuToggle = ({ isOpen, toggle }: Props) => (
+  <ToggleButton onClick={toggle}>
+    <svg width="20" height="20" viewBox="0 0 23 19">
+      <Path d={!isOpen ? "M 2 2.5 L 20 2.5" : "M 3 16.5 L 17 2.5"} />
+      <Path d="M 2 9.423 L 20 9.423" style={{ opacity: !isOpen ? 1 : 0 }} />
+      <Path d={!isOpen ? "M 2 16.346 L 20 16.346" : "M 3 2.5 L 17 16.346"} />
+    </svg>
+  </ToggleButton>
 );
 
-type Props = {
-  toggle: () => void;
-  handleOnClick: () => void;
-  isDisable: boolean;
-};
-
-export const MenuToggle = ({ toggle, handleOnClick, isDisable }:Props) => {
-  const toggleSet = () => {
-    toggle;
-    handleOnClick;
-  };
-  return (
-    <SButton onClick={toggleSet} disable={isDisable}>
-      <svg width="23" height="23" viewBox="0 0 23 23">
-        <Path
-          variants={{
-            closed: { d: "M 2 2.5 L 20 2.5" },
-            open: { d: "M 3 16.5 L 17 2.5" },
-          }}
-        />
-        <Path
-          d="M 2 9.423 L 20 9.423"
-          variants={{
-            closed: { opacity: 1 },
-            open: { opacity: 0 },
-          }}
-          transition={{ duration: 0.1 }}
-        />
-        <Path
-          variants={{
-            closed: { d: "M 2 16.346 L 20 16.346" },
-            open: { d: "M 3 2.5 L 17 16.346" },
-          }}
-        />
-      </svg>
-    </SButton>
-  );
-};
-
-const SButton = styled(motion.button)`
+const ToggleButton = styled.button`
   outline: none;
   border: none;
   -webkit-user-select: none;
+  user-select: none;
   cursor: pointer;
-  /* position: absolute; */
-  top: 18px;
-  left: 27px;
-  width: 50px;
-  height: 50px;
+  position: fixed;
+  float: right;
+  z-index: 60;
+  top: 1.5vh;
+  right: 3vw;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: transparent;
-  color: black;
-  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #191919;
 `;
+export default MenuToggle;

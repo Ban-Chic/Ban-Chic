@@ -90,7 +90,7 @@ const SAboutContainer = styled.div`
     animation-duration: 5000ms;
     animation-fill-mode: forwards;
 
-    @keyframes opacity {
+    /* @keyframes opacity {
       from {
         opacity: 0;
         transform: translateX(100%);
@@ -99,7 +99,7 @@ const SAboutContainer = styled.div`
         opacity: 1;
         transform: translateX(0%);
       }
-    }
+    } */
   }
 `;
 
@@ -117,7 +117,7 @@ const SAboutContainerReverse = styled.div`
     animation-duration: 7000ms;
     animation-fill-mode: forwards;
 
-    @keyframes opacityReverse {
+    /* @keyframes opacityReverse {
       from {
         opacity: 0;
         transform: translateX(-100%);
@@ -126,7 +126,7 @@ const SAboutContainerReverse = styled.div`
         opacity: 1;
         transform: translateX(0%);
       }
-    }
+    } */
   }
 `;
 

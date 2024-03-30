@@ -2,18 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { Link } from "react-router-dom";
+import Page_Url from "../../../router/Url";
+import useLogout from "../../../hooks/auth/useLogout";
 
 interface Props {
   width: number;
   isOpenCheck: boolean;
-  setIsOpen: () => void;
-  cal: number;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
-  // const [isOpen, setOpen] = useState(false);
   const [xPosition, setX] = useState(-width);
   const side = useRef<HTMLDivElement>(null);
+  const accessToken = localStorage.getItem("accessToken");
+  const Logout = useLogout();
 
   useEffect(() => {
     if (isOpenCheck) {
@@ -22,25 +24,6 @@ const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
       setX(-width);
     }
   }, [isOpenCheck, width]);
-
-  // 사이드바 외부 클릭시 닫히는 함수
-  // const handleClose = async (e: MouseEvent) => {
-  //   if (side.current) {
-  //     const sideArea = side.current;
-  //     const sideCildren = side.current.contains(e.target as Node);
-  //     if (isOpen && (!sideArea || !sideCildren)) {
-  //       await setX(-width);
-  //       await setOpen(false);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("click", handleClose);
-  //   return () => {
-  //     window.removeEventListener("click", handleClose);
-  //   };
-  // });
 
   return (
     <SContainer isOpenCheck={isOpenCheck}>
@@ -54,7 +37,11 @@ const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
         >
-          <SMenuLink>LOGIN</SMenuLink>
+          {accessToken === null ? (
+            <SMenuLink to={Page_Url.Login}>LOGIN</SMenuLink>
+            ) : (
+            <SButton onClick={() => Logout()}>LOGOUT</SButton>
+          )}
         </SDiv>
         <SDiv
           ref={side}
@@ -65,7 +52,7 @@ const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
             transform: `translatex(${xPosition - 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
         >
-          <SMenuLink>HOME</SMenuLink>
+          <SMenuLink to={Page_Url.Main}>HOME</SMenuLink>
         </SDiv>
         <SDiv
           ref={side}
@@ -76,7 +63,7 @@ const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
         >
-          <SMenuLink>SURVEY</SMenuLink>
+          <SMenuLink to={Page_Url.SurveySelect}>SURVEY</SMenuLink>
         </SDiv>
         <SDiv
           ref={side}
@@ -98,7 +85,7 @@ const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
         >
-          <SMenuLink >MY PAGE</SMenuLink>
+          <SMenuLink to={Page_Url.My}>MY PAGE</SMenuLink>
         </SDiv>
       </SSidebar>
     </SContainer>
@@ -112,7 +99,7 @@ const SContainer = styled.div<{ isOpenCheck: boolean }>`
   z-index: ${({ isOpenCheck }) => (isOpenCheck ? 6 : -1)};
 `;
 
-const SSidebar = styled.div<{ cal: number }>`
+const SSidebar = styled.div`
   background-color: #191919;
   position: fixed;
   top: 0;
@@ -128,6 +115,12 @@ const SSidebar = styled.div<{ cal: number }>`
 `;
 
 const SMenuLink = styled(Link)`
+  ${theme.font.KumarOneRegular};
+  font-size: 6.3em;
+  line-height: 1.5;
+`;
+
+const SButton = styled.button`
   ${theme.font.KumarOneRegular};
   font-size: 6.3em;
   line-height: 1.5;
