@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { ReactNode, useRef } from "react";
 import styled from "styled-components";
 

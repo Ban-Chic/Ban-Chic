@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import FrameSection from "../../atoms/framer/frameSection";
 

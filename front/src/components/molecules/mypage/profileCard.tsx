@@ -18,7 +18,7 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
     <SFlexCenter>
       <SSubTitle>내 정보</SSubTitle>
       <SProfile
-        $imageurl={data.data?.image ? data?.data?.image : "public/user.svg"}
+        $imageurl={data.data?.image ? data?.data?.image : "/user.svg"}
       />
       <input type="file" id="profileImg" accept="image/*" onInput={onInput} />
       <button type="submit" onClick={updateProfileImage}>

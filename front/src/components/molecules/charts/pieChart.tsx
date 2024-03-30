@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import React, { PureComponent } from "react";
-import { PieChart, Pie, Tooltip, Sector, Cell } from "recharts";
+import { PieChart, Pie, Tooltip, Cell } from "recharts";
 
 const data = [
   { name: "Group A", value: 400 },
@@ -17,7 +16,7 @@ function PieChartContainer() {
         <h1>PieChart</h1>
         <SDiv>
           <PieChart width={290} height={250}>
-            <Tooltip/>
+            <Tooltip />
             <Pie
               data={data}
               cx={120}

@@ -1,5 +1,3 @@
-import styled from "styled-components";
-import React, { PureComponent } from "react";
 import {
   BarChart,
   Bar,
@@ -9,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from "recharts";
 
 const data = [
