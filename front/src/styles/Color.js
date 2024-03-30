@@ -1,10 +1,14 @@
 const color = {
   // 백그라운드 컬러
   bgColor: "#191919",
-  fontColor: "#F2F2F2",
-  sectionColor: "#6C6C6C",
-  primaryColor: "FEC638",
-  secondaryColor: "EFC638",
+  fontColor: "#EFEFEF",
+  sectionColor: "#707070",
+  primaryColor: "#FEC638",
+  secondaryColor: "#EFEFEF",
+  actionColor: "#70A5FE",
+  successColor: "#00C42D",
+  warningColor: "#FFC107",
+  errorColor: "#FF142B",
 };
 
 export default color;
