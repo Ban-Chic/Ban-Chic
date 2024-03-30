@@ -1,6 +1,7 @@
 package com.ssafy.banchic.domain.entity.perfume.season;
 
 import com.ssafy.banchic.domain.entity.BaseEntity;
+import com.ssafy.banchic.domain.entity.Perfume;
 import com.ssafy.banchic.domain.entity.perfume.Season;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,11 +19,13 @@ public class Summer extends BaseEntity {
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "season_id")
-    private Season season;
+    @JoinColumn(name = "perfume_id")
+    private Perfume perfume;
 
     @Builder
-    public Summer(Season season) {
-        this.season = season;
+    public static Summer from(Perfume perfume) {
+        return Summer.builder()
+                .perfume(perfume)
+                .build();
     }
 }

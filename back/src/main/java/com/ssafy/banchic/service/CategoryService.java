@@ -49,42 +49,42 @@ public class CategoryService {
         if (seasonName.equals("Spring")) {
             Page<Spring> springData = springRepository.findAll(pageable);
             for (Spring spring : springData) {
-                Perfume perfume = perfumeRepository.findById(spring.getSeason().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(spring.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if (seasonName.equals("Summer")) {
             Page<Summer> summerData = summerRepository.findAll(pageable);
             for (Summer summer : summerData) {
-                Perfume perfume = perfumeRepository.findById(summer.getSeason().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(summer.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if (seasonName.equals("Fall")) {
             Page<Fall> fallData = fallRepository.findAll(pageable);
             for (Fall fall : fallData) {
-                Perfume perfume = perfumeRepository.findById(fall.getSeason().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(fall.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if (seasonName.equals("Winter")) {
             Page<Winter> winterData = winterRepository.findAll(pageable);
             for (Winter winter : winterData) {
-                Perfume perfume = perfumeRepository.findById(winter.getSeason().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(winter.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if (seasonName.equals("Day")) {
             Page<Day> dayData = dayRepository.findAll(pageable);
             for (Day day : dayData) {
-                Perfume perfume = perfumeRepository.findById(day.getSeason().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(day.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if (seasonName.equals("Night")) {
             Page<Night> nightData = nightRepository.findAll(pageable);
             for (Night night : nightData) {
-                Perfume perfume = perfumeRepository.findById(night.getSeason().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(night.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
@@ -103,35 +103,35 @@ public class CategoryService {
         if(genderName.equals("Male")) {
             Page<Male> males = maleRepository.findAll(pageable);
             for(Male male : males) {
-                Perfume perfume = perfumeRepository.findById(male.getGender().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(male.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if(genderName.equals("Female")) {
             Page<Female> females = femaleRepository.findAll(pageable);
             for(Female female : females) {
-                Perfume perfume = perfumeRepository.findById(female.getGender().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(female.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if(genderName.equals("MoreMale")) {
             Page<MoreMale> moreMales = moreMaleRepository.findAll(pageable);
             for(MoreMale moreMale : moreMales) {
-                Perfume perfume = perfumeRepository.findById(moreMale.getGender().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(moreMale.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if(genderName.equals("MoreFemale")) {
             Page<MoreFemale> moreFemales = moreFemaleRepository.findAll(pageable);
             for(MoreFemale moreFemale : moreFemales) {
-                Perfume perfume = perfumeRepository.findById(moreFemale.getGender().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(moreFemale.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }
         } else if(genderName.equals("Unisex")) {
             Page<Unisex> unisexes = unisexRepository.findAll(pageable);
             for(Unisex unisex : unisexes) {
-                Perfume perfume = perfumeRepository.findById(unisex.getGender().getPerfume().getId())
+                Perfume perfume = perfumeRepository.findById(unisex.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PERFUME));
                 findPerfumes.add(perfume);
             }

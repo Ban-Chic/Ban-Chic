@@ -2,6 +2,7 @@ package com.ssafy.banchic.domain.entity.perfume.season;
 
 
 import com.ssafy.banchic.domain.entity.BaseEntity;
+import com.ssafy.banchic.domain.entity.Perfume;
 import com.ssafy.banchic.domain.entity.perfume.Season;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,14 +17,16 @@ public class Spring extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "spring_id")
-    private int id;
+    private Integer id;
 
     @OneToOne
-    @JoinColumn(name = "season_id")
-    private Season season;
+    @JoinColumn(name = "perfume_id")
+    private Perfume perfume;
 
     @Builder
-    public Spring(Season season) {
-        this.season = season;
+    public static Spring from(Perfume perfume) {
+        return Spring.builder()
+                .perfume(perfume)
+                .build();
     }
 }

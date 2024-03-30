@@ -57,19 +57,19 @@ public class GenderDataService {
             if(maxGenderName != null) {
                 switch (maxGenderName) {
                     case "Male":
-                        maleRepository.save(new Male(perfume.getId(), perfume.getGender()));
+                        maleRepository.save(new Male(perfume.getId(), perfume));
                         break;
                     case "Female":
-                        femaleRepository.save(new Female(perfume.getId(), perfume.getGender()));
+                        femaleRepository.save(new Female(perfume.getId(), perfume));
                         break;
                     case "MoreFemale":
-                        moreFemaleRepository.save(new MoreFemale(perfume.getId(), perfume.getGender()));
+                        moreFemaleRepository.save(new MoreFemale(perfume.getId(), perfume));
                         break;
                     case "MoreMale":
-                        moreMaleRepository.save(new MoreMale(perfume.getId(), perfume.getGender()));
+                        moreMaleRepository.save(new MoreMale(perfume.getId(), perfume));
                         break;
                     case "Unisex":
-                        unisexRepository.save(new Unisex(perfume.getId(), perfume.getGender()));
+                        unisexRepository.save(new Unisex(perfume.getId(), perfume));
                         break;
                 }
             }

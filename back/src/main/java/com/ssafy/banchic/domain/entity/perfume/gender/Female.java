@@ -1,6 +1,7 @@
 package com.ssafy.banchic.domain.entity.perfume.gender;
 
 import com.ssafy.banchic.domain.entity.BaseEntity;
+import com.ssafy.banchic.domain.entity.Perfume;
 import com.ssafy.banchic.domain.entity.perfume.Gender;
 import com.ssafy.banchic.domain.entity.perfume.Season;
 import jakarta.persistence.*;
@@ -19,13 +20,13 @@ public class Female extends BaseEntity {
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "gender_id")
-    private Gender gender;
+    @JoinColumn(name = "perfume_id")
+    private Perfume perfume;
 
     @Builder
-    public static Female createFemale(Gender gender) {
+    public static Female createFemale(Perfume perfume) {
         return Female.builder()
-                .gender(gender)
+                .perfume(perfume)
                 .build();
     }
 }
