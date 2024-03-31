@@ -12,7 +12,7 @@ import LayoutsWithoutHF from "../layouts/layoutsWithoutHF";
 import MainPage from "../components/pages/main";
 import ErrorPage from "../components/pages/error";
 import MyPage from "../components/pages/mypage";
-import PerfumeDetailPage from "../components/pages/perfumeDetail";
+import PerfumeDetailPage from "../components/pages/perfumeDetail/indexcopy";
 import MainSample from "../components/pages/mainSample/mainSample";
 import RecommendPage from "../components/pages/recommend";
 import SurveySelectPage from "../components/pages/survey";
@@ -20,9 +20,9 @@ import NaverCallback from "../components/pages/login/NaverCallback";
 import KakaoCallback from "../components/pages/login/KakaoCallback";
 import LoginPage from "../components/pages/login";
 import MapPage from "../components/pages/map";
-import ReviewPage from "../components/pages/review/review";
-import CRUDTest from "../components/pages/crudTest";
-import ReviewModify from "../components/pages/review/reviewModify";
+// import ReviewPage from "../components/pages/review/review";
+// import CRUDTest from "../components/pages/crudTest";
+// import ReviewModify from "../components/pages/review/reviewModify";
 import SurveyPage from "../components/pages/survey/select";
 
 function Router() {
@@ -37,15 +37,15 @@ function Router() {
           ></Route>
           <Route path="/mainSample" element={<MainSample />}></Route>
           <Route path={Page_Url.Login} element={<LoginPage />}></Route>
-          <Route
+          {/* <Route
             path="/perfumes/:perfumeId/reviews/:reviewId"
             element={<ReviewModify />}
           ></Route>
-          <Route path="/perfumes/review/crud" element={<CRUDTest />}></Route>
-          <Route
+          <Route path="/perfumes/review/crud" element={<CRUDTest />}></Route> */}
+          {/* <Route
             path="/perfumes/:perfumeId/reviews"
             element={<ReviewPage />}
-          ></Route>
+          ></Route> */}
         </Route>
 
         <Route

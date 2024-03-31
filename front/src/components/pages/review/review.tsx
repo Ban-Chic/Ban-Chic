@@ -12,10 +12,10 @@ interface Props {
       imgUrl: string;
       member: {
         email: string;
-        imageUrl: string;
+        image: string;
         nickname: string;
       };
-    };
+    }[];
     pagealbe: object;
     totalPages: number;
     totalElements: number;
@@ -40,7 +40,7 @@ interface item {
   imgUrl: string;
   member: {
     email: string;
-    imageUrl: string;
+    image: string;
     nickname: string;
   };
 }
@@ -61,20 +61,20 @@ function ReviewPage() {
     getPerfumeReviews(perfumeId).then((response) => {
       setData(response.data.data.content);
     });
-  }, []);
+  }, [perfumeId]);
 
   return (
     <>
       <SReivewContainer>
         {data &&
-          data.map((item, index: number) => (
+          data.content.map((item, index: number) => (
             <SReviewCard key={index}>
               <SReviewImg src={item.imgUrl} alt="" />
               <div>
                 <p>{item.content}</p>
               </div>
               <SWriterInfo>
-                <SProfileImg src={item.member.imgUrl} alt="" />
+                <SProfileImg src={item.member.image} alt="" />
                 <p>{item.member.nickname}</p>
                 <p>{item.rate}</p>
               </SWriterInfo>

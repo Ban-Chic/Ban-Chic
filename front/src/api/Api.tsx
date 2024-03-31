@@ -1,23 +1,13 @@
-import { AxiosResponse } from "axios";
 import API, { ImgAPI } from "./Config";
-
-interface PerfumeData {
-  id: number;
-  perfumeImg: string;
-  perfumeName: string;
-  brandName: string;
-  notes: string;
-  data: object;
-}
 
 export const baseAPI = () => API.get("/");
 
 // 향수
 
 /** 향수 상세 조회 */
-export const getPerfumeDetail = (
-  perfumeId: string
-): Promise<AxiosResponse<PerfumeData>> => API.get(`/perfumes/${perfumeId}`);
+export const getPerfumeDetail = (perfumeId: string) => {
+  return API.get(`/perfumes/${perfumeId}`).then((res) => res.data);
+};
 
 export const getRecommend = () => API.get("/recommend/top");
 

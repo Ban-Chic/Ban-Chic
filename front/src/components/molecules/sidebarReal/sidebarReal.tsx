@@ -7,29 +7,29 @@ import useLogout from "../../../hooks/auth/useLogout";
 
 interface Props {
   width: number;
-  isOpenCheck: boolean;
+  $isOpenCheck: boolean;
 }
 
-const SidebarReal = ({ width, isOpenCheck }: Props) => {
+const SidebarReal = ({ width, $isOpenCheck }: Props) => {
   const [xPosition, setX] = useState(-width);
   const side = useRef<HTMLDivElement>(null);
   const accessToken = localStorage.getItem("accessToken");
   const Logout = useLogout();
 
   useEffect(() => {
-    if (isOpenCheck) {
+    if ($isOpenCheck) {
       setX(0);
     } else {
       setX(-width);
     }
-  }, [isOpenCheck, width]);
+  }, [$isOpenCheck, width]);
 
   const goToHome = () => {
     window.location.href = "/";
   };
 
   return (
-    <SContainer isOpenCheck={isOpenCheck}>
+    <SContainer $isOpenCheck={$isOpenCheck}>
       <SSidebar>
         <SDiv
           ref={side}
@@ -93,11 +93,11 @@ const SidebarReal = ({ width, isOpenCheck }: Props) => {
   );
 };
 
-const SContainer = styled.div<{ isOpenCheck: boolean }>`
+const SContainer = styled.div<{ $isOpenCheck: boolean }>`
   background-color: #e3ecf1;
-  opacity: ${({ isOpenCheck }) => (isOpenCheck ? 1 : 0)};
+  opacity: ${({ $isOpenCheck }) => ($isOpenCheck ? 1 : 0)};
   transition: 1.3s ease;
-  z-index: ${({ isOpenCheck }) => (isOpenCheck ? 10 : -1)};
+  z-index: ${({ $isOpenCheck }) => ($isOpenCheck ? 10 : -1)};
 `;
 
 const SSidebar = styled.div`

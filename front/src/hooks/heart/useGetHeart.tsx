@@ -8,10 +8,10 @@ export default function useGetHeart(perfumeId: string) {
   });
 }
 
-export function useUpdateHeart() {
+export function useUpdateHeart(perfumeId: string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: postLike,
+    mutationFn: () => postLike(perfumeId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["favorite"] });
     },
