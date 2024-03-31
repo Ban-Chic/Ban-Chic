@@ -50,9 +50,7 @@ function CRUDTest() {
     pefumeId: 1,
   });
 
-  const [reviewImg, setReviewImg] = useState({
-    file: File,
-  });
+  const [reviewImg, setReviewImg] = useState(new File([], "", { type: "" }));
   const onChange = (event: any) => {
     const { value, name } = event.target;
     if (name === "rate") {
@@ -70,12 +68,9 @@ function CRUDTest() {
   };
 
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, files } = event.target;
+    const { files } = event.target;
     if (files) {
-      setReviewImg({
-        ...reviewImg,
-        [name]: files[0],
-      });
+      setReviewImg(files[0]);
     }
   };
 
@@ -110,8 +105,7 @@ function CRUDTest() {
         />
         <button
           onClick={() => {
-            console.log(reviewImg.file);
-            postPerfumeReview("1", reviewImg.file, board.rate, board.content).catch(
+            postPerfumeReview("1", reviewImg, board.rate, board.content).catch(
               (error) => {
                 console.log(error);
               }

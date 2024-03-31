@@ -32,6 +32,7 @@ function useLogout() {
 
     // 메인으로 이동
     navigate("/");
+    window.location.href = "/";
   };
   return Logout;
 }

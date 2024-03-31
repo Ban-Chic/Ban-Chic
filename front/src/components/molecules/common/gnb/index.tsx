@@ -39,7 +39,7 @@ function GNB() {
       <SidebarReal
         width={isWidth}
         isOpenCheck={isOpen}
-        setIsOpen={setIsOpen}
+        // setIsOpen={setIsOpen}
       ></SidebarReal>
       <MenuToggle toggle={() => toggleMenu()} isOpen={isOpen} />
     </SHeaderContainer>
