@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React, { PureComponent } from "react";
 import {
   Radar,
   RadarChart,
@@ -7,19 +6,19 @@ import {
   Legend,
   PolarAngleAxis,
   PolarRadiusAxis,
-  ResponsiveContainer,
   Tooltip,
 } from "recharts";
 import theme from "../../../styles/Theme";
 
 interface Props {
-  season: string;
-  day: string;
-  night: string;
-  spring: string;
-  summer: string;
-  fall: string;
-  winter: string;
+  season: {
+    day: string;
+    night: string;
+    spring: string;
+    summer: string;
+    fall: string;
+    winter: string;
+  };
 }
 
 function RadarChartContainer(Props: Props) {
@@ -83,7 +82,6 @@ function RadarChartContainer(Props: Props) {
               isAnimationActive={true}
               animationBegin={1}
               animationEasing="ease-in-out"
-              activeDots={true}
             />
             <Legend />
             <Tooltip />

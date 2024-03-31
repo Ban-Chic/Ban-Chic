@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { SSubTitle } from "../../../styles/Font";
 import ButtonComponent from "../auth/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import theme from "../../../styles/Theme";
 
 type Props = {
   title?: string;
   alert?: string;
-  closeModal?: () => void;
+  closeModal: () => void;
   actionModal?: (nickname: string) => void;
 };
 const Modal = ({ title, alert = "", closeModal, actionModal }: Props) => {

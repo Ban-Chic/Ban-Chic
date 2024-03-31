@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { Link } from "react-router-dom";
@@ -8,7 +8,6 @@ import useLogout from "../../../hooks/auth/useLogout";
 interface Props {
   width: number;
   isOpenCheck: boolean;
-  // setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SidebarReal = ({ width, isOpenCheck }: Props) => {
@@ -35,7 +34,6 @@ const SidebarReal = ({ width, isOpenCheck }: Props) => {
         <SDiv
           ref={side}
           style={{
-            width: `0px`,
             height: "100px",
             transformOrigin: "left",
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
@@ -62,7 +60,6 @@ const SidebarReal = ({ width, isOpenCheck }: Props) => {
         <SDiv
           ref={side}
           style={{
-            width: `0px`,
             height: "100px",
             transformOrigin: "left",
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
@@ -79,12 +76,11 @@ const SidebarReal = ({ width, isOpenCheck }: Props) => {
             transform: `translatex(${xPosition - 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
         >
-          <SMenuLink>SEARCH</SMenuLink>
+          <SMenuLink to={"/"}>SEARCH</SMenuLink>
         </SDiv>
         <SDiv
           ref={side}
           style={{
-            width: `0px`,
             height: "100px",
             transformOrigin: "left",
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
@@ -101,7 +97,7 @@ const SContainer = styled.div<{ isOpenCheck: boolean }>`
   background-color: #e3ecf1;
   opacity: ${({ isOpenCheck }) => (isOpenCheck ? 1 : 0)};
   transition: 1.3s ease;
-  z-index: ${({ isOpenCheck }) => (isOpenCheck ? 6 : -1)};
+  z-index: ${({ isOpenCheck }) => (isOpenCheck ? 10 : -1)};
 `;
 
 const SSidebar = styled.div`
@@ -121,8 +117,11 @@ const SSidebar = styled.div`
 
 const SMenuLink = styled(Link)`
   ${theme.font.KumarOneRegular};
-  font-size: 6.3em;
   line-height: 1.5;
+  font-size: 4em;
+  @media only screen and (min-width: 768px) {
+    font-size: 6.3em;
+  }
 `;
 
 const SButton = styled.button`
@@ -135,12 +134,12 @@ const SDiv = styled.div`
   transition: 1s ease;
   position: relative;
   z-index: 0;
-
+  width: 100%;
   &:nth-child(1) {
     font-size: 5px;
   }
   &:nth-child(odd) {
-    text-align: end;
+    text-align: start;
   }
   &:nth-child(even) {
     text-align: end;

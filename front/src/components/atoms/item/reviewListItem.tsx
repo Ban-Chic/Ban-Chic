@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 interface Props {
-  item: object;
+  item: {
+    id: string;
+  };
 }
 
 function ReviewListItem({ item }: Props) {
-  return <SItemContainer></SItemContainer>;
+  return <SItemContainer>{item.id}</SItemContainer>;
 }
 
 const SItemContainer = styled.section`

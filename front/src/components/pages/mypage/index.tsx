@@ -61,77 +61,71 @@ function MyPage() {
   if (isError) return <>{error.message}</>;
   if (data && HeartList && RecommendedList && ReviewList)
     return (
-      <SMypageContainer>
-        <SMyPageGrid>
-          <SBlock>
-            <PersuitCard data={PersuitList.data}>
-              <SSubTitle>내 추구미</SSubTitle>
-            </PersuitCard>
-          </SBlock>
-          <SBlock>
-            <ProfileCard
-              data={data}
-              onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setFiles(event?.target?.files);
-              }}
-              updateProfileImage={updateProfileImage}
-            />
-          </SBlock>
-          <SBlock>
-            <SSubTitle>내가 쓴 리뷰들</SSubTitle>
-            <MyReviewList>
-              {ReviewList.data.length !== 0 &&
-                ReviewList.data.map((item: object, index: number) => {
-                  if (index < 10) <ReviewListItem item={item} />;
-                })}
-              {!ReviewList.data.length && <div>리뷰를 작성해보세요</div>}
-            </MyReviewList>
-          </SBlock>
-          <SBlock>
-            <CircleItemList data={HeartList.data}>
-              <SSubTitle>좋아요 한 향수</SSubTitle>
-            </CircleItemList>
-          </SBlock>
-          <SBlock>
-            <CircleItemList
-              data={[
-                {
-                  id: localStorage.getItem("visited"),
-                  perfumeImg: localStorage.getItem("visitedImg"),
-                },
-              ]}
-            >
-              <SSubTitle>내가 본 향수</SSubTitle>
-            </CircleItemList>
-          </SBlock>
-          <SBlock>
-            <CircleItemList data={RecommendedList?.data?.data}>
-              <SSubTitle>내가 추천받은 향수들</SSubTitle>
-            </CircleItemList>
-          </SBlock>
-          <SBlock>
-            <ButtonComponent onClick={() => clickModal()}>
-              닉네임 수정
-            </ButtonComponent>
-            <ButtonComponent onClick={() => Logout()}>로그아웃</ButtonComponent>
-            <ButtonComponent onClick={() => DeleteId()}>
-              회원탈퇴
-            </ButtonComponent>
-          </SBlock>
-          {isOpenModal && (
-            <Modal
-              closeModal={closeModal}
-              actionModal={updateNicknameFunction}
-              title="닉네임 수정하기"
-              alert={data.data?.nickname}
-            />
-          )}
-        </SMyPageGrid>
-      </SMypageContainer>
+      <SMyPageGrid>
+        <SBlock>
+          <PersuitCard data={PersuitList.data}>
+            <SSubTitle>내 추구미</SSubTitle>
+          </PersuitCard>
+        </SBlock>
+        <SBlock>
+          <ProfileCard
+            data={data}
+            onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFiles(event?.target?.files);
+            }}
+            updateProfileImage={updateProfileImage}
+          />
+        </SBlock>
+        <SBlock>
+          <SSubTitle>내가 쓴 리뷰들</SSubTitle>
+          <MyReviewList>
+            {ReviewList.data.length !== 0 &&
+              ReviewList.data.map((item: object, index: number) => {
+                if (index < 10) <ReviewListItem item={item} />;
+              })}
+            {!ReviewList.data.length && <div>리뷰를 작성해보세요</div>}
+          </MyReviewList>
+        </SBlock>
+        <SBlock>
+          <CircleItemList data={HeartList.data}>
+            <SSubTitle>좋아요 한 향수</SSubTitle>
+          </CircleItemList>
+        </SBlock>
+        <SBlock>
+          <CircleItemList
+            data={[
+              {
+                id: localStorage.getItem("visited"),
+                perfumeImg: localStorage.getItem("visitedImg"),
+              },
+            ]}
+          >
+            <SSubTitle>내가 본 향수</SSubTitle>
+          </CircleItemList>
+        </SBlock>
+        <SBlock>
+          <CircleItemList data={RecommendedList?.data?.data}>
+            <SSubTitle>내가 추천받은 향수들</SSubTitle>
+          </CircleItemList>
+        </SBlock>
+        <SBlock>
+          <ButtonComponent onClick={() => clickModal()}>
+            닉네임 수정
+          </ButtonComponent>
+          <ButtonComponent onClick={() => Logout()}>로그아웃</ButtonComponent>
+          <ButtonComponent onClick={() => DeleteId()}>회원탈퇴</ButtonComponent>
+        </SBlock>
+        {isOpenModal && (
+          <Modal
+            closeModal={closeModal}
+            actionModal={updateNicknameFunction}
+            title="닉네임 수정하기"
+            alert={data.data?.nickname}
+          />
+        )}
+      </SMyPageGrid>
     );
 }
-
-const SMypageContainer = styled.main``;
 
 const SMyPageGrid = styled.section`
   max-width: 1200px;
@@ -140,7 +134,7 @@ const SMyPageGrid = styled.section`
   padding: 1em;
   gap: 15px;
   grid-template-columns: 1fr;
-
+  width: 100%;
   @media only screen and (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, minmax((99vh / 4), auto));
@@ -150,6 +144,7 @@ const SMyPageGrid = styled.section`
 const SBlock = styled.div`
   background-color: ${theme.color.sectionColor};
   width: 100%;
+  min-width: 20em;
   height: 100%;
   border-radius: 10px;
   padding: 10px;
@@ -168,7 +163,7 @@ const SBlock = styled.div`
       grid-row: 2 / span 2;
     }
     &:nth-child(3) {
-      grid-row: 1 / span 3;
+      grid-row: 1 / span 2;
       grid-column: 3 / span 1;
     }
 
@@ -176,8 +171,12 @@ const SBlock = styled.div`
       grid-row: 3 / span 2;
     }
     &:nth-child(6) {
-      grid-row: 4 / span 1;
+      grid-row: 3 / span 2;
       grid-column: 3;
+    }
+    &:nth-child(7) {
+      grid-row: 4 / span 1;
+      grid-column: 2;
     }
   }
 `;

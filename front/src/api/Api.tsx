@@ -46,14 +46,14 @@ export const postPerfumeReview = async (
   content: string
 ) => {
   const formData = new FormData();
+
   const data = { rate: rate, content: content };
   const uploadData = JSON.stringify(data);
   const blobData = new Blob([uploadData], { type: "application/json" });
 
   formData.append("form", blobData);
   console.log("아래가 폼");
-  console.log("blob:", uploadData); // FormData 내용 확인
-  console.log("form:", formData.get("form")); // FormData 내용 확인
+  console.log("FormData:", formData.get("form")); // FormData 내용 확인
 
   formData.append("file", file);
   console.log("아래가 파일");
