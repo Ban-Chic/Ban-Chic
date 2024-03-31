@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Perfume from "../../../../public/img_perfume_sample.png";
 
 function MainSample() {
@@ -62,19 +62,9 @@ function MainSample() {
           </div>
         </SAboutContainer>
       </div>
-      {/* <main>
-        <SSpanContainer>
-          메인sdfasdf
-          
-        </SSpanContainer>
-      </main> */}
     </>
   );
 }
-
-const SSpanContainer = styled.span`
-  color: white;
-`;
 
 const SAboutContainer = styled.div`
   display: flex;
@@ -89,17 +79,6 @@ const SAboutContainer = styled.div`
     animation-name: opacity;
     animation-duration: 5000ms;
     animation-fill-mode: forwards;
-
-    /* @keyframes opacity {
-      from {
-        opacity: 0;
-        transform: translateX(100%);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0%);
-      }
-    } */
   }
 `;
 
@@ -116,17 +95,6 @@ const SAboutContainerReverse = styled.div`
     animation-name: opacityReverse;
     animation-duration: 7000ms;
     animation-fill-mode: forwards;
-
-    /* @keyframes opacityReverse {
-      from {
-        opacity: 0;
-        transform: translateX(-100%);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0%);
-      }
-    } */
   }
 `;
 

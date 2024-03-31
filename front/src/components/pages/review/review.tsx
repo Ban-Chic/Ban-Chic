@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { deletePerfumeReview, getPerfumeReviews } from "../../../api/Api";
 import { useNavigate, useParams } from "react-router-dom";
-import useIntersectionObserver from "./hook";
 
 interface Props {
   data: {
@@ -34,7 +33,7 @@ interface Props {
   } | null;
 }
 
-interface item{
+interface item {
   id: number;
   rate: number;
   content: string;
@@ -48,42 +47,21 @@ interface item{
 
 function ReviewPage() {
   const { perfumeId } = useParams() as { perfumeId: string };
-  const [isLoaded, seetIsLoaded] = useState(false);
-  const [itemIndex, setItemIndex] = useState(0);
   const [data, setData] = useState<Props["data"]>(null);
 
   const navigate = useNavigate();
 
-  const navigateToModify = (perfumeId:number, item:item) =>{
-    navigate(`/perfumes/${perfumeId}/reviews/${item.id}`, {state:{content:item.content, rating:item.rate}});
-  }
-
-  const testFetch = (delay = 1000) =>
-    new Promise((response) => setTimeout(response, delay));
+  const navigateToModify = (perfumeId: number, item: item) => {
+    navigate(`/perfumes/${perfumeId}/reviews/${item.id}`, {
+      state: { content: item.content, rating: item.rate },
+    });
+  };
 
   useEffect(() => {
     getPerfumeReviews(perfumeId).then((response) => {
       setData(response.data.data.content);
     });
   }, []);
-
-  const onIntersect: IntersectionObserverCallback = async (
-    [entry],
-    observer
-  ) => {
-    if (entry.isIntersecting && !isLoaded) {
-      observer.unobserve(entry.target);
-      await getPerfumeReviews(perfumeId);
-      observer.observe(entry.target);
-    }
-  };
-
-  const { setTarget } = useIntersectionObserver({
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.5,
-    onIntersect,
-  });
 
   return (
     <>
@@ -100,7 +78,9 @@ function ReviewPage() {
                 <p>{item.member.nickname}</p>
                 <p>{item.rate}</p>
               </SWriterInfo>
-              <button onClick={()=>navigateToModify(Number(perfumeId), item)}>수정 버튼</button>
+              <button onClick={() => navigateToModify(Number(perfumeId), item)}>
+                수정 버튼
+              </button>
               <button
                 onClick={() => deletePerfumeReview(Number(perfumeId), item.id)}
               >
@@ -139,13 +119,6 @@ const SProfileImg = styled.img`
   width: 30px;
   background: url(/logo_orange.png) no-repeat;
   background-size: cover;
-`;
-
-const SEachReview = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
 `;
 
 const SReviewCard = styled.div`

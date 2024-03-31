@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import theme from "../../../styles/Theme";
 import GPTSample from "../../molecules/gptApi/gptSample";
-import { HeartOutlined, HeartFilled } from "@ant-design/icons";
+import { HeartFilled } from "@ant-design/icons";
 import {
   getLike,
   getPerfumeDetail,

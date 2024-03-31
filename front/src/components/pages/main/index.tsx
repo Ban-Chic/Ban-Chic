@@ -82,8 +82,6 @@ const SDiv2Container = styled.div`
 `;
 
 const SDiv3Container = styled.div`
-  /* margin-top: 40px; */
-  /* height: 1200px; */
   background-color: #0038a6;
   height: 136vw;
   padding-top: 24.6vw;
@@ -91,8 +89,6 @@ const SDiv3Container = styled.div`
 `;
 
 const SDiv4Container = styled.div`
-  /* margin-top: 40px; */
-  /* height: 1200px; */
   height: 50vw;
   background-color: white;
 `;
@@ -103,21 +99,12 @@ const SMiddleSection = styled.div`
   height: 450px;
 `;
 
-const SBottomSection = styled.div`
-  /* display: flex; */
-`;
+const SBottomSection = styled.div``;
 
 const SDivKumarWhite = styled.span`
   ${theme.font.KumarOneRegular};
   font-size: 90px;
   color: white;
-  animation-delay: 0ms;
-`;
-
-const SDivKumarBlack = styled.span`
-  ${theme.font.KumarOneRegular};
-  font-size: 100px;
-  color: black;
   animation-delay: 0ms;
 `;
 
@@ -132,20 +119,14 @@ const SH1Cascade = styled.h1`
   margin-left: 170px;
   margin-top: 100px;
   display: block;
-  vertical-align: top;
   overflow: hidden;
   padding-bottom: 0.2em;
   font-size: 30px;
   z-index: 3;
 `;
 
-const SSecondLoad = styled.div`
-  display: flex;
-`;
-
 const SImg = styled.img`
   position: relative;
-  /* margin-right: 30px; */
   width: 40%;
   height: 40%;
 `;
@@ -169,7 +150,6 @@ const SImgFlower = styled.img`
   margin-left: 170px;
   margin-top: 30px;
   display: block;
-  vertical-align: top;
   overflow: hidden;
   padding-bottom: 0.2em;
   z-index: 3;
@@ -209,16 +189,12 @@ const SH2Group = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: end;
-  /* margin-top: 150px; */
   margin-right: 100px;
   justify-content: end;
   z-index: 3;
 `;
 
 const SH2 = styled.h2`
-  /* -webkit-transform: translate3d(0, 30vw, 0);
-  -moz-transform: translate3d(0, 30vw, 0);
-  transform: translate3d(0, 30vw, 0); */
   color: black;
   font-size: 80px;
   display: flex;

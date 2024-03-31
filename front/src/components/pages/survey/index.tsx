@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import theme from "../../../styles/Theme";
 
@@ -45,7 +45,6 @@ const FSTitle = styled(motion.div)`
   ${theme.font.KumarOneOutline}
   font-size: 24px;
   position: absolute;
-  inset:;
 `;
 
 const SContainer = styled(motion.section)`

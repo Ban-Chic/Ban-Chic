@@ -14,7 +14,6 @@ import ErrorPage from "../components/pages/error";
 import MyPage from "../components/pages/mypage";
 import PerfumeDetailPage from "../components/pages/perfumeDetail";
 import MainSample from "../components/pages/mainSample/mainSample";
-import GPTSample from "../components/molecules/gptApi/gptSample";
 import RecommendPage from "../components/pages/recommend";
 import SurveySelectPage from "../components/pages/survey";
 import NaverCallback from "../components/pages/login/NaverCallback";
@@ -37,7 +36,6 @@ function Router() {
             element={<PerfumeDetailPage />}
           ></Route>
           <Route path="/mainSample" element={<MainSample />}></Route>
-          <Route path="/gptSample" element={<GPTSample />}></Route>
           <Route path={Page_Url.Login} element={<LoginPage />}></Route>
           <Route
             path="/perfumes/:perfumeId/reviews/:reviewId"

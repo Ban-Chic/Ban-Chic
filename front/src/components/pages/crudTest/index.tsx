@@ -46,11 +46,13 @@ function CRUDTest() {
   const [board, setBoard] = useState({
     rate: 0,
     content: "",
-    file: new File([], "", { type: "" }),
+    // file: new File([], "", { type: "" }),
     pefumeId: 1,
   });
 
-  const [reviewImg, setReviewImg] = useState(new File([], "", { type: "" }));
+  const [reviewImg, setReviewImg] = useState({
+    file: File,
+  });
   const onChange = (event: any) => {
     const { value, name } = event.target;
     if (name === "rate") {
@@ -68,9 +70,12 @@ function CRUDTest() {
   };
 
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = event.target;
+    const { name, files } = event.target;
     if (files) {
-      setReviewImg(files[0]);
+      setReviewImg({
+        ...reviewImg,
+        [name]: files[0],
+      });
     }
   };
 
@@ -105,11 +110,15 @@ function CRUDTest() {
         />
         <button
           onClick={() => {
-            postPerfumeReview("1", reviewImg, board.rate, board.content).catch(
-              (error) => {
-                console.log(error);
-              }
-            );
+            console.log(reviewImg.file);
+            postPerfumeReview(
+              "1",
+              reviewImg.file,
+              board.rate,
+              board.content
+            ).catch((error) => {
+              console.log(error);
+            });
           }}
         >
           등록버튼

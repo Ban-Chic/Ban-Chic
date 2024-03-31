@@ -1,14 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 import { updatePerfumeReview } from "../../../api/Api";
-
-interface Props {
-  oneReview: {
-    content: string;
-    rating: number;
-  };
-}
 
 function ReviewModify() {
   const { perfumeId } = useParams() as { perfumeId: string };
@@ -37,9 +30,13 @@ function ReviewModify() {
       alert("별점을 입력해주세요.");
     } else {
       if (window.confirm("리뷰를 수정하시겠습니까?")) {
-        updatePerfumeReview(Number(perfumeId), Number(reviewId), {rate: rating, content: content})
-          .then(function (response) {
+        updatePerfumeReview(Number(perfumeId), Number(reviewId), {
+          rate: rating,
+          content: content,
+        })
+          .then((response) => {
             alert("수정 완료");
+            console.log(response);
             navigate(`/perfumes/${perfumeId}/reviews`);
           })
           .catch(function (error) {
