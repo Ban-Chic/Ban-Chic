@@ -76,11 +76,11 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-//        config.setAllowedOrigins(Arrays.asList(
-//            "http://localhost:5173",
-//            "http://j10b109.p.ssafy.io:5173"
-//        ));
-        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedOrigins(Arrays.asList(
+            "http://localhost:5173",
+            "http://j10b109.p.ssafy.io:5173"
+        ));
+//        config.setAllowedOrigins(List.of("*"));
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("*"));
         config.setAllowedMethods(Arrays.asList(
