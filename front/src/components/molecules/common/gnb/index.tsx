@@ -1,61 +1,32 @@
 import styled from "styled-components";
-import theme from "../../../../styles/Theme";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect, useRef } from "react";
-import SidebarReal from "../../sidebarReal/sidebarReal";
-import { motion } from "framer-motion";
-import MenuToggle from "../../../atoms/menuToggle/menuToggle";
+
+import theme from "../../../../styles/Theme";
+import Page_Url from "../../../../router/Url";
+import SideBar from "./sideBar";
 
 function GNB() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isWidth, setIsWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  // button 클릭 시 토글
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    console.log(isOpen);
-  };
-
   return (
     <SHeaderContainer>
-      <SLink to="/">Ban:Chic</SLink>
-      <SLink to="/mainSample">
-        <SImgContainer src="/logo_triangle_banchic.png" alt="logo" />
-      </SLink>
-      <SLink to="/perfumes/1">PerfumeDetail</SLink>
-      <SLink to="/mypage">MyPage</SLink>
-      {/* <SLink to="/perfumes/1/reviews">리뷰더보기</SLink> */}
-      <SidebarReal
-        width={isWidth}
-        isOpenCheck={isOpen}
-        setIsOpen={setIsOpen}
-      ></SidebarReal>
-      <MenuToggle toggle={() => toggleMenu()} isOpen={isOpen} />
+      <SLink to={Page_Url.Main}>Ban:Chic</SLink>
+      <SImgContainer src="/logo_triangle_banchic.png" alt="Logo" />
+      <SideBar />
     </SHeaderContainer>
   );
 }
 
-export const SHeaderContainer = styled.nav`
+const SHeaderContainer = styled.nav`
   display: flex;
   justify-content: space-between;
-  padding-left: 5rem;
-  padding-right: 5rem;
   align-items: center;
   background-color: transparent;
-  color: #f2f2f2;
+  color: ${theme.color.fontColor};
   white-space: nowrap;
   height: 50px;
+  padding: 0 1em;
+  @media only screen and (min-width: 768px) {
+    padding: 0 5em;
+  }
 `;
 
 const SImgContainer = styled.img`
@@ -65,7 +36,11 @@ const SImgContainer = styled.img`
 
 const SLink = styled(Link)`
   ${theme.font.KumarOneRegular};
+  ${theme.color.fontColor}
   font-size: 30px;
+  @media only screen and (min-width: 768px) {
+    font-size: 1.5em;
+  }
 `;
 
 export default GNB;

@@ -1,11 +1,12 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 // 페이지 URL
 import Page_Url from "./Url";
 
 //레이아웃
-import Layouts from "../layouts";
+import Layouts from "../layouts/layouts";
+import LayoutsWithoutHF from "../layouts/layoutsWithoutHF";
 
 // 페이지
 import MainPage from "../components/pages/main";
@@ -26,10 +27,9 @@ import ReviewModify from "../components/pages/review/reviewModify";
 import SurveyPage from "../components/pages/survey/select";
 
 function Router() {
-  const location = useLocation();
   return (
     <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
+      <Routes>
         <Route element={<Layouts />} errorElement={<ErrorPage />}>
           <Route path={Page_Url.Main} element={<MainPage />}></Route>
           <Route
@@ -39,8 +39,6 @@ function Router() {
           <Route path="/mainSample" element={<MainSample />}></Route>
           <Route path="/gptSample" element={<GPTSample />}></Route>
           <Route path={Page_Url.Login} element={<LoginPage />}></Route>
-          <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
-          <Route path={Page_Url.Map} element={<MapPage />}></Route>
           <Route
             path="/perfumes/:perfumeId/reviews/:reviewId"
             element={<ReviewModify />}
@@ -52,7 +50,6 @@ function Router() {
           ></Route>
         </Route>
 
-        <Route path={Page_Url.My} element={<MyPage />}></Route>
         <Route
           path={Page_Url.NaverCallback}
           element={<NaverCallback />}
@@ -61,8 +58,11 @@ function Router() {
           path={Page_Url.KakaoCallback}
           element={<KakaoCallback />}
         ></Route>
-        <Route path={Page_Url.Survey} element={<SurveySelectPage />}></Route>
-        <Route element={<Layouts />} errorElement={<ErrorPage />}>
+        <Route element={<LayoutsWithoutHF />} errorElement={<ErrorPage />}>
+          <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
+          <Route path={Page_Url.Map} element={<MapPage />}></Route>
+          <Route path={Page_Url.Survey} element={<SurveySelectPage />}></Route>
+          <Route path={Page_Url.My} element={<MyPage />}></Route>
           <Route
             path={Page_Url.SurveyImage}
             element={<SurveySelectPage />}
