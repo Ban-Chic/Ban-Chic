@@ -1,9 +1,7 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-
-import theme from "../../../../styles/Theme";
+/* eslint-disable react-refresh/only-export-components */
 import Page_Url from "../../../../router/Url";
 import SideBar from "./sideBar";
+import { SHeaderContainer, SImgContainer, SLink } from "./GNB.styles"; //
 
 function GNB() {
   return (
@@ -14,33 +12,5 @@ function GNB() {
     </SHeaderContainer>
   );
 }
-
-const SHeaderContainer = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: transparent;
-  color: ${theme.color.fontColor};
-  white-space: nowrap;
-  height: 50px;
-  padding: 0 1em;
-  @media only screen and (min-width: 768px) {
-    padding: 0 5em;
-  }
-`;
-
-const SImgContainer = styled.img`
-  padding: 10px;
-  width: 50px;
-`;
-
-const SLink = styled(Link)`
-  ${theme.font.KumarOneRegular};
-  ${theme.color.fontColor}
-  font-size: 30px;
-  @media only screen and (min-width: 768px) {
-    font-size: 1.5em;
-  }
-`;
 
 export default GNB;

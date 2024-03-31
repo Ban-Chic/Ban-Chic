@@ -28,17 +28,15 @@ function SurveySelectPage() {
 
   return (
     <SContainer>
-      <AnimatePresence>
-        <FSTitle
-          key={currentText} // Key를 현재 텍스트로 설정하여 각 상태를 구분합니다.
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 100 }}
-        >
-          {currentText}
-        </FSTitle>
-      </AnimatePresence>
+      <FSTitle
+        key={currentText} // Key를 현재 텍스트로 설정하여 각 상태를 구분합니다.
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3, type: "spring", stiffness: 100 }}
+      >
+        {currentText}
+      </FSTitle>
     </SContainer>
   );
 }
@@ -46,7 +44,8 @@ function SurveySelectPage() {
 const FSTitle = styled(motion.div)`
   ${theme.font.KumarOneOutline}
   font-size: 24px;
-  position: relative;
+  position: absolute;
+  inset:;
 `;
 
 const SContainer = styled(motion.section)`

@@ -10,15 +10,6 @@ interface PerfumeData {
   data: object;
 }
 
-interface IReview {
-  perfumeId: number;
-  reviewId?: number;
-  content: string;
-  rate: number;
-  file: string;
-  // imgUrl은 스트링 아니면 file
-}
-
 export const baseAPI = () => API.get("/");
 
 // 향수
@@ -48,30 +39,23 @@ export const getPerfumeReviews = (perfumeId: string) =>
 // 리뷰
 
 /** 리뷰 등록 */
-export const postPerfumeReview = (
+export const postPerfumeReview = async (
   perfumeId: string,
   file: File,
   rate: number,
   content: string
 ) => {
   const formData = new FormData();
+
   const data = { rate: rate, content: content };
   const uploadData = JSON.stringify(data);
-  const blobData = new Blob([uploadData], {type: "application/json" });
+  const blobData = new Blob([uploadData], { type: "application/json" });
 
-  // const uploadFile = JSON.stringify(file);
-  const blobFile = new Blob([file], {type: "multipart/form-data"});
-
-  
-  console.log(perfumeId);
-  console.log(uploadData);
-  console.log(blobFile);
-  
   formData.append("form", blobData);
   console.log("아래가 폼");
   console.log("FormData:", formData.get("form")); // FormData 내용 확인
-  
-  formData.append("file", blobFile);
+
+  formData.append("file", file);
   console.log("아래가 파일");
   console.log("FormData:", formData.get("file")); // FormData 내용 확인
 
@@ -79,14 +63,13 @@ export const postPerfumeReview = (
 
   // ImgAPI를 사용하여 요청 보내기
   try {
-    
-    ImgAPI.post(`/perfumes/${perfumeId}/reviews`, formData);
-    console.log("성공!");
-
+    ImgAPI.post(`/perfumes/${perfumeId}/reviews`, formData).then((res) =>
+      console.log(res)
+    );
   } catch (error) {
     console.log(error);
   }
-  return ImgAPI.post(`/perfumes/${perfumeId}/reviews`, formData);
+  window.alert("됐어");
 };
 
 /** 리뷰 수정 */
@@ -94,13 +77,13 @@ export const updatePerfumeReview = (
   perfumeId: number,
   reviewId: number,
   newReview: object
-  ) => API.put(`/perfumes/${perfumeId}/reviews/${reviewId}`, newReview);
-  
-  /** 리뷰 삭제 */
-  export const deletePerfumeReview = (perfumeId: number, reviewId: number) =>
+) => API.put(`/perfumes/${perfumeId}/reviews/${reviewId}`, newReview);
+
+/** 리뷰 삭제 */
+export const deletePerfumeReview = (perfumeId: number, reviewId: number) =>
   API.delete(`/perfumes/${perfumeId}/reviews/${reviewId}`);
-  
-  // 소셜로그인
+
+// 소셜로그인
 
 /** 네이버 소셜 로그인 */
 export const getNaverLogin = (code: string | null, state: string | null) => {

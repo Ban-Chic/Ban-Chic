@@ -1,9 +1,6 @@
-import styled, { css, keyframes } from "styled-components";
-import React, { useState, useEffect, useCallback } from "react";
+import styled from "styled-components";
+import { useState, useEffect } from "react";
 import theme from "../../../styles/Theme";
-import ReviewInDetail from "../../molecules/review/reviewInDetail";
-import { SHeaderContainer } from "../../molecules/common/gnb";
-import SpiceImageUrl from "../../../utils/ImgUrl";
 import GPTSample from "../../molecules/gptApi/gptSample";
 import {
   getPerfumeDetail,
@@ -14,13 +11,9 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import RadarChartContainer from "../../molecules/charts/radarChart";
-import BarChartContainer from "../../molecules/charts/barChart";
-import PieChartContainer from "../../molecules/charts/pieChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
 import { Link } from "react-router-dom";
 import ReviewPage from "../review/review";
-import ReviewRegist from "../../molecules/review/reviewRegist";
-import CRUDTest from "../crudTest";
 
 interface Props {
   data: {
@@ -35,19 +28,14 @@ interface Props {
     TopNotes: string[];
     MiddleNotes: string[];
     BottomNotes: string[];
-  } | null;
+  };
 }
 
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState<Props["data"]>(null);
-  const [notes, setNotes] = useState<Props["data"]>(null);
-
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const onClickToggleModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-  }, [isOpenModal]);
+  const [data, setData] = useState<Props["data"]>();
+  const [notes, setNotes] = useState<Props["data"]>();
 
   useEffect(() => {
     getPerfumeDetail(perfumeId).then((data) => {
@@ -71,13 +59,11 @@ function PerfumeDetail() {
     <>
       <SDetailContainer>
         <SBlock>
-          {data && <SImg src={data.data.perfumeImg} alt="Perfume Img" />}
+          {data && <SImg src={data.perfumeImg} alt="Perfume Img" />}
           <SLikeButton onClick={onClickHandler}>좋아요버튼임</SLikeButton>
         </SBlock>
         <SBlock>
-          {data && data.data.season && (
-            <RadarChartContainer season={data.data.season} />
-          )}
+          {data && data.season && <RadarChartContainer season={data.season} />}
         </SBlock>
         <SBlock>
           {data && (
@@ -243,6 +229,5 @@ const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
   background-color: darkgreen;
   color: black;
 `;
-
 
 export default PerfumeDetail;

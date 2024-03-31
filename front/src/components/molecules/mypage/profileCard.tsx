@@ -20,7 +20,12 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
       <SProfile
         $imageurl={data.data?.image ? data?.data?.image : "/user.svg"}
       />
-      <input type="file" id="profileImg" accept="image/*" onInput={onInput} />
+      <SInput
+        type="file"
+        id="profileImg"
+        accept="image/jpeg, image/png"
+        onInput={onInput}
+      />
       <button type="submit" onClick={updateProfileImage}>
         제출
       </button>
@@ -29,6 +34,10 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
     </SFlexCenter>
   );
 }
+
+const SInput = styled.input`
+  display: none;
+`;
 
 const SFlexCenter = styled.div`
   width: 100%;
