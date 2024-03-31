@@ -35,11 +35,11 @@ const SLoginSection = styled(motion.div)`
   display: flex;
   gap: 2em;
   justify-content: space-between;
-  padding: 5em 5em;
+  padding: 5em;
   ${theme.styleBase.glassmorphism}
   border-radius: 5px;
   flex-direction: column;
-  margin: 0 auto;
+  border: 2px solid white;
   @media only screen and (min-width: 768px) {
     width: 32rem;
     flex-direction: row;
