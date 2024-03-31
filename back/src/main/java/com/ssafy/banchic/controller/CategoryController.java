@@ -1,6 +1,9 @@
 package com.ssafy.banchic.controller;
 
+import com.ssafy.banchic.domain.dto.request.GenderReq;
+import com.ssafy.banchic.domain.dto.request.SeasonReq;
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
+import com.ssafy.banchic.domain.dto.response.GenderRes;
 import com.ssafy.banchic.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -10,10 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Category", description = "Category 관련 API")
 @RestController
@@ -31,11 +31,11 @@ public class CategoryController {
             responseCode = "200",
             description = "season 정보에 맞게 페이지 목록이 정상적으로 조회되었습니다."
     )
-    @GetMapping("/season/{seasonName}")
-    public ResponseEntity<CommonResponse> season(@PathVariable("seasonName") String seasonName,
+    @GetMapping("/season/division")
+    public ResponseEntity<CommonResponse> season(@RequestBody SeasonReq seasonReq,
                                                  @PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC, size = 20)
                                                  Pageable pageable) {
-
+        String seasonName = seasonReq.getSeasonName();
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("season에 대한 분류 값 뽑기")
                 .data(categoryService.getSeasonList(seasonName, pageable))
@@ -50,11 +50,11 @@ public class CategoryController {
             responseCode = "200",
             description = "gender 정보에 맞게 페이지 목록이 정상적으로 조회되었습니다."
     )
-    @GetMapping("/gender/{genderName}")
-    public ResponseEntity<CommonResponse> gender(@PathVariable("genderName") String genderName,
+    @GetMapping("/gender/division")
+    public ResponseEntity<CommonResponse> gender(@RequestBody GenderReq genderReq,
                                                  @PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC, size = 20)
                                                  Pageable pageable) {
-
+        String genderName = genderReq.getGenderName();
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("gender에 대한 분류 값 뽑기")
                 .data(categoryService.getGenderList(genderName, pageable))
