@@ -1,7 +1,9 @@
 package com.ssafy.banchic.service;
 
+import com.ssafy.banchic.domain.dto.response.BrandNameRes;
 import com.ssafy.banchic.domain.dto.response.GenderRes;
 import com.ssafy.banchic.domain.dto.response.SeasonRes;
+import com.ssafy.banchic.domain.dto.response.perfume.PerfumeRes;
 import com.ssafy.banchic.domain.entity.Perfume;
 import com.ssafy.banchic.domain.entity.perfume.gender.*;
 import com.ssafy.banchic.domain.entity.perfume.season.*;
@@ -142,5 +144,10 @@ public class CategoryService {
                 .toList();
 
         return new PageImpl<>(genderList, pageable, genderList.size());
+    }
+
+    @Transactional(readOnly = true)
+    public Page<BrandNameRes> getBrandList(String BrandName, Pageable pageable) {
+        Page<Perfume> perfumes = perfumeRepository.findByBrandNameContaining(BrandName, pageable);
     }
 }
