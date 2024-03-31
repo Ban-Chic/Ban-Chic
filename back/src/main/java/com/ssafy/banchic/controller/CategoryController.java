@@ -31,7 +31,7 @@ public class CategoryController {
             responseCode = "200",
             description = "season 정보에 맞게 페이지 목록이 정상적으로 조회되었습니다."
     )
-    @GetMapping("/season/division")
+    @GetMapping("/season")
     public ResponseEntity<CommonResponse> season(@RequestBody SeasonReq seasonReq,
                                                  @PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC, size = 20)
                                                  Pageable pageable) {
@@ -50,7 +50,7 @@ public class CategoryController {
             responseCode = "200",
             description = "gender 정보에 맞게 페이지 목록이 정상적으로 조회되었습니다."
     )
-    @GetMapping("/gender/division")
+    @GetMapping("/gender")
     public ResponseEntity<CommonResponse> gender(@RequestBody GenderReq genderReq,
                                                  @PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC, size = 20)
                                                  Pageable pageable) {
