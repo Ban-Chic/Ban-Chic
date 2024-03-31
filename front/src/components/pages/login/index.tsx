@@ -32,13 +32,18 @@ function LoginPage() {
 }
 
 const SLoginSection = styled(motion.div)`
-  width: 32rem;
   display: flex;
   gap: 2em;
   justify-content: space-between;
-  padding: 60px 30px;
+  padding: 5em 5em;
   ${theme.styleBase.glassmorphism}
   border-radius: 5px;
+  flex-direction: column;
+  margin: 0 auto;
+  @media only screen and (min-width: 768px) {
+    width: 32rem;
+    flex-direction: row;
+  }
 `;
 
 const SLoginTitle = styled(STitle)`
