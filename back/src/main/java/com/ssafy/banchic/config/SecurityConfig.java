@@ -6,7 +6,7 @@ import com.ssafy.banchic.security.JwtFilter;
 import com.ssafy.banchic.util.TokenProvider;
 import com.ssafy.banchic.service.UserDetailsServiceImpl;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -80,12 +80,14 @@ public class SecurityConfig {
             "http://localhost:5173",
             "http://j10b109.p.ssafy.io:5173"
         ));
-        config.setAllowedHeaders(List.of("Origin","Accept","X-Requested-With","Content-Type",
-            "Access-Control-Request-Method","Access-Control-Request-Headers", "Access-Control-Allow-Origin",
-            "Authorization", "RefreshToken"));
-        config.setExposedHeaders(List.of("Origin","Accept","X-Requested-With","Content-Type",
-            "Access-Control-Request-Method","Access-Control-Request-Headers","Access-Control-Allow-Origin",
-            "Authorization", "RefreshToken"));
+//        config.setAllowedHeaders(List.of("Origin","Accept","X-Requested-With","Content-Type",
+//            "Access-Control-Request-Method","Access-Control-Request-Headers", "Access-Control-Allow-Origin",
+//            "Authorization", "RefreshToken"));
+//        config.setExposedHeaders(List.of("Origin","Accept","X-Requested-With","Content-Type",
+//            "Access-Control-Request-Method","Access-Control-Request-Headers","Access-Control-Allow-Origin",
+//            "Authorization", "RefreshToken"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        config.setExposedHeaders(Collections.singletonList("*"));
         config.setAllowedMethods(Arrays.asList(
             HttpMethod.GET.name(),
             HttpMethod.POST.name(),
