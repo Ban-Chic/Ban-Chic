@@ -13,7 +13,7 @@ export const CallGPT = async ({ prompt }) => {
     {
       role: "user",
       content: `You must translate into Korean all thing.
-        1. [title] : Think of the diary title after understanding the [events] separated by """ at the bottom.
+        1. [title] : Think of the perfume title after understanding the [events] separated by """ at the bottom.
         2. [summarize] : summarize events in order with one line sentence.
         3. [promotional_copywriting] : Write an [promotional copywriting] with a paragraph based on the summary.
         4. [description] : description is from the perspective of a perfumer and perfume salesperson, explaining each perfume in detail about this perfume. But 

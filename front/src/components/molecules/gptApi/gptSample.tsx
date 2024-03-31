@@ -3,20 +3,11 @@ import { CallGPT } from "./gpt";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
 
-// interface PerfumeData{
-//   title: string;
-//   summary: string;
-//   promotional_copywriting: string;
-//   perfume_name: string;
-
-// }
-
-interface IData{
+interface IData {
   title: string;
   promotional_copywriting: string;
   evaluates: string;
   description: string;
-  perfume_name: string;
 }
 
 interface Props {
@@ -26,7 +17,6 @@ interface Props {
 
 function GPTSample(Props: Props) {
   const [data, setData] = useState<IData | null>(null);
-  // const [data, setData] = useState<PerfumeData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClickAPICall = async () => {
@@ -48,13 +38,10 @@ function GPTSample(Props: Props) {
 
   console.log(">>data", data);
 
-  
   return (
     <>
       <SContainer>
         <SButton onClick={handleClickAPICall}>GPT가 말해주는 향수 설명</SButton>
-        {/* <div>perfume_name: {data?.perfume_name}</div> */}
-        {/* <div>promotional_copywriting: {data?.promotional_copywriting}</div> */}
         <SDescription>description: {data?.description}</SDescription>
         <div>isLoading : {isLoading ? "loading.." : "fin"}</div>
       </SContainer>

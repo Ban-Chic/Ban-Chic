@@ -8,10 +8,10 @@ import useLogout from "../../../hooks/auth/useLogout";
 interface Props {
   width: number;
   isOpenCheck: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
+const SidebarReal = ({ width, isOpenCheck }: Props) => {
   const [xPosition, setX] = useState(-width);
   const side = useRef<HTMLDivElement>(null);
   const accessToken = localStorage.getItem("accessToken");
@@ -24,6 +24,10 @@ const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
       setX(-width);
     }
   }, [isOpenCheck, width]);
+
+  const goToHome = () => {
+    window.location.href = "/";
+  };
 
   return (
     <SContainer isOpenCheck={isOpenCheck}>
@@ -39,7 +43,7 @@ const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
         >
           {accessToken === null ? (
             <SMenuLink to={Page_Url.Login}>LOGIN</SMenuLink>
-            ) : (
+          ) : (
             <SButton onClick={() => Logout()}>LOGOUT</SButton>
           )}
         </SDiv>
@@ -52,7 +56,8 @@ const SidebarReal = ({ width, isOpenCheck, setIsOpen }: Props) => {
             transform: `translatex(${xPosition - 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
         >
-          <SMenuLink to={Page_Url.Main}>HOME</SMenuLink>
+          {/* <SMenuLink to={Page_Url.Main}>HOME</SMenuLink> */}
+          <SButton onClick={goToHome}>HOME</SButton>
         </SDiv>
         <SDiv
           ref={side}
