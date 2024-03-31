@@ -25,7 +25,11 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
   }, [$isOpenCheck, width]);
 
   const goToHome = () => {
-    window.location.href = "/";
+    window.location.href = Page_Url.Main;
+  };
+
+  const goToLogin = () => {
+    window.location.href = Page_Url.Login;
   };
 
   return (
@@ -40,7 +44,7 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
           }}
         >
           {accessToken === null ? (
-            <SMenuLink to={Page_Url.Login}>LOGIN</SMenuLink>
+            <SButton onClick={() => goToLogin()}>LOGIN</SButton>
           ) : (
             <SButton onClick={() => Logout()}>LOGOUT</SButton>
           )}
@@ -65,7 +69,7 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
         >
-          <SMenuLink to={Page_Url.SurveySelect}>SURVEY</SMenuLink>
+          <SMenuLink to={Page_Url.SurveyLanding}>SURVEY</SMenuLink>
         </SDiv>
         <SDiv
           ref={side}

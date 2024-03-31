@@ -11,6 +11,7 @@ export const SHeaderContainer = styled.nav`
   white-space: nowrap;
   height: 50px;
   padding: 0 1em;
+  position: relative;
   @media only screen and (min-width: 768px) {
     padding: 0 5em;
   }
@@ -19,6 +20,10 @@ export const SHeaderContainer = styled.nav`
 export const SImgContainer = styled.img`
   padding: 10px;
   width: 50px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
 `;
 
 export const SLink = styled(Link)`
