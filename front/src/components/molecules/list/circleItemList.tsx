@@ -4,8 +4,8 @@ import List from "../../atoms/list";
 import { ReactNode } from "react";
 
 interface IPerfumeData {
-  id: string | null;
-  perfumeImg: string | null;
+  id: string;
+  perfumeImg: string;
   perfumeName: string;
 }
 
