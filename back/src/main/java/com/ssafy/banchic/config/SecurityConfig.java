@@ -80,9 +80,10 @@ public class SecurityConfig {
             "http://localhost:5173",
             "http://j10b109.p.ssafy.io:5173"
         ));
-//        config.setAllowedOrigins(List.of("*"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setExposedHeaders(List.of("*"));
+        config.setAllowedHeaders(List.of("Origin","Accept","X-Requested-With","Content-Type",
+            "Access-Control-Request-Method","Access-Control-Request-Headers","Authorization", "RefreshToken"));
+        config.setExposedHeaders(List.of("Origin","Accept","X-Requested-With","Content-Type",
+            "Access-Control-Request-Method","Access-Control-Request-Headers","Authorization", "RefreshToken"));
         config.setAllowedMethods(Arrays.asList(
             HttpMethod.GET.name(),
             HttpMethod.POST.name(),
