@@ -22,6 +22,7 @@ import MyReviewList from "../../molecules/list/myReviewList";
 import ReviewListItem from "../../atoms/item/reviewListItem";
 import usePersuit from "../../../hooks/persuit/usePersuit";
 import PersuitCard from "../../molecules/mypage/persuitCard";
+import TempReviewBox from "../../molecules/detail/tempReviewBox";
 
 function MyPage() {
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
@@ -81,7 +82,7 @@ function MyPage() {
           <MyReviewList>
             {ReviewList.data.length !== 0 &&
               ReviewList.data.map((item: { id: string }, index: number) => {
-                if (index < 10) <ReviewListItem item={item} />;
+                if (index > 10) <div>{item.id}</div>;
               })}
             {!ReviewList.data.length && <div>리뷰를 작성해보세요</div>}
           </MyReviewList>
@@ -92,7 +93,7 @@ function MyPage() {
           </CircleItemList>
         </SBlock>
         <SBlock>
-          {/* <CircleItemList
+          <CircleItemList
             data={[
               {
                 id: localStorage.getItem("visited"),
@@ -101,7 +102,7 @@ function MyPage() {
             ]}
           >
             <SSubTitle>내가 본 향수</SSubTitle>
-          </CircleItemList> */}
+          </CircleItemList>
         </SBlock>
         <SBlock>
           <CircleItemList data={RecommendedList?.data?.data}>
