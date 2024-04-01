@@ -51,7 +51,7 @@ export const CallGPT = async ({ prompt }) => {
       model: "gpt-3.5-turbo",
       messages,
       temperature: 0.7,
-      max_tokens: 1_000,
+      max_tokens: 900,
     }),
   });
   const responseData = await response.json();
