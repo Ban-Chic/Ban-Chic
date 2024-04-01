@@ -4,6 +4,7 @@ import ButtonComponent from "../auth/Button";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import theme from "../../../styles/Theme";
+import { StarRating } from "./StarRating";
 
 type Props = {
   title?: string;
@@ -16,15 +17,15 @@ const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
   const [content, setContent] = useState<string>("");
 
   const ChangeBtn = () => {
-    const rateValue = parseInt(rate as any);
+    // const rateValue = parseInt(rate as any);
     if (
-      rateValue >= 1 &&
-      rateValue <= 5 &&
+      rate >= 1 &&
+      rate <= 5 &&
       content.length >= 2 &&
       content.length <= 500 &&
       /^[ㄱ-ㅎ가-힣a-z0-9-_ .%+=()*&^%$#@!~`,<>/?;:'"{}[]|]+$/i.test(content)
     ) {
-      actionModal?.(rateValue, content);
+      actionModal?.(rate, content);
       window.alert("리뷰 등록이 완료되었습니다.");
       closeModal();
     } else {
@@ -34,11 +35,11 @@ const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
     }
   };
 
-  const handleOnKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      ChangeBtn();
-    }
-  };
+  // const handleOnKeyPress = (e: React.KeyboardEvent) => {
+  //   if (e.key === "Enter") {
+  //     ChangeBtn();
+  //   }
+  // };
 
   return (
     <SModalWrap>
@@ -58,7 +59,8 @@ const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
         }}
       >
         <SSubTitle>{title}</SSubTitle>
-        <SInput
+        <StarRating setRate = {setRate}/>
+        {/* <SInput
           id="rateValue"
           type="number"
           onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +73,7 @@ const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
           onKeyPress={handleOnKeyPress}
           autoFocus
           required
-        />
+        /> */}
         <SInput
           id="contentValue"
           type="text"
@@ -82,7 +84,7 @@ const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
           placeholder="리뷰 내용을 입력하세요"
           maxLength={500}
           minLength={2}
-          onKeyPress={handleOnKeyPress}
+          // onKeyPress={handleOnKeyPress}
           required
         />
         <SFlexWrap>

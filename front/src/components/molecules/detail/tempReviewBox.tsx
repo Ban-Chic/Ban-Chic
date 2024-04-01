@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 import { SBody1, SBody2 } from "../../../styles/Font";
+import StarDisplay from "../../atoms/modalForm/StarDisplay";
 
 interface Props {
   children?: ReactNode;
@@ -29,7 +30,11 @@ function TempReviewBox({ children, data }: Props) {
       {data.data.content.map((item) => (
         <SReviewItem>
           <SBody1>{item.content}</SBody1>
-          <SRate>{item.rate}</SRate>
+          <SStarRate>
+
+          <StarDisplay rate={item.rate}/>
+          </SStarRate>
+          {/* <SRate>{item.rate}</SRate> */}
           <SProfile>
             <SProfileCircle
               $ImgUrl={item.member.image || "/user.svg"}
@@ -93,6 +98,18 @@ const SBoxContainer = styled.article`
   @media only screen and (min-width: 768px) {
     /* max-width: 300px; */
   }
+`;
+
+const SStarRate = styled.div`
+   position: absolute;
+  /* top: 3px; */
+  bottom: 15px;
+  right: 3px;
+  /* background-color: deepskyblue; */
+  width: 5em;
+  display: flex;
+  /* text-align: center; */
+  /* border-radius: 2em; */
 `;
 
 export default TempReviewBox;
