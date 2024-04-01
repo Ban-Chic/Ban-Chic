@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 // 페이지 URL
@@ -27,11 +27,13 @@ import SurveySelectPage from "../components/pages/survey/surveyselect";
 import SurveyLandingPage from "../components/pages/survey/surveyLanding";
 import SurveyImagePage from "../components/pages/survey/surveyImage";
 import SurveyQuestionPage from "../components/pages/survey/surveyQuestion";
+import SurveyResultPage from "../components/pages/survey/surveyResult";
 
 function Router() {
+  const location = useLocation();
   return (
-    <AnimatePresence>
-      <Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path={Page_Url.Landing} element={<LandingPage />}></Route>
         <Route element={<Layouts />} errorElement={<ErrorPage />}>
           <Route path={Page_Url.Main} element={<MainPage />}></Route>
@@ -52,9 +54,9 @@ function Router() {
           ></Route> */}
         </Route>
         <Route element={<LayoutsWithoutHF />} errorElement={<ErrorPage />}>
+          <Route path={Page_Url.Map} element={<MapPage />}></Route>
           <Route path={Page_Url.My} element={<MyPage />}></Route>
           <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
-          <Route path={Page_Url.Map} element={<MapPage />}></Route>
           <Route
             path={Page_Url.SurveyLanding}
             element={<SurveyLandingPage />}
@@ -70,6 +72,10 @@ function Router() {
           <Route
             path={Page_Url.SurveySwipe}
             element={<SurveyQuestionPage />}
+          ></Route>
+          <Route
+            path={Page_Url.SurveyResult}
+            element={<SurveyResultPage />}
           ></Route>
         </Route>
         <Route

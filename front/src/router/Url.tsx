@@ -18,9 +18,11 @@ const Page_Url = {
   /** 선택설문 페이지*/
   SurveySelect: "/survey/select",
   /** 양자택일설문 페이지*/
-  SurveySwipe: "/survey/select",
+  SurveySwipe: "/survey/question",
   /** 이미지설문 페이지*/
   SurveyImage: "/survey/image",
+  /** 이미지설문 페이지*/
+  SurveyResult: "/survey/result",
   /** 추천 페이지*/
   Recommend: "/recommend",
   /** 지도 페이지*/
