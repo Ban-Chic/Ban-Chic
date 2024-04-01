@@ -87,10 +87,13 @@ const SModalWrap = styled.div`
 const SModalBackGround = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
+  /* @media only screen and (max-width: none;) {
+    height: 100%;
+  } */
 `;
 
 const SInput = styled(motion.input)`
