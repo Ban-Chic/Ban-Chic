@@ -28,7 +28,7 @@ public class DataInitalizationRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         // 애플리케이션 초기화 시점에서 DummyData 실행
 //        dummyDataService.insertDummyData();
-        csvDataService.importCsvData("C:\\Users\\denny\\Downloads\\RealFinalPerfume.csv");
+        csvDataService.importCsvData("C:\\Users\\SSAFY\\Downloads\\RealFinalPerfume.csv");
         seasonDataService.insertSeasonData();
         genderDataService.insertGenderData();
     }

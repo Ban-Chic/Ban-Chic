@@ -13,7 +13,7 @@ public class OAuthLogoutService {
     private final RequestOAuthInfoService requestOAuthInfoService;
 
     public RevokeTokenResponseDto logout(OAuthLogoutParams params) {
-        RevokeTokenResponseDto responseDto = requestOAuthInfoService.logoutService(params);
-        return responseDto;
+        return requestOAuthInfoService.logoutService(params);
     }
+
 }

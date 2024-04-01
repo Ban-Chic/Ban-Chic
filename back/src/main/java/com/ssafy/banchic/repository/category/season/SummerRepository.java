@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SummerRepository extends JpaRepository<Summer, Long> {
 
     Page<Summer> findAll(Pageable pageable);
+
 }
