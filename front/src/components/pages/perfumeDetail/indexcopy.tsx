@@ -13,9 +13,11 @@ import LoadingSpinner from "../../../utils/LoadingSpinner";
 import useGetHeart, { useUpdateHeart } from "../../../hooks/heart/useGetHeart";
 import { SSubTitle } from "../../../styles/Font";
 import TempReviewBox from "../../molecules/detail/tempReviewBox";
-import useGetPerfumeReviews from "../../../hooks/review/useGetPerfumeReviews";
+import useGetPerfumeReviews, { usePostReview } from "../../../hooks/review/useGetPerfumeReviews";
 import { useEffect, useState } from "react";
 import { CallGPT } from "../../molecules/gptApi/gpt";
+import useOpenModal from "../../../hooks/modal/useOpenModal";
+import ModalForm from "../../atoms/modalForm/ModalForm";
 
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
@@ -23,12 +25,19 @@ function PerfumeDetail() {
   const { data, isLoading, isError, error } = useGetPerfumeDetail(perfumeId);
   const { data: hearts } = useGetHeart(perfumeId);
   const postHeart = useUpdateHeart(perfumeId);
+  const postReview = usePostReview();
   const { data: reviews } = useGetPerfumeReviews(perfumeId);
   const [gptDescription, setGptDescription] = useState<string | null>(null);
   const [gptDescriptionFetched, setGptDescriptionFetched] = useState(false);
+  const { isOpenModal, clickModal, closeModal } = useOpenModal();
 
+  //좋아요 뮤테이션
   const heartMutation = () => {
     postHeart.mutate();
+  };
+
+  const postReviewFunction = (rate: number, content:string) =>{
+    postReview.mutate({perfumeId, rate, content});
   };
 
   useEffect(() => {
@@ -41,8 +50,10 @@ function PerfumeDetail() {
               spices of perfume: ${data.data.notes}
             `,
           });
-          const { description } = JSON.parse(message);
-          setGptDescription(description);
+          console.log("Response from CallGPT:", message);
+          console.log(typeof message);
+          const { promotional_copywriting } = JSON.parse(message);
+          setGptDescription(promotional_copywriting);
           setGptDescriptionFetched(true);
         }
       } catch (error) {
@@ -117,7 +128,7 @@ function PerfumeDetail() {
             <TempReviewBox data={reviews}>
               <SReviewDiv>
                 <SSubTitle>Review</SSubTitle>
-                <button>리뷰등록</button>
+                <button onClick={() => clickModal()}>리뷰등록</button>
               </SReviewDiv>
             </TempReviewBox>
           </SBlock>
@@ -125,6 +136,14 @@ function PerfumeDetail() {
             <SPerfumeName> {data.data.perfumeName}</SPerfumeName>
             <SPerfumeName> {data.data.koreanName}</SPerfumeName>
           </SBlock>
+          {isOpenModal && (
+            <ModalForm
+              closeModal={closeModal}
+              actionModal={postReviewFunction}
+              title="리뷰 등록하기"
+              // alert={data.data?.nickname}
+            />
+          )}
         </SDetailContainer>
       </>
     );
