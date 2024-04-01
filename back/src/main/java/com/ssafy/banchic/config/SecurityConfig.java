@@ -7,6 +7,7 @@ import com.ssafy.banchic.util.TokenProvider;
 import com.ssafy.banchic.service.UserDetailsServiceImpl;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
