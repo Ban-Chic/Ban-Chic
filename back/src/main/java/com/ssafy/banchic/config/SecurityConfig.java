@@ -3,11 +3,8 @@ package com.ssafy.banchic.config;
 import com.ssafy.banchic.exception.AccessDeniedHandlerException;
 import com.ssafy.banchic.exception.AuthenticationEntryPointException;
 import com.ssafy.banchic.security.JwtFilter;
-import com.ssafy.banchic.util.TokenProvider;
 import com.ssafy.banchic.service.UserDetailsServiceImpl;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import com.ssafy.banchic.util.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -16,7 +13,6 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
@@ -26,9 +22,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -73,29 +66,29 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of(
-            "http://localhost:5173",
-            "http://j10b109.p.ssafy.io:5173"
-        ));
-        config.setAllowedHeaders(List.of("*"));
-        config.setExposedHeaders(List.of("*"));
-        config.setAllowedMethods(Arrays.asList(
-            HttpMethod.GET.name(),
-            HttpMethod.POST.name(),
-            HttpMethod.DELETE.name(),
-            HttpMethod.PUT.name(),
-            HttpMethod.HEAD.name(),
-            HttpMethod.OPTIONS.name()
-        ));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//
+//        config.setAllowCredentials(true);
+//        config.setAllowedOrigins(List.of(
+//            "http://localhost:5173",
+//            "http://j10b109.p.ssafy.io:5173"
+//        ));
+//        config.setAllowedHeaders(List.of("*"));
+//        config.setExposedHeaders(List.of("*"));
+//        config.setAllowedMethods(Arrays.asList(
+//            HttpMethod.GET.name(),
+//            HttpMethod.POST.name(),
+//            HttpMethod.DELETE.name(),
+//            HttpMethod.PUT.name(),
+//            HttpMethod.HEAD.name(),
+//            HttpMethod.OPTIONS.name()
+//        ));
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return source;
+//    }
 
 }
