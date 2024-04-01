@@ -23,8 +23,8 @@ function CircleItemList({ children, data }: IProps) {
           {data?.map((item, i) => (
             <CircleItem
               key={i}
-              url={"/perfumes/" + item.id}
-              $imageUrl={item.perfumeImg}
+              url={"/perfumes/" + item?.id}
+              $imageUrl={item?.perfumeImg}
             ></CircleItem>
           ))}
         </List>

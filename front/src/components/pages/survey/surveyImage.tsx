@@ -2,11 +2,13 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
+import { ImgAPI } from "../../../api/Config";
 
 function SurveyImagePage() {
   // 이미지 미리보기 URL을 상태로 관리합니다.
   const [previewUrl, setPreviewUrl] = useState("");
   const [unisex, setUnisex] = useState("");
+  const [files, setFiles] = useState<FileList | null>();
   // 파일 인풋 참조를 생성합니다.
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handlePictureClick = () => {
@@ -31,11 +33,16 @@ function SurveyImagePage() {
       const file = event.target.files[0];
       const fileUrl = URL.createObjectURL(file);
       setPreviewUrl(fileUrl); // 미리보기 URL 상태 업데이트
+      if (file) setFiles(event.target.files);
     }
   };
 
   const handleSubmit = () => {
-    console.log("dd");
+    const formData = new FormData();
+    if (files) formData.append("file", files[0]);
+    ImgAPI.post(`members/recommend/image`, formData).then((res) =>
+      console.log(res)
+    );
   };
   return (
     <SFContainer
