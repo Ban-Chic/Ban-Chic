@@ -22,7 +22,7 @@ const MapContainer = styled.div`
 
 const SWrap = styled.div`
   position: absolute;
-  top: 53px;
+  top: 3px;
   left: 3px;
   z-index: 2;
 

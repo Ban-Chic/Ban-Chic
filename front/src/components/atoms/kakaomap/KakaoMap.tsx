@@ -45,10 +45,19 @@ function KakaoMap(): React.ReactElement {
           zIndex: 1,
         });
 
-        navigator.geolocation.getCurrentPosition((data) => {
-          const position = [data.coords.latitude, data.coords.longitude];
-          window.kakao.obj.setCenter(new window.kakao.maps.LatLng(...position));
-        });
+        navigator.geolocation.getCurrentPosition(
+          (data) => {
+            const position = [data.coords.latitude, data.coords.longitude];
+            window.kakao.obj.setCenter(
+              new window.kakao.maps.LatLng(...position)
+            );
+          },
+          () => {
+            alert(
+              "위치 권한 설정을 허용으로 변경해주세요!\n현재 위치 기반으로 검색 결과를 반환해드립니다."
+            );
+          }
+        );
       });
     };
 
@@ -59,9 +68,10 @@ function KakaoMap(): React.ReactElement {
 
   return (
     <>
-      <MapContainer id="map" />;
-      <LocationBtn />
-      <SearchPlaces />
+      <MapContainer id="map">
+        <SearchPlaces />
+        <LocationBtn />
+      </MapContainer>
     </>
   );
 }

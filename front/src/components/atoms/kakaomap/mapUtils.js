@@ -1,4 +1,4 @@
-function searchPlaces(keyword) {
+function searchKakaoPlaces(keyword) {
   if (!keyword.replace(/^\s+|\s+$/g, "")) {
     alert("키워드를 입력해주세요!");
     return false;
@@ -30,7 +30,7 @@ function placesSearchCB(data, status, pagination) {
     // displayPagination(pagination);
     console.log(pagination);
   } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
-    alert("사용자의 위치 근처 10km 반경에 검색 결과가 존재하지 않습니다.");
+    alert("사용자의 위치 근처 15km 반경에 검색 결과가 존재하지 않습니다.");
     return;
   } else if (status === window.kakao.maps.services.Status.ERROR) {
     alert("검색 결과 중 오류가 발생했습니다.");
@@ -151,4 +151,4 @@ function displayInfowindow(marker, title) {
   window.kakao.infowindow.open(window.kakao.obj, marker);
 }
 
-export { searchPlaces };
+export { searchKakaoPlaces };

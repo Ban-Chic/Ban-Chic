@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SForm, SWrap } from "./KakaoMap.styled";
-import { searchPlaces } from "./mapUtils";
+import { searchKakaoPlaces } from "./mapUtils";
 
 function SearchPlaces() {
   const [value, setValue] = useState("");
@@ -10,7 +10,7 @@ function SearchPlaces() {
       <SForm
         onSubmit={(e) => {
           e.preventDefault();
-          searchPlaces(value);
+          searchKakaoPlaces(value);
         }}
       >
         <p>키워드 :</p>

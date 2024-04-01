@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import KakaoMap from "../../atoms/kakaomap/KakaoMap";
+import BrandLists from "../../atoms/kakaomap/BrandLists";
 
 function MapPage() {
   return (
     <>
       <SDiv>
+        <BrandLists />
         <KakaoMap />
       </SDiv>
     </>
