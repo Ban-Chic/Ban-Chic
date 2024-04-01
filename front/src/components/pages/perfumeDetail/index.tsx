@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import RadarChartContainer from "../../molecules/charts/radarChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
 import { Link } from "react-router-dom";
+import { CallGPT } from "../../molecules/gptApi/gpt";
 
 interface Props {
   data: {
@@ -76,24 +77,48 @@ function PerfumeDetail() {
   const [data, setData] = useState<Props["data"]>(null);
   const [isLike, setIsLike] = useState(false);
   const [parsedNotes, setParsedNotes] = useState<ParsedNotes>({});
+  const [gptDescription, setGptDescription] = useState<string | null>(null);
 
   useEffect(() => {
+    //향수 상세 조회
     getPerfumeDetail(perfumeId).then((response) => {
       const fetchedData = response.data.data as PerfumeDetailResponse;
       const parsedNotes = JSON.parse(fetchedData.notes);
 
       setData(fetchedData);
       setParsedNotes(parsedNotes);
+
+      console.log("gpt설명");
+      console.log(gptDescription);
+       // 이미 memo에 저장된 description이 없는 경우에만 API 호출
+       if (!gptDescription) {
+        CallGPT({
+          prompt: `
+            perfume Name: ${fetchedData.perfumeName}
+            spices of perfume: ${fetchedData.notes}
+          `,
+        }).then((message) => {
+          const { description } = JSON.parse(message);
+          setGptDescription(description); // API 호출 결과를 상태에 저장
+        });
+      }
     });
+
+    // 리뷰 조회
     getPerfumeReviews(perfumeId).then((response) => {
       console.log(response);
     });
+
+    // 좋아요 조회
     getLike(perfumeId).then((response) => {
       console.log(response.data.data);
       setIsLike(response.data.data);
     });
-  }, [perfumeId]);
 
+    
+  }, [perfumeId, gptDescription]);
+
+  // 좋아요 post
   const onClickHandler = () => {
     postLike(perfumeId).then((response) => {
       console.log(response);
@@ -111,7 +136,7 @@ function PerfumeDetail() {
               style={
                 isLike
                   ? { color: "red", fontSize: "30px" }
-                  : { color: "white", fontSize: "30px" }
+                  : { color: "gray", fontSize: "30px" }
               }
             />
           </SLikeButton>
@@ -131,35 +156,33 @@ function PerfumeDetail() {
           )}
         </SBlock>
         <SBlock>
-          {data && (
-            <GPTSample perfumeName={data.perfumeName} notes={data.notes} />
+          {data && gptDescription && (
+            <GPTSample perfumeName={data.perfumeName} notes={data.notes} description={gptDescription}/>
           )}
         </SBlock>
         <SBlock>
-          {data && parsedNotes.TopNotes && (
-            <>
-              <SNote>
-                <SNoteCate>Top Notes</SNoteCate>
-                <NoteGroup notes={parsedNotes.TopNotes} />
-              </SNote>
-            </>
-          )}
-          {data && parsedNotes.MiddleNotes && (
-            <>
-              <SNote>
-                <SNoteCate>Middle Notes</SNoteCate>
-                <NoteGroup notes={parsedNotes.MiddleNotes} />
-              </SNote>
-            </>
-          )}
-          {data && parsedNotes.BaseNotes && (
-            <>
-              <SNote>
-                <SNoteCate>Base Notes</SNoteCate>
-                <NoteGroup notes={parsedNotes.BaseNotes} />
-              </SNote>
-            </>
-          )}
+          <>
+            <SNote>
+              {data && parsedNotes.TopNotes && (
+                <>
+                  <SNoteCate>Top Notes</SNoteCate>
+                  <NoteGroup notes={parsedNotes.TopNotes} />
+                </>
+              )}
+              {data && parsedNotes.MiddleNotes && (
+                <>
+                  <SNoteCate>Middle Notes</SNoteCate>
+                  <NoteGroup notes={parsedNotes.MiddleNotes} />
+                </>
+              )}
+              {data && parsedNotes.BaseNotes && (
+                <>
+                  <SNoteCate>Base Notes</SNoteCate>
+                  <NoteGroup notes={parsedNotes.BaseNotes} />
+                </>
+              )}
+            </SNote>
+          </>
         </SBlock>
         <SBlock>
           <SParent
@@ -199,6 +222,7 @@ const SDetailContainer = styled.div`
 `;
 
 const SBlock = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -255,10 +279,15 @@ const SBlock = styled.div`
 `;
 
 const SImg = styled.img`
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
 `;
 
-const SNote = styled.div``;
+const SNote = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const SNoteCate = styled.div`
   ${theme.font.Title};
@@ -271,8 +300,9 @@ const SPerfumeName = styled.div`
 
 const SLikeButton = styled.button`
   position: absolute;
-  z-index: 3;
-  margin-left: 250px;
+  /* z-index: 3; */
+  top: 10px;
+  right: 10px;
 `;
 
 const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
