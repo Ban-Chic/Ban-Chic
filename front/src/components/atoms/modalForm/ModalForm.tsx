@@ -9,21 +9,28 @@ type Props = {
   title?: string;
   alert?: string;
   closeModal: () => void;
-  actionModal?: (rate:number, content: string) => void;
+  actionModal?: (rate: number, content: string) => void;
 };
 const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
-  // const [data, setData] = useState<string>(alert);
   const [rate, setRate] = useState<number>(0);
   const [content, setContent] = useState<string>("");
 
   const ChangeBtn = () => {
     const rateValue = parseInt(rate as any);
-    if (rateValue >= 1 && rateValue <= 5 && content.length >= 2 && content.length <= 500 && /^[가-힣a-z0-9-_ ]+$/i.test(content)) {
+    if (
+      rateValue >= 1 &&
+      rateValue <= 5 &&
+      content.length >= 2 &&
+      content.length <= 500 &&
+      /^[ㄱ-ㅎ가-힣a-z0-9-_ .%+=()*&^%$#@!~`,<>/?;:'"{}[]|]+$/i.test(content)
+    ) {
       actionModal?.(rateValue, content);
       window.alert("리뷰 등록이 완료되었습니다.");
       closeModal();
     } else {
-      window.alert("평점은 1-5점 사이, 내용은 특수문자 없이 2-500자로 작성 가능합니다.");
+      window.alert(
+        "평점은 1-5점 사이, 내용은 특수문자 없이 2-500자로 작성 가능합니다."
+      );
     }
   };
 
@@ -111,7 +118,7 @@ const SModalBackGround = styled.div`
 `;
 
 const SInput = styled(motion.input)`
-width: 500px;
+  width: 500px;
   background-color: var(--color-white);
   border: 1px solid var(--color-white);
   outline: none;

@@ -15,7 +15,6 @@ export function usePostReview(){
     mutationFn: ({perfumeId, rate, content}:any)=>postPerfumeReview(perfumeId, rate, content),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["perfumereviews"] });
-      console.log("리쿼 성공!");
     },
     mutationKey: ["postReview"],
   });

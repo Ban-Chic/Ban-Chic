@@ -13,7 +13,9 @@ import LoadingSpinner from "../../../utils/LoadingSpinner";
 import useGetHeart, { useUpdateHeart } from "../../../hooks/heart/useGetHeart";
 import { SSubTitle } from "../../../styles/Font";
 import TempReviewBox from "../../molecules/detail/tempReviewBox";
-import useGetPerfumeReviews, { usePostReview } from "../../../hooks/review/useGetPerfumeReviews";
+import useGetPerfumeReviews, {
+  usePostReview,
+} from "../../../hooks/review/useGetPerfumeReviews";
 import { useEffect, useState } from "react";
 import { CallGPT } from "../../molecules/gptApi/gpt";
 import useOpenModal from "../../../hooks/modal/useOpenModal";
@@ -36,8 +38,8 @@ function PerfumeDetail() {
     postHeart.mutate();
   };
 
-  const postReviewFunction = (rate: number, content:string) =>{
-    postReview.mutate({perfumeId, rate, content});
+  const postReviewFunction = (rate: number, content: string) => {
+    postReview.mutate({ perfumeId, rate, content });
   };
 
   useEffect(() => {

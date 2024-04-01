@@ -8,29 +8,29 @@ function SurveyLandingPage() {
   return (
     <>
       <SContainer variants={FContainer} initial="hidden" animate="visible">
-        <SSelectButton as={Link} to={Page_Url.SurveyImage} $url={"/test1.png"}>
-          <SDiv $url={"/test2.png"} />
+        <SSelectButton as={Link} to={Page_Url.SurveyImage} $url={"/surveyImg/test1.png"}>
+          <SDiv $url={"/surveyImg/test2.png"} />
           <STitleDiff>이미지 기반 추천</STitleDiff>
         </SSelectButton>
 
         <SSelectButton
           as={Link}
           to={Page_Url.SurveySwipe}
-          $url={"/test5.png"}
+          $url={"/surveyImg/test5.png"}
           initial={{ opacity: 0, translateY: -300 }}
           animate={{ opacity: 1, translateY: 0 }}
         >
-          <SDiv $url={"/test6.png"} />
+          <SDiv $url={"/surveyImg/test6.png"} />
           <STitleDiff>질문 기반 추천</STitleDiff>
         </SSelectButton>
         <SSelectButton
           as={Link}
           to={Page_Url.SurveySelect}
-          $url={"/test7.png"}
+          $url={"/surveyImg/test7.png"}
           initial={{ opacity: 0, translateY: -300 }}
           animate={{ opacity: 1, translateY: 0 }}
         >
-          <SDiv $url={"/test9.png"} />
+          <SDiv $url={"/surveyImg/test9.png"} />
           <STitleDiff>추구미 기반 추천</STitleDiff>
         </SSelectButton>
       </SContainer>

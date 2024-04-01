@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
-import Perfume from "../../../../public/img_perfume_sample.png";
+import Perfume from "../../../../public/perfumeImg/img_perfume_sample.png";
 
 function MainSample() {
   const element = useRef<HTMLDivElement | null>(null);

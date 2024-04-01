@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Kakao from "/kakaoLogin.png";
+import Kakao from "/loginImg/kakaoLogin.png";
 
 function KakaoLogin() {
   const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
