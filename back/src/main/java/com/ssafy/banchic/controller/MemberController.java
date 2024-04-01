@@ -185,4 +185,21 @@ public class MemberController {
             .build(), HttpStatus.OK);
     }
 
+    @Operation(
+        summary = "이미지 기반 향수 추천",
+        description = "사용자로부터 이미지를 받아 향수와 패션 스타일을 추천합니다."
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "이미지 기반 추천에 성공하였습니다."
+    )
+    @PostMapping("/recommend/image")
+    public ResponseEntity<CommonResponse> recommendByImage(
+        @RequestPart(value = "file") MultipartFile file) {
+        return new ResponseEntity<>(CommonResponse.builder()
+            .message("이미지 기반 추천에 성공하였습니다.")
+            .data(memberService.recommendByImage(file))
+            .build(), HttpStatus.OK);
+    }
+
 }
