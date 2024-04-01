@@ -76,7 +76,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList(
+        config.setAllowedOrigins(List.of(
             "http://localhost:5173",
             "http://j10b109.p.ssafy.io:5173"
         ));
