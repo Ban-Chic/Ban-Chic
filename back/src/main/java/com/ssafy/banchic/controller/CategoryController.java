@@ -58,24 +58,29 @@ public class CategoryController {
                                                  @PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC, size = 20)
                                                  Pageable pageable) {
         String genderName = genderReq.getGenderName();
-        log.info("genderName : {}", genderName);
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("gender에 대한 분류 값 뽑기")
                 .data(categoryService.getGenderList(genderName, pageable))
                 .build());
     }
 
+    @Operation(
+            summary = "brand 이름 별 페이지 조회",
+            description = "brand에 들어온 이름을 sql where like 로 페이지로 조회"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "brand 정보에 맞게 페이지 목록이 조회되었습니다."
+    )
     @GetMapping("/brand")
     public ResponseEntity<CommonResponse> brand(@RequestBody BrandReq brandReq,
                                                 @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 20)
                                                 Pageable pageable) {
         String brandName = brandReq.getBrandName();
-        log.info("brandName : {}", brandName);
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("brand에 대한 분류 값 뽑기")
                 .data(categoryService.getBrandList(brandName, pageable))
                 .build());
     }
-
 
 }
