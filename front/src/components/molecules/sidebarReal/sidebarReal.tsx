@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Page_Url from "../../../router/Url";
 import useLogout from "../../../hooks/auth/useLogout";
+import { motion } from "framer-motion";
 
 interface Props {
   width: number;
@@ -15,6 +16,7 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
   const side = useRef<HTMLDivElement>(null);
   const accessToken = localStorage.getItem("accessToken");
   const Logout = useLogout();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if ($isOpenCheck) {
@@ -24,8 +26,8 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
     }
   }, [$isOpenCheck, width]);
 
-  const goToHome = () => {
-    window.location.href = "/";
+  const goToLogin = () => {
+    navigate(Page_Url.Login);
   };
 
   return (
@@ -38,9 +40,10 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
             transformOrigin: "left",
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
+          exit={{ translateX: -1000, opacity: 0 }}
         >
           {accessToken === null ? (
-            <SMenuLink to={Page_Url.Login}>LOGIN</SMenuLink>
+            <SButton onClick={() => goToLogin()}>LOGIN</SButton>
           ) : (
             <SButton onClick={() => Logout()}>LOGOUT</SButton>
           )}
@@ -53,9 +56,10 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
             transformOrigin: "right",
             transform: `translatex(${xPosition - 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
+          exit={{ translateX: 1000, opacity: 0 }}
         >
-          {/* <SMenuLink to={Page_Url.Main}>HOME</SMenuLink> */}
-          <SButton onClick={goToHome}>HOME</SButton>
+          <SMenuLink to={Page_Url.Main}>HOME</SMenuLink>
+          {/* <SButton onClick={goToHome}>HOME</SButton> */}
         </SDiv>
         <SDiv
           ref={side}
@@ -64,8 +68,9 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
             transformOrigin: "left",
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
+          exit={{ translateX: -1000, opacity: 0 }}
         >
-          <SMenuLink to={Page_Url.SurveySelect}>SURVEY</SMenuLink>
+          <SMenuLink to={Page_Url.SurveyLanding}>SURVEY</SMenuLink>
         </SDiv>
         <SDiv
           ref={side}
@@ -75,6 +80,7 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
             transformOrigin: "right",
             transform: `translatex(${xPosition - 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
+          exit={{ translateX: 1000, opacity: 0 }}
         >
           <SMenuLink to={"/"}>SEARCH</SMenuLink>
         </SDiv>
@@ -85,6 +91,7 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
             transformOrigin: "left",
             transform: `translatex(${-xPosition + 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
+          exit={{ translateX: -1000, opacity: 0 }}
         >
           <SMenuLink to={Page_Url.My}>MY PAGE</SMenuLink>
         </SDiv>
@@ -93,7 +100,7 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
   );
 };
 
-const SContainer = styled.div<{ $isOpenCheck: boolean }>`
+const SContainer = styled(motion.div)<{ $isOpenCheck: boolean }>`
   background-color: #e3ecf1;
   opacity: ${({ $isOpenCheck }) => ($isOpenCheck ? 1 : 0)};
   transition: 1.3s ease;
@@ -130,7 +137,7 @@ const SButton = styled.button`
   line-height: 1.5;
 `;
 
-const SDiv = styled.div`
+const SDiv = styled(motion.div)`
   transition: 1s ease;
   position: relative;
   z-index: 0;

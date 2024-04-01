@@ -2,22 +2,28 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import theme from "../../../styles/Theme";
+import { useNavigate } from "react-router";
+import Page_Url from "../../../router/Url";
 
-function SurveySelectPage() {
-  // 상태를 문자열로 관리하여 현재 어떤 텍스트를 보여줄지 결정합니다.
+function LandingPage() {
   const [currentText, setCurrentText] = useState("");
+  const [on, setOn] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // 초기 상태를 'Ready?'로 설정합니다.
-    setCurrentText("HI");
+    setCurrentText("매력있는 내가");
 
-    // 2초 후에 상태를 'Ready?Ready?Ready?Ready?Ready?'로 변경합니다.
     const timer1 = setTimeout(() => {
-      setCurrentText("dundigi");
+      setCurrentText("향수까지 뿌리면?");
 
-      // 추가적으로 3초 후에 상태를 'START'로 변경합니다.
       const timer2 = setTimeout(() => {
-        setCurrentText("perfume scam");
+        setCurrentText("Ban:Chic");
+
+        const timer3 = setTimeout(() => {
+          setOn(false);
+          navigate(Page_Url.Main);
+        }, 3000);
+        return () => clearTimeout(timer3);
       }, 2000);
 
       return () => clearTimeout(timer2);
@@ -28,15 +34,17 @@ function SurveySelectPage() {
 
   return (
     <SContainer>
-      <FSTitle
-        key={currentText} // Key를 현재 텍스트로 설정하여 각 상태를 구분합니다.
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3, type: "spring", stiffness: 100 }}
-      >
-        {currentText}
-      </FSTitle>
+      {on && (
+        <FSTitle
+          key={currentText}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, type: "spring", stiffness: 50 }}
+        >
+          {currentText}
+        </FSTitle>
+      )}
     </SContainer>
   );
 }
@@ -58,4 +66,4 @@ const SContainer = styled(motion.section)`
   gap: 2em;
 `;
 
-export default SurveySelectPage;
+export default LandingPage;

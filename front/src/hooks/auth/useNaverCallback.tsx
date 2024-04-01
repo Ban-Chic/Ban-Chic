@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { getNaverLogin } from "../../api/Api";
+import Page_Url from "../../router/Url";
+import LoadingSpinner from "../../utils/LoadingSpinner";
 
 function useNaverCallback() {
   const navigate = useNavigate();
@@ -10,7 +12,6 @@ function useNaverCallback() {
     const state = new URL(window.location.href).searchParams.get("state");
     getNaverLogin(code, state)
       .then((response) => {
-        console.log(response);
         // spring에서 발급된 jwt 반환 localStorage 저장
         localStorage.setItem("accessToken", response.headers["authorization"]);
         localStorage.setItem("refreshToken", response.headers["refreshtoken"]);
@@ -18,19 +19,17 @@ function useNaverCallback() {
         localStorage.setItem("oauthProvider", response.data.data.oauthProvider);
 
         // 메인 페이지로 이동
-        navigate("/");
+        navigate(Page_Url.Main);
       })
       .catch((error: any) => {
         // 에러발생 시 login 페이지로 전환
-        navigate("/login");
+        navigate(Page_Url.Login);
         console.log(error);
       });
   }, []);
-
   return (
     <SErrorDiv>
-      <h1>이동중입니다</h1>
-      <p>loading...</p>
+      <LoadingSpinner />
     </SErrorDiv>
   );
 }

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { SBody1, SSubTitle, STitle } from "../../../styles/Font";
+import { useRef, useState } from "react";
 
 interface Props {
   data: {
@@ -14,17 +15,36 @@ interface Props {
 }
 
 function ProfileCard({ data, onInput, updateProfileImage }: Props) {
+  // 이미지 미리보기 URL을 상태로 관리합니다.
+  const [previewUrl, setPreviewUrl] = useState(data.data?.image || "/user.svg");
+  // 파일 인풋 참조를 생성합니다.
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const handleProfileClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    if (event.target.files?.length) {
+      const file = event.target.files[0];
+      const fileUrl = URL.createObjectURL(file);
+      setPreviewUrl(fileUrl); // 미리보기 URL 상태 업데이트
+      onInput(event); // 부모 컴포넌트로 이벤트 전달
+    }
+  };
+
   return (
     <SFlexCenter>
       <SSubTitle>내 정보</SSubTitle>
-      <SProfile
-        $imageurl={data.data?.image ? data?.data?.image : "/user.svg"}
-      />
+      <SProfile onClick={handleProfileClick} $imageurl={previewUrl} />
       <SInput
+        ref={fileInputRef}
         type="file"
         id="profileImg"
         accept="image/jpeg, image/png"
         onInput={onInput}
+        onChange={handleFileChange}
       />
       <button type="submit" onClick={updateProfileImage}>
         제출
@@ -61,6 +81,7 @@ const SProfile = styled.div<{ $imageurl: string }>`
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(0.5px);
   border: 5px solid #f2f2f2;
+  cursor: pointer;
 `;
 
 export default ProfileCard;

@@ -20,11 +20,11 @@ export const postLike = (perfumeId: string) =>
 
 /** 향수 좋아요 조회 */
 export const getLike = (perfumeId: string) =>
-  API.get(`/perfumes/${perfumeId}/hearts`);
+  API.get(`/perfumes/${perfumeId}/hearts`).then((res) => res.data);
 
 /** 향수 리뷰 목록 조회 */
 export const getPerfumeReviews = (perfumeId: string) =>
-  API.get(`/perfumes/${perfumeId}/reviews`);
+  API.get(`/perfumes/${perfumeId}/reviews`).then((res) => res.data);
 
 // 리뷰
 

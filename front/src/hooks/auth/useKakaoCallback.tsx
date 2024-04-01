@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { getKakaoLogin } from "../../api/Api";
+import Page_Url from "../../router/Url";
+import LoadingSpinner from "../../utils/LoadingSpinner";
 
 function useKakaoCallback() {
   const navigate = useNavigate();
@@ -16,19 +18,18 @@ function useKakaoCallback() {
         localStorage.setItem("oauthProvider", response.data.data.oauthProvider);
 
         // 메인 페이지로 이동
-        navigate("/");
+        navigate(Page_Url.Main);
       })
       .catch((error: any) => {
         // 에러발생 시 login 페이지로 전환
-        navigate("/login");
+        navigate(Page_Url.Login);
         console.log(error);
       });
   }, []);
 
   return (
     <SErrorDiv>
-      <h1>이동중입니다</h1>
-      <p>loading...</p>
+      <LoadingSpinner />
     </SErrorDiv>
   );
 }
