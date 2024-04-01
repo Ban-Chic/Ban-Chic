@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { Typewriter } from "react-simple-typewriter";
 import LoadingSpinner from "../../../utils/LoadingSpinner";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface Props {
   description: string | null;
@@ -15,7 +15,7 @@ function GPTSample({ description }: Props) {
     // Step 3
     const timer = setTimeout(() => {
       setLoadingTimedOut(true);
-    }, 20000); 
+    }, 20000);
 
     return () => clearTimeout(timer);
   }, []);
