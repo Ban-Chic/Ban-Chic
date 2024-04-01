@@ -31,15 +31,12 @@ function NoteGroup({ notes }: Props) {
 }
 
 const SEachNote = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-columns: auto;
+  margin: 0 auto;
 `;
 
 const SNoteImg = styled.div<{ $src: string; $name: string }>`
-  /* max-width: 2.5em; */
-  /* max-height: 2.5em; */
   width: 2.5em;
   height: 2.5em;
   border: 2px solid #f2f2f2;
@@ -64,14 +61,9 @@ const SNoteImg = styled.div<{ $src: string; $name: string }>`
   }
 `;
 
-const SNoteName = styled.div`
-  ${theme.font.Body1};
-  margin: 0 auto;
-  /* white-space: nowrap; */
-`;
-
 const SNoteGroup = styled.div`
   display: flex;
   gap: 0.2em;
+  flex-wrap: wrap;
 `;
 export default NoteGroup;
