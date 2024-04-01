@@ -44,7 +44,7 @@ public class SecurityConfig {
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(corsCustomizer  -> corsCustomizer.configurationSource(corsConfigurationSource()))
+//            .cors(corsCustomizer  -> corsCustomizer.configurationSource(corsConfigurationSource()))
             .csrf(CsrfConfigurer::disable)
             .headers((headerConfig) ->
                 headerConfig.frameOptions(FrameOptionsConfig::disable)
