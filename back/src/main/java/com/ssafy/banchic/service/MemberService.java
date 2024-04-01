@@ -1,11 +1,15 @@
 package com.ssafy.banchic.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.banchic.domain.dto.request.PersuitReq;
 import com.ssafy.banchic.domain.dto.request.UpdateNicknameReq;
 import com.ssafy.banchic.domain.dto.response.MemberInfoRes;
 import com.ssafy.banchic.domain.dto.response.MemberNicknameRes;
 import com.ssafy.banchic.domain.dto.response.MemberReviewRes;
 import com.ssafy.banchic.domain.dto.response.PerfumeOverviewRes;
+import com.ssafy.banchic.domain.dto.response.RecommendByImageRes;
 import com.ssafy.banchic.domain.entity.Heart;
 import com.ssafy.banchic.domain.entity.Member;
 import com.ssafy.banchic.domain.entity.Perfume;
@@ -23,15 +27,21 @@ import com.ssafy.banchic.repository.RecommendRepository;
 import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +49,8 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @Transactional
 public class MemberService {
+
+    private final String FAST_API_URL = "http://j10b109.p.ssafy.io:9876";
 
     private final FileUploadService fileUploadService;
 
@@ -136,7 +148,7 @@ public class MemberService {
     public List<PerfumeOverviewRes> survey(PersuitReq req, HttpServletRequest httpServletRequest) {
         Member member = getMemberFromAccessToken(httpServletRequest);
 
-        String url = "http://j10b109.p.ssafy.io:9876/api/recommend";
+        String url = FAST_API_URL + "/api/recommend";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -266,6 +278,65 @@ public class MemberService {
         return list;
     }
 
+    public RecommendByImageRes recommendByImage(MultipartFile multipartFile) {
+        if (multipartFile.isEmpty()) {
+            throw new CustomException(ErrorCode.EMPTY_FILE);
+        }
+
+        String url = FAST_API_URL + "/api/image";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        try {
+            body.add("file", new HttpEntity<>(multipartFile.getBytes(), getHeaders(multipartFile)));
+        } catch (IOException e) {
+            throw new CustomException(ErrorCode.FILE_INPUT_FAIL);
+        }
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = null;
+        try {
+            rootNode = objectMapper.readTree(response.getBody());
+        } catch (JsonProcessingException e) {
+            throw new CustomException(ErrorCode.JSON_PARSING_FAIL);
+        }
+
+        String fashion = rootNode.get("fashion").asText();
+        JsonNode recommend_index = rootNode.get("recommend_index");
+
+        List<Integer> idList = new ArrayList<>();
+        if (recommend_index.isArray()) {
+            Iterator<JsonNode> elements = recommend_index.elements();
+            while (elements.hasNext()) {
+                JsonNode node = elements.next();
+                int perfumeId = Integer.parseInt(node.asText());
+                idList.add(perfumeId);
+            }
+        }
+
+        List<PerfumeOverviewRes> perfumeOverviewResList = idList.stream()
+            .map(e -> PerfumeOverviewRes.from(perfumeRepository.findById(e)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID))))
+            .toList();
+
+        return RecommendByImageRes.builder()
+            .fashion(fashion)
+            .perfumeOverviewResList(perfumeOverviewResList)
+            .build();
+    }
+
+    private HttpHeaders getHeaders(MultipartFile file) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(file.getContentType()));
+        headers.setContentDispositionFormData("file", file.getOriginalFilename());
+        return headers;
+    }
 
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
