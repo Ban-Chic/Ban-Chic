@@ -34,11 +34,10 @@ public class CategoryController {
             responseCode = "200",
             description = "season 정보에 맞게 페이지 목록이 정상적으로 조회되었습니다."
     )
-    @GetMapping("/season")
-    public ResponseEntity<CommonResponse> season(@RequestBody SeasonReq seasonReq,
+    @GetMapping("/season/{seasonName}")
+    public ResponseEntity<CommonResponse> season(@PathVariable("seasonName") String seasonName,
                                                  @PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC, size = 20)
                                                  Pageable pageable) {
-        String seasonName = seasonReq.getSeasonName();
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("season에 대한 분류 값 뽑기")
                 .data(categoryService.getSeasonList(seasonName, pageable))
@@ -53,11 +52,10 @@ public class CategoryController {
             responseCode = "200",
             description = "gender 정보에 맞게 페이지 목록이 정상적으로 조회되었습니다."
     )
-    @GetMapping("/gender")
-    public ResponseEntity<CommonResponse> gender(@RequestBody GenderReq genderReq,
+    @GetMapping("/gender/{genderName}")
+    public ResponseEntity<CommonResponse> gender(@PathVariable("genderName") String genderName,
                                                  @PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC, size = 20)
                                                  Pageable pageable) {
-        String genderName = genderReq.getGenderName();
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("gender에 대한 분류 값 뽑기")
                 .data(categoryService.getGenderList(genderName, pageable))
@@ -72,11 +70,10 @@ public class CategoryController {
             responseCode = "200",
             description = "brand 정보에 맞게 페이지 목록이 조회되었습니다."
     )
-    @GetMapping("/brand")
-    public ResponseEntity<CommonResponse> brand(@RequestBody BrandReq brandReq,
+    @GetMapping("/brand/{brandName}")
+    public ResponseEntity<CommonResponse> brand(@PathVariable("brandName") String brandName,
                                                 @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 20)
                                                 Pageable pageable) {
-        String brandName = brandReq.getBrandName();
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("brand에 대한 분류 값 뽑기")
                 .data(categoryService.getBrandList(brandName, pageable))

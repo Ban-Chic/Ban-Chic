@@ -11,4 +11,6 @@ public interface PerfumeRepository extends JpaRepository<Perfume, Integer> {
 
     Page<Perfume> findByBrandNameContaining(String brandName, Pageable pageable);
 
+    Page<Perfume> findAll(Pageable pageable);
+
 }
