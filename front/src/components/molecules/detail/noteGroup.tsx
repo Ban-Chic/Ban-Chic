@@ -58,6 +58,7 @@ const SNoteImg = styled.div<{ $src: string; $name: string }>`
     padding: 5px;
     border-radius: 5px;
     font-size: 0.8em;
+    z-index: 100;
   }
 `;
 

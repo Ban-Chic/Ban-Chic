@@ -113,8 +113,8 @@ const SInput = styled.input`
 
 const contentString = (fileUrl: string) =>
   fileUrl
-    ? "사진은 저장되지 않고, 결과 도출 후 즉시 폐기됩니다."
-    : "나의 패션스타일을 분석하고 어울리는 향수를 추천받아보세요. 업로드한 사진은 기록이 남지 않습니다.";
+    ? "사진은 저장되지 않고,\n결과 도출 후 즉시 폐기됩니다."
+    : "나의 패션스타일을 분석하고 어울리는 향수를 추천받아보세요.\n업로드한 사진은 기록이 남지 않습니다.";
 
 const SView = styled.article<{ fileUrl: string }>`
   width: 300px;
@@ -127,13 +127,14 @@ const SView = styled.article<{ fileUrl: string }>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  position: relative;
   &:hover::after {
-    content: "${(props) => contentString(props.fileUrl)}";
+    content: "${(props) => contentString(props.fileUrl).replace(/\n/g, "\\A")}";
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
+    transform: translate(-50%, -50%);
+    white-space: pre;
     background-color: #f2f2f2;
     color: black;
     padding: 5px;
