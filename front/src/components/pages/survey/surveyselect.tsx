@@ -6,7 +6,7 @@ import { motion, useDragControls } from "framer-motion";
 import useSurvey from "../../../hooks/survey/useSurvey";
 import { StyleRanges, Styles } from "../../../utils/PursuitStyleRanges";
 import { postSurvey } from "../../../api/Api";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function SurveySelectPage() {
   const [data, selectPursuit] = useSurvey();
@@ -18,7 +18,6 @@ function SurveySelectPage() {
       const [min, max] = range;
       Styles[style] = data.some((num: number) => num >= min && num <= max);
     });
-
     // API 호출에 styles 객체 사용
     postSurvey(Styles).then((res) => {
       console.log(res);
@@ -41,9 +40,10 @@ function SurveySelectPage() {
   // 선택 여부를 판단하는 함수
   const isSelected = (index: number) => selected.includes(index);
   const controls = useDragControls();
+  const constraintsRef = useRef(null);
   return (
     <>
-      <SContainer>
+      <SContainer ref={constraintsRef}>
         <SSubTitle>나의 추구미</SSubTitle>
         <SPursuitBeautyContainer
           variants={FContainer}
@@ -60,26 +60,39 @@ function SurveySelectPage() {
               variants={FVariantitem}
               drag={true}
               dragControls={controls}
+              dragConstraints={constraintsRef}
             >
               {item}
             </SPursuitBlock>
           ))}
         </SPursuitBeautyContainer>
-        <button onClick={() => onClickHandler()}>제출</button>
+        <SButton disabled={data.length === 0} onClick={() => onClickHandler()}>
+          제출
+        </SButton>
       </SContainer>
     </>
   );
 }
 
+const SButton = styled(motion.button)`
+  padding: 1em 4em;
+  background-color: ${theme.color.actionColor};
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+  &:disabled {
+    background-color: #707070;
+    color: #909090;
+  }
+`;
+
 const SPursuitBlock = styled(motion.button)<{ isSelected?: boolean }>`
   background-color: ${(props) =>
-    props.isSelected ? theme.color.primaryColor : "rgba(255, 255, 255, 0.4)"};
+    props.isSelected ? theme.color.successColor : "rgba(255, 255, 255, 0.4)"};
   color: ${(props) => (props.isSelected ? theme.color.bgColor : "")};
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 1em;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(0.5px);
   border: ${(props) =>
@@ -87,26 +100,31 @@ const SPursuitBlock = styled(motion.button)<{ isSelected?: boolean }>`
       ? "5px soild rgb(255, 255, 255)"
       : "3px solid rgba(255, 255, 255, 0.18)"};
   transition: all 0.2s;
+  padding: 10px;
+  white-space: nowrap;
   &:hover {
     transform: scale(1.2);
   }
 `;
 
 const SPursuitBeautyContainer = styled(motion.section)`
-  width: 700px;
-  height: 500px;
   display: grid;
   gap: 1em;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 2.5em);
-  grid-auto-flow: row;
-
   &:nth-child(1) {
     grid-row: 1 / span 5;
   }
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  @media only screen and (min-width: 768px) {
+    width: 700px;
+    height: 500px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 2.5em);
+    grid-auto-flow: row;
+  }
 `;
 
-const SContainer = styled.article`
+const SContainer = styled(motion.article)`
   width: 100%;
   display: flex;
   align-items: center;

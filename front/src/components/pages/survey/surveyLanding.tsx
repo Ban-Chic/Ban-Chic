@@ -100,25 +100,26 @@ const SSelectButton = styled(motion.div)<{ $url: string; contents: string }>`
   & > :not(:first-child) {
     padding: 1em;
   }
-  &:hover::after {
-    content: "${(props) => props.contents}";
-    position: absolute;
-    bottom: -10%;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    background-color: #f2f2f2;
-    color: black;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 0.8em;
+  @media only screen and (min-width: 768px) {
+    &:hover::after {
+      content: "${(props) => props.contents}";
+      position: absolute;
+      bottom: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      background-color: #f2f2f2;
+      color: black;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 0.8em;
+    }
   }
-
   @media only screen and (max-width: 768px) {
     &::after {
       content: "${(props) => props.contents}";
       position: absolute;
-      top: 90%;
+      bottom: 10%;
       left: 50%;
       transform: translateX(-50%);
       white-space: nowrap;

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import SpiceImageUrl from "../../../utils/ImgUrl";
-import theme from "../../../styles/Theme";
 
 // Props 인터페이스 정의
 interface Props {
@@ -19,7 +18,7 @@ function NoteGroup({ notes }: Props) {
               $src={
                 SpiceImageUrl[note]
                   ? SpiceImageUrl[note]?.replace("/m.", "/o.")
-                  : "/logo_yellow.png"
+                  : SpiceImageUrl["Cranberry"]?.replace("/m.", "/o.")
               }
               $name={note}
             />
@@ -40,6 +39,7 @@ const SNoteImg = styled.div<{ $src: string; $name: string }>`
   width: 2.5em;
   height: 2.5em;
   border: 2px solid #f2f2f2;
+  position: relative;
   border-radius: 5px;
   background-image: url(${(props) => props.$src});
   background-position: center;
