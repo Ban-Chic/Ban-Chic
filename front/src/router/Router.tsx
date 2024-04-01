@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 // 페이지 URL
@@ -29,9 +29,10 @@ import SurveyImagePage from "../components/pages/survey/surveyImage";
 import SurveyQuestionPage from "../components/pages/survey/surveyQuestion";
 
 function Router() {
+  const location = useLocation();
   return (
-    <AnimatePresence>
-      <Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path={Page_Url.Landing} element={<LandingPage />}></Route>
         <Route element={<Layouts />} errorElement={<ErrorPage />}>
           <Route path={Page_Url.Main} element={<MainPage />}></Route>

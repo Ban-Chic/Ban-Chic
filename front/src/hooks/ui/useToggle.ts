@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-function useToggle(): {
+export function useToggle(): {
   isOpen: boolean;
   toggleMenu: () => void;
 } {
