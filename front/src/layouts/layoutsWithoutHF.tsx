@@ -23,6 +23,10 @@ const SLayout = styled.div`
     position: relative;
     min-height: 100vh;
   }
+  &:nth-child(1) > :nth-child(1) {
+    position: relative;
+    width: 100%;
+  }
 `;
 
 export default LayoutsWithoutHF;

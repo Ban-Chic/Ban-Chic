@@ -2,13 +2,15 @@ import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { SSubTitle } from "../../../styles/Font";
 import PursuitBeauty from "../../../utils/PursuitBeauty";
-import { motion } from "framer-motion";
+import { motion, useDragControls } from "framer-motion";
 import useSurvey from "../../../hooks/survey/useSurvey";
 import { StyleRanges, Styles } from "../../../utils/PursuitStyleRanges";
 import { postSurvey } from "../../../api/Api";
+import { useRef, useState } from "react";
 
 function SurveySelectPage() {
   const [data, selectPursuit] = useSurvey();
+  const [selected, setSelected] = useState<number[]>([]);
 
   const onClickHandler = () => {
     // styleRanges 객체를 순회하면서 각 스타일에 대해 data 배열에 해당 범위의 숫자가 있는지 검사
@@ -16,19 +18,32 @@ function SurveySelectPage() {
       const [min, max] = range;
       Styles[style] = data.some((num: number) => num >= min && num <= max);
     });
-
     // API 호출에 styles 객체 사용
     postSurvey(Styles).then((res) => {
       console.log(res);
     });
   };
 
+  // 개별 버튼 클릭 핸들러
+  const handleSelect = (index: number) => {
+    selectPursuit(index);
+    setSelected((prevSelected) => {
+      // 이미 선택된 아이템이면 제거, 아니면 추가
+      if (prevSelected.includes(index)) {
+        return prevSelected.filter((item) => item !== index);
+      } else {
+        return [...prevSelected, index];
+      }
+    });
+  };
+
+  // 선택 여부를 판단하는 함수
+  const isSelected = (index: number) => selected.includes(index);
+  const controls = useDragControls();
+  const constraintsRef = useRef(null);
   return (
     <>
-      <SContainer>
-        <SSurveyContainer>
-          <SSubTitle>선택해주세요</SSubTitle>
-        </SSurveyContainer>
+      <SContainer ref={constraintsRef}>
         <SSubTitle>나의 추구미</SSubTitle>
         <SPursuitBeautyContainer
           variants={FContainer}
@@ -38,60 +53,78 @@ function SurveySelectPage() {
           {PursuitBeauty.map((item, i) => (
             <SPursuitBlock
               key={i}
+              isSelected={isSelected(i)}
               onClick={async () => {
-                selectPursuit(i);
+                handleSelect(i);
               }}
               variants={FVariantitem}
+              drag={true}
+              dragControls={controls}
+              dragConstraints={constraintsRef}
             >
               {item}
             </SPursuitBlock>
           ))}
         </SPursuitBeautyContainer>
-        <button onClick={() => onClickHandler()}>제출</button>
+        <SButton disabled={data.length === 0} onClick={() => onClickHandler()}>
+          제출
+        </SButton>
       </SContainer>
     </>
   );
 }
 
-const SPursuitBlock = styled(motion.button)`
-  background-color: blue;
+const SButton = styled(motion.button)`
+  padding: 1em 4em;
+  background-color: ${theme.color.actionColor};
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+  &:disabled {
+    background-color: #707070;
+    color: #909090;
+  }
+`;
+
+const SPursuitBlock = styled(motion.button)<{ isSelected?: boolean }>`
+  background-color: ${(props) =>
+    props.isSelected ? theme.color.successColor : "rgba(255, 255, 255, 0.4)"};
+  color: ${(props) => (props.isSelected ? theme.color.bgColor : "")};
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 1em;
-  ${theme.styleBase.glassmorphism}
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(0.5px);
+  border: ${(props) =>
+    props.isSelected
+      ? "5px soild rgb(255, 255, 255)"
+      : "3px solid rgba(255, 255, 255, 0.18)"};
+  transition: all 0.2s;
+  padding: 10px;
+  white-space: nowrap;
   &:hover {
-    transition: all 0.2s;
-    transform: scale(1.05);
+    transform: scale(1.2);
   }
 `;
 
 const SPursuitBeautyContainer = styled(motion.section)`
-  width: 700px;
-  height: 500px;
   display: grid;
   gap: 1em;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 2.5em);
-  grid-auto-flow: row;
-
   &:nth-child(1) {
     grid-row: 1 / span 5;
   }
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  @media only screen and (min-width: 768px) {
+    width: 700px;
+    height: 500px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 2.5em);
+    grid-auto-flow: row;
+  }
 `;
 
-const SSurveyContainer = styled.figure`
-  width: 20em;
-  height: 5em;
-  border-radius: 0.5em;
-  ${theme.styleBase.glassmorphism}
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1em;
-`;
-
-const SContainer = styled.article`
+const SContainer = styled(motion.article)`
   width: 100%;
   display: flex;
   align-items: center;
