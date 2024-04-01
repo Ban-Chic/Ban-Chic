@@ -4,17 +4,16 @@ import theme from "../../../styles/Theme";
 
 // Props 인터페이스 정의
 interface Props {
-  noteName: string;
   notes: string;
 }
 
-function NoteGroup({ notes, noteName }: Props) {
-  const data = JSON.parse(notes);
+function NoteGroup({ notes }: Props) {
+  const data = notes;
 
   return (
     <>
       <SNoteGroup>
-        {data[noteName]?.split(", ")?.map((note: string, index: number) => (
+        {data.split(", ")?.map((note: string, index: number) => (
           <SEachNote key={index}>
             <SNoteImg
               src={

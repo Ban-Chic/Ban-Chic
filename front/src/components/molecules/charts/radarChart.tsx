@@ -12,12 +12,12 @@ import theme from "../../../styles/Theme";
 
 interface Props {
   season: {
-    day: string;
-    night: string;
-    spring: string;
-    summer: string;
-    fall: string;
-    winter: string;
+    spring: number;
+    summer: number;
+    fall: number;
+    winter: number;
+    day: number;
+    night: number;
   };
 }
 
@@ -25,33 +25,32 @@ function RadarChartContainer(Props: Props) {
   const data = [
     {
       subject: "Day",
-      // A: 100,
-      A: parseFloat(Props.season.day),
+      A: Props.season.day,
       fullMark: 100,
     },
     {
       subject: "Summer",
-      A: parseFloat(Props.season.summer),
+      A: Props.season.summer,
       fullMark: 100,
     },
     {
       subject: "Winter",
-      A: parseFloat(Props.season.winter),
+      A: Props.season.winter,
       fullMark: 100,
     },
     {
       subject: "Night",
-      A: parseFloat(Props.season.night),
+      A: Props.season.night,
       fullMark: 100,
     },
     {
       subject: "Fall",
-      A: parseFloat(Props.season.fall),
+      A: Props.season.fall,
       fullMark: 100,
     },
     {
       subject: "Spring",
-      A: parseFloat(Props.season.spring),
+      A: Props.season.spring,
       fullMark: 100,
     },
   ];

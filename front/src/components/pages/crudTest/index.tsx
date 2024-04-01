@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import theme from "../../../styles/Theme";
 import { getPerfumeReviews, postPerfumeReview } from "../../../api/Api";
 
 interface Props {
@@ -12,10 +11,10 @@ interface Props {
       imgUrl: string;
       member: {
         email: string;
-        imageUrl: string;
+        image: string;
         nickname: string;
       };
-    };
+    }[];
     pagealbe: object;
     totalPages: number;
     totalElements: number;
@@ -33,26 +32,15 @@ interface Props {
   } | null;
 }
 
-interface IReview {
-  perfumeId: number;
-  reviewId?: number;
-  content: string;
-  rate: number;
-  file: File;
-}
-
 function CRUDTest() {
   //리뷰 등록
   const [board, setBoard] = useState({
     rate: 0,
     content: "",
-    // file: new File([], "", { type: "" }),
     pefumeId: 1,
   });
 
-  const [reviewImg, setReviewImg] = useState({
-    file: File,
-  });
+  const [reviewImg, setReviewImg] = useState(new File([], "", { type: "" }));
   const onChange = (event: any) => {
     const { value, name } = event.target;
     if (name === "rate") {
@@ -110,15 +98,11 @@ function CRUDTest() {
         />
         <button
           onClick={() => {
-            console.log(reviewImg.file);
-            postPerfumeReview(
-              "1",
-              reviewImg.file,
-              board.rate,
-              board.content
-            ).catch((error) => {
-              console.log(error);
-            });
+            postPerfumeReview("1", reviewImg, board.rate, board.content).catch(
+              (error) => {
+                console.log(error);
+              }
+            );
           }}
         >
           등록버튼
@@ -127,14 +111,14 @@ function CRUDTest() {
       <div>조회 zone</div>
       <SContainer>
         {data &&
-          data.map((item, index: number) => (
+          data.content.map((item, index: number) => (
             <SDiv key={index}>
               <img src={item.imgUrl} alt="" />
               <div>
                 <p>{item.content}</p>
               </div>
               <div>
-                <img src={item.member.imgUrl} alt="" />
+                <img src={item.member.image} alt="" />
                 <p>{item.member.nickname}</p>
               </div>
             </SDiv>
