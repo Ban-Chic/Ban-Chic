@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface WinterRepository extends JpaRepository<Winter, Long> {
 
     Page<Winter> findAll(Pageable pageable);
+
 }

@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface PerfumeRepository extends JpaRepository<Perfume, Integer> {
 
     Page<Perfume> findByBrandNameContaining(String brandName, Pageable pageable);
+
 }

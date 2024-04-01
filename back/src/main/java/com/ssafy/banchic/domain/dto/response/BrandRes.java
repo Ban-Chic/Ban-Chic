@@ -24,4 +24,5 @@ public class BrandRes {
                 .perfumeImg(perfume.getPerfumeImg())
                 .build();
     }
+
 }

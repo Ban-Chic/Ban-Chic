@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UnisexRepository extends JpaRepository<Unisex, Long> {
 
     Page<Unisex> findAll(Pageable pageable);
+
 }

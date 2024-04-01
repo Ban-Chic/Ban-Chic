@@ -16,4 +16,5 @@ public class OAuthLogoutService {
         RevokeTokenResponseDto responseDto = requestOAuthInfoService.logoutService(params);
         return responseDto;
     }
+
 }
