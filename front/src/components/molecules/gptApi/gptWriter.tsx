@@ -2,12 +2,24 @@ import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { Typewriter } from "react-simple-typewriter";
 import LoadingSpinner from "../../../utils/LoadingSpinner";
+import React, { useState, useEffect } from "react";
 
 interface Props {
   description: string | null;
 }
 
 function GPTSample({ description }: Props) {
+  const [loadingTimedOut, setLoadingTimedOut] = useState(false); // Step 2
+
+  useEffect(() => {
+    // Step 3
+    const timer = setTimeout(() => {
+      setLoadingTimedOut(true);
+    }, 20000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <SContainer>
@@ -17,9 +29,11 @@ function GPTSample({ description }: Props) {
               words={[description]}
               cursor
               cursorStyle="|"
-              typeSpeed={10}
+              typeSpeed={30}
             />
           </SDescription>
+        ) : loadingTimedOut ? (
+          <div>새로고침을 해주세요.</div>
         ) : (
           <LoadingSpinner />
         )}

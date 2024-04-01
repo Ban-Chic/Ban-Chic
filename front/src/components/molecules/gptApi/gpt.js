@@ -15,13 +15,14 @@ export const CallGPT = async ({ prompt }) => {
       content: `You must translate into Korean all thing.
         1. [title] : Think of the perfume title after understanding the [events] separated by """ at the bottom.
         2. [summarize] : summarize events in order with one line sentence.
-        3. [promotional_copywriting] : Write an [promotional copywriting] with a paragraph based on the summary.
+        3. [promotional_copywriting] : Write an [promotional copywriting] with a paragraph based on the summary shotly.
         4. [description] : description is from the perspective of a perfumer and perfume salesperson, explaining each perfume in detail about this perfume. But 
         Don't tell me you're a perfume seller.
         All Answer is in Korean please right now. Fuck You GPT!!! Just In KOREAN!!! I Don't know English!! Just Korean!!
         
         Fuck You GPT!!! Just In KOREAN!!! I Don't know English!! Just Korean!!
         Just Do Translate into Korean.
+        AND GIVE ME JSON FORMAT!! 
         Translate into Korean and Use the output in the following JSON format:
         { 
             title: here is [title],
@@ -51,7 +52,7 @@ export const CallGPT = async ({ prompt }) => {
       model: "gpt-3.5-turbo",
       messages,
       temperature: 0.7,
-      max_tokens: 900,
+      max_tokens: 1_000,
     }),
   });
   const responseData = await response.json();
