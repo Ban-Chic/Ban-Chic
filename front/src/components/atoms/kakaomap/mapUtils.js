@@ -27,6 +27,7 @@ function searchKakaoPlaces(keyword) {
 function placesSearchCB(data, status, pagination) {
   if (status === window.kakao.maps.services.Status.OK) {
     displayPlaces(data);
+    console.log(data);
     // displayPagination(pagination);
     console.log(pagination);
   } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
@@ -76,17 +77,47 @@ function removePlaceList() {
 function createPlaceLi(place, marker) {
   let placeName = document.createElement("h2");
   placeName.innerText = place.place_name;
+  placeName.style.fontWeight = "bold";
+  placeName.style.fontSize = "16px";
+  placeName.style.maxHeight = "24px";
+  placeName.style.overflow = "hidden";
 
   let address = document.createElement("p");
-  address.innerText = place.address_name;
+  address.innerText = place.road_address_name;
+  address.style.fontSize = "14px";
+
+  let distance = document.createElement("p");
+  distance.innerText = replaceDistance(place.distance);
+  distance.style.fontSize = "14px";
+  distance.style.color = "#288756";
+
+  let wrap = document.createElement("div");
+  wrap.style.display = "flex";
+  wrap.style.alignItems = "center";
+  wrap.style.gap = "5px";
+
+  wrap.appendChild(distance);
+  wrap.appendChild(address);
 
   let phoneNumber = document.createElement("p");
   phoneNumber.innerText = place?.phone;
+  phoneNumber.style.fontSize = "14px";
+
+  let link = document.createElement("a");
+  link.href = place.place_url;
+  link.innerText = "상세보기";
+  link.style.color = "#1f8cff";
+  link.style.fontSize = "14px";
 
   let list = document.createElement("li");
+  list.style.margin = "10px";
+  list.style.padding = "10px";
+  list.style.borderBottom = "2px solid black";
+  list.style.backgroundColor = "white";
 
   list.appendChild(placeName);
-  list.appendChild(address);
+  list.appendChild(wrap);
+  list.appendChild(link);
   list.appendChild(phoneNumber);
 
   // mouse over / out이 잘 안되는 현상 수정해야 됨
@@ -149,6 +180,10 @@ function displayInfowindow(marker, title) {
 
   window.kakao.infowindow.setContent(content);
   window.kakao.infowindow.open(window.kakao.obj, marker);
+}
+
+function replaceDistance(meter) {
+  return (meter / 1000).toFixed(1) + "km";
 }
 
 export { searchKakaoPlaces };

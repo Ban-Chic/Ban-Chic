@@ -30,24 +30,22 @@ const SWrap = styled.div`
   background-color: white;
 
   overflow-y: scroll;
+  max-width: 290px;
   max-height: 500px;
 `;
 
 const SForm = styled.form`
-  border-radius: 5px;
   padding: 10px;
-
-  box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 
   display: flex;
   gap: 10px;
-`;
 
-const SList = styled.ul``;
+  background-color: #258fff;
+`;
 
 const SPlace = styled.li`
   display: flex;
   gap: 10px;
 `;
 
-export { SImg, MapContainer, SForm, SWrap, SList, SPlace };
+export { SImg, MapContainer, SForm, SWrap, SPlace };
