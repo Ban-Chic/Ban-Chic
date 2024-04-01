@@ -11,8 +11,9 @@ export const getPerfumeDetail = (perfumeId: string) => {
 
 export const getRecommend = () => API.get("/recommend/top");
 
-/** 향수 목록 조회 */
-export const getPerfumeList = () => API.get("/perfumes");
+/** 향수 카테고리 목록 조회 */
+export const getPerfumeList = (type: string) =>
+  API.get(`/perfumes/season/${type}`).then((res) => res.data);
 
 /** 향수 좋아요 토글*/
 export const postLike = (perfumeId: string) =>
@@ -108,7 +109,8 @@ export const getReviews = (userId: number) =>
   API.get(`/members/${userId}/reviews`).then((res) => res.data);
 
 /** 추천받은 향수 목록 조회 */
-export const getRecommendedPerfumeList = () => API.get("/members/recommend");
+export const getRecommendedPerfumeList = () =>
+  API.get("/members/recommend").then((res) => res.data);
 
 /** 멤버 정보 조회 */
 export const getMember = (userId: number) =>

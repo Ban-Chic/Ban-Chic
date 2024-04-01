@@ -18,7 +18,7 @@ function PerfumeListItem({
 }: Props) {
   return (
     <>
-      <SPerfumeBox as={Link} to={`/api/perfumes/${perfumeId}`}>
+      <SPerfumeBox as={Link} to={`/perfumes/${perfumeId}`}>
         <SPerfumeImg src={perfumeImg} alt="향수 이미지" />
         <SSubTitleDark>{perfumeName}</SSubTitleDark>
         <SBody2Dark>{perfumeBrand}</SBody2Dark>

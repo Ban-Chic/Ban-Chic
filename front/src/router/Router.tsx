@@ -51,10 +51,11 @@ function Router() {
             element={<ReviewPage />}
           ></Route> */}
         </Route>
+        <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
+        <Route path={Page_Url.Map} element={<MapPage />}></Route>
+
         <Route element={<LayoutsWithoutHF />} errorElement={<ErrorPage />}>
           <Route path={Page_Url.My} element={<MyPage />}></Route>
-          <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
-          <Route path={Page_Url.Map} element={<MapPage />}></Route>
           <Route
             path={Page_Url.SurveyLanding}
             element={<SurveyLandingPage />}
