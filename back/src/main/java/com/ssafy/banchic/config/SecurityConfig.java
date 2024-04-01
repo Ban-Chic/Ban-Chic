@@ -72,35 +72,29 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of(
-            "http://localhost:5173",
-            "http://j10b109.p.ssafy.io:5173"
-        ));
-//        config.setAllowedHeaders(List.of("Origin","Accept","X-Requested-With","Content-Type",
-//            "Access-Control-Request-Method","Access-Control-Request-Headers", "Access-Control-Allow-Origin",
-//            "Authorization", "RefreshToken"));
-//        config.setExposedHeaders(List.of("Origin","Accept","X-Requested-With","Content-Type",
-//            "Access-Control-Request-Method","Access-Control-Request-Headers","Access-Control-Allow-Origin",
-//            "Authorization", "RefreshToken"));
-        config.setAllowedHeaders(Collections.singletonList("*"));
-        config.setExposedHeaders(Collections.singletonList("*"));
-        config.setAllowedMethods(Arrays.asList(
-            HttpMethod.GET.name(),
-            HttpMethod.POST.name(),
-            HttpMethod.DELETE.name(),
-            HttpMethod.PUT.name(),
-            HttpMethod.HEAD.name(),
-            HttpMethod.OPTIONS.name()
-        ));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//
+//        config.setAllowCredentials(true);
+//        config.setAllowedOrigins(List.of(
+//            "http://localhost:5173",
+//            "http://j10b109.p.ssafy.io:5173"
+//        ));
+//        config.setAllowedHeaders(List.of("*"));
+//        config.setExposedHeaders(List.of("*"));
+//        config.setAllowedMethods(Arrays.asList(
+//            HttpMethod.GET.name(),
+//            HttpMethod.POST.name(),
+//            HttpMethod.DELETE.name(),
+//            HttpMethod.PUT.name(),
+//            HttpMethod.HEAD.name(),
+//            HttpMethod.OPTIONS.name()
+//        ));
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return source;
+//    }
 
 }
