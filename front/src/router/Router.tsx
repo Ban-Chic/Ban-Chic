@@ -27,6 +27,7 @@ import SurveySelectPage from "../components/pages/survey/surveyselect";
 import SurveyLandingPage from "../components/pages/survey/surveyLanding";
 import SurveyImagePage from "../components/pages/survey/surveyImage";
 import SurveyQuestionPage from "../components/pages/survey/surveyQuestion";
+import SurveyResultPage from "../components/pages/survey/surveyResult";
 
 function Router() {
   const location = useLocation();
@@ -53,9 +54,9 @@ function Router() {
           ></Route> */}
         </Route>
         <Route element={<LayoutsWithoutHF />} errorElement={<ErrorPage />}>
+          <Route path={Page_Url.Map} element={<MapPage />}></Route>
           <Route path={Page_Url.My} element={<MyPage />}></Route>
           <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
-          <Route path={Page_Url.Map} element={<MapPage />}></Route>
           <Route
             path={Page_Url.SurveyLanding}
             element={<SurveyLandingPage />}
@@ -71,6 +72,10 @@ function Router() {
           <Route
             path={Page_Url.SurveySwipe}
             element={<SurveyQuestionPage />}
+          ></Route>
+          <Route
+            path={Page_Url.SurveyResult}
+            element={<SurveyResultPage />}
           ></Route>
         </Route>
         <Route

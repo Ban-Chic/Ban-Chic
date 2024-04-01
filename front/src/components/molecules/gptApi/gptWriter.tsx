@@ -17,7 +17,7 @@ function GPTSample({ description }: Props) {
               words={[description]}
               cursor
               cursorStyle="|"
-              typeSpeed={70}
+              typeSpeed={10}
             />
           </SDescription>
         ) : (
