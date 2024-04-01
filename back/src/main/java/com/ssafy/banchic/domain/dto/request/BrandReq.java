@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BrandReq {
-    private String BrandName;
+    private String brandName;
 }

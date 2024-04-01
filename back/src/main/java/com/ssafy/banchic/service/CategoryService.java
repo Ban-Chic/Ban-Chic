@@ -147,7 +147,8 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public Page<BrandNameRes> getBrandList(String BrandName, Pageable pageable) {
-        Page<Perfume> perfumes = perfumeRepository.findByBrandNameContaining(BrandName, pageable);
+    public Page<BrandNameRes> getBrandList(String brandName, Pageable pageable) {
+        Page<Perfume> perfumePage = perfumeRepository.findByBrandNameContaining(brandName, pageable);
+        return perfumePage.map(BrandNameRes::from);
     }
 }

@@ -1,5 +1,6 @@
 package com.ssafy.banchic.controller;
 
+import com.ssafy.banchic.domain.dto.request.BrandReq;
 import com.ssafy.banchic.domain.dto.request.GenderReq;
 import com.ssafy.banchic.domain.dto.request.SeasonReq;
 import com.ssafy.banchic.domain.dto.response.CommonResponse;
@@ -9,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/perfumes")
 @RequiredArgsConstructor
+@Slf4j
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -55,10 +58,24 @@ public class CategoryController {
                                                  @PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC, size = 20)
                                                  Pageable pageable) {
         String genderName = genderReq.getGenderName();
+        log.info("genderName : {}", genderName);
         return ResponseEntity.ok(CommonResponse.builder()
                 .message("gender에 대한 분류 값 뽑기")
                 .data(categoryService.getGenderList(genderName, pageable))
                 .build());
     }
+
+    @GetMapping("/brand")
+    public ResponseEntity<CommonResponse> brand(@RequestBody BrandReq brandReq,
+                                                @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 20)
+                                                Pageable pageable) {
+        String brandName = brandReq.getBrandName();
+        log.info("brandName : {}", brandName);
+        return ResponseEntity.ok(CommonResponse.builder()
+                .message("brand에 대한 분류 값 뽑기")
+                .data(categoryService.getBrandList(brandName, pageable))
+                .build());
+    }
+
 
 }
