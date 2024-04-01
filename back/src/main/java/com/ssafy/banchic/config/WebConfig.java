@@ -11,7 +11,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
             .allowedOrigins("http://localhost:5173",
-                            "http://j10b109.p.ssafy.io:5173")
+                            "http://j10b109.p.ssafy.io:5173",
+                            "https://banchic.store")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .exposedHeaders("Authorization", "RefreshToken");
     }
