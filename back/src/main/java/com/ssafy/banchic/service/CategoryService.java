@@ -47,48 +47,52 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public Page<SeasonRes> getSeasonList(String seasonName, Pageable pageable) {
         List<Perfume> findPerfumes = new ArrayList<>();
-        if (seasonName.equals("Spring")) {
+        seasonName = seasonName.toLowerCase();
+        if (seasonName.equals("spring")) {
             Page<Spring> springData = springRepository.findAll(pageable);
             for (Spring spring : springData) {
                 Perfume perfume = perfumeRepository.findById(spring.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if (seasonName.equals("Summer")) {
+        } else if (seasonName.equals("summer")) {
             Page<Summer> summerData = summerRepository.findAll(pageable);
             for (Summer summer : summerData) {
                 Perfume perfume = perfumeRepository.findById(summer.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if (seasonName.equals("Fall")) {
+        } else if (seasonName.equals("fall")) {
             Page<Fall> fallData = fallRepository.findAll(pageable);
             for (Fall fall : fallData) {
                 Perfume perfume = perfumeRepository.findById(fall.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if (seasonName.equals("Winter")) {
+        } else if (seasonName.equals("winter")) {
             Page<Winter> winterData = winterRepository.findAll(pageable);
             for (Winter winter : winterData) {
                 Perfume perfume = perfumeRepository.findById(winter.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if (seasonName.equals("Day")) {
+        } else if (seasonName.equals("day")) {
             Page<Day> dayData = dayRepository.findAll(pageable);
             for (Day day : dayData) {
                 Perfume perfume = perfumeRepository.findById(day.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if (seasonName.equals("Night")) {
+        } else if (seasonName.equals("night")) {
             Page<Night> nightData = nightRepository.findAll(pageable);
             for (Night night : nightData) {
                 Perfume perfume = perfumeRepository.findById(night.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
+        } else {
+            Page<Perfume> perfumePage = perfumeRepository.findAll(pageable);
+            return perfumePage.map(SeasonRes::from);
         }
 
         List<SeasonRes> seasonResList = findPerfumes.stream()
@@ -101,41 +105,45 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public Page<GenderRes> getGenderList(String genderName, Pageable pageable) {
         List<Perfume> findPerfumes = new ArrayList<>();
-        if(genderName.equals("Male")) {
+        genderName = genderName.toLowerCase();
+        if(genderName.equals("male")) {
             Page<Male> males = maleRepository.findAll(pageable);
             for(Male male : males) {
                 Perfume perfume = perfumeRepository.findById(male.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if(genderName.equals("Female")) {
+        } else if(genderName.equals("female")) {
             Page<Female> females = femaleRepository.findAll(pageable);
             for(Female female : females) {
                 Perfume perfume = perfumeRepository.findById(female.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if(genderName.equals("MoreMale")) {
+        } else if(genderName.equals("moremale")) {
             Page<MoreMale> moreMales = moreMaleRepository.findAll(pageable);
             for(MoreMale moreMale : moreMales) {
                 Perfume perfume = perfumeRepository.findById(moreMale.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if(genderName.equals("MoreFemale")) {
+        } else if(genderName.equals("morefemale")) {
             Page<MoreFemale> moreFemales = moreFemaleRepository.findAll(pageable);
             for(MoreFemale moreFemale : moreFemales) {
                 Perfume perfume = perfumeRepository.findById(moreFemale.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
-        } else if(genderName.equals("Unisex")) {
+        } else if(genderName.equals("unisex")) {
             Page<Unisex> unisexes = unisexRepository.findAll(pageable);
             for(Unisex unisex : unisexes) {
                 Perfume perfume = perfumeRepository.findById(unisex.getPerfume().getId())
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ID));
                 findPerfumes.add(perfume);
             }
+        } else {
+            Page<Perfume> perfumePage = perfumeRepository.findAll(pageable);
+            return perfumePage.map(GenderRes::from);
         }
 
         List<GenderRes> genderList = findPerfumes.stream()
