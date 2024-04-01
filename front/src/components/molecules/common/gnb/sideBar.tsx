@@ -8,7 +8,7 @@ function SideBar() {
   const windowWidth = useWindowWidth();
   return (
     <>
-      <SidebarReal width={windowWidth} isOpenCheck={isOpen}></SidebarReal>
+      <SidebarReal width={windowWidth} $isOpenCheck={isOpen}></SidebarReal>
       <MenuToggle toggle={() => toggleMenu()} isOpen={isOpen} />
     </>
   );

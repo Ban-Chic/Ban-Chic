@@ -1,23 +1,13 @@
-import { AxiosResponse } from "axios";
 import API, { ImgAPI } from "./Config";
-
-interface PerfumeData {
-  id: number;
-  perfumeImg: string;
-  perfumeName: string;
-  brandName: string;
-  notes: string;
-  data: object;
-}
 
 export const baseAPI = () => API.get("/");
 
 // 향수
 
 /** 향수 상세 조회 */
-export const getPerfumeDetail = (
-  perfumeId: string
-): Promise<AxiosResponse<PerfumeData>> => API.get(`/perfumes/${perfumeId}`);
+export const getPerfumeDetail = (perfumeId: string) => {
+  return API.get(`/perfumes/${perfumeId}`).then((res) => res.data);
+};
 
 export const getRecommend = () => API.get("/recommend/top");
 
@@ -30,11 +20,11 @@ export const postLike = (perfumeId: string) =>
 
 /** 향수 좋아요 조회 */
 export const getLike = (perfumeId: string) =>
-  API.get(`/perfumes/${perfumeId}/hearts`);
+  API.get(`/perfumes/${perfumeId}/hearts`).then((res) => res.data);
 
 /** 향수 리뷰 목록 조회 */
 export const getPerfumeReviews = (perfumeId: string) =>
-  API.get(`/perfumes/${perfumeId}/reviews`);
+  API.get(`/perfumes/${perfumeId}/reviews`).then((res) => res.data);
 
 // 리뷰
 

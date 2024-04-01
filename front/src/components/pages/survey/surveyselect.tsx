@@ -7,7 +7,7 @@ import useSurvey from "../../../hooks/survey/useSurvey";
 import { StyleRanges, Styles } from "../../../utils/PursuitStyleRanges";
 import { postSurvey } from "../../../api/Api";
 
-function SurveyPage() {
+function SurveySelectPage() {
   const [data, selectPursuit] = useSurvey();
 
   const onClickHandler = () => {
@@ -120,4 +120,4 @@ const FVariantitem = {
   },
 };
 
-export default SurveyPage;
+export default SurveySelectPage;

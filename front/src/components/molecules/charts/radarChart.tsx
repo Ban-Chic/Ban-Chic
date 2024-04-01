@@ -7,6 +7,7 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 import theme from "../../../styles/Theme";
 
@@ -59,32 +60,27 @@ function RadarChartContainer(Props: Props) {
     <>
       <SContainer>
         <SDiv>
-          <RadarChart
-            width={300}
-            height={270}
-            cx="50%"
-            cy="50%"
-            outerRadius="80%"
-            data={data}
-            margin={{ top: 15, bottom: 0 }}
-          >
-            <PolarGrid gridType="circle" />
-            <PolarAngleAxis dataKey="subject" />
-            <PolarRadiusAxis angle={30} domain={[0, 100]} />
-            <Radar
-              name="Seasonality"
-              dataKey="A"
-              stroke="white"
-              fill="yellow"
-              fillOpacity={0.6}
-              legendType="diamond"
-              isAnimationActive={true}
-              animationBegin={1}
-              animationEasing="ease-in-out"
-            />
-            <Legend />
-            <Tooltip />
-          </RadarChart>
+          <ResponsiveContainer width="100%" height="90%">
+            <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
+              <PolarGrid gridType="polygon" />
+              <PolarAngleAxis dataKey="subject" stroke="white" />
+              <PolarRadiusAxis angle={90} domain={[0, 100]} />
+              <Radar
+                name="Seasonality"
+                dataKey="A"
+                stroke="white"
+                fill={theme.color.primaryColor}
+                fillOpacity={0.6}
+                legendType="diamond"
+                isAnimationActive={true}
+                animationBegin={1}
+                animationEasing="ease-in-out"
+              />
+
+              <Legend />
+              <Tooltip wrapperStyle={{ color: theme.color.sectionColor }} />
+            </RadarChart>
+          </ResponsiveContainer>
         </SDiv>
       </SContainer>
     </>
@@ -92,13 +88,15 @@ function RadarChartContainer(Props: Props) {
 }
 
 const SContainer = styled.div`
-  padding: 10px;
+  width: 100%;
+  height: 100%;
 `;
 
 const SDiv = styled.div`
   ${theme.font.Body1};
   width: 100%;
   height: 100%;
+  min-height: 200px;
   display: flex;
   justify-content: center;
 `;

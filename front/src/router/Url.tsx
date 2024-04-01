@@ -1,6 +1,8 @@
 const Page_Url = {
+  /** 랜딩 페이지 */
+  Landing: "/",
   /** 메인페이지 */
-  Main: "/",
+  Main: "/main",
   /** 마이 페이지 */
   My: "/mypage",
   /** 로그인 페이지*/
@@ -9,6 +11,8 @@ const Page_Url = {
   NaverCallback: "/naver/Callback",
   /** 카카오 콜백 페이지*/
   KakaoCallback: "/kakao/Callback",
+  /** 설문 랜딩 페이지 */
+  SurveyLanding: "/survey/landing",
   /** 설문 선택 페이지*/
   Survey: "/survey",
   /** 선택설문 페이지*/
