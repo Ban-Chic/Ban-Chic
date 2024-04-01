@@ -6,5 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DayRepository extends JpaRepository<Day, Long> {
+
     Page<Day> findAll(Pageable pageable);
+
 }

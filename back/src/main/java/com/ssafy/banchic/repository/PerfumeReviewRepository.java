@@ -12,4 +12,5 @@ public interface PerfumeReviewRepository extends JpaRepository<Review, Long> {
 
     Page<Review> getReviewsByPerfume(Perfume perfume, Pageable pageable);
     List<Review> findByMemberId(Long memberId);
+
 }

@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MaleRepository extends JpaRepository<Male, Long> {
 
     Page<Male> findAll(Pageable pageable);
+
 }
