@@ -1,5 +1,5 @@
 import { SImg } from "./KakaoMap.styled";
-import locationImg from "/now_locations.png";
+import locationImg from "/mapImg/now_locations.png";
 
 function LocationBtn() {
   const onClickHandler = () => {
