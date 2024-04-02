@@ -39,10 +39,13 @@ const SSubTitleDark = styled(SSubTitle)`
   color: #191919;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 16px;
 `;
 
 const SPerfumeImg = styled.img`
-  width: 150px;
+  width: 100px;
+  display: block;
+  margin: auto;
 `;
 
 const SPerfumeBox = styled.li`

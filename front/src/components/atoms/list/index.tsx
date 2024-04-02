@@ -16,6 +16,11 @@ const SListContainer = styled.div`
   gap: 10px;
   max-height: 375px;
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 export default List;

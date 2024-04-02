@@ -33,6 +33,7 @@ function Router() {
     <AnimatePresence>
       <Routes>
         <Route path={Page_Url.Landing} element={<LandingPage />}></Route>
+
         <Route element={<Layouts />} errorElement={<ErrorPage />}>
           <Route path={Page_Url.Main} element={<MainPage />}></Route>
           <Route
@@ -50,9 +51,9 @@ function Router() {
             path="/perfumes/:perfumeId/reviews"
             element={<ReviewPage />}
           ></Route> */}
+          <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
+          <Route path={Page_Url.Map} element={<MapPage />}></Route>
         </Route>
-        <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
-        <Route path={Page_Url.Map} element={<MapPage />}></Route>
 
         <Route element={<LayoutsWithoutHF />} errorElement={<ErrorPage />}>
           <Route path={Page_Url.My} element={<MyPage />}></Route>

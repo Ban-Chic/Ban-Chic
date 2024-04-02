@@ -80,7 +80,7 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
             transform: `translatex(${xPosition - 10}px) scaleX(${xPosition === 0 ? 1.2 : 1})`,
           }}
         >
-          <SMenuLink to={"/"}>SEARCH</SMenuLink>
+          <SMenuLink to={Page_Url.Recommend}>SEARCH</SMenuLink>
         </SDiv>
         <SDiv
           ref={side}
