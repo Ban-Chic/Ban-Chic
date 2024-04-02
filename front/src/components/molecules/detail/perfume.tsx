@@ -12,7 +12,7 @@ function Perfume({ pid }: { pid: number }) {
   const { data, isLoading, refetch } = useGetPerfumeDetail(String(pid));
   useEffect(() => {
     refetch();
-  }, [pid]);
+  }, [refetch]);
   if (isLoading) <LoadingSpinner />;
   if (data)
     return (
@@ -51,8 +51,6 @@ const SFlex = styled.div`
 
 const SNote = styled.span`
   display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0 0.2em;
 `;
 
