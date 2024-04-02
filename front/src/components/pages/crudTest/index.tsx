@@ -98,7 +98,7 @@ function CRUDTest() {
         />
         <button
           onClick={() => {
-            postPerfumeReview("1", reviewImg, board.rate, board.content).catch(
+            postPerfumeReview(perfumeId, board.rate, board.content).catch(
               (error) => {
                 console.log(error);
               }
