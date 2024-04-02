@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Page_Url from "../../../router/Url";
 
-function Perfume({ pid }: { pid: number }) {
+function PerfumeSummary({ pid }: { pid: number }) {
   const { data, isLoading, refetch } = useGetPerfumeDetail(String(pid));
   useEffect(() => {
     refetch();
@@ -70,4 +70,4 @@ const SContatiner = styled(motion.div)`
   gap: 0.2em;
 `;
 
-export default Perfume;
+export default PerfumeSummary;
