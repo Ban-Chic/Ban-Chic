@@ -66,11 +66,13 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
                 ></SImage>
                 <SFlexEnd>
                   <SSubTitle> {item?.perfumeName}</SSubTitle>
-                  <SAccordList>
-                    {Object.keys(JSON.parse(item?.accords)).map((acc) => (
-                      <SAccord key={acc} $name={acc}></SAccord>
-                    ))}
-                  </SAccordList>
+                  {item && (
+                    <SAccordList>
+                      {Object.keys(JSON.parse(item?.accords)).map((acc) => (
+                        <SAccord key={acc} $name={acc}></SAccord>
+                      ))}
+                    </SAccordList>
+                  )}
                 </SFlexEnd>
               </SListItem>
             ))}
