@@ -8,6 +8,7 @@ import lombok.Getter;
 @Builder
 public class PerfumeOverviewRes {
 
+    // TODO: korname 추가
     private Integer id;
     private String perfumeName;
     private String perfumeImg;
