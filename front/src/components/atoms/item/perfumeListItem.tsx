@@ -18,7 +18,7 @@ function PerfumeListItem({
 }: Props) {
   return (
     <>
-      <SPerfumeBox as={Link} to={`/api/perfumes/${perfumeId}`}>
+      <SPerfumeBox as={Link} to={`/perfumes/${perfumeId}`}>
         <SPerfumeImg src={perfumeImg} alt="향수 이미지" />
         <SSubTitleDark>{perfumeName}</SSubTitleDark>
         <SBody2Dark>{perfumeBrand}</SBody2Dark>
@@ -39,10 +39,13 @@ const SSubTitleDark = styled(SSubTitle)`
   color: #191919;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 16px;
 `;
 
 const SPerfumeImg = styled.img`
-  width: 150px;
+  width: 100px;
+  display: block;
+  margin: auto;
 `;
 
 const SPerfumeBox = styled.li`
