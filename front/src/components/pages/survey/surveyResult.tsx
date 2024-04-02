@@ -59,17 +59,17 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
           transition={{ duration: 0.3 }}
         >
           <SList layout>
-            {result?.data?.data.map((item: Perfume, index: number) => (
+            {result?.data?.map((item: Perfume, index: number) => (
               <SListItem key={index} onClick={() => handlerClick(item.id)}>
                 <SImage $url={item.perfumeImg}></SImage>
-                <SFlexWrap>
+                <SFlexEnd>
                   <SSubTitle> {item.perfumeName}</SSubTitle>
                   <SAccordList>
                     {Object.keys(JSON.parse(item.accords)).map((acc) => (
                       <SAccord key={acc} $name={acc}></SAccord>
                     ))}
                   </SAccordList>
-                </SFlexWrap>
+                </SFlexEnd>
               </SListItem>
             ))}
           </SList>
@@ -110,9 +110,6 @@ const SAccordList = styled.div`
   align-items: center;
   flex-wrap: wrap;
   max-width: 100%;
-  @media only screen and (min-width: 768px) {
-    max-width: 20%;
-  }
 `;
 
 const SImage = styled(motion.div)<{ $url: string }>`
@@ -137,8 +134,8 @@ const SListItem = styled(motion.div)`
   display: flex;
   align-items: center;
   cursor: pointer;
+  justify-content: space-between;
   @media only screen and (min-width: 768px) {
-    justify-content: space-between;
   }
 `;
 
@@ -172,13 +169,15 @@ const SResult = styled(motion.article)`
   }
 `;
 
-// const SFlexEnd = styled.div`
-//   display: flex;
-//   justify-content: flex-end;
-//   @media only screen and (min-width: 768px) {
-//     flex-direction: column;
-//   }
-// `;
+const SFlexEnd = styled.div`
+  display: flex;
+  text-align: end;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  @media only screen and (min-width: 768px) {
+  }
+`;
 
 const SFlexWrap = styled(motion.article)`
   display: flex;
