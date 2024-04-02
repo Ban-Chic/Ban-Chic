@@ -60,12 +60,14 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
         >
           <SList layout>
             {result?.data?.map((item: Perfume, index: number) => (
-              <SListItem key={index} onClick={() => handlerClick(item.id)}>
-                <SImage $url={item.perfumeImg}></SImage>
+              <SListItem key={index} onClick={() => handlerClick(item?.id)}>
+                <SImage
+                  $url={item?.perfumeImg || "/perfumeImg/tomford.jpg"}
+                ></SImage>
                 <SFlexEnd>
-                  <SSubTitle> {item.perfumeName}</SSubTitle>
+                  <SSubTitle> {item?.perfumeName}</SSubTitle>
                   <SAccordList>
-                    {Object.keys(JSON.parse(item.accords)).map((acc) => (
+                    {Object.keys(JSON.parse(item?.accords)).map((acc) => (
                       <SAccord key={acc} $name={acc}></SAccord>
                     ))}
                   </SAccordList>
@@ -91,7 +93,6 @@ const SAccord = styled.div<{ $color?: string; $name: string }>`
     content: "${(props) => props.$name}"; // 호버 시 표시할 이름
     position: absolute;
     top: -300%;
-    left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
     background-color: #f2f2f2;
