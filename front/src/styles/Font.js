@@ -57,6 +57,7 @@ export const SBody2 = styled.h1`
 export const SBody1 = styled.h1`
   ${font.Body1}
   color: ${color.fontColor};
+  width: 80%;
 `;
 
 export const SSubTitle = styled.h1`
