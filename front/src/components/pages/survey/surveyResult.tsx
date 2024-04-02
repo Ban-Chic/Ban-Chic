@@ -172,13 +172,13 @@ const SResult = styled(motion.article)`
   }
 `;
 
-const SFlexEnd = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  @media only screen and (min-width: 768px) {
-    flex-direction: column;
-  }
-`;
+// const SFlexEnd = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+//   @media only screen and (min-width: 768px) {
+//     flex-direction: column;
+//   }
+// `;
 
 const SFlexWrap = styled(motion.article)`
   display: flex;

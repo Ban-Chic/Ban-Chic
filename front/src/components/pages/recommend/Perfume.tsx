@@ -9,15 +9,15 @@ type perfumeProps = {
 
 function Perfume({ children, select, click }: perfumeProps) {
   return (
-    <SLi onClick={click} selected={select === children}>
+    <SLi onClick={click} $selected={select === children}>
       {children}
     </SLi>
   );
 }
 
-const SLi = styled.li`
+const SLi = styled.li<{ $selected: boolean }>`
   cursor: pointer;
-  font-weight: ${(props) => props.selected && "bold"};
+  font-weight: ${(props) => props.$selected && "bold"};
 `;
 
 export default Perfume;
