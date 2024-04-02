@@ -62,12 +62,14 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
             {result?.data?.data.map((item: Perfume, index: number) => (
               <SListItem key={index} onClick={() => handlerClick(item.id)}>
                 <SImage $url={item.perfumeImg}></SImage>
-                <SSubTitle> {item.perfumeName}</SSubTitle>
-                <SAccordList>
-                  {Object.keys(JSON.parse(item.accords)).map((acc) => (
-                    <SAccord key={acc} $name={acc}></SAccord>
-                  ))}
-                </SAccordList>
+                <SFlexWrap>
+                  <SSubTitle> {item.perfumeName}</SSubTitle>
+                  <SAccordList>
+                    {Object.keys(JSON.parse(item.accords)).map((acc) => (
+                      <SAccord key={acc} $name={acc}></SAccord>
+                    ))}
+                  </SAccordList>
+                </SFlexWrap>
               </SListItem>
             ))}
           </SList>
@@ -103,11 +105,14 @@ const SAccord = styled.div<{ $color?: string; $name: string }>`
 
 const SAccordList = styled.div`
   display: flex;
-  max-width: 100px;
   gap: 5px;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  max-width: 100%;
+  @media only screen and (min-width: 768px) {
+    max-width: 20%;
+  }
 `;
 
 const SImage = styled(motion.div)<{ $url: string }>`
@@ -131,8 +136,10 @@ const SListItem = styled(motion.div)`
   border-radius: 5px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   cursor: pointer;
+  @media only screen and (min-width: 768px) {
+    justify-content: space-between;
+  }
 `;
 
 const SList = styled(motion.div)`
@@ -165,12 +172,21 @@ const SResult = styled(motion.article)`
   }
 `;
 
+const SFlexEnd = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  @media only screen and (min-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
 const SFlexWrap = styled(motion.article)`
   display: flex;
   gap: 1em;
   width: 100%;
   padding: 0 10%;
   flex-direction: row;
+  justify-content: flex-end;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
