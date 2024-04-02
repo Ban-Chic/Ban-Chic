@@ -19,7 +19,15 @@ import useGetPerfumeReviews, {
 import { useEffect, useState } from "react";
 import { CallGPT } from "../../molecules/gptApi/gpt";
 import useOpenModal from "../../../hooks/modal/useOpenModal";
-import ModalForm from "../../atoms/modalForm/ModalForm";
+import ModalRegisterForm from "../../atoms/modalForm/ModalRegisterForm";
+// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+
+// interface Review {
+//   reviewId: number;
+//   rate: number;
+//   content: string;
+// }
 
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
@@ -127,7 +135,7 @@ function PerfumeDetail() {
             {/* <ReviewPage /> */}
             {/* </SParent> */}
 
-            <TempReviewBox data={reviews}>
+            <TempReviewBox data={reviews} perfumeId={perfumeId}>
               <SReviewDiv>
                 <SSubTitle>Review</SSubTitle>
                 <button onClick={() => clickModal()}>리뷰등록</button>
@@ -139,13 +147,21 @@ function PerfumeDetail() {
             <SPerfumeName> {data.data.koreanName}</SPerfumeName>
           </SBlock>
           {isOpenModal && (
-            <ModalForm
+            <ModalRegisterForm
               closeModal={closeModal}
               actionModal={postReviewFunction}
               title="리뷰 등록하기"
               // alert={data.data?.nickname}
             />
           )}
+          {/* {isOpenModal && (
+            <ModalUpdateForm
+              closeModal={closeModal}
+              actionModal={putReviewFunction}
+              title="리뷰 수정하기"
+              // alert={data.data?.nickname}
+            />
+          )} */}
         </SDetailContainer>
       </>
     );

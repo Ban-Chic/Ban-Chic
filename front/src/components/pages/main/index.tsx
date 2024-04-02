@@ -18,8 +18,8 @@ function MainPage() {
             </div>
             <FrameSection>
               <SImgGroup>
-                <SImgOne src="/logo_yellow.png" alt="perfume_square" />
-                <SImgOne src="/logo_green.png" alt="perfume_square" />
+                <SImgOne src="/logoImg/logo_yellow.png" alt="perfume_square" />
+                <SImgOne src="/logoImg/logo_green.png" alt="perfume_square" />
               </SImgGroup>
             </FrameSection>
           </SFisrtLoad>
@@ -31,7 +31,7 @@ function MainPage() {
 
           <FrameSection>
             <SZIndex1>
-              <SImg src="/img_main.png" alt="perfume" />
+              <SImg src="/mainPageImg/img_main.png" alt="perfume" />
             </SZIndex1>
           </FrameSection>
         </SDivContainer>
@@ -41,17 +41,17 @@ function MainPage() {
               <SSpan>A PERFECT PERFUME WITH NOTHING TO ADD</SSpan>
             </SPContainer>
             <SMiddleSection>
-              <SImgFlower src="/main_flower_perfume.jpg" alt="" />
+              <SImgFlower src="/mainPageImg/main_flower_perfume.jpg" alt="" />
               <FrameSection>
                 <SMiddleSquareGroup>
-                  <SMiddleSquare src="/logo_orange.png" alt="" />
-                  <SMiddleSquare src="/logo_black.png" alt="" />
+                  <SMiddleSquare src="/logoImg/logo_orange.png" alt="" />
+                  <SMiddleSquare src="/logoImg/logo_black.png" alt="" />
                 </SMiddleSquareGroup>
               </FrameSection>
             </SMiddleSection>
             <SBottomSection>
               <FrameSection>
-                <SImgHand src="/main_hand_perfume.jpg" alt="" />
+                <SImgHand src="/mainPageImg/main_hand_perfume.jpg" alt="" />
               </FrameSection>
               <FrameSection>
                 <SH2Group>
