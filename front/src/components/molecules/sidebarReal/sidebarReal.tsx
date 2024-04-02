@@ -82,7 +82,7 @@ const SidebarReal = ({ width, $isOpenCheck }: Props) => {
           }}
           exit={{ translateX: 1000, opacity: 0 }}
         >
-          <SMenuLink to={"/"}>SEARCH</SMenuLink>
+          <SMenuLink to={Page_Url.Recommend}>SEARCH</SMenuLink>
         </SDiv>
         <SDiv
           ref={side}
