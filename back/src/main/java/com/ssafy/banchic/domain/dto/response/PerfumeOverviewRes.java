@@ -8,12 +8,12 @@ import lombok.Getter;
 @Builder
 public class PerfumeOverviewRes {
 
-    // TODO: korname 추가
     private Integer id;
     private String perfumeName;
     private String perfumeImg;
     private String brandName;
     private String accords;
+    private String korName;
 
     public static PerfumeOverviewRes from(Perfume perfume) {
         return PerfumeOverviewRes.builder()
@@ -22,6 +22,7 @@ public class PerfumeOverviewRes {
             .perfumeImg(perfume.getPerfumeImg())
             .brandName(perfume.getBrandName())
             .accords(perfume.getAccords())
+            .korName(perfume.getKoreanName())
             .build();
     }
 
