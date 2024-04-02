@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import { searchKakaoPlaces } from "./mapUtils";
 
 import styled from "styled-components";
+import Page_Url from "../../../router/Url";
 
 function BrandLists() {
   const onClickHandler = (e: any) => {
@@ -30,6 +32,7 @@ function BrandLists() {
               </SLi>
             );
           })}
+          <Link to={Page_Url.Recommend}>돌아가기</Link>
         </SUL>
       </nav>
     </>
