@@ -342,6 +342,7 @@ public class MemberService {
         return headers;
     }
 
+    @Transactional(readOnly = true)
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
         return memberRepository.findById(memberFromAccessToken.getId())
