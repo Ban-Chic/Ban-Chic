@@ -7,7 +7,7 @@ function GNB() {
   return (
     <SHeaderContainer>
       <SLink to={Page_Url.Main}>Ban:Chic</SLink>
-      <SImgContainer src="/logo_triangle_banchic.png" alt="Logo" />
+      <SImgContainer src="/logoImg/logo_triangle_banchic.png" alt="Logo" />
       <SideBar />
     </SHeaderContainer>
   );

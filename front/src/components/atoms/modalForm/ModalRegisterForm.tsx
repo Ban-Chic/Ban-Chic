@@ -4,32 +4,37 @@ import ButtonComponent from "../auth/Button";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import theme from "../../../styles/Theme";
+import { StarRating } from "./StarRating";
 
 type Props = {
   title?: string;
   alert?: string;
   closeModal: () => void;
-  actionModal?: (rate:number, content: string) => void;
+  actionModal?: (rate: number, content: string) => void;
 };
-const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
-  // const [data, setData] = useState<string>(alert);
+const ModalRegisterForm = ({
+  title,
+  alert = "",
+  closeModal,
+  actionModal,
+}: Props) => {
   const [rate, setRate] = useState<number>(0);
   const [content, setContent] = useState<string>("");
 
   const ChangeBtn = () => {
-    const rateValue = parseInt(rate as any);
-    if (rateValue >= 1 && rateValue <= 5 && content.length >= 2 && content.length <= 500 && /^[가-힣a-z0-9-_ ]+$/i.test(content)) {
-      actionModal?.(rateValue, content);
+    // const rateValue = parseInt(rate as any);
+    if (
+      rate >= 1 &&
+      rate <= 5 &&
+      content.length >= 2 &&
+      content.length <= 500 &&
+      /^[ㄱ-ㅎ가-힣a-z0-9-_ .%+=()*&^%$#@!~`,<>/?;:'"{}[]|]+$/i.test(content)
+    ) {
+      actionModal?.(rate, content);
       window.alert("리뷰 등록이 완료되었습니다.");
       closeModal();
     } else {
-      window.alert("평점은 1-5점 사이, 내용은 특수문자 없이 2-500자로 작성 가능합니다.");
-    }
-  };
-
-  const handleOnKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      ChangeBtn();
+      window.alert("평점은 1-5점 사이, 리뷰는 2-500자로 작성 가능합니다.");
     }
   };
 
@@ -51,20 +56,7 @@ const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
         }}
       >
         <SSubTitle>{title}</SSubTitle>
-        <SInput
-          id="rateValue"
-          type="number"
-          onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setRate(parseInt(event.target.value));
-          }}
-          defaultValue={alert}
-          placeholder="평점을 입력하세요(1-5)"
-          max={5}
-          min={1}
-          onKeyPress={handleOnKeyPress}
-          autoFocus
-          required
-        />
+        <StarRating setRate={setRate} />
         <SInput
           id="contentValue"
           type="text"
@@ -75,7 +67,6 @@ const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
           placeholder="리뷰 내용을 입력하세요"
           maxLength={500}
           minLength={2}
-          onKeyPress={handleOnKeyPress}
           required
         />
         <SFlexWrap>
@@ -87,7 +78,7 @@ const ModalForm = ({ title, alert = "", closeModal, actionModal }: Props) => {
   );
 };
 
-export default ModalForm;
+export default ModalRegisterForm;
 
 const SFlexWrap = styled.div`
   display: flex;
@@ -111,7 +102,7 @@ const SModalBackGround = styled.div`
 `;
 
 const SInput = styled(motion.input)`
-width: 500px;
+  width: 500px;
   background-color: var(--color-white);
   border: 1px solid var(--color-white);
   outline: none;
