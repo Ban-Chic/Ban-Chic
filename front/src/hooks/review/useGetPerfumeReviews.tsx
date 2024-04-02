@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getPerfumeReviews, postPerfumeReview, updatePerfumeReview } from "../../api/Api";
+import {
+  getPerfumeReviews,
+  postPerfumeReview,
+  updatePerfumeReview,
+  deletePerfumeReview,
+} from "../../api/Api";
 
 export default function useGetPerfumeReviews(perfumeId: string) {
   return useQuery({
@@ -8,26 +13,41 @@ export default function useGetPerfumeReviews(perfumeId: string) {
   });
 }
 
-
-export function usePostReview(){
+export function usePostReview() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({perfumeId, rate, content}:any)=>postPerfumeReview(perfumeId, rate, content),
+    mutationFn: ({ perfumeId, rate, content }: any) =>
+      postPerfumeReview(perfumeId, rate, content),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["perfumereviews"] });
-      console.log("리쿼 성공!");
     },
     mutationKey: ["postReview"],
   });
 }
 
-export function useUpdateReview(perfumeId:number, reviewId:number, newReview:object){
+export function useUpdateReview() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ()=>updatePerfumeReview(perfumeId, reviewId, newReview),
+    mutationFn: ({ perfumeId, reviewId, rate, content }: any) =>
+      updatePerfumeReview(perfumeId, reviewId, {
+        rate: rate,
+        content: content,
+      }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["perfumereviews"] });
     },
-    mutationKey: ["updateReview"],
+    mutationKey: ["putReview"],
+  });
+}
+
+export function useDeleteReview() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ perfumeId, reviewId }: any) =>
+      deletePerfumeReview(perfumeId, reviewId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["perfumereviews"] });
+    },
+    mutationKey: ["deleteReview"],
   });
 }

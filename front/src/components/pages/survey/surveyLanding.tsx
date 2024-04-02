@@ -16,42 +16,42 @@ function SurveyLandingPage() {
         <SSelectButton
           as={Link}
           to={Page_Url.SurveyImage}
-          $url={"/test1.png"}
+          $url={"/surveyImg/test1.png"}
           variants={FVariantitem}
           initial="hidden"
           animate="visible"
           exit="exit"
           contents="내 스타일과 어울리는 향수를 추천 받아보세요"
         >
-          <SDiv $url={"/test2.png"} />
+          <SDiv $url={"/surveyImg/test2.png"} />
           <STitleDiff>내 착장 기반 추천</STitleDiff>
         </SSelectButton>
 
         <SSelectButton
           as={Link}
           to={Page_Url.SurveySelect}
-          $url={"/test7.png"}
+          $url={"/surveyImg/test7.png"}
           initial="hidden"
           animate="visible"
           exit="exit"
           variants={FVariantitem}
           contents="나의 추구미와 어울리는 향수를 추천 받아보세요"
         >
-          <SDiv $url={"/test9.png"} />
+          <SDiv $url={"/surveyImg/test9.png"} />
           <STitleDiff>추구미 기반 추천</STitleDiff>
         </SSelectButton>
 
         <SSelectButton
           as={Link}
           to={Page_Url.SurveySwipe}
-          $url={"/test5.png"}
+          $url={"/surveyImg/test5.png"}
           initial="hidden"
           animate="visible"
           exit="exit"
           variants={FVariantitem}
           contents="나와 어울리는 향수를 추천 받아보세요"
         >
-          <SDiv $url={"/test6.png"} />
+          <SDiv $url={"/surveyImg/test6.png"} />
           <STitleDiff>질문 기반 추천</STitleDiff>
         </SSelectButton>
       </SContainer>

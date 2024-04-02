@@ -15,7 +15,7 @@ function ButtonComponent({ children, onClick }: IButtonProps) {
 const SButton = styled.button`
   width: 100%;
   height: 100%;
-  color: ${theme.color.bgColor};
+  color: ${theme.color.fontColor};
   ${theme.styleBase.glassmorphism}
   border-radius: 5px;
 `;

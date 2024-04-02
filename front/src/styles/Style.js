@@ -1,9 +1,11 @@
+import color from "./Color";
+
 const styleBase = {
   glassmorphism: `
-  background: rgba( 255, 255, 255, 0.4 );
+  background: ${color.clearBlockColor};
   backdrop-filter: blur( 1px );
   -webkit-backdrop-filter: blur( 0.5px );
-  border: 1px solid rgba( 255, 255, 255, 0.18 );`,
+  border: 2px solid #e2e2e2;`,
 };
 
 export default styleBase;

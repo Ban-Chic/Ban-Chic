@@ -106,7 +106,7 @@ const SReivewContainer = styled.div`
 
 const SReviewImg = styled.img`
   width: 300px;
-  background: url(/img_perfume_sample.png) no-repeat;
+  background: url(/perfumeImg/img_perfume_sample.png) no-repeat;
   background-size: cover;
   height: 300px;
 
@@ -117,7 +117,7 @@ const SProfileImg = styled.img`
   transition: 2s linear;
   border-radius: 50%;
   width: 30px;
-  background: url(/logo_orange.png) no-repeat;
+  background: url(/logoImg/logo_orange.png) no-repeat;
   background-size: cover;
 `;
 
