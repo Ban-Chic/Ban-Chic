@@ -35,6 +35,7 @@ function Router() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path={Page_Url.Landing} element={<LandingPage />}></Route>
+
         <Route element={<Layouts />} errorElement={<ErrorPage />}>
           <Route path={Page_Url.Main} element={<MainPage />}></Route>
           <Route
@@ -52,11 +53,12 @@ function Router() {
             path="/perfumes/:perfumeId/reviews"
             element={<ReviewPage />}
           ></Route> */}
-        </Route>
-        <Route element={<LayoutsWithoutHF />} errorElement={<ErrorPage />}>
-          <Route path={Page_Url.Map} element={<MapPage />}></Route>
-          <Route path={Page_Url.My} element={<MyPage />}></Route>
           <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
+          <Route path={Page_Url.Map} element={<MapPage />}></Route>
+        </Route>
+
+        <Route element={<LayoutsWithoutHF />} errorElement={<ErrorPage />}>
+          <Route path={Page_Url.My} element={<MyPage />}></Route>
           <Route
             path={Page_Url.SurveyLanding}
             element={<SurveyLandingPage />}
