@@ -12,11 +12,13 @@ function PersuitCard({ children, data }: Props) {
   return (
     <>
       {children}
-      {data?.map((item) => (
-        <SFBlock drag={true} dragControls={controls}>
-          {item}
-        </SFBlock>
-      ))}
+      <SContainer>
+        {data?.map((item, i) => (
+          <SFBlock key={i} drag={true} dragControls={controls}>
+            {item}
+          </SFBlock>
+        ))}
+      </SContainer>
     </>
   );
 }
@@ -25,6 +27,11 @@ const SFBlock = styled(motion.div)`
   width: 100px;
   height: 100px;
   background-color: yellow;
+`;
+
+const SContainer = styled.article`
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export default PersuitCard;

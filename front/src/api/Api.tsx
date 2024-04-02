@@ -38,7 +38,6 @@ export const getPerfumeReviews = (perfumeId: string) =>
 /** 리뷰 등록 */
 export const postPerfumeReview = async (
   perfumeId: string,
-  file: File,
   rate: number,
   content: string
 ) => {
@@ -49,28 +48,15 @@ export const postPerfumeReview = async (
   const blobData = new Blob([uploadData], { type: "application/json" });
 
   formData.append("form", blobData);
-  console.log("아래가 폼");
-  console.log("FormData:", formData.get("form")); // FormData 내용 확인
 
-  formData.append("file", file);
-  console.log("아래가 파일");
-  console.log("file:", formData.get("file")); // FormData 내용 확인
-
-  console.log("FormData:", formData); // FormData 내용 확인
-
-  console.log("데이터", data);
-  console.log("레이트", rate);
-  console.log("컨텐트", content);
+  // formData.append("file", file);
 
   // ImgAPI를 사용하여 요청 보내기
   try {
-    ImgAPI.post(`/perfumes/${perfumeId}/reviews`, formData).then((res) =>
-      console.log(res)
-    );
+    return ImgAPI.post(`/perfumes/${perfumeId}/reviews`, formData)
   } catch (error) {
     console.log(error);
   }
-  window.alert("됐어");
 };
 
 /** 리뷰 수정 */

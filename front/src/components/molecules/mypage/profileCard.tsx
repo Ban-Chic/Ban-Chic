@@ -17,6 +17,7 @@ interface Props {
 function ProfileCard({ data, onInput, updateProfileImage }: Props) {
   // 이미지 미리보기 URL을 상태로 관리합니다.
   const [previewUrl, setPreviewUrl] = useState(data.data?.image || "/user.svg");
+  const [temp, setTemp] = useState(false);
   // 파일 인풋 참조를 생성합니다.
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleProfileClick = () => {
@@ -31,6 +32,7 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
       const fileUrl = URL.createObjectURL(file);
       setPreviewUrl(fileUrl); // 미리보기 URL 상태 업데이트
       onInput(event); // 부모 컴포넌트로 이벤트 전달
+      setTemp(true);
     }
   };
 
@@ -46,14 +48,18 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
         onInput={onInput}
         onChange={handleFileChange}
       />
-      <button type="submit" onClick={updateProfileImage}>
-        제출
-      </button>
+      {temp && (
+        <SButton type="submit" onClick={updateProfileImage}>
+          제출
+        </SButton>
+      )}
       {data.data?.nickname && <STitle>{data?.data?.nickname}</STitle>}
       {data.data?.email && <SBody1>{data?.data?.email}</SBody1>}
     </SFlexCenter>
   );
 }
+
+const SButton = styled.button``;
 
 const SInput = styled.input`
   display: none;

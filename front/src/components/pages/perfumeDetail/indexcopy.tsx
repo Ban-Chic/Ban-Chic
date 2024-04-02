@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
-import GPTSample from "../../molecules/gptApi/gptSample";
+import GPTSample from "../../molecules/gptApi/gptWriter";
 import { HeartFilled } from "@ant-design/icons";
 
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 import RadarChartContainer from "../../molecules/charts/radarChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
@@ -13,7 +13,11 @@ import LoadingSpinner from "../../../utils/LoadingSpinner";
 import useGetHeart, { useUpdateHeart } from "../../../hooks/heart/useGetHeart";
 import { SSubTitle } from "../../../styles/Font";
 import TempReviewBox from "../../molecules/detail/tempReviewBox";
-import useGetPerfumeReviews from "../../../hooks/review/useGetPerfumeReviews";
+import useGetPerfumeReviews, { usePostReview } from "../../../hooks/review/useGetPerfumeReviews";
+import { useEffect, useState } from "react";
+import { CallGPT } from "../../molecules/gptApi/gpt";
+import useOpenModal from "../../../hooks/modal/useOpenModal";
+import ModalForm from "../../atoms/modalForm/ModalForm";
 
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
@@ -21,11 +25,44 @@ function PerfumeDetail() {
   const { data, isLoading, isError, error } = useGetPerfumeDetail(perfumeId);
   const { data: hearts } = useGetHeart(perfumeId);
   const postHeart = useUpdateHeart(perfumeId);
+  const postReview = usePostReview();
   const { data: reviews } = useGetPerfumeReviews(perfumeId);
+  const [gptDescription, setGptDescription] = useState<string | null>(null);
+  const [gptDescriptionFetched, setGptDescriptionFetched] = useState(false);
+  const { isOpenModal, clickModal, closeModal } = useOpenModal();
 
+  //좋아요 뮤테이션
   const heartMutation = () => {
     postHeart.mutate();
   };
+
+  const postReviewFunction = (rate: number, content:string) =>{
+    postReview.mutate({perfumeId, rate, content});
+  };
+
+  useEffect(() => {
+    const fetchGptDescription = async () => {
+      try {
+        if (data && !gptDescriptionFetched) {
+          const message = await CallGPT({
+            prompt: `
+              perfume Name: ${data.data.perfumeName}
+              spices of perfume: ${data.data.notes}
+            `,
+          });
+          console.log("Response from CallGPT:", message);
+          console.log(typeof message);
+          const { promotional_copywriting } = JSON.parse(message);
+          setGptDescription(promotional_copywriting);
+          setGptDescriptionFetched(true);
+        }
+      } catch (error) {
+        console.error("GPT 호출 실패", error);
+      }
+    };
+
+    fetchGptDescription();
+  }, [data, gptDescriptionFetched]);
 
   // 로딩 화면
   if (isLoading) return <LoadingSpinner />;
@@ -51,10 +88,7 @@ function PerfumeDetail() {
             <RadarChartContainer season={data.data.season} />
           </SBlock>
           <SBlock>
-            <GPTSample
-              perfumeName={data.data.perfumeName}
-              notes={data.data.notes}
-            />
+            <GPTSample description={gptDescription} />
           </SBlock>
           <SBlock>
             <SSubTitle>Spices</SSubTitle>
@@ -92,13 +126,24 @@ function PerfumeDetail() {
             {/* </SParent> */}
 
             <TempReviewBox data={reviews}>
-              <SSubTitle>Review</SSubTitle>
+              <SReviewDiv>
+                <SSubTitle>Review</SSubTitle>
+                <button onClick={() => clickModal()}>리뷰등록</button>
+              </SReviewDiv>
             </TempReviewBox>
           </SBlock>
           <SBlock>
             <SPerfumeName> {data.data.perfumeName}</SPerfumeName>
             <SPerfumeName> {data.data.koreanName}</SPerfumeName>
           </SBlock>
+          {isOpenModal && (
+            <ModalForm
+              closeModal={closeModal}
+              actionModal={postReviewFunction}
+              title="리뷰 등록하기"
+              // alert={data.data?.nickname}
+            />
+          )}
         </SDetailContainer>
       </>
     );
@@ -147,10 +192,6 @@ const SBlock = styled.div`
     &:nth-child(1) {
       grid-column: 1 / span 2;
       grid-row: 1 / span 5;
-
-      &:hover {
-        background-color: yellowgreen;
-      }
     }
     &:nth-child(2) {
       grid-column: 3 / span 2;
@@ -162,16 +203,17 @@ const SBlock = styled.div`
       grid-row: 4 / span 3;
       display: flex;
       justify-content: space-around;
-      &:hover {
-        background-color: red;
-      }
     }
     &:nth-child(3) {
       grid-column: 5 / span 2;
       grid-row: 1 / span 2;
       display: flex;
+      overflow-y: hidden;
       &:hover {
-        background-color: yellowgreen;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
     }
     &:nth-child(5) {
@@ -179,8 +221,10 @@ const SBlock = styled.div`
       grid-row: 3 / span 4;
       overflow-y: hidden;
       &:hover {
-        background-color: yellowgreen;
         overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
     }
     &:nth-child(6) {
@@ -188,10 +232,6 @@ const SBlock = styled.div`
       grid-row: 6;
       display: flex;
       justify-content: center;
-
-      &:hover {
-        background-color: yellowgreen;
-      }
     }
   }
 `;
@@ -236,19 +276,23 @@ const SLikeButton = styled.button`
   right: 1em;
 `;
 
-const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
-  background: white;
-  width: ${(props) => (props.isOpenCheck ? "45.9%" : "100%")};
-  height: ${(props) => (props.isOpenCheck ? "86.5%" : "100%")};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: ${(props) => (props.isOpenCheck ? "fixed" : "static")};
-  z-index: 1;
-  top: ${(props) => (props.isOpenCheck ? "9%" : "0%")};
-  right: ${(props) => (props.isOpenCheck ? "16%" : "0%")};
-  background-color: darkgreen;
-  color: black;
-`;
+// const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
+//   background: white;
+//   width: ${(props) => (props.isOpenCheck ? "45.9%" : "100%")};
+//   height: ${(props) => (props.isOpenCheck ? "86.5%" : "100%")};
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   position: ${(props) => (props.isOpenCheck ? "fixed" : "static")};
+//   z-index: 1;
+//   top: ${(props) => (props.isOpenCheck ? "9%" : "0%")};
+//   right: ${(props) => (props.isOpenCheck ? "16%" : "0%")};
+//   background-color: darkgreen;
+//   color: black;
+// `;
 
+const SReviewDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 export default PerfumeDetail;
