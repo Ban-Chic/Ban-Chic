@@ -35,7 +35,7 @@ const SEachNote = styled.div`
   margin: 0 auto;
 `;
 
-const SNoteImg = styled.div<{ $src: string; $name: string }>`
+export const SNoteImg = styled.div<{ $src: string; $name: string }>`
   width: 2.5em;
   height: 2.5em;
   border: 2px solid #f2f2f2;
