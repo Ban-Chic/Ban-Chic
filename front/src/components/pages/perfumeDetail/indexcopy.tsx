@@ -15,7 +15,6 @@ import { SSubTitle } from "../../../styles/Font";
 import TempReviewBox from "../../molecules/detail/tempReviewBox";
 import useGetPerfumeReviews, {
   usePostReview,
-  // useUpdateReview,
 } from "../../../hooks/review/useGetPerfumeReviews";
 import { useEffect, useState } from "react";
 import { CallGPT } from "../../molecules/gptApi/gpt";
@@ -178,7 +177,7 @@ const SDetailContainer = styled.div`
   height: 100%;
   padding: 0.5em;
   position: relative;
-  background-color: #707070;
+  background-color: transparent;
   border-radius: 5px;
 
   @media only screen and (min-width: 768px) {
@@ -196,7 +195,7 @@ const SBlock = styled.div`
   justify-content: center;
   align-items: center;
   ${theme.styleBase.glassmorphism}
-  border:2px solid #e2e2e2;
+  border: 2px solid #e2e2e2;
   border-radius: 5px;
   flex-direction: column;
   &:nth-child(3) {
