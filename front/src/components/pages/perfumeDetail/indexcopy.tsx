@@ -13,11 +13,21 @@ import LoadingSpinner from "../../../utils/LoadingSpinner";
 import useGetHeart, { useUpdateHeart } from "../../../hooks/heart/useGetHeart";
 import { SSubTitle } from "../../../styles/Font";
 import TempReviewBox from "../../molecules/detail/tempReviewBox";
-import useGetPerfumeReviews, { usePostReview } from "../../../hooks/review/useGetPerfumeReviews";
+import useGetPerfumeReviews, {
+  usePostReview,
+} from "../../../hooks/review/useGetPerfumeReviews";
 import { useEffect, useState } from "react";
 import { CallGPT } from "../../molecules/gptApi/gpt";
 import useOpenModal from "../../../hooks/modal/useOpenModal";
-import ModalForm from "../../atoms/modalForm/ModalForm";
+import ModalRegisterForm from "../../atoms/modalForm/ModalRegisterForm";
+// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+
+// interface Review {
+//   reviewId: number;
+//   rate: number;
+//   content: string;
+// }
 
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
@@ -36,8 +46,8 @@ function PerfumeDetail() {
     postHeart.mutate();
   };
 
-  const postReviewFunction = (rate: number, content:string) =>{
-    postReview.mutate({perfumeId, rate, content});
+  const postReviewFunction = (rate: number, content: string) => {
+    postReview.mutate({ perfumeId, rate, content });
   };
 
   useEffect(() => {
@@ -125,7 +135,7 @@ function PerfumeDetail() {
             {/* <ReviewPage /> */}
             {/* </SParent> */}
 
-            <TempReviewBox data={reviews}>
+            <TempReviewBox data={reviews} perfumeId={perfumeId}>
               <SReviewDiv>
                 <SSubTitle>Review</SSubTitle>
                 <button onClick={() => clickModal()}>리뷰등록</button>
@@ -137,13 +147,21 @@ function PerfumeDetail() {
             <SPerfumeName> {data.data.koreanName}</SPerfumeName>
           </SBlock>
           {isOpenModal && (
-            <ModalForm
+            <ModalRegisterForm
               closeModal={closeModal}
               actionModal={postReviewFunction}
               title="리뷰 등록하기"
               // alert={data.data?.nickname}
             />
           )}
+          {/* {isOpenModal && (
+            <ModalUpdateForm
+              closeModal={closeModal}
+              actionModal={putReviewFunction}
+              title="리뷰 수정하기"
+              // alert={data.data?.nickname}
+            />
+          )} */}
         </SDetailContainer>
       </>
     );
@@ -159,7 +177,7 @@ const SDetailContainer = styled.div`
   height: 100%;
   padding: 0.5em;
   position: relative;
-  background-color: #707070;
+  background-color: transparent;
   border-radius: 5px;
 
   @media only screen and (min-width: 768px) {
@@ -177,7 +195,7 @@ const SBlock = styled.div`
   justify-content: center;
   align-items: center;
   ${theme.styleBase.glassmorphism}
-  border:2px solid #e2e2e2;
+  border: 2px solid #e2e2e2;
   border-radius: 5px;
   flex-direction: column;
   &:nth-child(3) {

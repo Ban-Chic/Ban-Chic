@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Naver from "/naverLogin.png";
+import Naver from "/loginImg/naverLogin.png";
 
 function NaverLogin() {
   const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID;
