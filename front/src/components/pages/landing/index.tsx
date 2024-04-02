@@ -22,12 +22,12 @@ function LandingPage() {
         const timer3 = setTimeout(() => {
           setOn(false);
           navigate(Page_Url.Main);
-        }, 3000);
+        }, 1300);
         return () => clearTimeout(timer3);
-      }, 2000);
+      }, 700);
 
       return () => clearTimeout(timer2);
-    }, 1000);
+    }, 700);
 
     return () => clearTimeout(timer1);
   }, []);
