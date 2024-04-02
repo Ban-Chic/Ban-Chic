@@ -3,6 +3,9 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import { ImgAPI } from "../../../api/Config";
+import { useNavigate } from "react-router";
+import Page_Url from "../../../router/Url";
+import LoadingSpinner from "../../../utils/LoadingSpinner";
 
 function SurveyImagePage() {
   // 이미지 미리보기 URL을 상태로 관리합니다.
@@ -14,8 +17,9 @@ function SurveyImagePage() {
   const handlePictureClick = () => {
     fileInputRef.current?.click();
   };
-
   const [activeButton, setActiveButton] = useState("");
+  const [load, setLoad] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleMale = () => {
     setUnisex("M");
@@ -38,58 +42,79 @@ function SurveyImagePage() {
   };
 
   const handleSubmit = () => {
+    setLoad(true);
     const formData = new FormData();
     if (files) formData.append("file", files[0]);
-    ImgAPI.post(`members/recommend/image`, formData).then((res) =>
-      console.log(res)
-    );
+    ImgAPI.post(`members/recommend/image`, formData)
+      .then((res) => {
+        navigate(Page_Url.SurveyResult, {
+          state: { fashion: res.data.data.fashion },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
-    <SFContainer
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 30,
-      }}
-    >
-      <SView fileUrl={previewUrl} onClick={handlePictureClick}></SView>
-      <SInput
-        ref={fileInputRef}
-        type="file"
-        id="profileImg"
-        accept="image/jpeg, image/png"
-        onChange={handleFileChange}
-      ></SInput>
-      {previewUrl && (
-        <span>
-          <SButton isActive={activeButton === "M"} onClick={handleMale}>
-            Male (남성)
-          </SButton>
-          <SButton isActive={activeButton === "F"} onClick={handleFemale}>
-            Female (여성)
-          </SButton>
-        </span>
+    <>
+      {load && (
+        <SAb>
+          <LoadingSpinner />
+        </SAb>
       )}
-      {unisex && (
-        <SButton
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 30,
-          }}
-          style={{ backgroundColor: theme.color.actionColor }}
-          onClick={handleSubmit}
-        >
-          어울리는 향수 추천받기
-        </SButton>
-      )}
-    </SFContainer>
+      <SFContainer
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 30,
+        }}
+      >
+        <SView fileUrl={previewUrl} onClick={handlePictureClick}></SView>
+        <SInput
+          ref={fileInputRef}
+          type="file"
+          id="profileImg"
+          accept="image/jpeg, image/png"
+          onChange={handleFileChange}
+        ></SInput>
+        {previewUrl && (
+          <span>
+            <SButton isActive={activeButton === "M"} onClick={handleMale}>
+              Male (남성)
+            </SButton>
+            <SButton isActive={activeButton === "F"} onClick={handleFemale}>
+              Female (여성)
+            </SButton>
+          </span>
+        )}
+        {unisex && (
+          <SButton
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 30,
+            }}
+            style={{ backgroundColor: theme.color.actionColor }}
+            onClick={handleSubmit}
+          >
+            어울리는 향수 추천받기
+          </SButton>
+        )}
+      </SFContainer>
+    </>
   );
 }
+
+const SAb = styled.div`
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
 const SButton = styled(motion.button)<{ isActive?: boolean }>`
   padding: 10px 20px;

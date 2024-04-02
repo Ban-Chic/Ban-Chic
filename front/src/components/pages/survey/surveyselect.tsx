@@ -7,21 +7,31 @@ import useSurvey from "../../../hooks/survey/useSurvey";
 import { StyleRanges, Styles } from "../../../utils/PursuitStyleRanges";
 import { postSurvey } from "../../../api/Api";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
+import Page_Url from "../../../router/Url";
+import LoadingSpinner from "../../../utils/LoadingSpinner";
 
 function SurveySelectPage() {
   const [data, selectPursuit] = useSurvey();
   const [selected, setSelected] = useState<number[]>([]);
+  const [load, setLoad] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const onClickHandler = () => {
+    setLoad(true);
     // styleRanges 객체를 순회하면서 각 스타일에 대해 data 배열에 해당 범위의 숫자가 있는지 검사
     Object.entries(StyleRanges).forEach(([style, range]) => {
       const [min, max] = range;
       Styles[style] = data.some((num: number) => num >= min && num <= max);
     });
     // API 호출에 styles 객체 사용
-    postSurvey(Styles).then((res) => {
-      console.log(res);
-    });
+    postSurvey(Styles)
+      .then(() => {
+        navigate(Page_Url.SurveyResult);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   // 개별 버튼 클릭 핸들러
@@ -66,6 +76,11 @@ function SurveySelectPage() {
             </SPursuitBlock>
           ))}
         </SPursuitBeautyContainer>
+        {load && (
+          <SAb>
+            <LoadingSpinner />
+          </SAb>
+        )}
         <SButton disabled={data.length === 0} onClick={() => onClickHandler()}>
           제출
         </SButton>
@@ -73,6 +88,13 @@ function SurveySelectPage() {
     </>
   );
 }
+
+const SAb = styled.div`
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
 const SButton = styled(motion.button)`
   padding: 1em 4em;
