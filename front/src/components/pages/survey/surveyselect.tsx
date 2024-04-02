@@ -109,7 +109,7 @@ const SButton = styled(motion.button)`
 
 const SPursuitBlock = styled(motion.button)<{ isSelected?: boolean }>`
   background-color: ${(props) =>
-    props.isSelected ? theme.color.successColor : "rgba(255, 255, 255, 0.4)"};
+    props.isSelected ? theme.color.successColor : "transparent"};
   color: ${(props) => (props.isSelected ? theme.color.bgColor : "")};
   display: flex;
   justify-content: center;

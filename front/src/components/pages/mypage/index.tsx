@@ -61,7 +61,7 @@ function MyPage() {
     return (
       <SMyPageGrid>
         <SBlock>
-          <PersuitCard data={PersuitList.data}>
+          <PersuitCard data={PersuitList?.data}>
             <SSubTitle>내 추구미</SSubTitle>
           </PersuitCard>
         </SBlock>
@@ -102,7 +102,7 @@ function MyPage() {
           </CircleItemList> */}
         </SBlock>
         <SBlock>
-          <CircleItemList data={RecommendedList?.data?.data}>
+          <CircleItemList data={RecommendedList?.data}>
             <SSubTitle>내가 추천받은 향수들</SSubTitle>
           </CircleItemList>
         </SBlock>
