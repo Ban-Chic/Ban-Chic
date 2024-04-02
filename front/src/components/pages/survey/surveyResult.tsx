@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { SSubTitle, STitle } from "../../../styles/Font";
 import useRecommended from "../../../hooks/recommed/useRecommended";
 import { useState } from "react";
-import Perfume from "../../molecules/detail/perfume";
+import PerfumeSummary from "../../molecules/detail/perfume";
 import { useLocation } from "react-router-dom";
 import useScrollTop from "../../../hooks/feat/useScrollTop";
 
@@ -49,7 +49,7 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <Perfume pid={perfumeI}></Perfume>
+            <PerfumeSummary pid={perfumeI}></PerfumeSummary>
           </SResult>
         )}
         <SResult
