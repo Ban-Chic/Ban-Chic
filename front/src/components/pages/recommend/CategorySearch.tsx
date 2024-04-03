@@ -16,6 +16,7 @@ interface Perfume {
   perfumeImg: string;
   originName: string;
   brand: string;
+  korName: string;
 }
 
 function CategorySearch() {
@@ -123,6 +124,7 @@ function CategorySearch() {
               perfumeId={perfume.perfumeId}
               perfumeImg={perfume.perfumeImg}
               perfumeName={perfume.originName}
+              perfumeKorName={perfume.korName}
               perfumeBrand={perfume.brand}
             ></PerfumeListItem>
           );

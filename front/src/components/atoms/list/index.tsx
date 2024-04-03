@@ -14,7 +14,7 @@ const SListContainer = styled.div`
   padding: 1em;
   display: flex;
   gap: 10px;
-  max-height: 375px;
+  /* max-height: 375px; */
   overflow-x: scroll;
   flex-wrap: wrap;
   &::-webkit-scrollbar {

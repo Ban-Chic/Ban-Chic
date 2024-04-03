@@ -172,6 +172,7 @@ const SResult = styled(motion.article)`
   transition: 1s ease-in-out;
   @media only screen and (max-width: 768px) {
     height: 100%;
+    max-height: 100%;
   }
 `;
 

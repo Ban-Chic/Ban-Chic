@@ -23,6 +23,15 @@ const SBody2NoWrap = styled.h1`
   ${theme.font.PretendardRegular}
   font-size: 12px;
   transition: all 0.1s ease-in-out;
+  @media only screen and (max-width: 768px) {
+    &:nth-child(3) {
+      background-color: ${theme.color.primaryColor};
+      margin: 0 auto;
+      width: 30%;
+      border-radius: 5px;
+      border: 2px white solid;
+    }
+  }
 `;
 
 export const SFooterContainer = styled.nav`
