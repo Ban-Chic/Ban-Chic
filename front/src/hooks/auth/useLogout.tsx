@@ -29,6 +29,7 @@ function useLogout() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("uid");
+    localStorage.removeItem("visitedPerfumes");
 
     // 메인으로 이동
     navigate(Page_Url.Main);
