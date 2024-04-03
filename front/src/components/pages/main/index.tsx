@@ -63,8 +63,8 @@ function MainPage() {
             </SBottomSection>
           </SDiv2Container>
         </FrameSection>
-        <SDiv3Container></SDiv3Container>
-        <SDiv4Container></SDiv4Container>
+        {/* <SDiv3Container></SDiv3Container>
+        <SDiv4Container></SDiv4Container> */}
       </main>
     </>
   );

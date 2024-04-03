@@ -592,7 +592,7 @@ function SurveyQuestionPage() {
                 $url="/survey/survey28.png"
                 onClick={() => handleRound("dandy")}
               >
-                명예의 전당에 오른 정장
+                <SDiv>명예의 전당에 오른 정장</SDiv>
               </SFButton>
               <SFButton
                 variants={FR}
@@ -714,6 +714,10 @@ const SResultContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const SDiv = styled.div`
+background-color: black !important;
 `;
 
 export default SurveyQuestionPage;

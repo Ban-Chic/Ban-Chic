@@ -14,6 +14,7 @@ export function useUpdateHeart(perfumeId: string) {
     mutationFn: () => postLike(perfumeId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["favorite"] });
+      queryClient.invalidateQueries({ queryKey: ["perfume"] });
     },
     mutationKey: ["likes"],
   });

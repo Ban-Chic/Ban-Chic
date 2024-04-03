@@ -7,6 +7,7 @@ import Page_Url from "./Url";
 //레이아웃
 import Layouts from "../layouts/layouts";
 import LayoutsWithoutHF from "../layouts/layoutsWithoutHF";
+import LayoutsWithoutF from "../layouts/layoutsWithoutF";
 
 // 페이지
 import LandingPage from "../components/pages/landing";
@@ -55,7 +56,6 @@ function Router() {
             element={<ReviewPage />}
           ></Route> */}
           <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
-          <Route path={Page_Url.Map} element={<MapPage />}></Route>
         </Route>
 
         <Route element={<LayoutsWithoutHF />} errorElement={<ErrorPage />}>
@@ -85,6 +85,11 @@ function Router() {
             element={<SurveyImgResultPage />}
           ></Route>
         </Route>
+
+        <Route element={<LayoutsWithoutF />} errorElement={<ErrorPage />}>
+          <Route path={Page_Url.Map} element={<MapPage />}></Route>
+        </Route>
+
         <Route
           path={Page_Url.NaverCallback}
           element={<NaverCallback />}
