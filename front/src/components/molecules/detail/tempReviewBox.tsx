@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { ReactNode } from "react";
 import { SBody1, SBody2 } from "../../../styles/Font";
 import { useParams } from "react-router-dom";
-
+import { RiDeleteBinLine } from "react-icons/ri";
 import StarDisplay from "../../atoms/modalForm/StarDisplay";
+import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+import { HiMiniPencilSquare } from "react-icons/hi2";
 
 import { useDeleteReview } from "../../../hooks/review/useGetPerfumeReviews";
 import useGetUser from "../../../hooks/info/useGetUser";
@@ -57,6 +59,11 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
     email: string,
     userEmail: string
   ) => {
+    const isConfirmed = window.confirm("정말 리뷰를 삭제하시겠습니까?");
+    if (!isConfirmed) {
+      return;
+    }
+
     if (email === userEmail) {
       deleteReview.mutate({ perfumeId, reviewId });
       window.alert("리뷰 삭제가 완료되었습니다.");
@@ -95,7 +102,7 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
         <SReviewItem>
           <SDiv>
             <SBody1>{item.content}</SBody1>
-            <SBtnModify
+            <SButton
               onClick={() =>
                 openModalWithReview(
                   item.id,
@@ -105,9 +112,9 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
                 )
               }
             >
-              수정
-            </SBtnModify>
-            <button
+              <HiMiniPencilSquare />
+            </SButton>
+            <SButton
               onClick={() =>
                 deleteReviewFunction(
                   Number(perfumeId),
@@ -117,8 +124,8 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
                 )
               }
             >
-              삭제
-            </button>
+              <RiDeleteBinLine />
+            </SButton>
           </SDiv>
           <div>
             <SStarRate>
@@ -148,10 +155,6 @@ const SProfile = styled.div`
   gap: 5px;
 `;
 
-const SBtnModify = styled.button`
-  display: flex;
-  justify-content: end;
-`;
 
 const SProfileCircle = styled.div<{ $ImgUrl: string }>`
   max-width: 30px;
@@ -200,6 +203,12 @@ const SStarRate = styled.div`
   display: flex;
   /* text-align: center; */
   /* border-radius: 2em; */
+`;
+
+const SButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default TempReviewBox;
