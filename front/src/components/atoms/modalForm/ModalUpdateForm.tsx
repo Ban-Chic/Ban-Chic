@@ -19,15 +19,17 @@ interface Props {
   actionModal?: ({ perfumeId, reviewId, rate, content }: Reviews) => void;
   initialRate: number;
   initialContent: string;
-  initReview: {
-    reviewmodi: {
-      initialRate: number;
-      initialContent: string;
-      perfumeId: string;
-      reviewId: number;
-      rate: number;
-      content: string;
-    };
+  initReview: ReviewModi | undefined;
+}
+
+interface ReviewModi {
+  reviewmodi: {
+    initialRate: number;
+    initialContent: string;
+    perfumeId: number;
+    reviewId: number;
+    rate: number;
+    content: string;
   };
 }
 
@@ -43,7 +45,7 @@ const ModalUpdateForm = ({
     reviewmodi: {
       initialRate: 1,
       initialContent: "",
-      perfumeId: "",
+      perfumeId: 1,
       reviewId: 1,
       rate: 1,
       content: "",
@@ -62,7 +64,7 @@ const ModalUpdateForm = ({
       /^[ㄱ-ㅎ가-힣a-z0-9-_ .%+=()*&^%$#@!~`,<>/?;:'"{}[]|]+$/i.test(content) &&
       actionModal
     ) {
-      const perfumeId = initReview.reviewmodi.perfumeId;
+      const perfumeId = String(initReview.reviewmodi.perfumeId);
       const reviewId = initReview.reviewmodi.reviewId;
       actionModal({ perfumeId, reviewId, rate, content });
       window.alert("리뷰 수정이 완료되었습니다.");

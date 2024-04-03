@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { SBody1, SBody2 } from "../../../styles/Font";
 import { useParams } from "react-router-dom";
 
@@ -42,16 +42,14 @@ interface Props {
   };
   perfumeId: string;
   initModi: (
-    value: ReviewModi | ((prevState: ReviewModi) => ReviewModi)
+    value:
+      | ReviewModi
+      | ((prevState: ReviewModi | undefined) => ReviewModi | undefined)
   ) => void;
 }
 function TempReviewBox({ children, data, openModi, initModi }: Props) {
   const { data: userData } = useGetUser();
   const { perfumeId } = useParams() as { perfumeId: string };
-  const [selectedReviewId, setSelectedReviewId] = useState(0);
-  const [selectedReviewRate, setSelectedReviewRate] = useState(0);
-  const [selectedReviewContent, setSelectedReviewContent] = useState("");
-
   const deleteReview = useDeleteReview();
   const deleteReviewFunction = (
     perfumeId: number,
