@@ -2,34 +2,60 @@ import styled from "styled-components";
 
 import { STitle } from "../../../styles/Font";
 import theme from "../../../styles/Theme";
-import NaverLogin from "../../atoms/auth/NaverLoginButton";
 import KakaoLogin from "../../atoms/auth/KakaoLoginButton";
 import { motion } from "framer-motion";
+import { Typewriter } from "react-simple-typewriter";
 
 function LoginPage() {
   return (
     <SLoginContainer>
       <SLoginSection
-        initial={{ rotate: 180, scale: 0 }}
-        animate={{ rotate: 0, scale: 1 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{
           type: "spring",
           stiffness: 70,
           damping: 10,
         }}
       >
-        <div>
+        <SFlexWrap>
           <SLoginTitle>Ban:Chic</SLoginTitle>
           <SLoginTitle>Login</SLoginTitle>
-        </div>
+        </SFlexWrap>
         <SFlexTap>
-          <NaverLogin />
           <KakaoLogin />
         </SFlexTap>
       </SLoginSection>
+      <SAb>
+        <Typewriter
+          words={[
+            "매력적인 당신이 향수까지 뿌리면",
+            "반칙",
+            "나 오늘 반칙할래",
+          ]}
+          cursor
+          loop
+          cursorStyle="|"
+          typeSpeed={50}
+        />
+      </SAb>
     </SLoginContainer>
   );
 }
+
+const SAb = styled.div`
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+const SFlexWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const SLoginSection = styled(motion.div)`
   display: flex;

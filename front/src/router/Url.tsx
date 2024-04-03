@@ -21,7 +21,9 @@ const Page_Url = {
   SurveySwipe: "/survey/question",
   /** 이미지설문 페이지*/
   SurveyImage: "/survey/image",
-  /** 이미지설문 페이지*/
+  /** 이미지설문결과 페이지*/
+  SurveyImageResult: "/survey/image/result",
+  /** 설문결과 페이지*/
   SurveyResult: "/survey/result",
   /** 추천 페이지*/
   Recommend: "/recommend",

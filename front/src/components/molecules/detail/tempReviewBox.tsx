@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { ReactNode } from "react";
 import { SBody1, SBody2 } from "../../../styles/Font";
 import { useParams } from "react-router-dom";
-
+import { RiDeleteBinLine } from "react-icons/ri";
 import StarDisplay from "../../atoms/modalForm/StarDisplay";
+import { HiMiniPencilSquare } from "react-icons/hi2";
 
 import { useDeleteReview } from "../../../hooks/review/useGetPerfumeReviews";
 import useGetUser from "../../../hooks/info/useGetUser";
@@ -21,7 +22,7 @@ interface ReviewModi {
 
 interface Props {
   children?: ReactNode;
-  openModi: () => void;
+  openModi?: () => void;
   closeModi: () => void;
   data: {
     data: {
@@ -41,7 +42,7 @@ interface Props {
     totalElements: number;
   };
   perfumeId: string;
-  initModi: (
+  initModi?: (
     value:
       | ReviewModi
       | ((prevState: ReviewModi | undefined) => ReviewModi | undefined)
@@ -57,6 +58,11 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
     email: string,
     userEmail: string
   ) => {
+    const isConfirmed = window.confirm("정말 리뷰를 삭제하시겠습니까?");
+    if (!isConfirmed) {
+      return;
+    }
+
     if (email === userEmail) {
       deleteReview.mutate({ perfumeId, reviewId });
       window.alert("리뷰 삭제가 완료되었습니다.");
@@ -75,17 +81,18 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
       window.alert("본인이 작성한 리뷰만 수정할 수 있습니다.");
       return;
     }
-    initModi({
-      reviewmodi: {
-        perfumeId: Number(perfumeId),
-        initialRate: rate,
-        initialContent: content,
-        reviewId: reviewId,
-        rate: rate,
-        content: content,
-      },
-    });
-    openModi();
+    if (initModi)
+      initModi({
+        reviewmodi: {
+          perfumeId: Number(perfumeId),
+          initialRate: rate,
+          initialContent: content,
+          reviewId: reviewId,
+          rate: rate,
+          content: content,
+        },
+      });
+    if (openModi) openModi();
   };
 
   return (
@@ -95,7 +102,7 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
         <SReviewItem>
           <SDiv>
             <SBody1>{item.content}</SBody1>
-            <SBtnModify
+            <SButton
               onClick={() =>
                 openModalWithReview(
                   item.id,
@@ -105,9 +112,9 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
                 )
               }
             >
-              수정
-            </SBtnModify>
-            <button
+              <HiMiniPencilSquare />
+            </SButton>
+            <SButton
               onClick={() =>
                 deleteReviewFunction(
                   Number(perfumeId),
@@ -117,8 +124,8 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
                 )
               }
             >
-              삭제
-            </button>
+              <RiDeleteBinLine />
+            </SButton>
           </SDiv>
           <div>
             <SStarRate>
@@ -146,11 +153,6 @@ const SProfile = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-`;
-
-const SBtnModify = styled.button`
-  display: flex;
-  justify-content: end;
 `;
 
 const SProfileCircle = styled.div<{ $ImgUrl: string }>`
@@ -200,6 +202,12 @@ const SStarRate = styled.div`
   display: flex;
   /* text-align: center; */
   /* border-radius: 2em; */
+`;
+
+const SButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default TempReviewBox;
