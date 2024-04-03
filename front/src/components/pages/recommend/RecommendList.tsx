@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PerfumeListItem from "../../atoms/item/perfumeListItem";
 import List from "../../atoms/list";
-import { getRecommendedPerfumeList } from "../../../api/Api";
+import { getCFRecommend } from "../../../api/Api";
 import { SSubTitle, STitle } from "../../../styles/Font";
 import styled from "styled-components";
 
@@ -17,7 +17,7 @@ function RecommendList() {
   const [recommends, setRecommends] = useState<PerfumeData[]>();
 
   useEffect(() => {
-    getRecommendedPerfumeList().then((data) => setRecommends(data.data));
+    getCFRecommend().then((data: any) => setRecommends(data.data));
   }, []);
 
   return (
