@@ -31,7 +31,7 @@
     <td align="center"><b>FE</b></b></td>
     <td align="center"><b>FE</b></td>
     <td align="center"><b>BE, INFRA</b></td>
-    <td align="center"><b>BE</b></td>
+    <td align="center"><b>BE, INFRA</b></td>
     <td align="center"><b>BE, INFRA</b></td>
   </tr>
 </table>
