@@ -96,7 +96,7 @@ function MyPage() {
         <SBlock>
           <SSubTitle>내가 쓴 리뷰들</SSubTitle>
           <TempMyReviewBox data={ReviewList.data}></TempMyReviewBox>
-          {PersuitList?.data === null && (
+          {ReviewList?.data == "" && (
             <DefaultBlock text="작성한 리뷰가 없어요" />
           )}
         </SBlock>
@@ -116,7 +116,7 @@ function MyPage() {
         <SBlock>
           <CircleItemList data={RecommendedList?.data}>
             <SSubTitle>내가 추천받은 향수들</SSubTitle>
-            {RecommendedList.data === null && (
+            {RecommendedList?.data === null && (
               <DefaultBlock
                 text="아직 추천받은 향수가 없어요!"
                 link={Page_Url.SurveyLanding}
