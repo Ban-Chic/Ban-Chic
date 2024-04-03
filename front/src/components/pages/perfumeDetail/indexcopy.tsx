@@ -41,6 +41,11 @@ interface ReviewModi {
   };
 }
 
+interface Perfume {
+  id: string;
+  perfumeImg: string;
+}
+
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
   const { data, isLoading, isError, error } = useGetPerfumeDetail(perfumeId);
@@ -53,6 +58,8 @@ function PerfumeDetail() {
   const [gptDescriptionFetched, setGptDescriptionFetched] = useState(false);
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
   const [reviewModi, setReviewModi] = useState<ReviewModi>();
+  const savedPerfumes = localStorage.getItem("visitedPerfumes");
+  const perfumeList = savedPerfumes ? JSON.parse(savedPerfumes) : [];
 
   const {
     isOpenModal: isOpenModal2,
@@ -79,6 +86,38 @@ function PerfumeDetail() {
   const putReviewFunction = ({ perfumeId, reviewId, rate, content }: Props) => {
     updateReview.mutate({ perfumeId, reviewId, rate, content });
   };
+
+  useEffect(() => {
+    if (!isLoading) {
+      const savedPerfumes = localStorage.getItem("visitedPerfumes");
+      const perfumeList = savedPerfumes ? JSON.parse(savedPerfumes) : [];
+
+      // 중복 체크 - 이미 리스트에 같은 향수 ID가 있는지 확인
+      const isDuplicate = perfumeList.some(
+        (perfume: Perfume) => perfume.id === perfumeId
+      );
+
+      // 중복이 아닐 경우에만 추가
+      if (!isDuplicate) {
+        // 새 향수 객체 생성
+        const newPerfume = {
+          id: data.data.id,
+          perfumeImg: data.data.perfumeImg,
+        };
+
+        // 이미 5개 저장되어 있다면, 가장 오래된 항목 제거
+        if (perfumeList.length >= 5) {
+          perfumeList.shift();
+        }
+
+        // 새 향수 추가
+        perfumeList.push(newPerfume);
+
+        // 업데이트된 리스트를 로컬 스토리지에 저장
+        localStorage.setItem("visitedPerfumes", JSON.stringify(perfumeList));
+      }
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     const fetchGptDescription = async () => {
