@@ -7,7 +7,7 @@
 ## 📆 프로젝트 기간
 - 2024.03. ~ 2024.04 (6주)
 
-###  🐾 Project Members
+##  🐾 Project Members
 
 <table>
    <tr>
