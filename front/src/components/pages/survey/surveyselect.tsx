@@ -4,12 +4,34 @@ import { SSubTitle } from "../../../styles/Font";
 import PursuitBeauty from "../../../utils/PursuitBeauty";
 import { motion, useDragControls } from "framer-motion";
 import useSurvey from "../../../hooks/survey/useSurvey";
-import { StyleRanges, Styles } from "../../../utils/PursuitStyleRanges";
+import {
+  StyleRanges,
+  Styles,
+  StylesF,
+} from "../../../utils/PursuitStyleRanges";
 import { postSurvey } from "../../../api/Api";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import Page_Url from "../../../router/Url";
 import LoadingSpinner from "../../../utils/LoadingSpinner";
+
+function determineTopStyles(data: number[]): string[] {
+  const styleCounts: { [key: string]: number } = {};
+
+  // 각 스타일 별로 선택된 숫자들의 빈도 계산
+  Object.entries(StyleRanges).forEach(([style, [min, max]]) => {
+    styleCounts[style] = data.filter((num) => num >= min && num <= max).length;
+  });
+
+  // 선택된 숫자가 있는 스타일만 필터링 후, 빈도수가 높은 순으로 정렬
+  const sortedStyles = Object.entries(styleCounts)
+    .filter(([, count]) => count > 0)
+    .sort(([, countA], [, countB]) => countB - countA)
+    .map(([style]) => style)
+    .slice(0, 3);
+
+  return sortedStyles;
+}
 
 function SurveySelectPage() {
   const [data, selectPursuit] = useSurvey();
@@ -20,12 +42,20 @@ function SurveySelectPage() {
   const onClickHandler = () => {
     setLoad(true);
     // styleRanges 객체를 순회하면서 각 스타일에 대해 data 배열에 해당 범위의 숫자가 있는지 검사
-    Object.entries(StyleRanges).forEach(([style, range]) => {
-      const [min, max] = range;
-      Styles[style] = data.some((num: number) => num >= min && num <= max);
+    // Object.entries(StyleRanges).forEach(([style, range]) => {
+    //   const [min, max] = range;
+    //   Styles[style] = data.some((num: number) => num >= min && num <= max);
+    // });
+    const tt = determineTopStyles(selected);
+
+    tt.forEach((item) => {
+      StylesF[item] = true;
     });
+
+    console.log(tt);
+    console.log(StylesF);
     // API 호출에 styles 객체 사용
-    postSurvey(Styles)
+    postSurvey(StylesF)
       .then(() => {
         navigate(Page_Url.SurveyResult);
       })
@@ -109,7 +139,7 @@ const SButton = styled(motion.button)`
 
 const SPursuitBlock = styled(motion.button)<{ isSelected?: boolean }>`
   background-color: ${(props) =>
-    props.isSelected ? theme.color.successColor : "transparent"};
+    props.isSelected ? theme.color.successColor : theme.color.clearBlockColor};
   color: ${(props) => (props.isSelected ? theme.color.bgColor : "")};
   display: flex;
   justify-content: center;
