@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import Page_Url from "../../../../router/Url";
 import SideBar from "./sideBar";
-import { SHeaderContainer, SImgContainer, SLink } from "./GNB.styles"; //
+import { SHeaderContainer, SImgContainer, SLink } from "./GNB.styles";
 
 function GNB() {
   return (

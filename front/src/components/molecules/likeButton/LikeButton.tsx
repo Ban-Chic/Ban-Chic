@@ -1,36 +1,50 @@
 import { motion, Variants } from "framer-motion";
-import { Suspense,  useState } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { HeartIcon } from "./HeartIcon";
 import styled from "styled-components";
 import useGetHeart, { useUpdateHeart } from "../../../hooks/heart/useGetHeart";
-// import useGetPerfumeDetail from "../../../hooks/info/useGetDetail";
-// import { useParams } from "react-router-dom";
+import useGetPerfumeDetail from "../../../hooks/info/useGetDetail";
 
 interface Props {
   perfumeId: string;
-  heartsNum: number;
 }
 
-function LikeButton({ perfumeId, heartsNum }: Props) {
-  //   const { perfumeId } = useParams() as { perfumeId: string };
+function LikeButton({ perfumeId }: Props) {
   const [isHover, setIsHover] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const postHeart = useUpdateHeart(perfumeId);
   const { data: hearts } = useGetHeart(perfumeId);
-//   const { data } = useGetPerfumeDetail(perfumeId);
+  const [shouldRotate, setShouldRotate] = useState(false);
+  const { data: perfumeDetailInfo } = useGetPerfumeDetail(perfumeId);
 
   const heartMutation = () => {
     postHeart.mutate();
     setIsLiked(!isLiked);
   };
-  console.log("이게 하트 수");
-  console.log(hearts);
-  console.log(heartsNum);
+
+
+  useEffect(() => {
+    setIsLiked(!!hearts.data);
+  }, [hearts.data, perfumeDetailInfo]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    setShouldRotate(mediaQuery.matches);
+
+    const handler = (e: any) => setShouldRotate(e.matches);
+    mediaQuery.addListener(handler);
+
+    return () => mediaQuery.removeListener(handler);
+  }, []);
 
   return (
     <SButton
-      initial={false}
-      animate={[isLiked ? "liked" : "unliked", isHover ? "hover" : "rest"]}
+      initial={hearts.data}
+      animate={
+        shouldRotate
+          ? [isLiked ? "liked" : "unliked", isHover ? "hover" : "rest"]
+          : [isLiked ? "liked" : "unliked", isHover ? "hover" : "hover"]
+      }
       whileTap="press"
       variants={buttonVariants}
       onHoverStart={() => setIsHover(true)}
@@ -51,15 +65,15 @@ function LikeButton({ perfumeId, heartsNum }: Props) {
       </SIcon>
       <SLabel>
         <SDefault variants={labelTextVariants}>
-          좋아요
+          Like
           <motion.span variants={successTextVariants} className="success">
-            완료!
+            d!
           </motion.span>
         </SDefault>
       </SLabel>
       <SNumber>
-        <SCurrent variants={currentCountVariants}></SCurrent>
-        <SNew variants={newCountVariants}></SNew>
+        <SCurrent variants={currentCountVariants}>{perfumeDetailInfo.data.hearts}</SCurrent>
+        <SNew variants={newCountVariants}>{perfumeDetailInfo.data.hearts}</SNew>
       </SNumber>
     </SButton>
   );
@@ -119,7 +133,7 @@ const SButton = styled(motion.button)`
   --button-star-contrast: 0%; */
   width: 90%;
   height: 60%;
-  /* z-index: 10; */
+  z-index: 10;
   appearance: none;
   border: none;
   cursor: pointer;
@@ -132,7 +146,7 @@ const SButton = styled(motion.button)`
   padding-left: 20%;
   font-family: "Montserrat Alternates";
   font-size: 20px;
-  letter-spacing: -2px;
+  letter-spacing: 2px;
   font-weight: 600;
   line-height: 40px;
   position: relative;
@@ -149,7 +163,7 @@ const SIcon = styled(motion.div)`
   display: block;
   width: 600px;
   height: 300px;
-  z-index: 1;
+  z-index: -15;
   pointer-events: none;
   transform-origin: 50% 52%;
   filter: grayscale(var(--button-star-greyscale))
@@ -162,7 +176,7 @@ const SIcon = styled(motion.div)`
 
 const SLabel = styled(motion.div)`
   width: 140px;
-  padding: 20px 0 22px;
+  padding: 26px 0 22px;
   transform: translateZ(0);
 `;
 

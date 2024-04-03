@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import theme from "../../../styles/Theme";
@@ -29,6 +29,7 @@ function MyPage() {
   const Logout = useLogout();
   const DeleteId = useDeleteId();
   const [files, setFiles] = useState<FileList | null>();
+  const [visitedPerfumes, setVisitedPerfumes] = useState([]);
 
   // 내 정보 불러오는 탠스택쿼리
   const { data, isLoading, isError, error } = useGetUser();
@@ -56,6 +57,15 @@ function MyPage() {
       window.alert("프로필 이미지를 업로드해주세요.");
     }
   };
+
+  useEffect(() => {
+    // 로컬 스토리지에서 봤던 향수 정보 불러오기
+    const savedPerfumes = localStorage.getItem("visitedPerfumes");
+    if (savedPerfumes) {
+      setVisitedPerfumes(JSON.parse(savedPerfumes));
+    }
+  }, []);
+
   // 로딩 화면
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <>{error.message}</>;
@@ -65,7 +75,7 @@ function MyPage() {
         <SBlock>
           <PersuitCard data={PersuitList?.data}>
             <SSubTitle>내 추구미</SSubTitle>
-            {PersuitList.data === null && (
+            {PersuitList?.data === null && (
               <DefaultBlock
                 text="아직 정한 추구미가 없어요"
                 link={Page_Url.SurveyLanding}
@@ -86,7 +96,7 @@ function MyPage() {
         <SBlock>
           <SSubTitle>내가 쓴 리뷰들</SSubTitle>
           <TempMyReviewBox data={ReviewList.data}></TempMyReviewBox>
-          {PersuitList.data === null && (
+          {PersuitList?.data === null && (
             <DefaultBlock text="작성한 리뷰가 없어요" />
           )}
         </SBlock>
@@ -99,14 +109,7 @@ function MyPage() {
           </CircleItemList>
         </SBlock>
         <SBlock>
-          <CircleItemList
-          // data={[
-          //   {
-          //     id: localStorage.getItem("visited"),
-          //     perfumeImg: localStorage.getItem("visitedImg"),
-          //   },
-          // ]}
-          >
+          <CircleItemList data={visitedPerfumes}>
             <SSubTitle>내가 본 향수</SSubTitle>
           </CircleItemList>
         </SBlock>
