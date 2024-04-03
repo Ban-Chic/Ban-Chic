@@ -1,308 +1,381 @@
-// import styled from "styled-components";
-// import { useState, useEffect } from "react";
-// import theme from "../../../styles/Theme";
-// import GPTSample from "../../molecules/gptApi/gptSample";
+import styled from "styled-components";
+import theme from "../../../styles/Theme";
+import GPTSample from "../../molecules/gptApi/gptWriter";
 // import { HeartFilled } from "@ant-design/icons";
-// import {
-//   getLike,
-//   getPerfumeDetail,
-//   getPerfumeReviews,
-//   postLike,
-// } from "../../../api/Api";
-// import { useParams } from "react-router-dom";
-// import { motion } from "framer-motion";
 
-// import RadarChartContainer from "../../molecules/charts/radarChart";
-// import NoteGroup from "../../molecules/detail/noteGroup";
-// import { Link } from "react-router-dom";
-// import { CallGPT } from "../../molecules/gptApi/gpt";
+import { useParams } from "react-router-dom";
 
-// interface Props {
-//   data: {
-//     id: number;
-//     perfumeName: string;
-//     perfumeImg: string;
-//     brandName: string;
-//     brandImg: string;
-//     notes: string;
-//     accords: string;
-//     year: number;
-//     bestRate: number;
-//     rate: number;
-//     sillage: object;
-//     longevity: object;
-//     price: object;
-//     gender: object;
-//     season: Season;
-//     hearts: number;
-//     koreanName: string;
-//   } | null;
-// }
-// interface PerfumeDetailResponse {
-//   id: number;
-//   perfumeName: string;
-//   perfumeImg: string;
-//   brandName: string;
-//   brandImg: string;
-//   notes: string;
-//   accords: string;
-//   year: number;
-//   bestRate: number;
-//   rate: number;
-//   sillage: object;
-//   longevity: object;
-//   price: object;
-//   gender: object;
-//   season: Season;
-//   hearts: number;
-//   koreanName: string;
-// }
-// interface Season {
-//   spring: number;
-//   summer: number;
-//   fall: number;
-//   winter: number;
-//   day: number;
-//   night: number;
-// }
-// interface ParsedNotes {
-//   TopNotes?: string;
-//   MiddleNotes?: string;
-//   BaseNotes?: string;
-// }
+import RadarChartContainer from "../../molecules/charts/radarChart";
+import NoteGroup from "../../molecules/detail/noteGroup";
+import useGetPerfumeDetail from "../../../hooks/info/useGetDetail";
+import LoadingSpinner from "../../../utils/LoadingSpinner";
+import useGetHeart from "../../../hooks/heart/useGetHeart"; // , { useUpdateHeart }
+import { SSubTitle } from "../../../styles/Font";
+import TempReviewBox from "../../molecules/detail/tempReviewBox";
+import useGetPerfumeReviews, {
+  usePostReview,
+  useUpdateReview,
+} from "../../../hooks/review/useGetPerfumeReviews";
+import { MdRateReview } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { CallGPT } from "../../molecules/gptApi/gpt";
+import useOpenModal from "../../../hooks/modal/useOpenModal";
+import ModalRegisterForm from "../../atoms/modalForm/ModalRegisterForm";
 
-// function PerfumeDetail() {
-//   const { perfumeId } = useParams() as { perfumeId: string };
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [data, setData] = useState<Props["data"]>(null);
-//   const [isLike, setIsLike] = useState(false);
-//   const [parsedNotes, setParsedNotes] = useState<ParsedNotes>({});
-//   const [gptDescription, setGptDescription] = useState<string | null>(null);
+import LikeButton from "../../molecules/likeButton/LikeButton";
 
-//   useEffect(() => {
-//     //향수 상세 조회
-//     getPerfumeDetail(perfumeId).then((response) => {
-//       const fetchedData = response.data.data as PerfumeDetailResponse;
-//       const parsedNotes = JSON.parse(fetchedData.notes);
+// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
 
-//       setData(fetchedData);
-//       setParsedNotes(parsedNotes);
+import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
 
-//       console.log("gpt설명");
-//       console.log(gptDescription);
-//        // 이미 memo에 저장된 description이 없는 경우에만 API 호출
-//        if (!gptDescription) {
-//         CallGPT({
-//           prompt: `
-//             perfume Name: ${fetchedData.perfumeName}
-//             spices of perfume: ${fetchedData.notes}
-//           `,
-//         }).then((message) => {
-//           const { description } = JSON.parse(message);
-//           setGptDescription(description); // API 호출 결과를 상태에 저장
-//         });
-//       }
-//     });
+interface ReviewModi {
+  reviewmodi: {
+    initialRate: number;
+    initialContent: string;
+    perfumeId: number;
+    reviewId: number;
+    rate: number;
+    content: string;
+  };
+}
 
-//     // 리뷰 조회
-//     getPerfumeReviews(perfumeId).then((response) => {
-//       console.log(response);
-//     });
+interface Perfume {
+  id: string;
+  perfumeImg: string;
+}
 
-//     // 좋아요 조회
-//     getLike(perfumeId).then((response) => {
-//       console.log(response.data.data);
-//       setIsLike(response.data.data);
-//     });
+function PerfumeDetail() {
+  const { perfumeId } = useParams() as { perfumeId: string };
+  const { data, isLoading, isError, error } = useGetPerfumeDetail(perfumeId);
+  const { data: hearts } = useGetHeart(perfumeId);
+  // const postHeart = useUpdateHeart(perfumeId);
+  const postReview = usePostReview();
+  const updateReview = useUpdateReview();
+  const { data: reviews } = useGetPerfumeReviews(perfumeId);
+  const [gptDescription, setGptDescription] = useState<string | null>(null);
+  const [gptDescriptionFetched, setGptDescriptionFetched] = useState(false);
+  const { isOpenModal, clickModal, closeModal } = useOpenModal();
+  const [reviewModi, setReviewModi] = useState<ReviewModi>();
 
-    
-//   }, [perfumeId, gptDescription]);
+  const {
+    isOpenModal: isOpenModal2,
+    clickModal: clickModal2,
+    closeModal: closeModal2,
+  } = useOpenModal();
 
-//   // 좋아요 post
-//   const onClickHandler = () => {
-//     postLike(perfumeId).then((response) => {
-//       console.log(response);
-//       setIsLike(!isLike);
-//     });
-//   };
+  //좋아요 뮤테이션
+  // const heartMutation = () => {
+  //   postHeart.mutate();
+  //   console.log("좋아요 클릭");
+  // };
 
-//   return (
-//     <>
-//       <SDetailContainer>
-//         <SBlock>
-//           {data && <SImg src={data.perfumeImg} alt="Perfume Img" />}
-//           <SLikeButton onClick={onClickHandler}>
-//             <HeartFilled
-//               style={
-//                 isLike
-//                   ? { color: "red", fontSize: "30px" }
-//                   : { color: "gray", fontSize: "30px" }
-//               }
-//             />
-//           </SLikeButton>
-//         </SBlock>
-//         <SBlock>
-//           {data && data.season && (
-//             <RadarChartContainer
-//               season={{
-//                 day: data.season.day || 0,
-//                 night: data.season.night || 0,
-//                 spring: data.season.spring || 0,
-//                 summer: data.season.summer || 0,
-//                 fall: data.season.fall || 0,
-//                 winter: data.season.winter || 0,
-//               }}
-//             />
-//           )}
-//         </SBlock>
-//         <SBlock>
-//           {data && gptDescription && (
-//             <GPTSample perfumeName={data.perfumeName} notes={data.notes} description={gptDescription}/>
-//           )}
-//         </SBlock>
-//         <SBlock>
-//           <>
-//             <SNote>
-//               {data && parsedNotes.TopNotes && (
-//                 <>
-//                   <SNoteCate>Top Notes</SNoteCate>
-//                   <NoteGroup notes={parsedNotes.TopNotes} />
-//                 </>
-//               )}
-//               {data && parsedNotes.MiddleNotes && (
-//                 <>
-//                   <SNoteCate>Middle Notes</SNoteCate>
-//                   <NoteGroup notes={parsedNotes.MiddleNotes} />
-//                 </>
-//               )}
-//               {data && parsedNotes.BaseNotes && (
-//                 <>
-//                   <SNoteCate>Base Notes</SNoteCate>
-//                   <NoteGroup notes={parsedNotes.BaseNotes} />
-//                 </>
-//               )}
-//             </SNote>
-//           </>
-//         </SBlock>
-//         <SBlock>
-//           <SParent
-//             layout
-//             isOpenCheck={isOpen}
-//             initial={{ borderRadius: 50 }}
-//             onClick={() => setIsOpen(!isOpen)}
-//             transition={{
-//               opacity: { ease: "linear" },
-//               layout: { duration: 0.6 },
-//             }}
-//           ></SParent>
-//         </SBlock>
-//         <SBlock>
-//           {data && <SPerfumeName> {data.perfumeName}</SPerfumeName>}
-//           {data && <SPerfumeName> {data.koreanName}</SPerfumeName>}
-//         </SBlock>
-//       </SDetailContainer>
-//       <div>
-//         <Link to="/perfumes/review/crud">CRUD Test</Link> |
-//         <Link to="/perfumes/1/reviews"> Review Zone</Link> |
-//       </div>
-//     </>
-//   );
-// }
+  const postReviewFunction = (rate: number, content: string) => {
+    postReview.mutate({ perfumeId, rate, content });
+  };
+  interface Props {
+    perfumeId: string;
+    reviewId: number;
+    rate: number;
+    content: string;
+  }
 
-// const SDetailContainer = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(6, 1fr);
-//   grid-template-rows: repeat(4, 1fr);
-//   padding: 3rem;
-//   gap: 15px;
-//   height: calc(100vh - 50px);
-//   max-width: 1200px;
-//   margin: 0 auto;
-//   position: relative;
-// `;
+  const putReviewFunction = ({ perfumeId, reviewId, rate, content }: Props) => {
+    updateReview.mutate({ perfumeId, reviewId, rate, content });
+  };
 
-// const SBlock = styled.div`
-//   position: relative;
-//   display: flex;
-//   width: 100%;
-//   height: 100%;
-//   background-color: black;
-//   &:nth-child(1) {
-//     grid-column: 1 / span 2;
-//     grid-row: 1 / span 3;
-//     &:hover {
-//       background-color: yellowgreen;
-//     }
-//   }
-//   &:nth-child(2) {
-//     grid-column: 3 / span 2;
-//     grid-row: 1 / span 2;
-//     background-color: black;
-//     display: flex;
-//     flex-direction: column;
-//   }
-//   &:nth-child(4) {
-//     grid-column: 3 / span 2;
-//     grid-row: 3 / span 2;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-around;
-//     &:hover {
-//       background-color: red;
-//     }
-//   }
-//   &:nth-child(3) {
-//     grid-column: 5 / span 2;
-//     grid-row: 1 / span 2;
-//     display: flex;
-//     flex-direction: column;
-//     &:hover {
-//       background-color: yellowgreen;
-//     }
-//   }
-//   &:nth-child(5) {
-//     grid-column: 5 / span 2;
-//     grid-row: 3 / span 2;
-//     &:hover {
-//       background-color: yellowgreen;
-//     }
-//   }
-//   &:nth-child(6) {
-//     grid-column: 1 / span 2;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     &:hover {
-//       background-color: yellowgreen;
-//     }
-//   }
-// `;
+  useEffect(() => {
+    if (!isLoading) {
+      const savedPerfumes = localStorage.getItem("visitedPerfumes");
+      const perfumeList = savedPerfumes ? JSON.parse(savedPerfumes) : [];
 
-// const SImg = styled.img`
-//   width: 100%;
-//   height: 100%;
-//   margin: 0 auto;
-// `;
+      // 중복 체크 - 이미 리스트에 같은 향수 ID가 있는지 확인
+      const isDuplicate = perfumeList.some(
+        (perfume: Perfume) => perfume.id === perfumeId
+      );
 
-// const SNote = styled.div`
-//   width: 100%;
-//   height: 100%;
-// `;
+      // 중복이 아닐 경우에만 추가
+      if (!isDuplicate) {
+        // 새 향수 객체 생성
+        const newPerfume = {
+          id: data.data.id,
+          perfumeImg: data.data.perfumeImg,
+        };
 
-// const SNoteCate = styled.div`
-//   ${theme.font.Title};
-//   padding: 10px;
-// `;
+        // 이미 5개 저장되어 있다면, 가장 오래된 항목 제거
+        if (perfumeList.length >= 5) {
+          perfumeList.shift();
+        }
 
-// const SPerfumeName = styled.div`
-//   ${theme.font.Title};
-// `;
+        // 새 향수 추가
+        perfumeList.push(newPerfume);
+
+        // 업데이트된 리스트를 로컬 스토리지에 저장
+        localStorage.setItem("visitedPerfumes", JSON.stringify(perfumeList));
+      }
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    const fetchGptDescription = async () => {
+      try {
+        if (data && !gptDescriptionFetched) {
+          const message = await CallGPT({
+            prompt: `
+              perfume Name: ${data.data.perfumeName}
+              spices of perfume: ${data.data.notes}
+            `,
+          });
+          console.log("Response from CallGPT:", message);
+          console.log(typeof message);
+          const { promotional_copywriting } = JSON.parse(message);
+          setGptDescription(promotional_copywriting);
+          setGptDescriptionFetched(true);
+        }
+      } catch (error) {
+        console.error("GPT 호출 실패", error);
+      }
+    };
+
+    fetchGptDescription();
+  }, [data, gptDescriptionFetched]);
+
+  // 로딩 화면
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <>{error.message}</>;
+  if (data && hearts && reviews)
+    return (
+      <>
+        <SDetailContainer>
+          <SBlock>
+            {isLoading && <LoadingSpinner />}
+            {data && <SImg $ImgUrl={data.data.perfumeImg} />}
+            {/* <SLikeButton onClick={() => heartMutation()}>
+              <HeartFilled
+                style={
+                  hearts?.data
+                    ? { color: "red", fontSize: "30px" }
+                    : { color: "gray", fontSize: "30px" }
+                }
+              />
+            </SLikeButton> */}
+          </SBlock>
+          <SBlock>
+            <LikeButton perfumeId={perfumeId} />
+          </SBlock>
+          <SBlock>
+            <RadarChartContainer season={data.data.season} />
+          </SBlock>
+          <SBlock>
+            <GPTSample description={gptDescription} />
+          </SBlock>
+          <SBlock>
+            <SSubTitle>Spices</SSubTitle>
+            {JSON.parse(data.data.notes)["TopNotes"] && (
+              <SNote>
+                <SNoteCate>Top Notes</SNoteCate>
+                <NoteGroup notes={JSON.parse(data.data.notes)["TopNotes"]} />
+              </SNote>
+            )}
+            {JSON.parse(data.data.notes)["MiddleNotes"] && (
+              <SNote>
+                <SNoteCate>Middle Notes</SNoteCate>
+                <NoteGroup notes={JSON.parse(data.data.notes)["MiddleNotes"]} />
+              </SNote>
+            )}
+            {JSON.parse(data.data.notes)["BaseNotes"] && (
+              <SNote>
+                <SNoteCate>Base Notes</SNoteCate>
+                <NoteGroup notes={JSON.parse(data.data.notes)["BaseNotes"]} />
+              </SNote>
+            )}
+          </SBlock>
+          <SBlock>
+            <TempReviewBox
+              data={reviews}
+              perfumeId={perfumeId}
+              openModi={clickModal2}
+              closeModi={closeModal2}
+              initModi={setReviewModi}
+            >
+              <SReviewDiv>
+                <SSubTitle>Review</SSubTitle>
+                <SButton onClick={() => clickModal()}>
+                  리뷰등록
+                  <MdRateReview />
+                </SButton>
+              </SReviewDiv>
+            </TempReviewBox>
+          </SBlock>
+          <SBlock>
+            <SPerfumeName> {data.data.perfumeName}</SPerfumeName>
+            <SPerfumeName> {data.data.koreanName}</SPerfumeName>
+          </SBlock>
+          {isOpenModal && (
+            <ModalRegisterForm
+              closeModal={closeModal}
+              actionModal={postReviewFunction}
+              title="리뷰 등록하기"
+            />
+          )}
+
+          {isOpenModal2 && (
+            <ModalUpdateForm
+              closeModal={closeModal2}
+              actionModal={putReviewFunction}
+              title="리뷰 수정하기"
+              initReview={reviewModi}
+              initialRate={0}
+              initialContent={""}
+              perfumeId={""}
+              reviewId={0}
+              rate={0}
+              content={""}
+            />
+          )}
+        </SDetailContainer>
+      </>
+    );
+}
+
+const SDetailContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(400px, 1fr);
+  gap: 0.5em;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0.5em;
+  position: relative;
+  background-color: transparent;
+  border-radius: 5px;
+
+  @media only screen and (min-width: 768px) {
+    height: calc(100vh - 50px);
+    padding: 1.5em;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+`;
+
+const SBlock = styled.div`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  ${theme.styleBase.glassmorphism}
+  border: 2px solid #e2e2e2;
+  border-radius: 5px;
+  flex-direction: column;
+  &:nth-child(3) {
+    grid-row: 5;
+    display: flex;
+  }
+  &:nth-child(6) {
+    grid-row: 2;
+    padding: 1em 0;
+  }
+  @media only screen and (min-width: 768px) {
+    &:nth-child(1) {
+      grid-column: 1 / span 2;
+      grid-row: 1 / span 5;
+    }
+    &:nth-child(2) {
+      grid-column: 3 / span 2;
+      grid-row: 1 / span 1;
+      flex-direction: row;
+      border: none;
+      background-color: transparent;
+    }
+    &:nth-child(6) {
+      grid-column: 5 / span 2;
+      grid-row: 3 / span 4;
+      display: flex;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      &:hover {
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+    &:nth-child(4) {
+      grid-column: 3 / span 2;
+      grid-row: 2 / span 2;
+      flex-direction: row;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &:nth-child(3) {
+      grid-column: 5 / span 2;
+      grid-row: 1 / span 2;
+      display: flex;
+      justify-content: space-around;
+    }
+    &:nth-child(5) {
+      grid-column: 3 / span 2;
+      grid-row: 4 / span 3;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      &:hover {
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+    &:nth-child(7) {
+      grid-column: 1 / span 2;
+      grid-row: 6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+`;
+
+const SImg = styled.div<{ $ImgUrl: string }>`
+  border-radius: 5px;
+  border: 5px solid #cccccc;
+  width: 100%;
+  height: 100%;
+  background-image: url(${(props) => props.$ImgUrl});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
+const SNote = styled.article`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.2em;
+`;
+
+const SNoteCate = styled.div`
+  ${theme.font.Title};
+  font-size: 12px;
+`;
+
+const SPerfumeName = styled.div`
+  ${theme.font.Title};
+  font-size: 14px;
+  margin: 0 auto;
+  @media only screen and (min-width: 768px) {
+    font-size: 18px;
+  }
+`;
 
 // const SLikeButton = styled.button`
 //   position: absolute;
-//   /* z-index: 3; */
-//   top: 10px;
-//   right: 10px;
+//   z-index: 3;
+//   top: 1em;
+//   right: 1em;
 // `;
 
 // const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
@@ -320,4 +393,15 @@
 //   color: black;
 // `;
 
-// export default PerfumeDetail;
+const SReviewDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const SButton = styled.button`
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+`;
+export default PerfumeDetail;
