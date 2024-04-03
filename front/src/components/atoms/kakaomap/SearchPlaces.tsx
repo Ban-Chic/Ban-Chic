@@ -23,7 +23,7 @@ function SearchPlaces() {
             placeholder="검색어를 입력해주세요."
           />
           <button type="submit">
-            <img src="/public/mapImg/search.png" alt="#" />
+            <img src="/mapImg/search.png" alt="#" />
           </button>
         </SInputWrap>
       </SForm>
