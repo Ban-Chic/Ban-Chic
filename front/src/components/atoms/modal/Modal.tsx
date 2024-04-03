@@ -3,6 +3,8 @@ import { SSubTitle } from "../../../styles/Font";
 import ButtonComponent from "../auth/Button";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from 'react-toastify';
+
 import theme from "../../../styles/Theme";
 
 type Props = {
@@ -19,7 +21,15 @@ const Modal = ({ title, alert = "", closeModal, actionModal }: Props) => {
       actionModal?.(data);
       closeModal();
     } else {
-      window.alert("닉네임을 확인해주세요. 2-10자로 설정가능합니다.");
+      toast("닉네임을 확인해주세요. 특수문자를 제외하고 2-10자로 설정가능합니다.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

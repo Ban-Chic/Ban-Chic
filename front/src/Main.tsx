@@ -4,6 +4,9 @@ import { ThemeProvider } from "styled-components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import GlobalStyles from "./styles/GlobalStyles";
 import Router from "./router/Router";
 import theme from "./styles/Theme";
@@ -28,6 +31,7 @@ enableMocking().then(() => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
+          <ToastContainer />
           <GlobalStyles />
           <Router />
           <ReactQueryDevtools initialIsOpen={true} />

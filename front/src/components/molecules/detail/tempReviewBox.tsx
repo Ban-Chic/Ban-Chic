@@ -8,6 +8,7 @@ import { HiMiniPencilSquare } from "react-icons/hi2";
 
 import { useDeleteReview } from "../../../hooks/review/useGetPerfumeReviews";
 import useGetUser from "../../../hooks/info/useGetUser";
+import { toast } from "react-toastify";
 
 interface ReviewModi {
   reviewmodi: {
@@ -65,9 +66,25 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
 
     if (email === userEmail) {
       deleteReview.mutate({ perfumeId, reviewId });
-      window.alert("리뷰 삭제가 완료되었습니다.");
+      toast("리뷰 삭제가 완료되었습니다.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else {
-      window.alert("본인이 작성한 리뷰만 삭제할 수 있습니다.");
+      toast("본인이 작성한 리뷰만 삭제할 수 있습니다.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -78,7 +95,15 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
     email: string
   ) => {
     if (email !== userData.data.email) {
-      window.alert("본인이 작성한 리뷰만 수정할 수 있습니다.");
+      toast("본인이 작성한 리뷰만 수정할 수 있습니다.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return;
     }
     if (initModi)

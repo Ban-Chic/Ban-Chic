@@ -23,6 +23,7 @@ import PersuitCard from "../../molecules/mypage/persuitCard";
 import DefaultBlock from "../../atoms/item/defalutBlock";
 import Page_Url from "../../../router/Url";
 import TempMyReviewBox from "../../molecules/detail/tempReviewBoxMy";
+import { toast } from "react-toastify";
 
 function MyPage() {
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
@@ -55,7 +56,15 @@ function MyPage() {
     if (files) {
       profileImageMutation.mutate(files[0]);
     } else {
-      window.alert("프로필 이미지를 업로드해주세요.");
+      toast("프로필 이미지를 업로드해주세요.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
