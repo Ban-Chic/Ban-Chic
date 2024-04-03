@@ -14,7 +14,7 @@ import LandingPage from "../components/pages/landing";
 import MainPage from "../components/pages/main";
 import ErrorPage from "../components/pages/error";
 import MyPage from "../components/pages/mypage";
-import PerfumeDetailPage from "../components/pages/perfumeDetail/indexcopy";
+import PerfumeDetailPage from "../components/pages/perfumeDetail";
 import RecommendPage from "../components/pages/recommend";
 import NaverCallback from "../components/pages/login/NaverCallback";
 import KakaoCallback from "../components/pages/login/KakaoCallback";
