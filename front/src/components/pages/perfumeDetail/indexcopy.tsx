@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import theme from "../../../styles/Theme";
 import GPTSample from "../../molecules/gptApi/gptWriter";
-import { HeartFilled } from "@ant-design/icons";
+// import { HeartFilled } from "@ant-design/icons";
 
 import { useParams } from "react-router-dom";
 
@@ -9,7 +9,8 @@ import RadarChartContainer from "../../molecules/charts/radarChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
 import useGetPerfumeDetail from "../../../hooks/info/useGetDetail";
 import LoadingSpinner from "../../../utils/LoadingSpinner";
-import useGetHeart, { useUpdateHeart } from "../../../hooks/heart/useGetHeart";
+import useGetHeart from // , { useUpdateHeart }
+"../../../hooks/heart/useGetHeart";
 import { SSubTitle } from "../../../styles/Font";
 import TempReviewBox from "../../molecules/detail/tempReviewBox";
 import useGetPerfumeReviews, {
@@ -40,12 +41,11 @@ interface ReviewModi {
   };
 }
 
-
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
   const { data, isLoading, isError, error } = useGetPerfumeDetail(perfumeId);
   const { data: hearts } = useGetHeart(perfumeId);
-  const postHeart = useUpdateHeart(perfumeId);
+  // const postHeart = useUpdateHeart(perfumeId);
   const postReview = usePostReview();
   const updateReview = useUpdateReview();
   const { data: reviews } = useGetPerfumeReviews(perfumeId);
@@ -61,10 +61,10 @@ function PerfumeDetail() {
   } = useOpenModal();
 
   //좋아요 뮤테이션
-  const heartMutation = () => {
-    postHeart.mutate();
-  };
-  
+  // const heartMutation = () => {
+  //   postHeart.mutate();
+  //   console.log("좋아요 클릭");
+  // };
 
   const postReviewFunction = (rate: number, content: string) => {
     postReview.mutate({ perfumeId, rate, content });
@@ -114,7 +114,7 @@ function PerfumeDetail() {
           <SBlock>
             {isLoading && <LoadingSpinner />}
             {data && <SImg $ImgUrl={data.data.perfumeImg} />}
-            <SLikeButton onClick={() => heartMutation()}>
+            {/* <SLikeButton onClick={() => heartMutation()}>
               <HeartFilled
                 style={
                   hearts?.data
@@ -122,10 +122,10 @@ function PerfumeDetail() {
                     : { color: "gray", fontSize: "30px" }
                 }
               />
-            </SLikeButton>
+            </SLikeButton> */}
           </SBlock>
           <SBlock>
-            <LikeButton perfumeId={perfumeId} heartsNum={data.data.hearts} />
+            <LikeButton perfumeId={perfumeId} />
           </SBlock>
           <SBlock>
             <RadarChartContainer season={data.data.season} />
@@ -155,7 +155,6 @@ function PerfumeDetail() {
             )}
           </SBlock>
           <SBlock>
-
             <TempReviewBox
               data={reviews}
               perfumeId={perfumeId}
@@ -163,7 +162,6 @@ function PerfumeDetail() {
               closeModi={closeModal2}
               initModi={setReviewModi}
             >
-
               <SReviewDiv>
                 <SSubTitle>Review</SSubTitle>
                 <SButton onClick={() => clickModal()}>
@@ -199,7 +197,6 @@ function PerfumeDetail() {
               content={""}
             />
           )}
-
         </SDetailContainer>
       </>
     );
@@ -338,12 +335,12 @@ const SPerfumeName = styled.div`
   }
 `;
 
-const SLikeButton = styled.button`
-  position: absolute;
-  z-index: 3;
-  top: 1em;
-  right: 1em;
-`;
+// const SLikeButton = styled.button`
+//   position: absolute;
+//   z-index: 3;
+//   top: 1em;
+//   right: 1em;
+// `;
 
 // const SParent = styled(motion.div)<{ isOpenCheck: boolean }>`
 //   background: white;

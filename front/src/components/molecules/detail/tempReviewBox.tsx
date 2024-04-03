@@ -4,7 +4,6 @@ import { SBody1, SBody2 } from "../../../styles/Font";
 import { useParams } from "react-router-dom";
 import { RiDeleteBinLine } from "react-icons/ri";
 import StarDisplay from "../../atoms/modalForm/StarDisplay";
-import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 
 import { useDeleteReview } from "../../../hooks/review/useGetPerfumeReviews";
