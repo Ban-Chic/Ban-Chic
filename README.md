@@ -7,6 +7,35 @@
 ## 📆 프로젝트 기간
 - 2024.03. ~ 2024.04 (6주)
 
+###  🐾 Project Members
+
+<table>
+   <tr>
+    <td align="center"><b><a href="https://github.com/myungae">엄진식</a></b></td>
+    <td align="center"><b><a href="https://github.com/HJ-dp">이호진</a></b></td>
+    <td align="center"><b><a href="https://github.com/bonkri9">구본민</a></b></td>
+    <td align="center"><b><a href="https://github.com/NavyHubb">김성재</a></b></td>
+    <td align="center"><b><a href="https://github.com/HyunEnn">김현준</a></b></td>
+    <td align="center"><b><a href="https://github.com/b9s2w6">백성욱</a></b></td>
+  </tr>
+  <tr>
+     <td align="center"><a href="https://github.com/llama-ste"><img src="https://avatars.githubusercontent.com/u/78721036?v=4" width="100px" /></a></td>
+    <td align="center"><a href="https://github.com/AlgoRoots"><img src="https://avatars.githubusercontent.com/u/117727017?v=4" width="100px" /></a></td>
+    <td align="center"><a href="https://github.com/limjae"><img src="https://avatars.githubusercontent.com/u/139411343?v=4" width="100px" /></a></td>
+    <td align="center"><a href="https://github.com/catalinakim"><img src="https://avatars.githubusercontent.com/u/101810007?v=4" width="100px" /></a></td>
+    <td align="center"><a href="https://github.com/Juri-Lee"><img src="https://avatars.githubusercontent.com/u/87894432?v=4" width="100px" /></a></td>
+    <td align="center"><a href="https://github.com/Juri-Lee"><img src="https://avatars.githubusercontent.com/u/48309725?v=4" width="100px" /></a></td>
+  </tr>
+  <tr>
+    <td align="center"><b>FE, AI, INFRA</b></td>
+    <td align="center"><b>FE</b></b></td>
+    <td align="center"><b>FE</b></td>
+    <td align="center"><b>BE, INFRA</b></td>
+    <td align="center"><b>BE</b></td>
+    <td align="center"><b>BE, INFRA</b></td>
+  </tr>
+</table>
+
 ## ✨️️ 주요 기능
 1. 추구하고자 하는 이미지 기반 향수 추천
 2. 옷차림 기반 향수 추천
