@@ -1,30 +1,47 @@
-import { FaStar, FaStarHalf } from "react-icons/fa";
-import styled, { css } from "styled-components";
-
-interface LabelProps {
-  isHalf?: boolean;
-}
+import { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import styled from "styled-components";
 
 interface StarInputProps {
-    onClickRating: (value: number) => void; 
-    value: number;
-    isHalf: boolean;
-  }
+  onClickRating: (value: number) => void;
+  value: number;
+  init: number;
+}
 
-const StarInput: React.FC<StarInputProps> = ({ onClickRating, value, isHalf }) => {
-  const handleClickRatingInput = (value:number) => {
-    onClickRating(value);
-  };
+const StarInput: React.FC<StarInputProps> = ({
+  onClickRating,
+  value,
+  init,
+}) => {
+  // 사용자가 별을 클릭했는지 여부를 추적하는 상태
+  const [isClicked, setIsClicked] = useState(false);
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 한 번만 실행되어야 함
+    // 사용자가 별을 클릭하지 않았고, init 값이 value와 같다면, 해당 별을 "체크된" 상태로 설정
+    if (!isClicked && init === value) {
+      onClickRating(value);
+    }
+  }, [init, value, onClickRating, isClicked]);
 
   return (
     <>
-      <Input type="radio" name="rating" id={`star${value}`} value={value} />
+      <Input
+        type="radio"
+        name="rating"
+        id={`star${value}`}
+        value={value}
+        checked={init === value}
+        onChange={() => {}}
+        onClick={() => setIsClicked(true)}
+      />
       <Label
-        onClick={() => handleClickRatingInput(value)}
-        isHalf={isHalf}
+        onClick={() => {
+          onClickRating(value);
+          setIsClicked(true);
+        }}
         htmlFor={`star${value}`}
       >
-        {isHalf ? <FaStarHalf /> : <FaStar />}
+        <FaStar />
       </Label>
     </>
   );
@@ -34,34 +51,10 @@ const Input = styled.input`
   display: none;
 `;
 
-const Label = styled.label<LabelProps>`
+const Label = styled.label`
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.5em;
   color: lightgray;
-
-  ${({ isHalf }) =>
-    isHalf &&
-    css`
-      position: absolute;
-      width: 12px;
-      overflow: hidden;
-
-      &:nth-of-type(10) {
-        transform: translate(-108px);
-      }
-      &:nth-of-type(8) {
-        transform: translate(-84px);
-      }
-      &:nth-of-type(6) {
-        transform: translate(-60px);
-      }
-      &:nth-of-type(4) {
-        transform: translate(-36px);
-      }
-      &:nth-of-type(2) {
-        transform: translate(-12px);
-      }
-    `}
 `;
 
 export default StarInput;
