@@ -62,8 +62,12 @@ const Modal = ({ title, alert = "", closeModal, actionModal }: Props) => {
           required
         />
         <SFlexWrap>
-          <ButtonComponent onClick={closeModal}>취소</ButtonComponent>
-          <ButtonComponent onClick={ChangeBtn}>변경</ButtonComponent>
+          <ButtonComponent onClick={closeModal} color={theme.color.errorColor}>
+            취소
+          </ButtonComponent>
+          <ButtonComponent onClick={ChangeBtn} color={theme.color.actionColor}>
+            변경
+          </ButtonComponent>
         </SFlexWrap>
       </SModalContainer>
     </SModalWrap>

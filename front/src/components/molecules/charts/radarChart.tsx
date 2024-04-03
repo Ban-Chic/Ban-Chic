@@ -5,7 +5,6 @@ import {
   PolarGrid,
   Legend,
   PolarAngleAxis,
-  PolarRadiusAxis,
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
@@ -63,10 +62,15 @@ function RadarChartContainer(Props: Props) {
           <ResponsiveContainer width="100%" height="90%">
             <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
               <PolarGrid gridType="polygon" />
-              <PolarAngleAxis dataKey="subject" stroke="white" />
-              <PolarRadiusAxis angle={90} domain={[0, 100]} />
+              <Legend wrapperStyle={{ fontSize: "14px" }} />
+              <PolarAngleAxis
+                dataKey="subject"
+                stroke="white"
+                tick={{ fontSize: "20px" }}
+                tickLine={false}
+              />
               <Radar
-                name="Seasonality"
+                name="계절감"
                 dataKey="A"
                 stroke="white"
                 fill={theme.color.primaryColor}
@@ -74,11 +78,25 @@ function RadarChartContainer(Props: Props) {
                 legendType="diamond"
                 isAnimationActive={true}
                 animationBegin={1}
-                animationEasing="ease-in-out"
+                animationEasing="ease"
               />
 
-              <Legend />
-              <Tooltip wrapperStyle={{ color: theme.color.sectionColor }} />
+              <Tooltip
+                content={<CustomTooltip />}
+                labelFormatter={(value) => `Subject: ${value}`}
+                filterNull={true}
+                cursor={{ strokeDasharray: "3 3" }}
+                wrapperStyle={{
+                  color: "black",
+                  backgroundColor: "rgba(255, 255, 255, 0.7)",
+                  border: "1px solid #aaa",
+                  borderRadius: "15px",
+                  padding: "5px",
+                }}
+                contentStyle={{ padding: "10px" }}
+                itemStyle={{ color: "#000" }}
+                separator=" -> "
+              />
             </RadarChart>
           </ResponsiveContainer>
         </SDiv>
@@ -100,5 +118,40 @@ const SDiv = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`${label} : ${payload[0].value}`}</p>
+        <p className="intro">{getIntroOfPage(label)}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+const getIntroOfPage = (label: string) => {
+  if (label === "Day") {
+    return "낮과 어울리는 향";
+  }
+  if (label === "Spring") {
+    return "봄과 어울리는 향";
+  }
+  if (label === "Summer") {
+    return "여름과 어울리는 향";
+  }
+  if (label === "Fall") {
+    return "가을과 어울리는 향";
+  }
+  if (label === "Winter") {
+    return "겨울과 어울리는 향";
+  }
+  if (label === "Night") {
+    return "밤과 어울리는 향";
+  }
+  return "";
+};
 
 export default RadarChartContainer;
