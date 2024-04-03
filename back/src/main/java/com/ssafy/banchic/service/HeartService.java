@@ -43,6 +43,7 @@ public class HeartService {
         }
     }
 
+    @Transactional(readOnly = true)
     public boolean checkHeart(Integer perfumeId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
@@ -52,6 +53,7 @@ public class HeartService {
         return heartRepository.existsByMemberAndPerfume(memberFromAccessToken, perfume);
     }
 
+    @Transactional(readOnly = true)
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
         return memberRepository.findById(memberFromAccessToken.getId())

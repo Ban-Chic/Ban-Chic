@@ -28,10 +28,16 @@ spring:
   profiles:
     active: local
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/perfume?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
-    username: ${LOCAL_MYSQL_USERNAME}
-    password: ${LOCAL_MYSQL_PASSWORD}
+    source:
+      username: ${LOCAL_MYSQL_USERNAME}
+      password: ${LOCAL_MYSQL_PASSWORD}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/perfume?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    replica:
+      username: ${LOCAL_MYSQL_USERNAME}
+      password: ${LOCAL_MYSQL_PASSWORD}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/perfume?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
   jpa:
     defer-datasource-initialization: true
     hibernate:

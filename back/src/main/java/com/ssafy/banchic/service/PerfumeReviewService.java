@@ -97,6 +97,7 @@ public class PerfumeReviewService {
         perfumeReviewRepository.delete(review);
     }
 
+    @Transactional(readOnly = true)
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
         return memberRepository.findById(memberFromAccessToken.getId())

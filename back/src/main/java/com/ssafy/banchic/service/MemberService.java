@@ -26,7 +26,6 @@ import com.ssafy.banchic.repository.PersuitRepository;
 import com.ssafy.banchic.repository.RecommendRepository;
 import com.ssafy.banchic.util.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,6 +39,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpServerErrorException;
@@ -66,6 +66,7 @@ public class MemberService {
     private final RestTemplate restTemplate;
     private final TokenProvider tokenProvider;
 
+    @Transactional(readOnly = true)
     public List<MemberReviewRes> getMemberReview(Long memberId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
@@ -81,6 +82,7 @@ public class MemberService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public List<PerfumeOverviewRes> getMemberHeart(Long memberId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
@@ -95,6 +97,7 @@ public class MemberService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public MemberInfoRes getMemberInfo(Long memberId, HttpServletRequest httpServletRequest) {
         Member memberFromAccessToken = getMemberFromAccessToken(httpServletRequest);
 
@@ -254,6 +257,7 @@ public class MemberService {
         return perfume.map(PerfumeOverviewRes::from).orElse(null);
     }
 
+    @Transactional(readOnly = true)
     public List<Integer> getPersuit(HttpServletRequest httpServletRequest) {
         Member member = getMemberFromAccessToken(httpServletRequest);
         if (!persuitRepository.existsByMember(member)) {
@@ -345,6 +349,7 @@ public class MemberService {
         return headers;
     }
 
+    @Transactional(readOnly = true)
     public Member getMemberFromAccessToken(HttpServletRequest request) {
         Member memberFromAccessToken = tokenProvider.getMemberFromAccessToken(request);
         return memberRepository.findById(memberFromAccessToken.getId())
