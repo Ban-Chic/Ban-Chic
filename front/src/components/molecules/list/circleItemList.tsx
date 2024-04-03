@@ -11,7 +11,7 @@ interface IPerfumeData {
 
 interface IProps {
   children: ReactNode;
-  data: IPerfumeData[];
+  data?: IPerfumeData[];
 }
 
 function CircleItemList({ children, data }: IProps) {

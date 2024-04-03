@@ -5,10 +5,11 @@ import theme from "../../../styles/Theme";
 
 interface StarRatingProps {
   setRate: (value: number) => void;
+  init?: number;
 }
 
-export const StarRating = ({ setRate }: StarRatingProps) => {
-  const [rating, setRating] = useState(0);
+export const StarRating = ({ setRate, init = 0 }: StarRatingProps) => {
+  const [rating, setRating] = useState(init);
 
   const handleClickRating = (value: number) => {
     setRate(value);
@@ -19,15 +20,15 @@ export const StarRating = ({ setRate }: StarRatingProps) => {
     <Base>
       <Name>별점</Name>
       <RatingField>
-        <StarInput onClickRating={handleClickRating} value={5} isHalf={false} />
+        <StarInput onClickRating={handleClickRating} value={5} init={rating} />
 
-        <StarInput onClickRating={handleClickRating} value={4} isHalf={false} />
+        <StarInput onClickRating={handleClickRating} value={4} init={rating} />
 
-        <StarInput onClickRating={handleClickRating} value={3} isHalf={false} />
+        <StarInput onClickRating={handleClickRating} value={3} init={rating} />
 
-        <StarInput onClickRating={handleClickRating} value={2} isHalf={false} />
+        <StarInput onClickRating={handleClickRating} value={2} init={rating} />
 
-        <StarInput onClickRating={handleClickRating} value={1} isHalf={false} />
+        <StarInput onClickRating={handleClickRating} value={1} init={rating} />
       </RatingField>
       <RatingValue>{rating}</RatingValue>
     </Base>

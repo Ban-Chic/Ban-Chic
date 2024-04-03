@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { SSubTitle, STitle } from "../../../styles/Font";
+import { SBody2, SSubTitle, STitle } from "../../../styles/Font";
 import useRecommended from "../../../hooks/recommed/useRecommended";
 import { useState } from "react";
 import PerfumeSummary from "../../molecules/detail/perfume";
@@ -18,6 +18,7 @@ interface Perfume {
   perfumeImg: string;
   brandName: string;
   accords: string;
+  korName: string;
 }
 
 function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Props) {
@@ -28,6 +29,7 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
   const location = useLocation();
   const fashion = location?.state?.fashion;
   const handlerClick = (id: number) => {
+    setPerfumeI(id);
     if (id === perfumeI) {
       setToggle(!toggle);
     } else {
@@ -42,7 +44,7 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
       <STitle>{title}</STitle>
       {fashion && <SSubTitle>{fashion} 스타일인 나에게?</SSubTitle>}
       <SFlexWrap>
-        {toggle && perfumeI && (
+        {perfumeI && (
           <SResult
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -60,15 +62,20 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
         >
           <SList layout>
             {result?.data?.map((item: Perfume, index: number) => (
-              <SListItem key={index} onClick={() => handlerClick(item.id)}>
-                <SImage $url={item.perfumeImg}></SImage>
+              <SListItem key={index} onClick={() => handlerClick(item?.id)}>
+                <SImage
+                  $url={item?.perfumeImg || "/perfumeImg/tomford.jpg"}
+                ></SImage>
                 <SFlexEnd>
-                  <SSubTitle> {item.perfumeName}</SSubTitle>
-                  <SAccordList>
-                    {Object.keys(JSON.parse(item.accords)).map((acc) => (
-                      <SAccord key={acc} $name={acc}></SAccord>
-                    ))}
-                  </SAccordList>
+                  <SSubTitle> {item?.perfumeName}</SSubTitle>
+                  <SBody2> {item?.korName}</SBody2>
+                  {item && (
+                    <SAccordList>
+                      {Object.keys(JSON.parse(item?.accords)).map((acc) => (
+                        <SAccord key={acc} $name={acc}></SAccord>
+                      ))}
+                    </SAccordList>
+                  )}
                 </SFlexEnd>
               </SListItem>
             ))}
@@ -91,7 +98,6 @@ const SAccord = styled.div<{ $color?: string; $name: string }>`
     content: "${(props) => props.$name}"; // 호버 시 표시할 이름
     position: absolute;
     top: -300%;
-    left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
     background-color: #f2f2f2;
