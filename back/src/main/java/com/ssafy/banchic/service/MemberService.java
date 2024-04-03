@@ -44,7 +44,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -356,6 +355,39 @@ public class MemberService {
         headers.setContentType(MediaType.parseMediaType(file.getContentType()));
         headers.setContentDispositionFormData("file", file.getOriginalFilename());
         return headers;
+    }
+
+    public List<PerfumeOverviewRes> recommendByCf(HttpServletRequest httpServletRequest) {
+        Member member = getMemberFromAccessToken(httpServletRequest);
+
+        String url = FAST_API_URL + "/api/user";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        StringBuilder sb = new StringBuilder();
+        String requestBody = sb.append("{")
+            .append("\"member_id\": " ).append(member.getId())
+            .append("}").toString();
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+        Recommendation response = null;
+
+        try {
+            response = restTemplate.postForObject(url, requestEntity, Recommendation.class);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            throw new CustomException(ErrorCode.FAIL_IN_FASTAPI);
+        }
+
+        List<Integer> recommendIndexList = response.getRecommendIndex();
+
+        List<PerfumeOverviewRes> recommList = new ArrayList<>();
+        for (Integer idx : recommendIndexList) {
+            recommList.add(findById(idx));
+        }
+
+        return recommList;
     }
 
     @Transactional(readOnly = true)

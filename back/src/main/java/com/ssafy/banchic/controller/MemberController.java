@@ -202,4 +202,20 @@ public class MemberController {
             .build(), HttpStatus.OK);
     }
 
+    @Operation(
+        summary = "CF 알고리즘을 통한 향수 추천",
+        description = "CF 알고리즘을 통해 향수를 추천합니다."
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "추천 목록 조회에 성공했습니다."
+    )
+    @PostMapping("/recommend/cf")
+    public ResponseEntity<CommonResponse> recommendByCf (HttpServletRequest httpServletRequest) {
+        return new ResponseEntity<>(CommonResponse.builder()
+            .message("추천 목록 조회 성공")
+            .data(memberService.recommendByCf(httpServletRequest))
+            .build(), HttpStatus.OK);
+    }
+
 }
