@@ -90,16 +90,16 @@ function MyPage() {
           </CircleItemList>
         </SBlock>
         <SBlock>
-          {/* <CircleItemList
-            data={[
-              {
-                id: localStorage.getItem("visited"),
-                perfumeImg: localStorage.getItem("visitedImg"),
-              },
-            ]}
+          <CircleItemList
+          // data={[
+          //   {
+          //     id: localStorage.getItem("visited"),
+          //     perfumeImg: localStorage.getItem("visitedImg"),
+          //   },
+          // ]}
           >
             <SSubTitle>내가 본 향수</SSubTitle>
-          </CircleItemList> */}
+          </CircleItemList>
         </SBlock>
         <SBlock>
           <CircleItemList data={RecommendedList?.data}>

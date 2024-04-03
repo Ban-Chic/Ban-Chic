@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { SBody1, SBody2 } from "../../../styles/Font";
 import { useParams } from "react-router-dom";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -7,15 +7,24 @@ import StarDisplay from "../../atoms/modalForm/StarDisplay";
 import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 
-import {
-  useDeleteReview,
-  useUpdateReview,
-} from "../../../hooks/review/useGetPerfumeReviews";
-import useOpenModal from "../../../hooks/modal/useOpenModal";
+import { useDeleteReview } from "../../../hooks/review/useGetPerfumeReviews";
 import useGetUser from "../../../hooks/info/useGetUser";
+
+interface ReviewModi {
+  reviewmodi: {
+    initialRate: number;
+    initialContent: string;
+    perfumeId: number;
+    reviewId: number;
+    rate: number;
+    content: string;
+  };
+}
 
 interface Props {
   children?: ReactNode;
+  openModi: () => void;
+  closeModi: () => void;
   data: {
     data: {
       content: {
@@ -34,16 +43,15 @@ interface Props {
     totalElements: number;
   };
   perfumeId: string;
+  initModi: (
+    value:
+      | ReviewModi
+      | ((prevState: ReviewModi | undefined) => ReviewModi | undefined)
+  ) => void;
 }
-
-function TempReviewBox({ children, data }: Props) {
+function TempReviewBox({ children, data, openModi, initModi }: Props) {
   const { data: userData } = useGetUser();
   const { perfumeId } = useParams() as { perfumeId: string };
-  const [selectedReviewId, setSelectedReviewId] = useState(0);
-  const [selectedReviewRate, setSelectedReviewRate] = useState(0);
-  const [selectedReviewContent, setSelectedReviewContent] = useState("");
-  const { isOpenModal, clickModal, closeModal } = useOpenModal();
-
   const deleteReview = useDeleteReview();
   const deleteReviewFunction = (
     perfumeId: number,
@@ -64,17 +72,6 @@ function TempReviewBox({ children, data }: Props) {
     }
   };
 
-  const putReview = useUpdateReview();
-  const putReviewFunction = (
-    perfumeId: number,
-    reviewId: number,
-    rate: number,
-    content: string
-  ) => {
-    putReview.mutate({ perfumeId, reviewId, rate, content });
-    window.alert("리뷰 수정이 완료되었습니다.");
-  };
-
   const openModalWithReview = (
     reviewId: number,
     content: string,
@@ -85,11 +82,17 @@ function TempReviewBox({ children, data }: Props) {
       window.alert("본인이 작성한 리뷰만 수정할 수 있습니다.");
       return;
     }
-    clickModal();
-    setSelectedReviewId(reviewId);
-    setSelectedReviewContent(content);
-    setSelectedReviewRate(rate);
-    // setIsOpenModal(true);
+    initModi({
+      reviewmodi: {
+        perfumeId: Number(perfumeId),
+        initialRate: rate,
+        initialContent: content,
+        reviewId: reviewId,
+        rate: rate,
+        content: content,
+      },
+    });
+    openModi();
   };
 
   return (
@@ -128,7 +131,6 @@ function TempReviewBox({ children, data }: Props) {
             <SStarRate>
               <StarDisplay rate={item.rate} />
             </SStarRate>
-            {/* <SRate>{item.rate}</SRate> */}
             <SProfile>
               <SProfileCircle
                 $ImgUrl={item.member.image || "/user.svg"}
@@ -138,33 +140,9 @@ function TempReviewBox({ children, data }: Props) {
           </div>
         </SReviewItem>
       ))}
-      {isOpenModal && selectedReviewId !== null && (
-        <ModalUpdateForm
-          closeModal={closeModal}
-          actionModal={(perfumeId, reviewId, rate, content) =>
-            putReviewFunction(Number(perfumeId), reviewId, rate, content)
-          }
-          title="리뷰 수정하기"
-          perfumeId={Number(perfumeId)}
-          reviewId={selectedReviewId}
-          initialRate={selectedReviewRate}
-          initialContent={selectedReviewContent}
-          // alert={data.data?.nickname}
-        />
-      )}
     </SBoxContainer>
   );
 }
-
-// const SRate = styled.div`
-//   position: absolute;
-//   top: 3px;
-//   right: 3px;
-//   background-color: deepskyblue;
-//   width: 1.5em;
-//   text-align: center;
-//   border-radius: 2em;
-// `;
 
 const SDiv = styled.div`
   display: flex;
