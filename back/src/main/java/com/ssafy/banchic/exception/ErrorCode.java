@@ -25,6 +25,7 @@ public enum ErrorCode {
     NOT_VALID_EXTENSION(HttpStatus.BAD_REQUEST, "유효하지 않은 확장자입니다."),
     FILE_INPUT_FAIL(HttpStatus.BAD_REQUEST, "파일 입력에 실패했습니다."),
     JSON_PARSING_FAIL(HttpStatus.BAD_REQUEST, "JSON 파싱에 실패했습니다."),
+    FAIL_IN_FASTAPI(HttpStatus.BAD_REQUEST, "FastAPI와의 통신에서 에러가 발생했습니다."),
 
     RECOMM_FAIL(HttpStatus.BAD_REQUEST, "추천에 실패하였습니다.");
 
