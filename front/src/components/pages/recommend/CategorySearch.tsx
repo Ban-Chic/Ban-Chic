@@ -159,6 +159,8 @@ const SWrap = styled.main`
   flex-wrap: wrap;
   margin: 1em;
   gap: 10px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default CategorySearch;

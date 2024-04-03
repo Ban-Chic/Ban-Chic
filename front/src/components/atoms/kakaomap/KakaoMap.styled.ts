@@ -17,7 +17,7 @@ const SImg = styled.img`
 `;
 
 const MapContainer = styled.div`
-  height: 100%;
+  height: 95%;
 `;
 
 const SWrap = styled.div`

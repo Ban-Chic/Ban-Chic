@@ -2,7 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { degreesToRadians } from "popmotion";
 import { motion } from "framer-motion-3d";
-
+import { useEffect, useState } from "react";
 export function HeartIcon({
   isLiked,
   isHover,
@@ -13,8 +13,21 @@ export function HeartIcon({
   const { nodes } = useGLTF("/star-icon.glb") as any;
   console.log(nodes);
 
+  const [shouldRotate, setShouldRotate] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    setShouldRotate(mediaQuery.matches);
+
+    const handler = (e: any) => setShouldRotate(e.matches);
+    mediaQuery.addListener(handler);
+
+    return () => mediaQuery.removeListener(handler);
+  }, []);
+
   return (
     <Canvas
+      style={{ pointerEvents: "none" }}
       resize={{ offsetSize: true }}
       dpr={[1, 2]}
       camera={{ position: [0, 0, 5.5], fov: 45 }}
@@ -32,7 +45,12 @@ export function HeartIcon({
           geometry={nodes.Star.geometry}
           rotation={[Math.PI / 2, 0, degreesToRadians(360)]}
           scale={1}
-          animate={[isLiked ? "liked" : "unliked", isHover ? "hover" : ""]}
+          animate={
+            shouldRotate
+              ? [isLiked ? "liked" : "unliked", isHover ? "hover" : ""]
+              : [isLiked ? "liked" : "unliked", isHover ? "hover" : "hover"]
+          }
+          // animate={shouldRotate ? "rotate" : "static"}
           variants={{
             unliked: {
               x: [0, 0],
