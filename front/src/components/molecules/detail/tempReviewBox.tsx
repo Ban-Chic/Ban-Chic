@@ -98,8 +98,8 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
   return (
     <SBoxContainer>
       {children}
-      {data.data.content.map((item) => (
-        <SReviewItem>
+      {data?.data?.content?.map((item, i) => (
+        <SReviewItem key={i}>
           <SDiv>
             <SBody1>{item.content}</SBody1>
             <SButton
