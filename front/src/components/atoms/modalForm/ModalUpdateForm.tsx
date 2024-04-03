@@ -6,15 +6,30 @@ import { motion } from "framer-motion";
 import theme from "../../../styles/Theme";
 import { StarRating } from "./StarRating";
 
-type Props = {
+interface Reviews {
+  perfumeId: string;
+  reviewId: number;
+  rate: number;
+  content: string;
+}
+
+interface Props {
   title?: string;
   closeModal: () => void;
-  actionModal?: (perfumeId: number, reviewId: number, rate: number, content: string) => void;
-  perfumeId: number;
-  reviewId: number;
+  actionModal?: ({ perfumeId, reviewId, rate, content }: Reviews) => void;
   initialRate: number;
   initialContent: string;
-};
+  initReview: {
+    reviewmodi: {
+      initialRate: number;
+      initialContent: string;
+      perfumeId: string;
+      reviewId: number;
+      rate: number;
+      content: string;
+    };
+  };
+}
 
 const ModalUpdateForm = ({
   title,
@@ -24,7 +39,17 @@ const ModalUpdateForm = ({
   reviewId,
   initialRate,
   initialContent,
-}: Props) => {
+  initReview = {
+    reviewmodi: {
+      initialRate: 1,
+      initialContent: "",
+      perfumeId: "",
+      reviewId: 1,
+      rate: 1,
+      content: "",
+    },
+  },
+}: Props & Reviews) => {
   const [rate, setRate] = useState<number>(initialRate);
   const [content, setContent] = useState<string>(initialContent);
 
@@ -34,15 +59,17 @@ const ModalUpdateForm = ({
       rate <= 5 &&
       content.length >= 2 &&
       content.length <= 500 &&
-      /^[ㄱ-ㅎ가-힣a-z0-9-_ .%+=()*&^%$#@!~`,<>/?;:'"{}[]|]+$/i.test(content)
+      /^[ㄱ-ㅎ가-힣a-z0-9-_ .%+=()*&^%$#@!~`,<>/?;:'"{}[]|]+$/i.test(content) &&
+      actionModal
     ) {
-      actionModal?.( perfumeId, reviewId, rate, content);
-      // window.alert("리뷰 수정이 완료되었습니다.");
+      const perfumeId = initReview.reviewmodi.perfumeId;
+      const reviewId = initReview.reviewmodi.reviewId;
+      actionModal({ perfumeId, reviewId, rate, content });
+      window.alert("리뷰 수정이 완료되었습니다.");
       closeModal();
     } else {
-      window.alert(
-        "평점은 1-5점 사이, 리뷰는 2-500자로 작성 가능합니다."
-      );
+      console.log(rate, perfumeId, reviewId, rate, content);
+      window.alert("평점은 1-5점 사이, 리뷰는 2-500자로 작성 가능합니다.");
     }
   };
 
@@ -64,13 +91,14 @@ const ModalUpdateForm = ({
         }}
       >
         <SSubTitle>{title}</SSubTitle>
-        <StarRating setRate={setRate} />
+        <StarRating setRate={setRate} init={initReview.reviewmodi.rate} />
         <SInput
           id="contentValue"
           type="text"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setContent(event.target.value);
           }}
+          defaultValue={initReview.reviewmodi.content}
           placeholder="리뷰 내용을 입력하세요"
           maxLength={500}
           minLength={2}
@@ -85,27 +113,26 @@ const ModalUpdateForm = ({
   );
 };
 
-
 const SFlexWrap = styled.div`
   display: flex;
   gap: 1em;
   width: 10em;
   height: 2em;
-  `;
+`;
 
 const SModalWrap = styled.div`
   width: 100%;
   height: 100%;
-  `;
+`;
 
 const SModalBackGround = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
-  `;
+`;
 
 const SInput = styled(motion.input)`
   width: 500px;
@@ -114,7 +141,7 @@ const SInput = styled(motion.input)`
   outline: none;
   ${theme.font.Title}
   text-align: center;
-  `;
+`;
 
 const SModalContainer = styled(motion.div)`
   display: flex;
@@ -129,8 +156,8 @@ const SModalContainer = styled(motion.div)`
   /* background-color: yellow; */
   position: absolute;
   right: 0;
-  top: 20em;
+  top: 10em;
   width: 100%;
-  `;
+`;
 
 export default ModalUpdateForm;
