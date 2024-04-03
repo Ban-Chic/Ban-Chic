@@ -94,11 +94,12 @@ function MyPage() {
           />
         </SBlock>
         <SBlock>
-          <SSubTitle>내가 쓴 리뷰들</SSubTitle>
-          <TempMyReviewBox data={ReviewList.data}></TempMyReviewBox>
-          {ReviewList?.data == "" && (
-            <DefaultBlock text="작성한 리뷰가 없어요" />
-          )}
+          <TempMyReviewBox data={ReviewList.data}>
+            <SSubTitle>내가 쓴 리뷰들</SSubTitle>
+            {ReviewList?.data == "" && (
+              <DefaultBlock text="작성한 리뷰가 없어요" />
+            )}
+          </TempMyReviewBox>
         </SBlock>
         <SBlock>
           <CircleItemList data={HeartList.data}>
