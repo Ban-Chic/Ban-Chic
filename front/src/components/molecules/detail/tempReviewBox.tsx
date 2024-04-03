@@ -23,7 +23,7 @@ interface ReviewModi {
 
 interface Props {
   children?: ReactNode;
-  openModi: () => void;
+  openModi?: () => void;
   closeModi: () => void;
   data: {
     data: {
@@ -43,7 +43,7 @@ interface Props {
     totalElements: number;
   };
   perfumeId: string;
-  initModi: (
+  initModi?: (
     value:
       | ReviewModi
       | ((prevState: ReviewModi | undefined) => ReviewModi | undefined)
@@ -82,17 +82,18 @@ function TempReviewBox({ children, data, openModi, initModi }: Props) {
       window.alert("본인이 작성한 리뷰만 수정할 수 있습니다.");
       return;
     }
-    initModi({
-      reviewmodi: {
-        perfumeId: Number(perfumeId),
-        initialRate: rate,
-        initialContent: content,
-        reviewId: reviewId,
-        rate: rate,
-        content: content,
-      },
-    });
-    openModi();
+    if (initModi)
+      initModi({
+        reviewmodi: {
+          perfumeId: Number(perfumeId),
+          initialRate: rate,
+          initialContent: content,
+          reviewId: reviewId,
+          rate: rate,
+          content: content,
+        },
+      });
+    if (openModi) openModi();
   };
 
   return (

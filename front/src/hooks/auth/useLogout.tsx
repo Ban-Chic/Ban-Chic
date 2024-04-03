@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { getKakaoLogout, getNaverLogout } from "../../api/Api";
+import Page_Url from "../../router/Url";
 function useLogout() {
   const navigate = useNavigate();
   const Logout = () => {
@@ -14,7 +15,6 @@ function useLogout() {
 
       // 네이버일 경우
     } else if (auth === "NAVER") {
-      console.log("네이버다");
       getNaverLogout().then((res) => {
         console.log(res);
       });
@@ -31,8 +31,8 @@ function useLogout() {
     localStorage.removeItem("uid");
 
     // 메인으로 이동
-    navigate("/");
-    window.location.href = "/";
+    navigate(Page_Url.Main);
+    window.location.href = Page_Url.Main;
   };
   return Logout;
 }

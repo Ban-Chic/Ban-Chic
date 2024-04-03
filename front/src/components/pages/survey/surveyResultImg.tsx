@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { SBody2, SSubTitle, STitle } from "../../../styles/Font";
-import useRecommended from "../../../hooks/recommed/useRecommended";
 import { useState } from "react";
 import PerfumeSummary from "../../molecules/detail/perfume";
 import { useLocation } from "react-router-dom";
@@ -21,13 +20,15 @@ interface Perfume {
   korName: string;
 }
 
-function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Props) {
-  const { data: result } = useRecommended();
+function SurveyImgResultPage({ title = "나와 어울리는 향수! TOP 10" }: Props) {
   const [toggle, setToggle] = useState(true);
-  const [perfumeI, setPerfumeI] = useState<number>();
   const top = useScrollTop();
   const location = useLocation();
+  const [perfumeI, setPerfumeI] = useState<number>(
+    location?.state?.perfumeData[0].id
+  );
   const fashion = location?.state?.fashion;
+  const result = location?.state?.perfumeData;
   const handlerClick = (id: number) => {
     setPerfumeI(id);
     if (id === perfumeI) {
@@ -61,7 +62,7 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
           transition={{ duration: 0.3 }}
         >
           <SList layout>
-            {result?.data?.map((item: Perfume, index: number) => (
+            {result?.map((item: Perfume, index: number) => (
               <SListItem key={index} onClick={() => handlerClick(item?.id)}>
                 <SImage
                   $url={item?.perfumeImg || "/perfumeImg/tomford.jpg"}
@@ -164,7 +165,7 @@ const SList = styled(motion.div)`
 
 const SResult = styled(motion.article)`
   width: 100%;
-  max-height: 100vh;
+  height: 90vh;
   padding: 1em;
   border-radius: 5px;
   max-width: 1200px;
@@ -206,4 +207,4 @@ const SResultContainer = styled.section`
   perspective: 1500px;
 `;
 
-export default SurveyResultPage;
+export default SurveyImgResultPage;
