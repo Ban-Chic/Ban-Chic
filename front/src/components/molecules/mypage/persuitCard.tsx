@@ -27,8 +27,10 @@ function PersuitCard({ children, data }: Props) {
 const SType = styled.div`
   position: absolute;
   width: 100%;
-  bottom: -20%;
+  top: -20%;
   left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 `;
 
 const SFBlock = styled(motion.div)<{ $type: number }>`
