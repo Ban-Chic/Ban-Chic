@@ -47,8 +47,11 @@ function SurveyImagePage() {
     if (files) formData.append("file", files[0]);
     ImgAPI.post(`members/recommend/image`, formData)
       .then((res) => {
-        navigate(Page_Url.SurveyResult, {
-          state: { fashion: res.data.data.fashion },
+        navigate(Page_Url.SurveyImageResult, {
+          state: {
+            fashion: res.data.data.fashion,
+            perfumeData: res.data.data.perfumeOverviewResList,
+          },
         });
       })
       .catch((error) => {

@@ -28,6 +28,7 @@ import SurveyLandingPage from "../components/pages/survey/surveyLanding";
 import SurveyImagePage from "../components/pages/survey/surveyImage";
 import SurveyQuestionPage from "../components/pages/survey/surveyQuestion";
 import SurveyResultPage from "../components/pages/survey/surveyResult";
+import SurveyImgResultPage from "../components/pages/survey/surveyResultImg";
 
 function Router() {
   const location = useLocation();
@@ -78,6 +79,10 @@ function Router() {
           <Route
             path={Page_Url.SurveyResult}
             element={<SurveyResultPage />}
+          ></Route>
+          <Route
+            path={Page_Url.SurveyImageResult}
+            element={<SurveyImgResultPage />}
           ></Route>
         </Route>
         <Route
