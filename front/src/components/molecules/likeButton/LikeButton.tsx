@@ -22,7 +22,6 @@ function LikeButton({ perfumeId }: Props) {
     setIsLiked(!isLiked);
   };
 
-
   useEffect(() => {
     setIsLiked(!!hearts.data);
   }, [hearts.data, perfumeDetailInfo]);
@@ -43,7 +42,7 @@ function LikeButton({ perfumeId }: Props) {
       animate={
         shouldRotate
           ? [isLiked ? "liked" : "unliked", isHover ? "hover" : "rest"]
-          : [isLiked ? "liked" : "unliked", isHover ? "hover" : "hover"]
+          : [isLiked ? "liked" : "unliked", isHover ? "hover" : "mobileRest"]
       }
       whileTap="press"
       variants={buttonVariants}
@@ -72,7 +71,9 @@ function LikeButton({ perfumeId }: Props) {
         </SDefault>
       </SLabel>
       <SNumber>
-        <SCurrent variants={currentCountVariants}>{perfumeDetailInfo.data.hearts}</SCurrent>
+        <SCurrent variants={currentCountVariants}>
+          {perfumeDetailInfo.data.hearts}
+        </SCurrent>
         <SNew variants={newCountVariants}>{perfumeDetailInfo.data.hearts}</SNew>
       </SNumber>
     </SButton>
@@ -108,11 +109,18 @@ const buttonVariants: Variants = {
     // "--button-star-greyscale": "100%",
     // "--button-star-contrast": "0%",
     transition: { duration: 0.7 },
+    scale: 1.0,
   },
   hover: {
     // "--button-star-greyscale": "0%",
     // "--button-star-contrast": "100%",
     scale: 1.15,
+    y: -8,
+  },
+  mobileRest: {
+    // "--button-star-greyscale": "0%",
+    // "--button-star-contrast": "100%",
+    scale: 1.0,
     y: -8,
   },
   press: { scale: 1.05 },

@@ -114,7 +114,7 @@ function PerfumeDetail() {
         localStorage.setItem("visitedPerfumes", JSON.stringify(perfumeList));
       }
     }
-  }, [isLoading]);
+  }, [isLoading, data?.data.id, data?.data.perfumeImg, perfumeId]);
 
   useEffect(() => {
     const fetchGptDescription = async () => {
@@ -269,13 +269,25 @@ const SBlock = styled.div`
   border: 2px solid #e2e2e2;
   border-radius: 5px;
   flex-direction: column;
-  &:nth-child(3) {
-    grid-row: 5;
+  &:nth-child(7) {
+    grid-row: 2;
     display: flex;
   }
   &:nth-child(6) {
-    grid-row: 2;
+    grid-row: 7;
     padding: 1em 0;
+  }
+  &:nth-child(2) {
+    grid-row: 3;
+    border: none;
+    background-color: transparent;
+    padding: 1em 0;
+  }
+  &:nth-child(5) {
+    grid-row: 4;
+  }
+  &:nth-child(4) {
+    grid-row: 5;
   }
   @media only screen and (min-width: 768px) {
     &:nth-child(1) {
