@@ -134,6 +134,7 @@ const SSelectButton = styled(motion.div)<{ $url: string; contents: string }>`
 
 const SContainer = styled(motion.div)`
   width: 100%;
+  /* height: calc(100vh - 50px); */
   height: 100%;
   display: flex;
   justify-content: center;
