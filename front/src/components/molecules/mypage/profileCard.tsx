@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { SBody1, SSubTitle, STitle } from "../../../styles/Font";
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import theme from "../../../styles/Theme";
 
 interface Props {
   data: {
@@ -22,6 +24,16 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleProfileClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleUpdateClick = () => {
+    setTemp(false);
+    updateProfileImage();
+  };
+
+  const handleCancleClick = () => {
+    setTemp(false);
+    setPreviewUrl(data.data?.image || "/user.svg");
   };
 
   const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -49,9 +61,24 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
         onChange={handleFileChange}
       />
       {temp && (
-        <SButton type="submit" onClick={updateProfileImage}>
-          제출
-        </SButton>
+        <>
+          <SButton
+            initial={{ opacity: 0, x: 0, y: 0 }}
+            animate={{ opacity: 1, x: 100, y: 100 }}
+            type="submit"
+            onClick={() => handleUpdateClick()}
+          >
+            변경
+          </SButton>
+          <SCButton
+            initial={{ opacity: 0, x: 0, y: 0 }}
+            animate={{ opacity: 1, x: -100, y: 100 }}
+            type="submit"
+            onClick={() => handleCancleClick()}
+          >
+            취소
+          </SCButton>
+        </>
       )}
       {data.data?.nickname && <STitle>{data?.data?.nickname}</STitle>}
       {data.data?.email && <SBody1>{data?.data?.email}</SBody1>}
@@ -59,7 +86,19 @@ function ProfileCard({ data, onInput, updateProfileImage }: Props) {
   );
 }
 
-const SButton = styled.button``;
+const SCButton = styled(motion.button)`
+  position: absolute;
+  padding: 0.5em 1em;
+  background-color: ${theme.color.errorColor};
+  border-radius: 5px;
+`;
+
+const SButton = styled(motion.button)`
+  position: absolute;
+  padding: 0.5em 1em;
+  background-color: ${theme.color.actionColor};
+  border-radius: 5px;
+`;
 
 const SInput = styled.input`
   display: none;
@@ -72,6 +111,7 @@ const SFlexCenter = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  text-align: center;
 `;
 
 const SProfile = styled.div<{ $imageurl: string }>`
