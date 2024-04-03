@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { SSubTitle, STitle } from "../../../styles/Font";
+import { SBody2, SSubTitle, STitle } from "../../../styles/Font";
 import useRecommended from "../../../hooks/recommed/useRecommended";
 import { useState } from "react";
 import PerfumeSummary from "../../molecules/detail/perfume";
@@ -18,6 +18,7 @@ interface Perfume {
   perfumeImg: string;
   brandName: string;
   accords: string;
+  korName: string;
 }
 
 function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Props) {
@@ -28,6 +29,7 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
   const location = useLocation();
   const fashion = location?.state?.fashion;
   const handlerClick = (id: number) => {
+    setPerfumeI(id);
     if (id === perfumeI) {
       setToggle(!toggle);
     } else {
@@ -42,7 +44,7 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
       <STitle>{title}</STitle>
       {fashion && <SSubTitle>{fashion} 스타일인 나에게?</SSubTitle>}
       <SFlexWrap>
-        {toggle && perfumeI && (
+        {perfumeI && (
           <SResult
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -66,6 +68,7 @@ function SurveyResultPage({ title = "나와 어울리는 향수! TOP 10" }: Prop
                 ></SImage>
                 <SFlexEnd>
                   <SSubTitle> {item?.perfumeName}</SSubTitle>
+                  <SBody2> {item?.korName}</SBody2>
                   {item && (
                     <SAccordList>
                       {Object.keys(JSON.parse(item?.accords)).map((acc) => (
