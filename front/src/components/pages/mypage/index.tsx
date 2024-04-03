@@ -20,6 +20,9 @@ import useGetMyReviews from "../../../hooks/review/useGetMyReviews";
 import useRecommended from "../../../hooks/recommed/useRecommended";
 import usePersuit from "../../../hooks/persuit/usePersuit";
 import PersuitCard from "../../molecules/mypage/persuitCard";
+import DefaultBlock from "../../atoms/item/defalutBlock";
+import Page_Url from "../../../router/Url";
+import TempMyReviewBox from "../../molecules/detail/tempReviewBoxMy";
 
 function MyPage() {
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
@@ -53,7 +56,6 @@ function MyPage() {
       window.alert("프로필 이미지를 업로드해주세요.");
     }
   };
-
   // 로딩 화면
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <>{error.message}</>;
@@ -63,6 +65,13 @@ function MyPage() {
         <SBlock>
           <PersuitCard data={PersuitList?.data}>
             <SSubTitle>내 추구미</SSubTitle>
+            {PersuitList.data === null && (
+              <DefaultBlock
+                text="아직 정한 추구미가 없어요"
+                link={Page_Url.SurveyLanding}
+                linkText="추구미 정하러 가기"
+              />
+            )}
           </PersuitCard>
         </SBlock>
         <SBlock>
@@ -75,18 +84,19 @@ function MyPage() {
           />
         </SBlock>
         <SBlock>
-          <SSubTitle>내가 쓴 리뷰들</SSubTitle>
-          {/* <MyReviewList>
-            {ReviewList.data.length !== 0 &&
-              ReviewList.data.map((item: { id: string }, index: number) => {
-                if (index > 10) <div>{item.id}</div>;
-              })}
-            {!ReviewList.data.length && <div>리뷰를 작성해보세요</div>}
-          </MyReviewList> */}
+          <TempMyReviewBox data={ReviewList.data}>
+            <SSubTitle>내가 쓴 리뷰들</SSubTitle>
+          </TempMyReviewBox>
+          {PersuitList.data === null && (
+            <DefaultBlock text="작성한 리뷰가 없어요" />
+          )}
         </SBlock>
         <SBlock>
           <CircleItemList data={HeartList.data}>
             <SSubTitle>좋아요 한 향수</SSubTitle>
+            {HeartList.data == "" && (
+              <DefaultBlock text="아직 좋아하는 향수가 없어요!" />
+            )}
           </CircleItemList>
         </SBlock>
         <SBlock>
@@ -104,6 +114,13 @@ function MyPage() {
         <SBlock>
           <CircleItemList data={RecommendedList?.data}>
             <SSubTitle>내가 추천받은 향수들</SSubTitle>
+            {RecommendedList.data === null && (
+              <DefaultBlock
+                text="아직 추천받은 향수가 없어요!"
+                link={Page_Url.SurveyLanding}
+                linkText="추천 받으러 가기"
+              />
+            )}
           </CircleItemList>
         </SBlock>
         <SBlock>
