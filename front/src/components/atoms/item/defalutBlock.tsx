@@ -12,7 +12,7 @@ interface Props {
 function DefaultBlock({ text, link, linkText }: Props) {
   return (
     <SContainer>
-      <SImg src="public\perfumeImg\empty.png" alt="빈 박스" />
+      <SImg src="/perfumeImg/empty.png" alt="빈 박스" />
       <div>{text}</div>
       {link && (
         <SButton as={Link} to={Page_Url.SurveyLanding}>
