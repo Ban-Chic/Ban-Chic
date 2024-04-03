@@ -75,7 +75,7 @@ function MyPage() {
         <SBlock>
           <PersuitCard data={PersuitList?.data}>
             <SSubTitle>내 추구미</SSubTitle>
-            {PersuitList.data === null && (
+            {PersuitList?.data === null && (
               <DefaultBlock
                 text="아직 정한 추구미가 없어요"
                 link={Page_Url.SurveyLanding}
@@ -96,7 +96,7 @@ function MyPage() {
         <SBlock>
           <SSubTitle>내가 쓴 리뷰들</SSubTitle>
           <TempMyReviewBox data={ReviewList.data}></TempMyReviewBox>
-          {PersuitList.data === null && (
+          {PersuitList?.data === null && (
             <DefaultBlock text="작성한 리뷰가 없어요" />
           )}
         </SBlock>

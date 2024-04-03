@@ -1,6 +1,10 @@
 const Page_Url = {
   /** 랜딩 페이지 */
   Landing: "/",
+  /** 메인 로그인 페이지*/
+  MainLogin: "/mainl",
+  /** 메인 로그인 페이지*/
+  NoLogin: "/mainnologin",
   /** 메인페이지 */
   Main: "/main",
   /** 마이 페이지 */
