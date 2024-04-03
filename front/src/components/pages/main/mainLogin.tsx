@@ -7,7 +7,6 @@ import LoadingSpinner from "../../../utils/LoadingSpinner";
 import useCFRecommended from "../../../hooks/recommed/useCFRecommended";
 import LocalNav from "../../molecules/common/localnav";
 import ParallaxTextforUse from "../../atoms/framer/ParallaxTextforUse";
-import { PerspectiveCamera } from "@react-three/drei";
 
 interface PerfumeData {
   id: number;
