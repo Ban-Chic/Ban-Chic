@@ -14,7 +14,7 @@ interface PerfumeData {
   korName: string;
 }
 function MainLoginPage() {
-  const { data, isLoading, isError, error } = useRecommended();
+  const { data, isLoading } = useRecommended();
   const { data: cfdata, isLoading: isCFLoading } = useCFRecommended();
 
   return (

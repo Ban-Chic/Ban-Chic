@@ -9,8 +9,7 @@ import RadarChartContainer from "../../molecules/charts/radarChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
 import useGetPerfumeDetail from "../../../hooks/info/useGetDetail";
 import LoadingSpinner from "../../../utils/LoadingSpinner";
-import useGetHeart from // , { useUpdateHeart }
-"../../../hooks/heart/useGetHeart";
+import useGetHeart from "../../../hooks/heart/useGetHeart"; // , { useUpdateHeart }
 import { SSubTitle } from "../../../styles/Font";
 import TempReviewBox from "../../molecules/detail/tempReviewBox";
 import useGetPerfumeReviews, {
@@ -58,8 +57,6 @@ function PerfumeDetail() {
   const [gptDescriptionFetched, setGptDescriptionFetched] = useState(false);
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
   const [reviewModi, setReviewModi] = useState<ReviewModi>();
-  const savedPerfumes = localStorage.getItem("visitedPerfumes");
-  const perfumeList = savedPerfumes ? JSON.parse(savedPerfumes) : [];
 
   const {
     isOpenModal: isOpenModal2,

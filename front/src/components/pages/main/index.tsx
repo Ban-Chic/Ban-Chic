@@ -81,17 +81,17 @@ const SDiv2Container = styled.div`
   background-color: #fcf1d4;
 `;
 
-const SDiv3Container = styled.div`
-  background-color: #0038a6;
-  height: 136vw;
-  padding-top: 24.6vw;
-  margin-top: -8vw;
-`;
+// const SDiv3Container = styled.div`
+//   background-color: #0038a6;
+//   height: 136vw;
+//   padding-top: 24.6vw;
+//   margin-top: -8vw;
+// `;
 
-const SDiv4Container = styled.div`
-  height: 50vw;
-  background-color: white;
-`;
+// const SDiv4Container = styled.div`
+//   height: 50vw;
+//   background-color: white;
+// `;
 
 const SMiddleSection = styled.div`
   display: flex;
