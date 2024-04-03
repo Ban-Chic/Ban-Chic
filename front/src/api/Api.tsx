@@ -9,7 +9,12 @@ export const getPerfumeDetail = (perfumeId: string) => {
   return API.get(`/perfumes/${perfumeId}`).then((res) => res.data);
 };
 
+/** CBF 추천 조회 */
 export const getRecommend = () => API.get("/recommend/top");
+
+/** CF 추천 조회 */
+export const getCFRecommend = () =>
+  API.post("/members/recommend/cf").then((res) => res.data);
 
 /** 향수 카테고리 목록 조회 */
 export const getPerfumeSeason = (type: string, page: number = 1) =>
