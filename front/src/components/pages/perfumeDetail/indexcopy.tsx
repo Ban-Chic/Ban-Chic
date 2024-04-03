@@ -4,7 +4,6 @@ import GPTSample from "../../molecules/gptApi/gptWriter";
 import { HeartFilled } from "@ant-design/icons";
 
 import { useParams } from "react-router-dom";
-// import { motion } from "framer-motion";
 
 import RadarChartContainer from "../../molecules/charts/radarChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
@@ -174,6 +173,12 @@ function PerfumeDetail() {
               actionModal={putReviewFunction}
               title="리뷰 수정하기"
               initReview={reviewModi}
+              initialRate={0}
+              initialContent={""}
+              perfumeId={""}
+              reviewId={0}
+              rate={0}
+              content={""}
             />
           )}
         </SDetailContainer>
