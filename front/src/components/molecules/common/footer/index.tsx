@@ -13,7 +13,7 @@ function Footer() {
           BACK TO TOP
         </SBody2NoWrap>
       </SDiv>
-      <SImg src="/footerLogo.svg" alt="" />
+      <SImg src="/logoImg/footerLogo.svg" alt="" />
     </SFooterContainer>
   );
 }
