@@ -24,7 +24,7 @@ function SurveyLandingPage() {
           contents="내 스타일과 어울리는 향수를 추천 받아보세요"
         >
           <SDiv $url={"/surveyImg/test2.png"} />
-          <STitleDiff>내 착장 기반 추천</STitleDiff>
+          <STitleDiff>복장 기반 추천</STitleDiff>
         </SSelectButton>
 
         <SSelectButton
@@ -38,7 +38,7 @@ function SurveyLandingPage() {
           contents="나의 추구미와 어울리는 향수를 추천 받아보세요"
         >
           <SDiv $url={"/surveyImg/test9.png"} />
-          <STitleDiff>추구미 기반 추천</STitleDiff>
+          <STitleDiff>형용사 기반 추천</STitleDiff>
         </SSelectButton>
 
         <SSelectButton
