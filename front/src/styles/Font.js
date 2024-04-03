@@ -52,6 +52,10 @@ const font = {
 export const SBody2 = styled.h1`
   ${font.Body2}
   color: ${color.fontColor};
+  max-width: calc(100% - 130px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const SBody1 = styled.h1`
