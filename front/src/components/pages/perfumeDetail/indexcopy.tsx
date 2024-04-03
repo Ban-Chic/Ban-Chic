@@ -5,7 +5,6 @@ import { HeartFilled } from "@ant-design/icons";
 
 import { useParams } from "react-router-dom";
 // import { motion } from "framer-motion";
-
 import RadarChartContainer from "../../molecules/charts/radarChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
 import useGetPerfumeDetail from "../../../hooks/info/useGetDetail";
@@ -16,18 +15,15 @@ import TempReviewBox from "../../molecules/detail/tempReviewBox";
 import useGetPerfumeReviews, {
   usePostReview,
 } from "../../../hooks/review/useGetPerfumeReviews";
+import { MdRateReview } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { CallGPT } from "../../molecules/gptApi/gpt";
 import useOpenModal from "../../../hooks/modal/useOpenModal";
 import ModalRegisterForm from "../../atoms/modalForm/ModalRegisterForm";
-// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
-// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+import LikeButton from "../../molecules/likeButton/LikeButton";
 
-// interface Review {
-//   reviewId: number;
-//   rate: number;
-//   content: string;
-// }
+// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
 
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
@@ -45,6 +41,7 @@ function PerfumeDetail() {
   const heartMutation = () => {
     postHeart.mutate();
   };
+  
 
   const postReviewFunction = (rate: number, content: string) => {
     postReview.mutate({ perfumeId, rate, content });
@@ -95,6 +92,9 @@ function PerfumeDetail() {
             </SLikeButton>
           </SBlock>
           <SBlock>
+            <LikeButton perfumeId={perfumeId} heartsNum={data.data.hearts} />
+          </SBlock>
+          <SBlock>
             <RadarChartContainer season={data.data.season} />
           </SBlock>
           <SBlock>
@@ -122,23 +122,13 @@ function PerfumeDetail() {
             )}
           </SBlock>
           <SBlock>
-            {/* <SParent
-              layout
-              isOpenCheck={isOpen}
-              initial={{ borderRadius: 50 }}
-              onClick={() => setIsOpen(!isOpen)}
-              transition={{
-                opacity: { ease: "linear" },
-                layout: { duration: 0.6 },
-              }}
-            > */}
-            {/* <ReviewPage /> */}
-            {/* </SParent> */}
-
             <TempReviewBox data={reviews} perfumeId={perfumeId}>
               <SReviewDiv>
                 <SSubTitle>Review</SSubTitle>
-                <button onClick={() => clickModal()}>리뷰등록</button>
+                <SButton onClick={() => clickModal()}>
+                  리뷰등록
+                  <MdRateReview />
+                </SButton>
               </SReviewDiv>
             </TempReviewBox>
           </SBlock>
@@ -154,14 +144,6 @@ function PerfumeDetail() {
               // alert={data.data?.nickname}
             />
           )}
-          {/* {isOpenModal && (
-            <ModalUpdateForm
-              closeModal={closeModal}
-              actionModal={putReviewFunction}
-              title="리뷰 수정하기"
-              // alert={data.data?.nickname}
-            />
-          )} */}
         </SDetailContainer>
       </>
     );
@@ -213,31 +195,43 @@ const SBlock = styled.div`
     }
     &:nth-child(2) {
       grid-column: 3 / span 2;
-      grid-row: 1 / span 3;
+      grid-row: 1 / span 1;
       flex-direction: row;
+      border: none;
+      background-color: transparent;
+    }
+    &:nth-child(6) {
+      grid-column: 5 / span 2;
+      grid-row: 3 / span 4;
+      display: flex;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      &:hover {
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
     }
     &:nth-child(4) {
       grid-column: 3 / span 2;
-      grid-row: 4 / span 3;
+      grid-row: 2 / span 2;
+      flex-direction: row;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
+      align-items: center;
     }
     &:nth-child(3) {
       grid-column: 5 / span 2;
       grid-row: 1 / span 2;
       display: flex;
-      overflow-y: hidden;
-      &:hover {
-        overflow-y: scroll;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }
+      justify-content: space-around;
     }
     &:nth-child(5) {
-      grid-column: 5 / span 2;
-      grid-row: 3 / span 4;
+      grid-column: 3 / span 2;
+      grid-row: 4 / span 3;
       overflow-y: hidden;
+      overflow-x: hidden;
       &:hover {
         overflow-y: scroll;
         &::-webkit-scrollbar {
@@ -245,11 +239,12 @@ const SBlock = styled.div`
         }
       }
     }
-    &:nth-child(6) {
+    &:nth-child(7) {
       grid-column: 1 / span 2;
       grid-row: 6;
       display: flex;
       justify-content: center;
+      align-items: center;
     }
   }
 `;
@@ -312,5 +307,12 @@ const SLikeButton = styled.button`
 const SReviewDiv = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const SButton = styled.button`
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
 `;
 export default PerfumeDetail;
