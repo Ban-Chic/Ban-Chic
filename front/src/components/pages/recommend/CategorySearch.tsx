@@ -10,6 +10,7 @@ import { brandMap, genderMap, seasonMap } from "./a";
 import Perfume from "./Perfume";
 import { Link } from "react-router-dom";
 import Page_Url from "../../../router/Url";
+import LoadingSpinner from "../../../utils/LoadingSpinner";
 
 interface Perfume {
   perfumeId: number;
@@ -22,13 +23,16 @@ interface Perfume {
 function CategorySearch() {
   const [perfumes, setPerfumes] = useState([]);
   const [selected, setSelected] = useState("겨울");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [seasons] = useState(["봄", "여름", "가을", "겨울", "낮", "밤"]);
   const onClickSeasonHandler: MouseEventHandler = (e: any) => {
     setSelected(e.target.innerText);
-    getPerfumeSeason(seasonMap[e.target.innerText], 1).then((data) =>
-      setPerfumes(data.data.content)
-    );
+    setIsLoading(true);
+    getPerfumeSeason(seasonMap[e.target.innerText], 1).then((data) => {
+      setPerfumes(data.data.content);
+      setIsLoading(false);
+    });
   };
 
   const [brands] = useState([
@@ -44,17 +48,21 @@ function CategorySearch() {
   ]);
   const onClickBrandHandler: MouseEventHandler = (e: any) => {
     setSelected(e.target.innerText);
-    getPerfumeBrand(brandMap[e.target.innerText], 1).then((data) =>
-      setPerfumes(data.data.content)
-    );
+    setIsLoading(true);
+    getPerfumeBrand(brandMap[e.target.innerText], 1).then((data) => {
+      setPerfumes(data.data.content);
+      setIsLoading(false);
+    });
   };
 
   const [genders] = useState(["남자", "여자", "중성"]);
   const onClickGenderHandler: MouseEventHandler = (e: any) => {
+    setIsLoading(true);
     setSelected(e.target.innerText);
-    getPerfumeGender(genderMap[e.target.innerText], 1).then((data) =>
-      setPerfumes(data.data.content)
-    );
+    getPerfumeGender(genderMap[e.target.innerText], 1).then((data) => {
+      setPerfumes(data.data.content);
+      setIsLoading(false);
+    });
   };
 
   useEffect(() => {
@@ -66,8 +74,8 @@ function CategorySearch() {
   return (
     <>
       <SCategoryWrap>
+        <Sh2>계절</Sh2>
         <SFlexWrap>
-          <Sh2>계절</Sh2>
           <SFlexUl>
             {seasons.map((season, index) => {
               return (
@@ -82,8 +90,8 @@ function CategorySearch() {
             })}
           </SFlexUl>
         </SFlexWrap>
+        <Sh2>브랜드</Sh2>
         <SFlexWrap>
-          <Sh2>브랜드</Sh2>
           <SFlexUl>
             {brands.map((brand, index) => {
               return (
@@ -98,8 +106,8 @@ function CategorySearch() {
             })}
           </SFlexUl>
         </SFlexWrap>
+        <Sh2>성별</Sh2>
         <SFlexWrap>
-          <Sh2>성별</Sh2>
           <SFlexUl>
             {genders.map((gender, index) => {
               return (
@@ -117,18 +125,20 @@ function CategorySearch() {
         <Link to={Page_Url.Map}>가까운 매장 찾아보기</Link>
       </SCategoryWrap>
       <SWrap>
-        {perfumes.map((perfume: Perfume) => {
-          return (
-            <PerfumeListItem
-              key={perfume.perfumeId}
-              perfumeId={perfume.perfumeId}
-              perfumeImg={perfume.perfumeImg}
-              perfumeName={perfume.originName}
-              perfumeKorName={perfume.korName}
-              perfumeBrand={perfume.brand}
-            ></PerfumeListItem>
-          );
-        })}
+        {isLoading && <LoadingSpinner />}
+        {!isLoading &&
+          perfumes.map((perfume: Perfume) => {
+            return (
+              <PerfumeListItem
+                key={perfume.perfumeId}
+                perfumeId={perfume.perfumeId}
+                perfumeImg={perfume.perfumeImg}
+                perfumeName={perfume.originName}
+                perfumeKorName={perfume.korName}
+                perfumeBrand={perfume.brand}
+              ></PerfumeListItem>
+            );
+          })}
       </SWrap>
       {/* <div ref={nextDiv}>loading more perfumes</div> */}
     </>
@@ -136,6 +146,10 @@ function CategorySearch() {
 }
 
 const SCategoryWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
   margin: 1em;
 `;
 
@@ -154,6 +168,7 @@ const SFlexUl = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  justify-content: center;
 `;
 
 const SWrap = styled.main`
