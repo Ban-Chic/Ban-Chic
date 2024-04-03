@@ -31,11 +31,11 @@ enableMocking().then(() => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <ToastContainer />
           <GlobalStyles />
           <Router />
           <ReactQueryDevtools initialIsOpen={true} />
         </BrowserRouter>
+          <ToastContainer />
       </ThemeProvider>
     </QueryClientProvider>
   );
