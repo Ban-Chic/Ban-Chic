@@ -64,7 +64,7 @@ const SImg = styled.div<{ $url: string }>`
   background-image: url(${(props) => props.$url});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   border-radius: 5px;
 `;
 
