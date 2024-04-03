@@ -44,6 +44,7 @@ function MyPage() {
   // 닉네임 업데이트
   const updateNicknameFunction = (nickname: string) => {
     nickNameMutation.mutate(nickname);
+    localStorage.setItem("nickname", nickname);
   };
 
   // 프로필 이미지 뮤테이션

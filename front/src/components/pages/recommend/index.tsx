@@ -1,10 +1,10 @@
 import CategorySearch from "./CategorySearch";
-import RecommendList from "./RecommendList";
+// import RecommendList from "./RecommendList";
 
 function RecommendPage() {
   return (
     <>
-      <RecommendList />
+      {/* <RecommendList /> */}
       <CategorySearch />
     </>
   );

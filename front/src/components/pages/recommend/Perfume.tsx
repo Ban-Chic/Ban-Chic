@@ -16,6 +16,12 @@ function Perfume({ children, select, click }: perfumeProps) {
 }
 
 const SLi = styled.li<{ $selected: boolean }>`
+  /* background-color: red; */
+  padding: 0 10px;
+  border-radius: 5px;
+  border: ${(props) =>
+    props.$selected ? "solid 2px green" : "solid 2px white;"};
+  color: ${(props) => (props.$selected ? "green" : "")};
   cursor: pointer;
   font-weight: ${(props) => props.$selected && "bold"};
 `;
