@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -50,6 +51,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @AllArgsConstructor
 @Transactional
+@Slf4j
 public class MemberService {
 
     private final String FAST_API_URL = "http://j10b109.p.ssafy.io:9876";
@@ -184,7 +186,14 @@ public class MemberService {
         persuitRepository.save(persuit);
 
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-        Recommendation recommResponse = restTemplate.postForObject(url, requestEntity, Recommendation.class);
+        Recommendation recommResponse = null;
+
+        try {
+            recommResponse = restTemplate.postForObject(url, requestEntity, Recommendation.class);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            throw new CustomException(ErrorCode.FAIL_IN_FASTAPI);
+        }
 
         Recommend recommend = new Recommend();
         recommend.setMember(member);
