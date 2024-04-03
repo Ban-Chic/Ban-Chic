@@ -4,11 +4,7 @@ import { SSubTitle } from "../../../styles/Font";
 import PursuitBeauty from "../../../utils/PursuitBeauty";
 import { motion, useDragControls } from "framer-motion";
 import useSurvey from "../../../hooks/survey/useSurvey";
-import {
-  StyleRanges,
-  Styles,
-  StylesF,
-} from "../../../utils/PursuitStyleRanges";
+import { StyleRanges, StylesF } from "../../../utils/PursuitStyleRanges";
 import { postSurvey } from "../../../api/Api";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
