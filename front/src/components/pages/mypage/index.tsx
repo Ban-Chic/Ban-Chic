@@ -84,9 +84,8 @@ function MyPage() {
           />
         </SBlock>
         <SBlock>
-          <TempMyReviewBox data={ReviewList.data}>
-            <SSubTitle>내가 쓴 리뷰들</SSubTitle>
-          </TempMyReviewBox>
+          <SSubTitle>내가 쓴 리뷰들</SSubTitle>
+          <TempMyReviewBox data={ReviewList.data}></TempMyReviewBox>
           {PersuitList.data === null && (
             <DefaultBlock text="작성한 리뷰가 없어요" />
           )}
@@ -169,6 +168,17 @@ const SBlock = styled.div`
   flex-direction: column;
   gap: 1em;
   transition: ease 0.1s all;
+  &:nth-child(3) {
+    max-height: 350px;
+    overflow-y: hidden;
+    &:hover {
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
   @media only screen and (min-width: 768px) {
     &:nth-child(1) {
       grid-row: 1 / span 2;
@@ -180,6 +190,14 @@ const SBlock = styled.div`
     &:nth-child(3) {
       grid-row: 1 / span 2;
       grid-column: 3 / span 1;
+      max-height: 350px;
+      overflow-y: hidden;
+      &:hover {
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
     }
 
     &:nth-child(4) {
