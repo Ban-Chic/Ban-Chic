@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import theme from "../../../styles/Theme";
 import { StarRating } from "./StarRating";
+import { toast } from "react-toastify";
 
 interface Reviews {
   perfumeId: string;
@@ -67,11 +68,27 @@ const ModalUpdateForm = ({
       const perfumeId = String(initReview.reviewmodi.perfumeId);
       const reviewId = initReview.reviewmodi.reviewId;
       actionModal({ perfumeId, reviewId, rate, content });
-      window.alert("리뷰 수정이 완료되었습니다.");
+      toast("리뷰 수정이 완료되었습니다.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       closeModal();
     } else {
       console.log(rate, perfumeId, reviewId, rate, content);
-      window.alert("평점은 1-5점 사이, 리뷰는 2-500자로 작성 가능합니다.");
+      toast("평점은 1-5점 사이, 리뷰는 2-500자로 작성 가능합니다.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
