@@ -1,7 +1,7 @@
 <img width="1076" alt="image" src="https://github.com/NavyHubb/codetree-TILs/assets/101810007/e4de04e1-35ae-4b64-ac46-20e8e9a79b8c">
 
 # Ban:Chic
-어떤 향수가 본인의 이미지 맞을지 모르시겠나요?
+어떤 향수가 본인의 이미지 맞을지 모르시겠나요?  
 추구하고자 하는 이미지를 선택하여 설문을 제출하면 그에 맞는 향수를 추천해드립니다!
 
 ## 📆 프로젝트 기간
