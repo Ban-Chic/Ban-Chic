@@ -27,7 +27,7 @@ type PropsWithNums = ParallaxProps & Nums;
 
 function ParallaxText({
   children,
-  baseVelocity = 100,
+  baseVelocity = 1,
   xx = 1,
   yy = 1,
   zz = 1,
@@ -52,7 +52,7 @@ function ParallaxText({
   const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
 
   const directionFactor = useRef<number>(1);
-  useAnimationFrame((t, delta) => {
+  useAnimationFrame((delta) => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
     /**
@@ -80,9 +80,6 @@ function ParallaxText({
   return (
     <SParallax xx={xx} yy={yy} zz={zz} deg={deg}>
       <SScroller style={{ x }}>
-        <SSpan>{children} </SSpan>
-        <SSpan>{children} </SSpan>
-        <SSpan>{children} </SSpan>
         <SSpan>{children} </SSpan>
         <SSpan>{children} </SSpan>
         <SSpan>{children} </SSpan>
@@ -142,10 +139,9 @@ const SParallax = styled.div<Nums>`
 const SScroller = styled(motion.div)`
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 100px;
+  font-size: 64px;
   display: flex;
   white-space: nowrap;
-  display: flex;
   flex-wrap: nowrap;
 `;
 

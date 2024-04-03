@@ -125,7 +125,7 @@ const SSidebar = styled.div`
 const SMenuLink = styled(Link)`
   ${theme.font.KumarOneRegular};
   line-height: 1.5;
-  font-size: 4em;
+  font-size: 3em;
   @media only screen and (min-width: 768px) {
     font-size: 6.3em;
   }
