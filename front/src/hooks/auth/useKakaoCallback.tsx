@@ -16,7 +16,7 @@ function useKakaoCallback() {
         localStorage.setItem("refreshToken", response.headers["refreshtoken"]);
         localStorage.setItem("uid", response.data.data.userId);
         localStorage.setItem("oauthProvider", response.data.data.oauthProvider);
-
+        localStorage.setItem("nickname", response.data.data.nickname);
         // 메인 페이지로 이동
         navigate(Page_Url.Main);
       })
