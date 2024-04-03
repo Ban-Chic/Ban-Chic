@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ReactNode } from "react";
 import { motion, useDragControls } from "framer-motion";
+import PursuitMap, { PursuitName } from "../../../utils/PursuitMap";
 
 interface Props {
   children: ReactNode;
@@ -14,8 +15,8 @@ function PersuitCard({ children, data }: Props) {
       {children}
       <SContainer>
         {data?.map((item, i) => (
-          <SFBlock key={i} drag={true} dragControls={controls}>
-            {item}
+          <SFBlock key={i} drag={true} $type={item} dragControls={controls}>
+            <SType>{PursuitName[item]}</SType>
           </SFBlock>
         ))}
       </SContainer>
@@ -23,10 +24,21 @@ function PersuitCard({ children, data }: Props) {
   );
 }
 
-const SFBlock = styled(motion.div)`
+const SType = styled.div`
+  position: absolute;
+  width: 100%;
+  bottom: -20%;
+  left: 50%;
+`;
+
+const SFBlock = styled(motion.div)<{ $type: number }>`
   width: 100px;
   height: 100px;
-  background-color: yellow;
+  background-image: url(${(props) => PursuitMap[props.$type]});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
 `;
 
 const SContainer = styled.article`
