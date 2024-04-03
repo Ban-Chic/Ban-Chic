@@ -2,12 +2,11 @@ import { useEffect } from "react";
 import useGetPerfumeDetail from "../../../hooks/info/useGetDetail";
 import LoadingSpinner from "../../../utils/LoadingSpinner";
 import styled from "styled-components";
-import NoteGroup from "./noteGroup";
 import { SBody1, SSubTitle } from "../../../styles/Font";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Page_Url from "../../../router/Url";
-
+import NoteGroupwrap from "./noteGroupwrap";
 function PerfumeSummary({ pid }: { pid: number }) {
   const { data, isLoading, refetch } = useGetPerfumeDetail(String(pid));
   useEffect(() => {
@@ -25,17 +24,18 @@ function PerfumeSummary({ pid }: { pid: number }) {
         <SImg $url={data.data.perfumeImg}></SImg>
         <SFlex>
           <SSubTitle>{data.data.perfumeName}</SSubTitle>
+          <SSubTitle>{data.data.koreanName}</SSubTitle>
           <SBody1>{data.data.brandName}</SBody1>
         </SFlex>
         <SNote>
           {JSON.parse(data.data.notes)["TopNotes"] && (
-            <NoteGroup notes={JSON.parse(data.data.notes)["TopNotes"]} />
+            <NoteGroupwrap notes={JSON.parse(data.data.notes)["TopNotes"]} />
           )}
           {JSON.parse(data.data.notes)["MiddleNotes"] && (
-            <NoteGroup notes={JSON.parse(data.data.notes)["MiddleNotes"]} />
+            <NoteGroupwrap notes={JSON.parse(data.data.notes)["MiddleNotes"]} />
           )}
           {JSON.parse(data.data.notes)["BaseNotes"] && (
-            <NoteGroup notes={JSON.parse(data.data.notes)["BaseNotes"]} />
+            <NoteGroupwrap notes={JSON.parse(data.data.notes)["BaseNotes"]} />
           )}
         </SNote>
       </SContatiner>
@@ -51,8 +51,11 @@ const SFlex = styled.div`
 `;
 
 const SNote = styled.span`
-  display: flex;
+  display: grid;
   padding: 0 0.2em;
+  grid-template-columns: repeat(auto-fill, 2.5em);
+  justify-content: center;
+  gap: 3px;
 `;
 
 const SImg = styled.div<{ $url: string }>`
