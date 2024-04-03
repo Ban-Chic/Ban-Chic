@@ -61,14 +61,36 @@ function SurveyQuestionPage() {
   useEffect(() => {
     if (currentRound > 14) {
       setCurrentRound(0);
+
       Object.keys(preferences).map((item) =>
         setPreferencesBoolean((prevPreferences) => ({
           ...prevPreferences,
           [item]: prevPreferences[item] ? true : false,
         }))
       );
-      console.log(JSON.stringify(preferencesBoolean));
-      postSurvey(preferencesBoolean).then(() => {
+
+      // 모든 preferencesBoolean 값을 false로 초기화
+      const updatedPreferencesBoolean: Record<string, boolean> = {};
+      Object.keys(preferencesBoolean).forEach((key) => {
+        updatedPreferencesBoolean[key] = false;
+      });
+
+      // preferences를 배열로 변환하고, 값을 기준으로 내림차순 정렬
+      const sortedPreferences = Object.entries(preferences).sort(
+        (a, b) => b[1] - a[1]
+      );
+      // 상위 세 개의 키만 추출
+      const topThreeKeys = sortedPreferences.slice(0, 3).map((item) => item[0]);
+
+      // 상위 세 개의 preferencesBoolean 값을 true로 설정
+      topThreeKeys.forEach((key) => {
+        updatedPreferencesBoolean[key] = true;
+      });
+
+      // preferencesBoolean 상태 업데이트
+      setPreferencesBoolean(updatedPreferencesBoolean);
+
+      postSurvey(updatedPreferencesBoolean).then(() => {
         navigate(Page_Url.SurveyResult);
       });
     }

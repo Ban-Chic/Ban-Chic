@@ -24,9 +24,10 @@ function TempMyReviewBox({ children, data }: Props) {
   return (
     <SBoxContainer>
       {children}
-      {data.map((item) => (
+      {data?.map((item, i) => (
         <SReviewItem
           as={Link}
+          key={i}
           to={Page_Url.PerfumeDetail + `${item.perfumeOverviewRes.id}`}
         >
           <SDiv>
