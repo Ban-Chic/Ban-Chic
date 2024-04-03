@@ -25,11 +25,18 @@ export function usePostReview() {
   });
 }
 
+interface Props {
+  perfumeId: string;
+  reviewId: number;
+  rate: number;
+  content: string;
+}
+
 export function useUpdateReview() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ perfumeId, reviewId, rate, content }: any) =>
-      updatePerfumeReview(perfumeId, reviewId, {
+    mutationFn: ({ perfumeId, reviewId, rate, content }: Props) =>
+      updatePerfumeReview(Number(perfumeId), reviewId, {
         rate: rate,
         content: content,
       }),

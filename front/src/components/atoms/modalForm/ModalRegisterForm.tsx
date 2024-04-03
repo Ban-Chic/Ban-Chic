@@ -123,6 +123,6 @@ const SModalContainer = styled(motion.div)`
   /* background-color: yellow; */
   position: absolute;
   right: 0;
-  top: 20em;
+  top: 10em;
   width: 100%;
 `;

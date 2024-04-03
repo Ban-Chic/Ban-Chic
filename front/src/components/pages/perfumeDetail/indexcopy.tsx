@@ -4,7 +4,6 @@ import GPTSample from "../../molecules/gptApi/gptWriter";
 import { HeartFilled } from "@ant-design/icons";
 
 import { useParams } from "react-router-dom";
-// import { motion } from "framer-motion";
 
 import RadarChartContainer from "../../molecules/charts/radarChart";
 import NoteGroup from "../../molecules/detail/noteGroup";
@@ -15,31 +14,43 @@ import { SSubTitle } from "../../../styles/Font";
 import TempReviewBox from "../../molecules/detail/tempReviewBox";
 import useGetPerfumeReviews, {
   usePostReview,
+  useUpdateReview,
 } from "../../../hooks/review/useGetPerfumeReviews";
 import { useEffect, useState } from "react";
 import { CallGPT } from "../../molecules/gptApi/gpt";
 import useOpenModal from "../../../hooks/modal/useOpenModal";
 import ModalRegisterForm from "../../atoms/modalForm/ModalRegisterForm";
-// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
-// import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
+import ModalUpdateForm from "../../atoms/modalForm/ModalUpdateForm";
 
-// interface Review {
-//   reviewId: number;
-//   rate: number;
-//   content: string;
-// }
+interface ReviewModi {
+  reviewmodi: {
+    initialRate: number;
+    initialContent: string;
+    perfumeId: number;
+    reviewId: number;
+    rate: number;
+    content: string;
+  };
+}
 
 function PerfumeDetail() {
   const { perfumeId } = useParams() as { perfumeId: string };
-  // const [isOpen, setIsOpen] = useState(false);
   const { data, isLoading, isError, error } = useGetPerfumeDetail(perfumeId);
   const { data: hearts } = useGetHeart(perfumeId);
   const postHeart = useUpdateHeart(perfumeId);
   const postReview = usePostReview();
+  const updateReview = useUpdateReview();
   const { data: reviews } = useGetPerfumeReviews(perfumeId);
   const [gptDescription, setGptDescription] = useState<string | null>(null);
   const [gptDescriptionFetched, setGptDescriptionFetched] = useState(false);
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
+  const [reviewModi, setReviewModi] = useState<ReviewModi>();
+
+  const {
+    isOpenModal: isOpenModal2,
+    clickModal: clickModal2,
+    closeModal: closeModal2,
+  } = useOpenModal();
 
   //좋아요 뮤테이션
   const heartMutation = () => {
@@ -48,6 +59,16 @@ function PerfumeDetail() {
 
   const postReviewFunction = (rate: number, content: string) => {
     postReview.mutate({ perfumeId, rate, content });
+  };
+  interface Props {
+    perfumeId: string;
+    reviewId: number;
+    rate: number;
+    content: string;
+  }
+
+  const putReviewFunction = ({ perfumeId, reviewId, rate, content }: Props) => {
+    updateReview.mutate({ perfumeId, reviewId, rate, content });
   };
 
   useEffect(() => {
@@ -122,20 +143,13 @@ function PerfumeDetail() {
             )}
           </SBlock>
           <SBlock>
-            {/* <SParent
-              layout
-              isOpenCheck={isOpen}
-              initial={{ borderRadius: 50 }}
-              onClick={() => setIsOpen(!isOpen)}
-              transition={{
-                opacity: { ease: "linear" },
-                layout: { duration: 0.6 },
-              }}
-            > */}
-            {/* <ReviewPage /> */}
-            {/* </SParent> */}
-
-            <TempReviewBox data={reviews} perfumeId={perfumeId}>
+            <TempReviewBox
+              data={reviews}
+              perfumeId={perfumeId}
+              openModi={clickModal2}
+              closeModi={closeModal2}
+              initModi={setReviewModi}
+            >
               <SReviewDiv>
                 <SSubTitle>Review</SSubTitle>
                 <button onClick={() => clickModal()}>리뷰등록</button>
@@ -151,17 +165,22 @@ function PerfumeDetail() {
               closeModal={closeModal}
               actionModal={postReviewFunction}
               title="리뷰 등록하기"
-              // alert={data.data?.nickname}
             />
           )}
-          {/* {isOpenModal && (
+          {isOpenModal2 && (
             <ModalUpdateForm
-              closeModal={closeModal}
+              closeModal={closeModal2}
               actionModal={putReviewFunction}
               title="리뷰 수정하기"
-              // alert={data.data?.nickname}
+              initReview={reviewModi}
+              initialRate={0}
+              initialContent={""}
+              perfumeId={""}
+              reviewId={0}
+              rate={0}
+              content={""}
             />
-          )} */}
+          )}
         </SDetailContainer>
       </>
     );
