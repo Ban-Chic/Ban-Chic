@@ -10,6 +10,7 @@ interface PerfumeData {
   perfumeImg: string;
   perfumeName: string;
   brandName: string;
+  korName: string;
 }
 
 function RecommendList() {
@@ -35,6 +36,7 @@ function RecommendList() {
                 perfumeId={item.id}
                 perfumeImg={item.perfumeImg}
                 perfumeName={item.perfumeName}
+                perfumeKorName={item.korName}
                 perfumeBrand={item.brandName}
               ></PerfumeListItem>
             ))}
