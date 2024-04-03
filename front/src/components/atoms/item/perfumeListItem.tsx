@@ -8,6 +8,7 @@ interface Props {
   perfumeImg?: string;
   perfumeName?: string;
   perfumeBrand?: string;
+  perfumeKorName?: string;
 }
 
 function PerfumeListItem({
@@ -15,12 +16,14 @@ function PerfumeListItem({
   perfumeImg = "/tomford.jpg",
   perfumeName = "Neroli Prtofino",
   perfumeBrand = "Tomford",
+  perfumeKorName = "",
 }: Props) {
   return (
     <>
       <SPerfumeBox as={Link} to={`/perfumes/${perfumeId}`}>
         <SPerfumeImg src={perfumeImg} alt="향수 이미지" />
         <SSubTitleDark>{perfumeName}</SSubTitleDark>
+        <SBody2Dark>{perfumeKorName}</SBody2Dark>
         <SBody2Dark>{perfumeBrand}</SBody2Dark>
       </SPerfumeBox>
     </>

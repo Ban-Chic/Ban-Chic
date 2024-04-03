@@ -20,9 +20,6 @@ import NaverCallback from "../components/pages/login/NaverCallback";
 import KakaoCallback from "../components/pages/login/KakaoCallback";
 import LoginPage from "../components/pages/login";
 import MapPage from "../components/pages/map";
-// import ReviewPage from "../components/pages/review/review";
-// import CRUDTest from "../components/pages/crudTest";
-// import ReviewModify from "../components/pages/review/reviewModify";
 import SurveySelectPage from "../components/pages/survey/surveyselect";
 import SurveyLandingPage from "../components/pages/survey/surveyLanding";
 import SurveyImagePage from "../components/pages/survey/surveyImage";
@@ -45,15 +42,6 @@ function Router() {
           ></Route>
           <Route path="/mainSample" element={<MainSample />}></Route>
           <Route path={Page_Url.Login} element={<LoginPage />}></Route>
-          {/* <Route
-            path="/perfumes/:perfumeId/reviews/:reviewId"
-            element={<ReviewModify />}
-          ></Route>
-          <Route path="/perfumes/review/crud" element={<CRUDTest />}></Route> */}
-          {/* <Route
-            path="/perfumes/:perfumeId/reviews"
-            element={<ReviewPage />}
-          ></Route> */}
           <Route path={Page_Url.Recommend} element={<RecommendPage />}></Route>
           <Route path={Page_Url.Map} element={<MapPage />}></Route>
         </Route>

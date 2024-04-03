@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 interface IPerfumeData {
   id: string;
   perfumeImg: string;
-  perfumeName: string;
+  perfumeName?: string;
 }
 
 interface IProps {
