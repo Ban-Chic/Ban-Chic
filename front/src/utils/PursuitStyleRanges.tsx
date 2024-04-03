@@ -32,3 +32,21 @@ export const Styles: { [key: string]: boolean } = {
   classic: true,
   dandy: true,
 };
+
+// 초기 상태에 모든 스타일을 false 설정
+export const StylesF: { [key: string]: boolean } = {
+  clear: false,
+  romantic: false,
+  pretty: false,
+  coolcasual: false,
+  casual: false,
+  natural: false,
+  elegant: false,
+  dynamic: false,
+  wild: false,
+  gorgeous: false,
+  chic: false,
+  modern: false,
+  classic: false,
+  dandy: false,
+};
