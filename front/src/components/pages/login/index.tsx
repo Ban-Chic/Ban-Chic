@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 import { STitle } from "../../../styles/Font";
 import theme from "../../../styles/Theme";
-import NaverLogin from "../../atoms/auth/NaverLoginButton";
 import KakaoLogin from "../../atoms/auth/KakaoLoginButton";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";

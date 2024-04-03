@@ -4,7 +4,6 @@ import ButtonComponent from "../auth/Button";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import theme from "../../../styles/Theme";
-import Page_Url from "../../../router/Url";
 
 type Props = {
   title?: string;
