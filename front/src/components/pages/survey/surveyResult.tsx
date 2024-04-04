@@ -182,6 +182,7 @@ const SFlexEnd = styled.div`
   justify-content: flex-end;
   align-items: flex-end;
   flex-direction: column;
+  overflow: hidden;
   @media only screen and (min-width: 768px) {
   }
 `;
