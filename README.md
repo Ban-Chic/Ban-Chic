@@ -24,51 +24,35 @@
 ## 🚀 기술 스택 🚀
 
 #### FE ####
-<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
-<img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> 
+<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> 
 <br>
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-<img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
-<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
 <br>
-<img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=black">
-<img src="https://img.shields.io/badge/mockserviceworker-FF6A33?style=for-the-badge&logo=mockserviceworker&logoColor=white">
+<img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=black"> <img src="https://img.shields.io/badge/mockserviceworker-FF6A33?style=for-the-badge&logo=mockserviceworker&logoColor=white">
 <br>
 
 #### BE #### 
-<img src="https://img.shields.io/badge/spring%20boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> 
-<img src="https://img.shields.io/badge/spring%20data%20JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> 
-<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/spring%20boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/spring%20data%20JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
 <br>
 
 
 #### AI ####
-<img src="https://img.shields.io/badge/tensorflow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white">
-<img src="https://img.shields.io/badge/scikitlearn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=black">
-<img src="https://img.shields.io/badge/fastapi-009688?style=for-the-badge&logo=fastapi&logoColor=white">
-<img src="https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white">
+<img src="https://img.shields.io/badge/tensorflow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"> <img src="https://img.shields.io/badge/scikitlearn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=black"> <img src="https://img.shields.io/badge/fastapi-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img src="https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white">
 <br>
 
 
 #### Infra ####
-<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonAWS&logoColor=white">  
-<img src="https://img.shields.io/badge/EC2-FF9900?style=for-the-badge&logo=amazonEC2&logoColor=white">  
-<img src="https://img.shields.io/badge/Docker-000000?style=for-the-badge&logo=Docker&logoColor=white">  
-<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white">  
+<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonAWS&logoColor=white"> <img src="https://img.shields.io/badge/EC2-FF9900?style=for-the-badge&logo=amazonEC2&logoColor=white"> <img src="https://img.shields.io/badge/Docker-000000?style=for-the-badge&logo=Docker&logoColor=white"> <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white">  
 
 
 &nbsp;
 ### 🔨  Tools 🔨 
-<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"> 
-<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"> <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
 
 
 &nbsp;
 ### 👥  Collaboration  👥
-<img src="https://img.shields.io/badge/gitlab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white"> 
-<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"> 
-<img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=Jirasoftware&logoColor=white"> 
+<img src="https://img.shields.io/badge/gitlab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white"> <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"> <img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=Jirasoftware&logoColor=white"> 
 
 </div>
 &nbsp;   
@@ -139,345 +123,345 @@
 
 <details>
 <summary>Front</summary>
- 
-📦src
- ┣ 📂api
- ┃ ┣ 📜Api.tsx
- ┃ ┗ 📜Config.js
- ┣ 📂assets
- ┃ ┗ 📜react.svg
- ┣ 📂components
- ┃ ┣ 📂atoms
- ┃ ┃ ┣ 📂auth
- ┃ ┃ ┃ ┣ 📜Button.tsx
- ┃ ┃ ┃ ┣ 📜KakaoLoginButton.tsx
- ┃ ┃ ┃ ┗ 📜NaverLoginButton.tsx
- ┃ ┃ ┣ 📂framer
- ┃ ┃ ┃ ┣ 📜OpacityText.tsx
- ┃ ┃ ┃ ┣ 📜ParallaxTextforUse copy.tsx
- ┃ ┃ ┃ ┣ 📜ParallaxTextforUse.tsx
- ┃ ┃ ┃ ┗ 📜frameSection.tsx
- ┃ ┃ ┣ 📂item
- ┃ ┃ ┃ ┣ 📜circleItem.tsx
- ┃ ┃ ┃ ┣ 📜defalutBlock.tsx
- ┃ ┃ ┃ ┣ 📜perfumeListItem.tsx
- ┃ ┃ ┃ ┗ 📜reviewListItem.tsx
- ┃ ┃ ┣ 📂kakaomap
- ┃ ┃ ┃ ┣ 📜BrandLists.tsx
- ┃ ┃ ┃ ┣ 📜KakaoMap.styled.ts
- ┃ ┃ ┃ ┣ 📜KakaoMap.tsx
- ┃ ┃ ┃ ┣ 📜LocationBtn.tsx
- ┃ ┃ ┃ ┣ 📜SearchPlaces.tsx
- ┃ ┃ ┃ ┗ 📜mapUtils.js
- ┃ ┃ ┣ 📂list
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┣ 📂list-item
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┣ 📂menuToggle
- ┃ ┃ ┃ ┗ 📜menuToggle.tsx
- ┃ ┃ ┣ 📂modal
- ┃ ┃ ┃ ┗ 📜Modal.tsx
- ┃ ┃ ┗ 📂modalForm
- ┃ ┃ ┃ ┣ 📜ModalRegisterForm.tsx
- ┃ ┃ ┃ ┣ 📜ModalUpdateForm.tsx
- ┃ ┃ ┃ ┣ 📜StarDisplay.tsx
- ┃ ┃ ┃ ┣ 📜StarInput.tsx
- ┃ ┃ ┃ ┗ 📜StarRating.tsx
- ┃ ┣ 📂molecules
- ┃ ┃ ┣ 📂charts
- ┃ ┃ ┃ ┗ 📜radarChart.tsx
- ┃ ┃ ┣ 📂common
- ┃ ┃ ┃ ┣ 📂footer
- ┃ ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┃ ┣ 📂gnb
- ┃ ┃ ┃ ┃ ┣ 📜GNB.styles.ts
- ┃ ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┃ ┗ 📜sideBar.tsx
- ┃ ┃ ┃ ┗ 📂localnav
- ┃ ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┣ 📂detail
- ┃ ┃ ┃ ┣ 📜noteGroup.tsx
- ┃ ┃ ┃ ┣ 📜noteGroupwrap.tsx
- ┃ ┃ ┃ ┣ 📜perfume.tsx
- ┃ ┃ ┃ ┣ 📜tempReviewBox.tsx
- ┃ ┃ ┃ ┗ 📜tempReviewBoxMy.tsx
- ┃ ┃ ┣ 📂gptApi
- ┃ ┃ ┃ ┣ 📜gpt.js
- ┃ ┃ ┃ ┗ 📜gptWriter.tsx
- ┃ ┃ ┣ 📂likeButton
- ┃ ┃ ┃ ┣ 📜HeartIcon.tsx
- ┃ ┃ ┃ ┗ 📜LikeButton.tsx
- ┃ ┃ ┣ 📂list
- ┃ ┃ ┃ ┣ 📜circleItemList.tsx
- ┃ ┃ ┃ ┗ 📜myReviewList.tsx
- ┃ ┃ ┣ 📂mypage
- ┃ ┃ ┃ ┣ 📜persuitCard.tsx
- ┃ ┃ ┃ ┗ 📜profileCard.tsx
- ┃ ┃ ┗ 📂sidebarReal
- ┃ ┃ ┃ ┗ 📜sidebarReal.tsx
- ┃ ┗ 📂pages
- ┃ ┃ ┣ 📂error
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┣ 📂landing
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┣ 📂login
- ┃ ┃ ┃ ┣ 📜KakaoCallback.tsx
- ┃ ┃ ┃ ┣ 📜NaverCallback.tsx
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┣ 📂main
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┣ 📜mainLogin.tsx
- ┃ ┃ ┃ ┗ 📜mainSelect.tsx
- ┃ ┃ ┣ 📂map
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┣ 📂mypage
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┣ 📂perfumeDetail
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜indexcopy.tsx
- ┃ ┃ ┣ 📂recommend
- ┃ ┃ ┃ ┣ 📜CategorySearch.tsx
- ┃ ┃ ┃ ┣ 📜Perfume.tsx
- ┃ ┃ ┃ ┣ 📜RecommendList.tsx
- ┃ ┃ ┃ ┣ 📜a.ts
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┗ 📂survey
- ┃ ┃ ┃ ┣ 📜surveyImage.tsx
- ┃ ┃ ┃ ┣ 📜surveyLanding.tsx
- ┃ ┃ ┃ ┣ 📜surveyQuestion.tsx
- ┃ ┃ ┃ ┣ 📜surveyResult.tsx
- ┃ ┃ ┃ ┣ 📜surveyResultImg.tsx
- ┃ ┃ ┃ ┗ 📜surveyselect.tsx
- ┣ 📂hooks
- ┃ ┣ 📂auth
- ┃ ┃ ┣ 📜useDeleteId.tsx
- ┃ ┃ ┣ 📜useKakaoCallback.tsx
- ┃ ┃ ┣ 📜useLogout.tsx
- ┃ ┃ ┗ 📜useNaverCallback.tsx
- ┃ ┣ 📂feat
- ┃ ┃ ┗ 📜useScrollTop.tsx
- ┃ ┣ 📂heart
- ┃ ┃ ┣ 📜useGetHeart.tsx
- ┃ ┃ ┗ 📜useGetMyHeartList.tsx
- ┃ ┣ 📂info
- ┃ ┃ ┣ 📜useGetDetail.tsx
- ┃ ┃ ┗ 📜useGetUser.tsx
- ┃ ┣ 📂modal
- ┃ ┃ ┗ 📜useOpenModal.tsx
- ┃ ┣ 📂persuit
- ┃ ┃ ┗ 📜usePersuit.tsx
- ┃ ┣ 📂recommed
- ┃ ┃ ┣ 📜useCFRecommended.tsx
- ┃ ┃ ┗ 📜useRecommended.tsx
- ┃ ┣ 📂review
- ┃ ┃ ┣ 📜useGetMyReviews.tsx
- ┃ ┃ ┗ 📜useGetPerfumeReviews.tsx
- ┃ ┣ 📂survey
- ┃ ┃ ┗ 📜useSurvey.tsx
- ┃ ┗ 📂ui
- ┃ ┃ ┣ 📜useToggle.ts
- ┃ ┃ ┗ 📜useWindowWidth.ts
- ┣ 📂layouts
- ┃ ┣ 📜layouts.tsx
- ┃ ┣ 📜layoutsWithoutF.tsx
- ┃ ┗ 📜layoutsWithoutHF.tsx
- ┣ 📂mocks
- ┃ ┣ 📜handlers.js
- ┃ ┗ 📜worker.js
- ┣ 📂router
- ┃ ┣ 📜Router.tsx
- ┃ ┗ 📜Url.tsx
- ┣ 📂styles
- ┃ ┣ 📜Color.js
- ┃ ┣ 📜Font.js
- ┃ ┣ 📜GlobalStyles.js
- ┃ ┣ 📜Style.js
- ┃ ┗ 📜Theme.js
- ┣ 📂utils
- ┃ ┣ 📜ImgUrl.ts
- ┃ ┣ 📜LoadingSpinner.tsx
- ┃ ┣ 📜PursuitBeauty.tsx
- ┃ ┣ 📜PursuitMap.tsx
- ┃ ┗ 📜PursuitStyleRanges.tsx
- ┣ 📜Main.tsx
- ┗ 📜vite-env.d.ts
+   
+      📦src
+       ┣ 📂api
+       ┃ ┣ 📜Api.tsx
+       ┃ ┗ 📜Config.js
+       ┣ 📂assets
+       ┃ ┗ 📜react.svg
+       ┣ 📂components
+       ┃ ┣ 📂atoms
+       ┃ ┃ ┣ 📂auth
+       ┃ ┃ ┃ ┣ 📜Button.tsx
+       ┃ ┃ ┃ ┣ 📜KakaoLoginButton.tsx
+       ┃ ┃ ┃ ┗ 📜NaverLoginButton.tsx
+       ┃ ┃ ┣ 📂framer
+       ┃ ┃ ┃ ┣ 📜OpacityText.tsx
+       ┃ ┃ ┃ ┣ 📜ParallaxTextforUse copy.tsx
+       ┃ ┃ ┃ ┣ 📜ParallaxTextforUse.tsx
+       ┃ ┃ ┃ ┗ 📜frameSection.tsx
+       ┃ ┃ ┣ 📂item
+       ┃ ┃ ┃ ┣ 📜circleItem.tsx
+       ┃ ┃ ┃ ┣ 📜defalutBlock.tsx
+       ┃ ┃ ┃ ┣ 📜perfumeListItem.tsx
+       ┃ ┃ ┃ ┗ 📜reviewListItem.tsx
+       ┃ ┃ ┣ 📂kakaomap
+       ┃ ┃ ┃ ┣ 📜BrandLists.tsx
+       ┃ ┃ ┃ ┣ 📜KakaoMap.styled.ts
+       ┃ ┃ ┃ ┣ 📜KakaoMap.tsx
+       ┃ ┃ ┃ ┣ 📜LocationBtn.tsx
+       ┃ ┃ ┃ ┣ 📜SearchPlaces.tsx
+       ┃ ┃ ┃ ┗ 📜mapUtils.js
+       ┃ ┃ ┣ 📂list
+       ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┣ 📂list-item
+       ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┣ 📂menuToggle
+       ┃ ┃ ┃ ┗ 📜menuToggle.tsx
+       ┃ ┃ ┣ 📂modal
+       ┃ ┃ ┃ ┗ 📜Modal.tsx
+       ┃ ┃ ┗ 📂modalForm
+       ┃ ┃ ┃ ┣ 📜ModalRegisterForm.tsx
+       ┃ ┃ ┃ ┣ 📜ModalUpdateForm.tsx
+       ┃ ┃ ┃ ┣ 📜StarDisplay.tsx
+       ┃ ┃ ┃ ┣ 📜StarInput.tsx
+       ┃ ┃ ┃ ┗ 📜StarRating.tsx
+       ┃ ┣ 📂molecules
+       ┃ ┃ ┣ 📂charts
+       ┃ ┃ ┃ ┗ 📜radarChart.tsx
+       ┃ ┃ ┣ 📂common
+       ┃ ┃ ┃ ┣ 📂footer
+       ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┃ ┣ 📂gnb
+       ┃ ┃ ┃ ┃ ┣ 📜GNB.styles.ts
+       ┃ ┃ ┃ ┃ ┣ 📜index.tsx
+       ┃ ┃ ┃ ┃ ┗ 📜sideBar.tsx
+       ┃ ┃ ┃ ┗ 📂localnav
+       ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┣ 📂detail
+       ┃ ┃ ┃ ┣ 📜noteGroup.tsx
+       ┃ ┃ ┃ ┣ 📜noteGroupwrap.tsx
+       ┃ ┃ ┃ ┣ 📜perfume.tsx
+       ┃ ┃ ┃ ┣ 📜tempReviewBox.tsx
+       ┃ ┃ ┃ ┗ 📜tempReviewBoxMy.tsx
+       ┃ ┃ ┣ 📂gptApi
+       ┃ ┃ ┃ ┣ 📜gpt.js
+       ┃ ┃ ┃ ┗ 📜gptWriter.tsx
+       ┃ ┃ ┣ 📂likeButton
+       ┃ ┃ ┃ ┣ 📜HeartIcon.tsx
+       ┃ ┃ ┃ ┗ 📜LikeButton.tsx
+       ┃ ┃ ┣ 📂list
+       ┃ ┃ ┃ ┣ 📜circleItemList.tsx
+       ┃ ┃ ┃ ┗ 📜myReviewList.tsx
+       ┃ ┃ ┣ 📂mypage
+       ┃ ┃ ┃ ┣ 📜persuitCard.tsx
+       ┃ ┃ ┃ ┗ 📜profileCard.tsx
+       ┃ ┃ ┗ 📂sidebarReal
+       ┃ ┃ ┃ ┗ 📜sidebarReal.tsx
+       ┃ ┗ 📂pages
+       ┃ ┃ ┣ 📂error
+       ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┣ 📂landing
+       ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┣ 📂login
+       ┃ ┃ ┃ ┣ 📜KakaoCallback.tsx
+       ┃ ┃ ┃ ┣ 📜NaverCallback.tsx
+       ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┣ 📂main
+       ┃ ┃ ┃ ┣ 📜index.tsx
+       ┃ ┃ ┃ ┣ 📜mainLogin.tsx
+       ┃ ┃ ┃ ┗ 📜mainSelect.tsx
+       ┃ ┃ ┣ 📂map
+       ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┣ 📂mypage
+       ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┣ 📂perfumeDetail
+       ┃ ┃ ┃ ┣ 📜index.tsx
+       ┃ ┃ ┃ ┗ 📜indexcopy.tsx
+       ┃ ┃ ┣ 📂recommend
+       ┃ ┃ ┃ ┣ 📜CategorySearch.tsx
+       ┃ ┃ ┃ ┣ 📜Perfume.tsx
+       ┃ ┃ ┃ ┣ 📜RecommendList.tsx
+       ┃ ┃ ┃ ┣ 📜a.ts
+       ┃ ┃ ┃ ┗ 📜index.tsx
+       ┃ ┃ ┗ 📂survey
+       ┃ ┃ ┃ ┣ 📜surveyImage.tsx
+       ┃ ┃ ┃ ┣ 📜surveyLanding.tsx
+       ┃ ┃ ┃ ┣ 📜surveyQuestion.tsx
+       ┃ ┃ ┃ ┣ 📜surveyResult.tsx
+       ┃ ┃ ┃ ┣ 📜surveyResultImg.tsx
+       ┃ ┃ ┃ ┗ 📜surveyselect.tsx
+       ┣ 📂hooks
+       ┃ ┣ 📂auth
+       ┃ ┃ ┣ 📜useDeleteId.tsx
+       ┃ ┃ ┣ 📜useKakaoCallback.tsx
+       ┃ ┃ ┣ 📜useLogout.tsx
+       ┃ ┃ ┗ 📜useNaverCallback.tsx
+       ┃ ┣ 📂feat
+       ┃ ┃ ┗ 📜useScrollTop.tsx
+       ┃ ┣ 📂heart
+       ┃ ┃ ┣ 📜useGetHeart.tsx
+       ┃ ┃ ┗ 📜useGetMyHeartList.tsx
+       ┃ ┣ 📂info
+       ┃ ┃ ┣ 📜useGetDetail.tsx
+       ┃ ┃ ┗ 📜useGetUser.tsx
+       ┃ ┣ 📂modal
+       ┃ ┃ ┗ 📜useOpenModal.tsx
+       ┃ ┣ 📂persuit
+       ┃ ┃ ┗ 📜usePersuit.tsx
+       ┃ ┣ 📂recommed
+       ┃ ┃ ┣ 📜useCFRecommended.tsx
+       ┃ ┃ ┗ 📜useRecommended.tsx
+       ┃ ┣ 📂review
+       ┃ ┃ ┣ 📜useGetMyReviews.tsx
+       ┃ ┃ ┗ 📜useGetPerfumeReviews.tsx
+       ┃ ┣ 📂survey
+       ┃ ┃ ┗ 📜useSurvey.tsx
+       ┃ ┗ 📂ui
+       ┃ ┃ ┣ 📜useToggle.ts
+       ┃ ┃ ┗ 📜useWindowWidth.ts
+       ┣ 📂layouts
+       ┃ ┣ 📜layouts.tsx
+       ┃ ┣ 📜layoutsWithoutF.tsx
+       ┃ ┗ 📜layoutsWithoutHF.tsx
+       ┣ 📂mocks
+       ┃ ┣ 📜handlers.js
+       ┃ ┗ 📜worker.js
+       ┣ 📂router
+       ┃ ┣ 📜Router.tsx
+       ┃ ┗ 📜Url.tsx
+       ┣ 📂styles
+       ┃ ┣ 📜Color.js
+       ┃ ┣ 📜Font.js
+       ┃ ┣ 📜GlobalStyles.js
+       ┃ ┣ 📜Style.js
+       ┃ ┗ 📜Theme.js
+       ┣ 📂utils
+       ┃ ┣ 📜ImgUrl.ts
+       ┃ ┣ 📜LoadingSpinner.tsx
+       ┃ ┣ 📜PursuitBeauty.tsx
+       ┃ ┣ 📜PursuitMap.tsx
+       ┃ ┗ 📜PursuitStyleRanges.tsx
+       ┣ 📜Main.tsx
+       ┗ 📜vite-env.d.ts
 
 </details>
 
 <details>
 <summary>Back</summary>
-
-📦src
- ┣ 📂main
- ┃ ┣ 📂java
- ┃ ┃ ┗ 📂com
- ┃ ┃ ┃ ┗ 📂ssafy
- ┃ ┃ ┃ ┃ ┗ 📂banchic
- ┃ ┃ ┃ ┃ ┃ ┣ 📂config
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dummy
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂service
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CsvDataService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DummyDataService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderDataService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SeasonDataService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜DataInitalizationRunner.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DataSourceConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RoutingDataSource.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜S3Config.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SecurityConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SwaggerConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebConfig.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜HeartController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TestController.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂domain
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂request
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BrandReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PersuitReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SeasonReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UpdateNicknameReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂perfume
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LongevityRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PriceRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SeasonRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SillageRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BrandRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommonResponse.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberInfoRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberNicknameRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberReviewRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeOverviewRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommendByImageRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SeasonRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TokenDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂perfume
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂gender
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Female.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Male.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MoreFemale.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MoreMale.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Unisex.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂season
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Day.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Fall.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Night.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Spring.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Summer.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Winter.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Gender.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Likeability.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Longevity.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Price.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Season.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Sillage.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BaseEntity.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Heart.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Member.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Perfume.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Persuit.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Recommend.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RefreshToken.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Review.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂type
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberType.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜OAuthProvider.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDetailsImpl.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AccessDeniedHandlerException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthenticationEntryPointException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ExceptionController.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂oauthApi
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂client
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜KakaoApiClient.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NaverApiClient.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthApiClient.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜RevokeTokenResponseDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂params
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NaverLogoutParams.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthLogoutParams.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜OauthTokenParams.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜KakaoInfoResponse.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NaverInfoResponse.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthInfoResponse.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜RequestOAuthInfoService.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂category
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂gender
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FemaleRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MaleRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MoreFemaleRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MoreMaleRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UnisexRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂season
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DayRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FallRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NightRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SpringRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SummerRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜WinterRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂perfume
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LikeabilityRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LongevityRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PriceRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SeasonRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SillageRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜HeartRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeReviewRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PersuitRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommendRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜RefreshTokenRepository.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂security
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜JwtFilter.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂service
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AmazonS3ResourceStorage.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FileUploadService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜HeartService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthLoginService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthLogoutService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeReviewService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDetailsServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂tokens
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthTokens.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜KakaoTokens.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜NaverTokens.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂util
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TokenProvider.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜BanchicApplication.java
- ┃ ┗ 📂resources
- ┃ ┃ ┣ 📂templates
- ┃ ┃ ┃ ┣ 📜loginForm.html
- ┃ ┃ ┃ ┗ 📜loginSuccess.html
- ┃ ┃ ┣ 📜application-prod.yml
- ┃ ┃ ┗ 📜application.yml
- ┗ 📂test
- ┃ ┗ 📂java
- ┃ ┃ ┗ 📂com
- ┃ ┃ ┃ ┗ 📂ssafy
- ┃ ┃ ┃ ┃ ┗ 📂banchic
- ┃ ┃ ┃ ┃ ┃ ┗ 📜BanchicApplicationTests.java
+   
+      📦src
+       ┣ 📂main
+       ┃ ┣ 📂java
+       ┃ ┃ ┗ 📂com
+       ┃ ┃ ┃ ┗ 📂ssafy
+       ┃ ┃ ┃ ┃ ┗ 📂banchic
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂config
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dummy
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂service
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CsvDataService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DummyDataService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderDataService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SeasonDataService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜DataInitalizationRunner.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientConfig.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DataSourceConfig.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RoutingDataSource.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜S3Config.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SecurityConfig.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SwaggerConfig.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebConfig.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthController.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryController.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜HeartController.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberController.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeController.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TestController.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂domain
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂request
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BrandReq.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderReq.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PersuitReq.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewReq.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SeasonReq.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UpdateNicknameReq.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂response
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂perfume
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LongevityRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PriceRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SeasonRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SillageRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BrandRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommonResponse.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberInfoRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberNicknameRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberReviewRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeOverviewRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommendByImageRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SeasonRes.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TokenDto.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂perfume
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂gender
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Female.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Male.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MoreFemale.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MoreMale.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Unisex.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂season
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Day.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Fall.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Night.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Spring.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Summer.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Winter.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Gender.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Likeability.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Longevity.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Price.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Season.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Sillage.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BaseEntity.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Heart.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Member.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Perfume.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Persuit.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Recommend.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RefreshToken.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Review.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂type
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberType.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜OAuthProvider.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDetailsImpl.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂exception
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AccessDeniedHandlerException.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthenticationEntryPointException.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomException.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ErrorCode.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ExceptionController.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂oauthApi
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂client
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜KakaoApiClient.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NaverApiClient.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthApiClient.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜RevokeTokenResponseDto.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂params
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NaverLogoutParams.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthLogoutParams.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜OauthTokenParams.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂response
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜KakaoInfoResponse.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NaverInfoResponse.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthInfoResponse.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜RequestOAuthInfoService.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂repository
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂category
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂gender
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FemaleRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MaleRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MoreFemaleRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MoreMaleRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UnisexRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂season
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DayRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FallRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NightRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SpringRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SummerRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜WinterRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂perfume
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GenderRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LikeabilityRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LongevityRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PriceRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SeasonRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SillageRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜HeartRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeReviewRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PersuitRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommendRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜RefreshTokenRepository.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂security
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜JwtFilter.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂service
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AmazonS3ResourceStorage.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FileUploadService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜HeartService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthLoginService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OAuthLogoutService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeReviewService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PerfumeService.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDetailsServiceImpl.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂tokens
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthTokens.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜KakaoTokens.java
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜NaverTokens.java
+       ┃ ┃ ┃ ┃ ┃ ┣ 📂util
+       ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TokenProvider.java
+       ┃ ┃ ┃ ┃ ┃ ┗ 📜BanchicApplication.java
+       ┃ ┗ 📂resources
+       ┃ ┃ ┣ 📂templates
+       ┃ ┃ ┃ ┣ 📜loginForm.html
+       ┃ ┃ ┃ ┗ 📜loginSuccess.html
+       ┃ ┃ ┣ 📜application-prod.yml
+       ┃ ┃ ┗ 📜application.yml
+       ┗ 📂test
+       ┃ ┗ 📂java
+       ┃ ┃ ┗ 📂com
+       ┃ ┃ ┃ ┗ 📂ssafy
+       ┃ ┃ ┃ ┃ ┗ 📂banchic
+       ┃ ┃ ┃ ┃ ┃ ┗ 📜BanchicApplicationTests.java
 
 </details>
